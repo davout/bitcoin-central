@@ -1,0 +1,10 @@
+<h1>Server informations</h1>
+
+<table id="server-infos">
+  <% @infos.each do |k,v| %>
+    <tr>
+      <th><%= k %></th>
+      <td><%= v %></td>
+    </tr>
+  <% end %>
+</table>

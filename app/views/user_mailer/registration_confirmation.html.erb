@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+  <head>
+    <title>Bitcoin Central</title>
+  </head>
+  <body>
+    <div id="content">
+      <%= link_to image_tag(attachments['bitcoin.png'].url), "https://bitcoin-central.net" %>
+
+      <p>
+        Thank you for registering at Bitcoin Central.
+      </p>
+
+      <p>
+        Your account ID is : <%= @user.account %>
+      </p>
+    </div>
+  </body>
+</html>

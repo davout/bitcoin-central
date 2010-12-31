@@ -1,0 +1,20 @@
+development:
+  account: U8651415
+  store: Bitcoin Central
+  success_url: http://85.171.177.102:3000/liberty_reserve_transfers
+  status_url: http://85.171.177.102:3000/liberty_reserve_transfers
+  fail_url: http://85.171.177.102:3000/liberty_reserve_transfers/fail
+  api_uri: https://api.libertyreserve.com/
+  api_name: Bitcoin Central API
+  secret_word: MySecWord123
+
+test:
+  account: U8651415
+  store: Bitcoin Central
+  success_url: http://85.171.177.102:3000/liberty_reserve_transfers
+  status_url: http://85.171.177.102:3000/liberty_reserve_transfers
+  fail_url: http://85.171.177.102:3000/liberty_reserve_transfers/fail
+  api_uri: https://api.libertyreserve.com/
+  api_name: Bitcoin Central API
+  secret_word: MySecWord123
+  

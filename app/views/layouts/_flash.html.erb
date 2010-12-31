@@ -1,0 +1,17 @@
+<% if flash %>
+  <% unless flash[:error].blank? and flash[:notice].blank? %>
+    <div class="flash">
+      <% unless flash[:error].blank? %>
+        <div class="error">
+          <%= flash[:error].html_safe %>
+        </div>
+      <% end %>
+
+      <% unless flash[:notice].blank? %>
+        <div class="notice">
+          <%= flash[:notice].html_safe %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

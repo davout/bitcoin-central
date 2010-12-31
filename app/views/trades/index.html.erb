@@ -1,0 +1,33 @@
+<h1>Trade history</h1>
+
+<% unless @trades.blank? %>
+  <table class="default" id="trade-history">
+    <tr>
+      <th>Date</th>
+      <th>Type</th>
+      <th>Amount</th>
+      <th>Price</th>
+      <th>Currency</th>
+      <th>Total</th>
+    </tr>
+
+    <% @trades.each do |trade| %>
+      <tr>
+        <td><%= l trade.created_at %></td>
+        <td>
+          <% if trade.buyer_id == @current_user.id %>
+            Buy
+          <% else %>
+            Sell
+          <% end %>
+        </td>
+        <td><%= number_to_bitcoins trade.traded_btc %></td>
+        <td><%= number_to_lrusd trade.ppc %></td>
+        <td><%= trade.currency %></td>
+        <td><%= trade.traded_currency %></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <p>No trades were found</p>
+<% end %>

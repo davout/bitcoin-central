@@ -1,0 +1,86 @@
+<h1>
+  Account
+</h1>
+
+<table class="default" id="account-balances">
+  <tr>
+    <th />
+    <th>
+      Currency
+    </th>
+    <th>
+      Balance
+    </th>
+  </tr>
+
+  <tr>
+    <td>
+      <%= link_to image_tag("bitcoin-logo.jpg"), "http://www.bitcoin.org/", :target => "_blank", :title => "Bitcoin home" %>
+    </td>
+    <td>
+      BTC
+    </td>
+    <td class="account-balance">
+      <%
+      btc_balance = @current_user.balance(:btc)
+      unconfirmed_btc_balance = @current_user.balance(:btc, :unconfirmed => true) - btc_balance
+    %>
+
+      <span class="<%= @current_user.balance(:btc) > 0 ? "green" : (@current_user.balance(:btc) < 0 ? "red" : "") %>">
+        <%= btc_balance > 0 ? "+" : (btc_balance < 0 ? "-" : "") %> <%= number_to_currency btc_balance.abs, :unit => "" %>
+      </span>
+
+      <% unless unconfirmed_btc_balance.zero? %>
+        <br />
+        <span class="unconfirmed" title="These funds are awaiting confirmation from the bitcoin network">
+          + <%= number_to_currency unconfirmed_btc_balance.abs, :unit => "" %>
+        </span>
+      <% end %>
+    </td>
+  </tr>
+
+  <tr>
+    <td rowspan="2">
+      <%= link_to image_tag("liberty_reserve.gif"), "https://www.libertyreserve.com/", :target => "_blank", :title => "Liberty Reserve home" %>
+    </td>
+    <td>
+      LRUSD
+    </td>
+    <td class="account-balance <%= @current_user.balance(:lrusd) > 0 ? "green" : (@current_user.balance(:lrusd) < 0 ? "red" : "") %>">
+      <%= @current_user.balance(:lrusd) > 0 ? "+" : (@current_user.balance(:lrusd) < 0 ? "-" : "") %> <%= number_to_currency @current_user.balance(:lrusd).abs, :unit => "" %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      LREUR
+    </td>
+    <td class="account-balance <%= @current_user.balance(:lreur) > 0 ? "green" : (@current_user.balance(:lreur) < 0 ? "red" : "") %>">
+      <%= @current_user.balance(:lreur) > 0 ? "+" : (@current_user.balance(:lreur) < 0 ? "-" : "") %> <%= number_to_currency @current_user.balance(:lreur).abs, :unit => "" %>
+    </td>
+  </tr>
+
+  <% if false %>
+    <!-- No LiqPay for now -->
+    <tr>
+      <td rowspan="2">
+        <%=  link_to image_tag("liqpay.gif"), "https://www.liqpay.com/", :target => "_blank", :title => "LiqPAY home" %>
+      </td>
+      <td>
+        LPUSD
+      </td>
+      <td class="account-balance <%= @current_user.balance(:lpusd) > 0 ? "green" : (@current_user.balance(:lpusd) < 0 ? "red" : "") %>">
+        <%= @current_user.balance(:lpusd) > 0 ? "+" : (@current_user.balance(:lpusd) < 0 ? "-" : "") %> <%= number_to_currency @current_user.balance(:lpusd).abs, :unit => "" %>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        LPEUR
+      </td>
+      <td class="account-balance <%= @current_user.balance(:lpeur) > 0 ? "green" : (@current_user.balance(:lpeur) < 0 ? "red" : "") %>">
+        <%= @current_user.balance(:lpeur) > 0 ? "+" : (@current_user.balance(:lpeur) < 0 ? "-" : "") %> <%= number_to_currency @current_user.balance(:lpeur).abs, :unit => "" %>
+      </td>
+    </tr>
+  <% end %>
+</table>

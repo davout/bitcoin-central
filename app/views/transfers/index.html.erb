@@ -1,0 +1,24 @@
+<h1>Account history</h1>
+
+<table class="default" id="history">
+  <tr>
+    <th>Date</th>
+    <th>Currency</th>
+    <th>Amount</th>
+  </tr>
+
+  <% @transfers.each do |transfer| %>
+    <tr>
+      <td><%= l transfer.created_at %></td>
+      <td><%= transfer.currency %></td>
+      <td class="amount">
+        <span class="<%= transfer.amount > 0 ? (transfer.confirmed? ? "green" : "unconfirmed") : "red" %>" <%= !transfer.confirmed? ? "title=\"#{pluralize(Transfer::MIN_BTC_CONFIRMATIONS - transfer.bt_tx_confirmations, "confirmation")} left\"".html_safe : ""%> >
+          <%= transfer.amount > 0 ? "+" : "-" %> <%= number_to_currency transfer.amount.abs, :unit => "" %>
+        </span>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+
+

@@ -1,0 +1,72 @@
+<%= form_for @user, :url => user_path do |f| %>
+  <%=
+  render :partial => 'layouts/errors', :locals => {
+    :model => @user,
+    :message => "prevented your account details from being updated"
+  }
+%>
+
+  <% unless @user.new_record? %>
+    <div class="form-field">
+      <%= f.label :account %>
+      <%= f.text_field :account, :disabled => true %>
+    </div>
+  <% end %>
+
+  <div class="form-field">
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+    <div class="explanation">
+      Necessary to recover your password
+    </div>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :new_password %>
+    <%= f.password_field :new_password, :autocomplete => "off" %>
+    <% unless @user.new_record? %>
+      <div class="explanation">
+        Use this field only if you want to change your password
+      </div>
+    <% end %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :new_password_confirmation %>
+    <%= f.password_field :new_password_confirmation, :autocomplete => "off" %>
+    <% unless @user.new_record? %>
+      <div class="explanation">
+        New password confirmation
+      </div>
+    <% end %>
+  </div>
+
+  <% unless @user.new_record? %>
+    <div class="form-field">
+      <%= f.label :current_password %>
+      <%= f.password_field :current_password %>
+      <div class="explanation">
+        This is required to protect your account
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-field">
+    <%= f.label :time_zone %>
+    <%= f.time_zone_select :time_zone, nil, :prompt => "--" %>
+    <div class="explanation">
+      Select your time-zone to get data displayed in local time
+    </div>
+  </div>
+
+  <div class="recaptcha-field">
+    <label for="recaptcha_response_field">Are you human ?</label>
+    <div class="recaptcha-input">
+      <%= recaptcha_tags :ssl => true %>
+    </div>
+  </div>
+
+  <div class="form-field">
+    <%= f.submit :class => 'submit' %>
+  </div>
+<% end %>

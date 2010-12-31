@@ -1,0 +1,31 @@
+<ul id="menu">
+  <%= menu_item :logged_in => true do %>
+    <%= link_to "<span>Account</span>".html_safe, "#" %>
+    <ul>
+      <%= menu_item link_to("<span>Balance</span>".html_safe, account_path), :logged_in => true %>
+      <%= menu_item link_to("<span>History</span>".html_safe, account_transfers_path), :logged_in => true %>
+      <%= menu_item link_to("<span>Add/Send LR</span>".html_safe, new_account_liberty_reserve_transfer_path), :logged_in => true %>
+      <%= menu_item link_to("<span>Add/Send BTC</span>".html_safe, new_account_bitcoin_transfer_path), :logged_in => true %>
+    </ul>
+  <% end %>
+
+  <%= menu_item do %>
+    <%= link_to "<span>Trading</span>".html_safe, "#" %>
+    <ul>
+      <%= menu_item link_to("<span>New order</span>".html_safe, new_account_trade_order_path), :logged_in => true %>
+      <%= menu_item link_to("<span>Your orders</span>".html_safe, account_trade_orders_path), :logged_in => true %>
+      <%= menu_item link_to("<span>Order book</span>".html_safe, book_account_trade_orders_path) %>
+      <%= menu_item link_to("<span>Trade history</span>".html_safe, account_trades_path), :logged_in => true %>
+      <li><%= link_to "<span>Statistics</span>".html_safe, "#" %></li>
+    </ul>
+  <% end %>
+
+  <%= menu_item do %>
+    <%= link_to "<span>Help</span>".html_safe, "#" %>
+    <ul>
+      <li><%= link_to "<span>FAQ</span>".html_safe, faq_path %></li>
+      <li><%= link_to "<span>Economy</span>".html_safe, economy_path %></li>
+      <li><%= link_to "<span>Support</span>".html_safe, support_path %></li>
+    </ul>
+  <% end %>
+</ul>

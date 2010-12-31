@@ -1,0 +1,47 @@
+<h1>Create a trade order</h1>
+
+<%= form_for @trade_order, :url => account_trade_orders_path do |f| %>
+  <% if @trade_order.errors.any? %>
+    <div id="errors">
+      <h2>
+        <%= pluralize(@trade_order.errors.count, "error") %> prohibited this trade order from being created
+      </h2>
+
+      <ul>
+        <% @trade_order.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-field">
+    <%= f.label :category %>
+    <div class="radios">
+      <%= f.radio_button :category, "buy" %> <%= f.label :category_buy, "Buy" %>
+      <%= f.radio_button :category, "sell" %> <%= f.label :category_sell, "Sell" %>
+    </div>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :amount, "Amount (BTC)" %>
+    <%= f.text_field :amount, :size => 8, :value => "" %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :ppc, "Price" %>
+    <%= f.text_field :ppc, :size => 8, :value => "" %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :currency %>
+    <div class="radios">
+      <%= f.radio_button :currency, "LRUSD" %> <%= f.label :currency_lrusd, "USD" %>
+      <%= f.radio_button :currency, "LREUR" %> <%= f.label :currency_lreur, "EUR" %>
+    </div>
+  </div>
+
+  <div class="form-field">
+    <%= f.submit :class => "submit" %>
+  </div>
+<% end %>

@@ -1,0 +1,11 @@
+development:
+  username: bitcoin-admin
+  password: 5MLpeupM46
+  url: http://localhost:8332/
+  donations: 18y3fhMogiWZdS7JuLiv9re5aEmrZaPv3u
+  
+test:
+  username: bitcoin-admin
+  password: 5MLpeupM46
+  url: http://localhost:8332/
+  donations: 18y3fhMogiWZdS7JuLiv9re5aEmrZaPv3u

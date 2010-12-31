@@ -1,0 +1,9 @@
+.bundle
+db/*.sqlite3
+log/*.log
+tmp/**/*
+nbproject
+nbproject/*
+nbproject/**/*
+Thumbs.db
+**/Thumbs.db

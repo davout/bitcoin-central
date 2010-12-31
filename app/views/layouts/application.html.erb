@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta name="keywords" lang="en" content="bitcoin, bitcoin central, buy bitcoins, sell bitcoins" />
+
+    <title>Bitcoin Central</title>
+
+    <%= stylesheet_link_tag %w{reset application}, :cache => "all" %>
+    <%= javascript_include_tag :defaults, :cache => "all" %>
+
+    <%= csrf_meta_tag %>
+  </head>
+  <body>
+    <div id="content">
+      <h1 id="main-title">
+        <%= link_to "<span>Bitcoin Central</span>".html_safe, root_path %>
+      </h1>
+
+      <%= render :partial => 'layouts/user_informations' %>
+      <%= render :partial => 'layouts/navigation' %>
+      <%= render :partial => 'layouts/flash', :object => flash %>
+
+      <div id="right-content">
+        <%= yield %>
+      </div>
+    </div>
+
+    <%= render :partial => 'layouts/footer' %>
+  </body>
+</html>

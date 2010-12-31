@@ -1,0 +1,28 @@
+<%= form_tag session_path, :method => :post do %>
+  <div class="form-field">
+    <label for="account">Account ID</label>
+    <input name="account" id="account" />
+    <div class="explanation">
+      E-mail address or account ID
+    </div>
+  </div>
+
+  <div class="form-field">
+    <label for="password">Password</label>
+    <input name="password" id="password" type="password" />
+    <div class="explanation">
+      <a href="mailto:support@bitcoin-central.net" tabindex="-1">Password forgotten?</a>
+    </div>
+  </div>
+
+  <div class="recaptcha-field">
+    <label for="recaptcha_response_field">Are you human ?</label>
+    <div class="recaptcha-input">
+      <%= recaptcha_tags :ssl => true %>
+    </div>
+  </div>
+
+  <div class="form-field">
+    <input type="submit" class="submit" value="Sign-in" />
+  </div>
+<% end %>

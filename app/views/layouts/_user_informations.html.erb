@@ -1,0 +1,20 @@
+<div id="user-information">
+  <p>
+    <% if @current_user %>
+      <p class="identification">
+        Signed-in as <%= link_to @current_user.account, edit_user_path %> - <%= link_to "Logout", session_path, :method => :delete %>
+      </p>
+      <p>
+        Your address : <span class="bitcoin-address" id="last-bitcoin-address"><%= @current_user.last_address %></span>
+        <%= link_to image_tag('refresh.png'),
+          user_addresses_path,
+          :remote => true,
+          :method => :post,
+          :id => 'refresh-button',
+          :title => 'Generate a new receiving address, refresh at will' %>
+      </p>
+    <% else %>
+      <%= link_to "Sign-up", new_user_path %> or <%= link_to "login", new_session_path %>
+    <% end %>
+  </p>
+</div>

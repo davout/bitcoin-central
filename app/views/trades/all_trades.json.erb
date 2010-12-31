@@ -1,0 +1,3 @@
+[
+  <%= @trades.map { |t| "{\"date\":#{t.created_at.to_i},\"price\":#{t.ppc},\"amount\":#{t.traded_btc},\"currency\":\"#{t.currency}\"}" }.join(",\n").html_safe %>
+]

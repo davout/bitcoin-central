@@ -1,0 +1,115 @@
+GIT
+  remote: git://github.com/davout/recaptcha.git
+  revision: 2e3bfac0a0e29dcbd0e77262d54264949df1d8d6
+  specs:
+    recaptcha (0.2.3)
+
+GIT
+  remote: git://github.com/rails/exception_notification
+  revision: 192a49a02d63d28b23ed41cebadfedd490929cf1
+  specs:
+    exception_notification (1.0.0)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    aaronh-chronic (0.3.9)
+    abstract (1.0.0)
+    actionmailer (3.0.0)
+      actionpack (= 3.0.0)
+      mail (~> 2.2.5)
+    actionpack (3.0.0)
+      activemodel (= 3.0.0)
+      activesupport (= 3.0.0)
+      builder (~> 2.1.2)
+      erubis (~> 2.6.6)
+      i18n (~> 0.4.1)
+      rack (~> 1.2.1)
+      rack-mount (~> 0.6.12)
+      rack-test (~> 0.5.4)
+      tzinfo (~> 0.3.23)
+    activemodel (3.0.0)
+      activesupport (= 3.0.0)
+      builder (~> 2.1.2)
+      i18n (~> 0.4.1)
+    activerecord (3.0.0)
+      activemodel (= 3.0.0)
+      activesupport (= 3.0.0)
+      arel (~> 1.0.0)
+      tzinfo (~> 0.3.23)
+    activeresource (3.0.0)
+      activemodel (= 3.0.0)
+      activesupport (= 3.0.0)
+    activesupport (3.0.0)
+    addressable (2.2.2)
+    arel (1.0.1)
+      activesupport (~> 3.0.0)
+    builder (2.1.2)
+    capistrano (2.5.19)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.0.0)
+    erubis (2.6.6)
+      abstract (>= 1.0.0)
+    highline (1.6.1)
+    i18n (0.4.2)
+    json (1.4.6)
+    json (1.4.6-x86-mingw32)
+    mail (2.2.12)
+      activesupport (>= 2.3.6)
+      i18n (>= 0.4.0)
+      mime-types (~> 1.16)
+      treetop (~> 1.4.8)
+    mime-types (1.16)
+    mysql (2.8.1)
+    mysql (2.8.1-x86-mingw32)
+    net-scp (1.0.4)
+      net-ssh (>= 1.99.1)
+    net-sftp (2.0.5)
+      net-ssh (>= 2.0.9)
+    net-ssh (2.0.23)
+    net-ssh-gateway (1.0.1)
+      net-ssh (>= 1.99.1)
+    polyglot (0.3.1)
+    rack (1.2.1)
+    rack-mount (0.6.13)
+      rack (>= 1.0.0)
+    rack-test (0.5.6)
+      rack (>= 1.0)
+    rails (3.0.0)
+      actionmailer (= 3.0.0)
+      actionpack (= 3.0.0)
+      activerecord (= 3.0.0)
+      activeresource (= 3.0.0)
+      activesupport (= 3.0.0)
+      bundler (~> 1.0.0)
+      railties (= 3.0.0)
+    railties (3.0.0)
+      actionpack (= 3.0.0)
+      activesupport (= 3.0.0)
+      rake (>= 0.8.4)
+      thor (~> 0.14.0)
+    rake (0.8.7)
+    thor (0.14.6)
+    treetop (1.4.9)
+      polyglot (>= 0.3.1)
+    tzinfo (0.3.23)
+    whenever (0.6.2)
+      aaronh-chronic (>= 0.3.9)
+      activesupport (>= 2.3.4)
+
+PLATFORMS
+  ruby
+  x86-mingw32
+
+DEPENDENCIES
+  addressable
+  capistrano
+  exception_notification!
+  json
+  mysql (= 2.8.1)
+  rails (= 3.0.0)
+  recaptcha!
+  whenever

@@ -1,0 +1,41 @@
+<h1>Deposit bitcoins</h1>
+
+<p>Simply transfer funds to any of your addresses and they'll show up in your account after a couple of minutes.</p>
+<p>Please note that you will only be able to use these funds after the bitcoin network has confirmed the transfer (approx. 20 minutes).</p>
+
+<h1>Transfer bitcoins</h1>
+
+<%= form_for @bitcoin_transfer, :url => account_bitcoin_transfers_path, :html => { :method => :post } do |f| %>
+  <%=
+    render :partial => 'layouts/errors', :locals => {
+      :model => @bitcoin_transfer,
+      :message => "prevented your funds from being sent"
+    }
+  %>
+
+  <div class="form-field">
+    <%= f.label :address %>
+    <%= f.text_field :address, :class => "bitcoin-address" %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :amount %>
+    <%= f.text_field :amount, :value => amount_field_value(@bitcoin_transfer.amount), :autocomplete => "off" %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+
+  <div class="recaptcha-field">
+    <label for="recaptcha_response_field">Are you human ?</label>
+    <div class="recaptcha-input">
+      <%= recaptcha_tags :ssl => true %>
+    </div>
+  </div>
+
+  <div class="form-field">
+    <%= f.submit :value => "Withdraw", :class => "submit" %>
+  </div>
+<% end %>

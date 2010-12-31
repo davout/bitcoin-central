@@ -1,0 +1,20 @@
+<form id="add_lr" action="https://sci.libertyreserve.com/en" method="POST">
+  <input type="hidden" name="lr_acc" value="<%= BitcoinBank::LibertyReserve['account'] %>" />
+
+  <input type="hidden" name="lr_store" value="<%= BitcoinBank::LibertyReserve['store'] %>" />
+  <input type="hidden" name="lr_merchant_ref" value="<%= @current_user.id %>" />
+  <input type="hidden" name="lr_comments" value="Transfer funds to account <%= @current_user.account %>" />
+
+  <input type="hidden" name="lr_success_url" value="<%= BitcoinBank::LibertyReserve['success_url'] %>" />
+  <input type="hidden" name="lr_success_url_method" value="GET" />
+
+  <input type="hidden" name="lr_fail_url" value="<%= BitcoinBank::LibertyReserve['fail_url'] %>" />
+  <input type="hidden" name="lr_fail_url_method" value="GET" />
+
+  <input type="hidden" name="lr_status_url" value="<%= BitcoinBank::LibertyReserve['status_url'] %>" />
+  <input type="hidden" name="lr_status_url_method" value="POST" />
+
+  <input type="hidden" name="account_id" value="<%= @current_user.id %>" />
+</form>
+
+<a href="#" onclick="$('add_lr').submit();">Click here</a> to be taken to the Liberty Reserve interface, you'll be able to specify the details of your deposit.

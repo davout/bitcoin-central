@@ -1,0 +1,2 @@
+page['user-information'].replace render(:partial => 'layouts/user_informations')
+page['last-bitcoin-address'].highlight(:startcolor => "#FE9791", :endcolor => "#FFFFFF")
