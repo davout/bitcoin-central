@@ -1,25 +1,6 @@
 require 'test_helper'
 
 class TradeOrderTest < ActiveSupport::TestCase
-  def setup
-    LibertyReserveTransfer.create!(
-      :amount => 25.0,
-      :user => users(:trader1),
-      :currency => "LRUSD"
-    )
-
-    BitcoinTransfer.create(
-      :amount => 100.0,
-      :user => users(:trader2),
-      :currency => "BTC"
-    )
-
-    assert_equal users(:trader1).balance(:btc), 0.0
-    assert_equal users(:trader1).balance(:lrusd), 25.0
-    assert_equal users(:trader2).balance(:btc), 100.0
-    assert_equal users(:trader2).balance(:lrusd), 0.0
-  end
-  
   test "should correctly perform a simple trade order" do
     # We need an extra little something so we get to create the order
     LibertyReserveTransfer.create!(

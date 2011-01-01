@@ -15,6 +15,17 @@ class TransferTest < ActiveSupport::TestCase
   end
 
   test "bitcoin transfer execution should explode if it is an incoming one" do
-    flunk
+    t = BitcoinTransfer.new(
+      :amount => 10.0,
+      :user => users(:trader1),
+      :currency => "BTC",
+      :internal => true
+    )
+
+    assert t.save, "Transfer should be saved"
+
+    assert_raise RuntimeError do
+      t.execute!
+    end
   end
 end
