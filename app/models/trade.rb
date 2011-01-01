@@ -35,6 +35,15 @@ class Trade < ActiveRecord::Base
     :inclusion => { :in => ["LRUSD", "LREUR"] },
     :presence => true
 
+  scope :last_24h, lambda {
+    where("created_at >= ?", DateTime.now.advance(:hours => -24))
+  }
+
+  # TODO : Dry up (duplicated in TradeOrder)
+  scope :with_currency, lambda { |currency|
+    where("currency = ?", currency.to_s.upcase)
+  }
+
   def execute!
     # credit seller /w currency
     transfers << LibertyReserveTransfer.create!(

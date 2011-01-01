@@ -1,0 +1,21 @@
+<% last_pair = false %>
+{
+  "at" : <%= DateTime.now.to_i %>,
+  "pairs": [ <% @ticker.each do |k,v| %>
+    "<%= k.downcase %>": {
+      "high" : <%= v[:high] %>,
+      "low" : <%= v[:low] %>,
+      "buy" : <%= v[:buy] %>,
+      "sell" : <%= v[:sell] %>,
+      "volume" : <%= v[:volume] %>,
+      <% if v[:last_trade] %>
+      "last-trade" : {
+        "at" : <%= v[:last_trade].created_at.to_i %>,
+        "price" : <%= v[:last_trade].ppc %>
+      }
+      <% end %>
+    }<%= "," unless last_pair %>
+    <%last_pair = true -%>
+    <% end -%>
+  ]
+}

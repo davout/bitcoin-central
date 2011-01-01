@@ -5,11 +5,13 @@ class TradeOrder < ActiveRecord::Base
 
   belongs_to :user
 
+  # TODO : Necessary ?
   has_many :sale_trades,
     :class_name => "Trade",
     :foreign_key => :sale_order_id,
     :dependent => :nullify
 
+  # TODO : Necessary ?
   has_many :purchase_trades,
     :class_name => "Trade",
     :foreign_key => :purchase_order_id,
@@ -49,16 +51,31 @@ class TradeOrder < ActiveRecord::Base
     :minimal_order_ppc => true,
     :numericality => true
 
+  def buying?
+    category == "buy"
+  end
+
+  def selling?
+    !buying?
+  end
+
+  scope :with_currency, lambda { |currency|
+    where("currency = ?", currency.to_s.upcase)
+  }
+
+  scope :with_category, lambda { |category|
+    where("category = ?", category.to_s)
+  }
+
   scope :matching_orders, lambda { |order|
     # TESTME Check that the order scope is the specified one, not the default one
     with_exclusive_scope do
-      where("category = ?", (order.category == 'buy' ? 'sell' : 'buy')).
-        active.
-        where("currency = ?", order.currency).
-        where("ppc #{(order.category == 'buy') ? '<=' : '>='} ? ", order.ppc).
+      active.
+        with_currency(order.currency).
+        with_category(order.buying? ? 'sell' : 'buy').
+        where("ppc #{order.buying? ? '<=' : '>='} ? ", order.ppc).
         where("user_id <> ?", order.user_id).
-        where("cancelled_at IS NULL").
-        order("ppc #{(order.category == 'buy') ? 'ASC' : 'DESC'}")
+        order("ppc #{order.buying? ? 'ASC' : 'DESC'}")
     end
   }
 
@@ -88,8 +105,6 @@ class TradeOrder < ActiveRecord::Base
     TradeOrder.connection.execute("SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE")
 
     TradeOrder.transaction do
-      @rolled_back = false
-
       begin
         mos = TradeOrder.matching_orders(self)
         mos.reverse!

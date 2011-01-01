@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class TradeOrderTest < ActiveSupport::TestCase
+  def setup
+    TradeOrder.delete_all
+  end
+
   test "should correctly perform a simple trade order" do
     # We need an extra little something so we get to create the order
     LibertyReserveTransfer.create!(

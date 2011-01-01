@@ -1,0 +1,15 @@
+trade_lreur:
+  buyer: trader1
+  seller: trader2
+  traded_btc: 100.0
+  traded_currency: 20.0
+  ppc: 0.20
+  currency: LREUR
+
+trade_lrusd:
+  buyer: trader1
+  seller: trader2
+  traded_btc: 100.0
+  traded_currency: 25.0
+  ppc: 0.25
+  currency: LRUSD

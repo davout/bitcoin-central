@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class TradesControllerTest < ActionController::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  test "should render ticker" do
+    assert session[:current_user_id].nil?, "We should not be logged-in"
+
+    [:json, :xml].each do |f|
+      get :ticker, :format => f
+      assert_response :success
+    end
   end
 end
