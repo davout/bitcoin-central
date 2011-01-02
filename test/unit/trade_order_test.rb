@@ -84,10 +84,6 @@ class TradeOrderTest < ActiveSupport::TestCase
     assert_equal buy_order.reload.amount, 900.0
   end
 
-  test "should be able to re-activate order" do
-    flunk
-  end
-
   test "should correctly perform a trade order with a limiting balance" do
     BitcoinTransfer.create(
       :amount => 9900.0,
@@ -174,14 +170,6 @@ class TradeOrderTest < ActiveSupport::TestCase
     assert !sell_order.reload.active?
     assert !buy_order.reload.active?
     assert_equal buy_order.amount, 0.75427
-  end
-
-  test "should handle damn small remainings with ease" do
-    flunk
-  end
-
-  test "should delete empty orders" do
-    flunk
   end
 
   test "should correctly handle trade activation when insufficient balance" do
@@ -328,14 +316,6 @@ class TradeOrderTest < ActiveSupport::TestCase
     assert t2.reload.active?, "Selling trade order should be active"
   end
 
-  test "should re-activate order, and automatically try to re-execute it" do
-    flunk
-  end
-
-  test "order re activation should only be possible with sufficient balance" do
-    flunk
-  end
-
   test "should auto inactivate on funds withdrawal" do
     t = TradeOrder.new(
       :category => "buy",
@@ -357,5 +337,44 @@ class TradeOrderTest < ActiveSupport::TestCase
 
     assert_equal 20.0, users(:trader1).balance(:lrusd)
     assert !t.reload.active?, "Order should have been auto-inactivated #{t.reload.active}"
+  end
+
+  test "should not inactivate orders that have just enough funds and get partially filled" do
+    assert_equal 25.0, users(:trader1).balance(:lrusd)
+    assert_equal 100.0, users(:trader2).balance(:btc)
+    
+    t = TradeOrder.new(
+      :category => "buy",
+      :amount => 200,
+      :ppc => 0.125,
+      :user => users(:trader1),
+      :currency => "LRUSD"
+    )
+    
+    assert t.save, "Order should get saved"
+
+    t2 = TradeOrder.new(
+      :category => "sell",
+      :amount => 100,
+      :ppc => 0.125,
+      :user => users(:trader2),
+      :currency => "LRUSD"
+    )
+
+    assert t2.save, "Order should get saved"
+
+    t.execute!
+
+    assert t.reload.active?, "Order should remain active"
+    assert_equal 100.0, t.amount
+    assert_destroyed t2, "Order should have been destroyed since it got filled completely"
+  end
+
+  test "should be able to re-activate order" do
+    flunk
+  end
+
+  test "order re activation should only be possible with sufficient balance" do
+    flunk
   end
 end

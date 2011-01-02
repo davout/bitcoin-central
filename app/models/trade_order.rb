@@ -110,7 +110,7 @@ class TradeOrder < ActiveRecord::Base
         mos.reverse!
         mo = mos.pop
 
-        while !mo.blank? and active? and !destroyed? 
+        while !mo.blank? and active? and !destroyed?
           is_purchase = category == "buy"
           purchase, sale = (is_purchase ? self : mo), (is_purchase ? mo : self)
 
@@ -127,6 +127,13 @@ class TradeOrder < ActiveRecord::Base
           traded_btc = round_to(btc_amount, 5)
           traded_currency = round_to(btc_amount * p, 5)
 
+          # Update orders
+          mo.amount = mo.amount - traded_btc
+          self.amount = amount - traded_btc
+
+          mo.save!
+          save!
+
           # Record the trade
           trade = Trade.new(
             :traded_btc => traded_btc,
@@ -142,10 +149,7 @@ class TradeOrder < ActiveRecord::Base
           # Execute it
           trade.execute!
 
-          # Update orders
-          mo.amount = mo.amount - traded_btc
-          self.amount = amount - traded_btc
-
+          # TODO : Doesn't this already come for free with transfers callbax?
           # Inactivate orders if required
           sale.active = false if (sale.user.balance(:btc) < sale.amount)
           purchase.active = false if (purchase.user.balance(currency) < (purchase.amount * purchase.ppc))

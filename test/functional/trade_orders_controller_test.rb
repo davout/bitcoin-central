@@ -45,10 +45,8 @@ class TradeOrdersControllerTest < ActionController::TestCase
   end
 
   test "should render book when not logged" do
-    flunk
-  end
-
-  test "should give full precision when displaying orders" do
-    flunk
+    assert session[:current_user_id].nil?, "we don't want to be logged-in here"
+    get :book
+    assert_response :success
   end
 end
