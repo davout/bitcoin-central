@@ -149,11 +149,6 @@ class TradeOrder < ActiveRecord::Base
           # Execute it
           trade.execute!
 
-          # TODO : Doesn't this already come for free with transfers callbax?
-          # Inactivate orders if required
-          sale.active = false if (sale.user.balance(:btc) < sale.amount)
-          purchase.active = false if (purchase.user.balance(currency) < (purchase.amount * purchase.ppc))
-
           # TODO : Split orders if an user has enough funds to partially honor an order ?
           # Destroy or save them according to the remaining balance
           [self, mo].each do |o|
