@@ -38,6 +38,7 @@ class TradeOrdersController < ApplicationController
 
     respond_to do |format|
       format.html
+      format.xml
       format.json do
         json = {
           :bids => [],
