@@ -55,5 +55,5 @@ BitcoinBank::Application.routes.draw do
     :as => :support
 
   # TODO : Replace me
-  root :to => 'accounts#show'
+  root :to => 'informations#faq'
 end
