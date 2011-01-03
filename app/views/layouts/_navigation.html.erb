@@ -16,7 +16,7 @@
       <%= menu_item link_to("<span>Your orders</span>".html_safe, account_trade_orders_path), :logged_in => true %>
       <%= menu_item link_to("<span>Order book</span>".html_safe, book_account_trade_orders_path) %>
       <%= menu_item link_to("<span>Trade history</span>".html_safe, account_trades_path), :logged_in => true %>
-      <li><%= link_to "<span>Statistics</span>".html_safe, "#" %></li>
+      <%= menu_item link_to("<span>Trade data</span>".html_safe, statistics_trades_path), :logged_in => true %>
     </ul>
   <% end %>
 

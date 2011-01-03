@@ -36,6 +36,7 @@ BitcoinBank::Application.routes.draw do
     collection do
       get :all_trades
       get :ticker
+      get :statistics
     end
   end
 

@@ -10,6 +10,9 @@
 
     <%= stylesheet_link_tag %w{reset application}, :cache => "all" %>
     <%= javascript_include_tag :defaults, :cache => "all" %>
+    
+    <!-- TODO Cache me along the default JS files -->
+    <%= javascript_include_tag 'excanvas', 'protochart' %>
 
     <%= csrf_meta_tag %>
   </head>
