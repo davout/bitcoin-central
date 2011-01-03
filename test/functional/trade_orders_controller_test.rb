@@ -49,4 +49,9 @@ class TradeOrdersControllerTest < ActionController::TestCase
     get :book
     assert_response :success
   end
+
+  test "should get order book in json format" do
+    get :book, :format => :json
+    assert_response :success
+  end
 end
