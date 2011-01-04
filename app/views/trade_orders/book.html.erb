@@ -1,10 +1,28 @@
-<div id="purchase-orders">
-  <h1>Buying</h1>
+<h1>Select a currency</h1>
+
+<div id="order-book-filter-wrapper" class="form-field">
+  <div id="order-book-filter" class="radios">
+    <%= form_tag book_account_trade_orders_path, :method => :get do %>
+      <%= radio_button_tag 'currency', 'all', params[:currency] == 'all', :onclick => "$(this).up('form').submit()" %> <%= label_tag "currency_all", "All" %>
+      <%= radio_button_tag 'currency', 'lrusd', params[:currency] == 'lrusd', :onclick => "$(this).up('form').submit()" %> <%= label_tag "currency_lrusd", "LRUSD" %>
+      <%= radio_button_tag 'currency', 'lreur', params[:currency] == 'lreur', :onclick => "$(this).up('form').submit()" %> <%= label_tag "currency_lreur", "LREUR" %>
+      <%= radio_button_tag 'currency', 'eur', params[:currency] == 'eur', :onclick => "$(this).up('form').submit()" %> <%= label_tag "currency_eur", "EUR" %>
+
+      <%= submit_tag 'Filter', :class => "submit", :id => "order-book-filter-submit" %>
+      <script type="text/javascript">
+        $('order-book-filter-submit').hide();
+      </script>
+    <% end %>
+  </div>
+</div>
+
+<div id="purchase-orders" class="order-book">
+  <h2>Buying</h2>
 
   <% unless @purchases.blank? %>
     <table class="default">
       <tr>
-        <th>Orders</th>
+        <th class="auto-sized">#</th>
         <th>Amount</th>
         <th>Price</th>
         <th class="auto-sized"></th>
@@ -12,10 +30,10 @@
 
       <% @purchases.each do |to| %>
         <tr>
-          <td><%= to[:orders] %></td>
-          <td><%= number_to_bitcoins to[:amount], :precision => 4 %></td>
-          <td><%= "#{number_to_currency(to[:price].to_f, :unit => "", :precision => 5)} #{to[:currency]}" %></td>
-          <td class="auto-sized"><%= image_tag "#{to.currency}.png"%></td>
+          <td class="auto-sized"><%= to[:orders] %></td>
+          <td class="amount"><%= number_to_bitcoins to[:amount], :precision => 4 %></td>
+          <td class="amount"><%= "#{number_to_currency(to[:price].to_f, :unit => "", :precision => 5)} #{to[:currency]}" %></td>
+          <td class="auto-sized"><%= image_tag "#{to.currency}.png", :alt => to.currency, :title => to.currency %></td>
         </tr>
       <% end %>
     </table>
@@ -24,13 +42,13 @@
   <% end %>
 </div>
 
-<div id="sale-orders">
-  <h1>Selling</h1>
+<div id="sale-orders" class="order-book">
+  <h2>Selling</h2>
 
-<% unless @sales.blank? %>
+  <% unless @sales.blank? %>
     <table class="default">
       <tr>
-        <th>Orders</th>
+        <th class="auto-sized">#</th>
         <th>Amount</th>
         <th>Price</th>
         <th class="auto-sized"></th>
@@ -38,10 +56,10 @@
 
       <% @sales.each do |to| %>
         <tr>
-          <td><%= to[:orders] %></td>
-          <td><%= number_to_bitcoins to[:amount], :precision => 4 %></td>
-          <td><%= "#{number_to_currency(to[:price].to_f, :unit => "", :precision => 5)} #{to[:currency]}" %></td>
-          <td class="auto-sized"><%= image_tag "#{to.currency}.png"%></td>
+          <td class="auto-sized"><%= to[:orders] %></td>
+          <td class="amount"><%= number_to_bitcoins to[:amount], :precision => 4 %></td>
+          <td class="amount"><%= "#{number_to_currency(to[:price].to_f, :unit => "", :precision => 5)} #{to[:currency]}" %></td>
+          <td class="auto-sized"><%= image_tag "#{to.currency}.png", :alt => to.currency, :title => to.currency %></td>
         </tr>
       <% end %>
     </table>

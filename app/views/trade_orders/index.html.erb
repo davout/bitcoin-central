@@ -9,15 +9,17 @@
       <th>Price</th>
       <th>Total</th>
       <th class="auto-sized"></th>
+      <th class="auto-sized"></th>
     </tr>
 
     <% @trade_orders.each do |to| %>
       <tr<%= " class=\"inactive\"" unless to.active? %>>
         <td><%= l to.created_at %></td>
         <td><%= to.category.capitalize %></td>
-        <td><%= number_to_bitcoins to.amount, :precision => 4 %></td>
-        <td><%= "#{number_to_currency(to.ppc, :unit => "", :precision => 4)}" %></td>
-        <td><%= "#{number_to_currency(to.ppc * to.amount, :unit => "", :precision => 4)} #{to.currency}" %></td>
+        <td class="amount"><%= number_to_bitcoins to.amount, :precision => 4 %></td>
+        <td class="amount"><%= "#{number_to_currency(to.ppc, :unit => "", :precision => 5)} #{to.currency}" %></td>
+        <td class="amount"><%= "#{number_to_currency(to.ppc * to.amount, :unit => "", :precision => 4)} #{to.currency}" %></td>
+        <td class="auto-sized"><%= image_tag "#{to.currency}.png", :alt => to.currency, :title => to.currency %></td>
         <td  class="auto-sized">
           <%=
             link_to image_tag("delete.png"),

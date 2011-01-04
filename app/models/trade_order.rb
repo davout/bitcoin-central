@@ -60,7 +60,7 @@ class TradeOrder < ActiveRecord::Base
   end
 
   scope :with_currency, lambda { |currency|
-    unless currency.to_s == 'all'
+    unless currency.to_s.upcase == 'ALL'
       where("currency = ?", currency.to_s.upcase)
     end
   }

@@ -177,6 +177,7 @@ ul#menu > li > ul > li:hover {
 
 ul#menu > li:hover > ul {
     display: block;
+    z-index: 10;
 }
 
 /* Forms */
@@ -308,7 +309,7 @@ table.default {
 table.default tr {
     border-bottom: 1px solid #6E0701;
     border-top: 1px solid #6E0701;
-    
+
 }
 
 table.default th {
@@ -433,11 +434,38 @@ table#trade-orders tr.inactive {
 div#purchase-orders {
     width: 45%;
     float: left;
-    /*border: 1px solid red;*/
 }
 
 div#sale-orders {
     width: 45%;
     float: right;
-    /*border: 1px solid green;*/
 }
+
+div.order-book h2 {
+    margin-top: .5em;
+}
+
+div#order-book-filter, div#order-book-filter label {
+    z-index: 0;
+}
+
+div#order-book-filter label {
+    font-weight: bold;
+    margin-left: .7em;
+    width: 8em;
+    font-size: 105%;
+    position: relative;
+    top: -3px;
+}
+
+div#order-book-filter input.submit {
+    margin-left: inherit;
+    position: relative;
+    top:-7px;
+}
+
+table.default td.amount, .amount {
+    font-family: Lucidatypewriter, monospace;
+    text-align: right;
+}
+
