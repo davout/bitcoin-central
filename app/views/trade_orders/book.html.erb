@@ -1,49 +1,47 @@
-<h1>Selling</h1>
+<div id="purchase-orders">
+  <h1>Buying</h1>
+
+  <% unless @purchases.blank? %>
+    <table class="default">
+      <tr>
+        <th>Orders</th>
+        <th>Amount</th>
+        <th>Price</th>
+      </tr>
+
+      <% @purchases.each do |to| %>
+        <tr>
+          <td><%= to[:orders] %></td>
+          <td><%= number_to_bitcoins to[:amount], :precision => 4 %></td>
+          <td><%= "#{number_to_currency(to[:price].to_f, :unit => "", :precision => 5)}" %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% else %>
+    <p>No buying orders have been found.</p>
+  <% end %>
+</div>
+
+<div id="sale-orders">
+  <h1>Selling</h1>
 
 <% unless @sales.blank? %>
-  <table class="default" id="sale-orders">
-    <tr>
-      <th>Created at</th>
-      <th>Amount</th>
-      <th>Price</th>
-      <th>Total</th>
-    </tr>
-
-    <% @sales.each do |to| %>
+    <table class="default">
       <tr>
-        <td><%= l to.created_at %></td>
-        <td><%= number_to_bitcoins to.amount, :precision => 4 %></td>
-        <td><%= "#{number_to_currency(to.ppc, :unit => "", :precision => 4)}" %></td>
-        <td><%= "#{number_to_currency(to.ppc * to.amount, :unit => "", :precision => 4)} #{to.currency}" %></td>
+        <th>Orders</th>
+        <th>Amount</th>
+        <th>Price</th>
       </tr>
-    <% end %>
-  </table>
-<% else %>
-  <p>No selling orders have been found.</p>
-<% end %>
 
-<br />
-
-<h1>Buying</h1>
-
-<% unless @purchases.blank? %>
-  <table class="default" id="purchase-orders">
-    <tr>
-      <th>Created at</th>
-      <th>Amount</th>
-      <th>Price</th>
-      <th>Total</th>
-    </tr>
-
-    <% @purchases.each do |to| %>
-      <tr>
-        <td><%= l to.created_at %></td>
-        <td><%= number_to_bitcoins to.amount, :precision => 4 %></td>
-        <td><%= "#{number_to_currency(to.ppc, :unit => "", :precision => 4)}" %></td>
-        <td><%= "#{number_to_currency(to.ppc * to.amount, :unit => "", :precision => 4)} #{to.currency}" %></td>
-      </tr>
-    <% end %>
-  </table>
-<% else %>
-  <p>No buying orders have been found.</p>
-<% end %>
+      <% @sales.each do |to| %>
+        <tr>
+          <td><%= to[:orders] %></td>
+          <td><%= number_to_bitcoins to[:amount], :precision => 4 %></td>
+          <td><%= "#{number_to_currency(to[:price].to_f, :unit => "", :precision => 5)}" %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% else %>
+    <p>No selling orders have been found.</p>
+  <% end %>
+</div>

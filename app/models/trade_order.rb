@@ -177,4 +177,21 @@ class TradeOrder < ActiveRecord::Base
   def round_to(arg, precision)
     (arg * (10 ** precision)).round.to_f / (10 ** precision).to_f
   end
+
+  def self.get_orders(category, options = {})
+    with_exclusive_scope do
+      TradeOrder.active_with_category(category).
+        select("COUNT(*) AS orders").
+        select("ppc AS price").
+        select("SUM(amount) AS amount").
+        select("MAX(created_at) AS created_at").
+        select("currency").
+        active.
+        with_currency(options[:currency] || :all).
+        group("#{options[:separated] ? "id" : "ppc"}").
+        group("currency").
+        order("ppc #{category == :sell ? "ASC" : "DESC"}").
+        all
+    end
+  end
 end

@@ -31,11 +31,14 @@ class TradeOrdersController < ApplicationController
   end
 
   def book
-    currency = params[:currency] || :all
+    @sales = TradeOrder.get_orders :sell,
+      :currency => params[:currency],
+      :separated => params[:separated]
 
-    @sales = TradeOrder.active_with_category(:sell).with_currency(currency).all
-    @purchases = TradeOrder.active_with_category(:buy).with_currency(currency).all
-
+    @purchases = TradeOrder.get_orders :buy,
+      :currency => params[:currency],
+      :separated => params[:separated]
+      
     respond_to do |format|
       format.html
       format.xml
@@ -48,10 +51,11 @@ class TradeOrdersController < ApplicationController
         { :asks => @sales, :bids => @purchases }.each do |k,v|
           v.each do |to|
             json[k] << {
-              :timestamp => to.created_at.to_i,
-              :price => to.ppc.to_f,
-              :volume => to.amount.to_f,
-              :currency => to.currency
+              :timestamp => to[:created_at].to_i,
+              :price => to[:price].to_f,
+              :volume => to[:amount].to_f,
+              :currency => to[:currency],
+              :orders => to[:orders].to_i
             }
           end
         end
