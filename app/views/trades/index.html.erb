@@ -22,7 +22,7 @@
           <% end %>
         </td>
         <td><%= number_to_bitcoins trade.traded_btc %></td>
-        <td><%= number_to_lrusd trade.ppc %></td>
+        <td><%= number_to_currency trade.ppc %> <%= trade.currency %></td>
         <td><%= trade.currency %></td>
         <td><%= trade.traded_currency %></td>
       </tr>
