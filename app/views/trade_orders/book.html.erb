@@ -3,7 +3,7 @@
 <div id="order-book-filter-wrapper" class="form-field">
   <div id="order-book-filter" class="radios">
     <%= form_tag book_account_trade_orders_path, :method => :get do %>
-      <%= radio_button_tag 'currency', 'all', params[:currency] == 'all', :onclick => "$(this).up('form').submit()" %> <%= label_tag "currency_all", "All" %>
+      <%= radio_button_tag 'currency', 'all', params[:currency].blank? or (params[:currency] == 'all'), :onclick => "$(this).up('form').submit()" %> <%= label_tag "currency_all", "All" %>
       <%= radio_button_tag 'currency', 'lrusd', params[:currency] == 'lrusd', :onclick => "$(this).up('form').submit()" %> <%= label_tag "currency_lrusd", "LRUSD" %>
       <%= radio_button_tag 'currency', 'lreur', params[:currency] == 'lreur', :onclick => "$(this).up('form').submit()" %> <%= label_tag "currency_lreur", "LREUR" %>
       <%= radio_button_tag 'currency', 'eur', params[:currency] == 'eur', :onclick => "$(this).up('form').submit()" %> <%= label_tag "currency_eur", "EUR" %>
