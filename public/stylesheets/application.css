@@ -376,6 +376,8 @@ td.account-balance span.unconfirmed {
 table#history td.amount {
     font-size: 120%;
     font-weight: bold;
+    font-family: inherit;
+    text-align: center;
 }
 
 /* Trade orders history */
