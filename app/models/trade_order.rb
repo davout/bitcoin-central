@@ -34,7 +34,7 @@ class TradeOrder < ActiveRecord::Base
       end
 
       if ((user.balance(currency) / ppc) < amount ) and (category == "buy")
-        errors[:amount] << "is greater than your buying capability at this price (#{"%.4f" % (user.balance(currency) / ppc)} BTC @ #{ppc} BTC/#{currency})"
+        errors[:amount] << "is greater than your buying capacity (#{"%.4f" % (user.balance(currency) / ppc)} BTC @ #{ppc} BTC/#{currency})"
       end
     end
   end
@@ -70,7 +70,6 @@ class TradeOrder < ActiveRecord::Base
   }
 
   scope :matching_orders, lambda { |order|
-    # TESTME Check that the order scope is the specified one, not the default one
     with_exclusive_scope do
       active.
         with_currency(order.currency).
@@ -148,7 +147,7 @@ class TradeOrder < ActiveRecord::Base
             :sale_order_id => sale.id
           )
 
-          # Execute it
+          # Execute it (record the different fund transfers)
           trade.execute!
 
           # TODO : Split orders if an user has enough funds to partially honor an order ?
@@ -178,6 +177,7 @@ class TradeOrder < ActiveRecord::Base
     (arg * (10 ** precision)).round.to_f / (10 ** precision).to_f
   end
 
+  # This is used by the order book
   def self.get_orders(category, options = {})
     with_exclusive_scope do
       TradeOrder.active_with_category(category).
