@@ -1,0 +1,82 @@
+<div id="price-chart-container" class="chart-container">
+  <h3>Last 48h trade data</h3>
+  <div id="price-chart" class="chart" style="margin:auto;margin-top:2em;width:400px;height:300px"></div>
+</div>
+
+<h1>Welcome to bitcoin-central.net!</h1>
+<div class="question" style="text-align:justify">
+  <h2>What is Bitcoin?</h2>
+  <p>
+    Bitcoin is a peer-to-peer digital currency. Peer-to-peer means that there is no central authority to issue new money or keep track of transactions. Instead, these tasks are managed collectively by the nodes of the network. Advantages:
+  <ul>
+    <li>
+      Bitcoins can be sent easily through the Internet, without having to trust middlemen.
+    </li>
+    <li>
+      Transactions are designed to be irreversible.
+    </li>
+    <li>
+      Be safe from instability caused by fractional reserve banking and central banks. The limited inflation of the Bitcoin system’s money supply is distributed evenly (by CPU power) throughout the network, not monopolized by banks.
+    </li>
+  </ul>
+  More detailed explanations can be found at <strong><%= link_to "bitcoin.org", "http://bitcoin.org" %></strong>.
+</p>
+</div>
+
+<script type="text/javascript">
+  var graph = new Proto.Chart(
+  $('price-chart'),   
+  [
+    {
+      data: [
+<%=
+Trade.
+  with_currency(:lrusd).
+  where("created_at >= ?", DateTime.now.advance(:hours => -48)).
+  all.
+  map { |t| "[#{t.created_at.to_i}, #{t.ppc}]"}.
+  join(",")
+%>
+      ],
+      label: "LRUSD",
+      color: "#068300"
+    },
+    {
+      data: [
+<%=
+Trade.
+  with_currency(:lreur).
+  where("created_at >= ?", DateTime.now.advance(:hours => -48)).
+  all.
+  map { |t| "[#{t.created_at.to_i}, #{t.ppc}]"}.
+  join(",")
+%>
+      ],
+      label: "LREUR",
+      color:"#0E00C1"
+    }
+  ],
+  {
+    xaxis: {
+      mode: "time",
+      max: <%= DateTime.now.to_i %>,
+      min: <%= DateTime.now.advance(:hours => -48).to_i %>
+    },
+    yaxis: {
+      min: <%= @min_y %>,
+      max: <%= @max_y %>,
+      tickSize: <%= @y_tick_size %>
+    },
+    legend: {
+      show: true
+    },
+    points: {
+      show: true
+    },
+    lines: {
+      show: true
+    }
+
+  }
+);
+</script>

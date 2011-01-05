@@ -56,5 +56,5 @@ BitcoinBank::Application.routes.draw do
     :as => :support
 
   # TODO : Replace me
-  root :to => 'informations#index'
+  root :to => 'informations#welcome'
 end

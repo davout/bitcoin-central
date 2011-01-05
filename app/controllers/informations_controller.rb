@@ -1,15 +1,10 @@
 class InformationsController < ApplicationController
   skip_before_filter :authorize
 
-  def lr_api
-    raise LibertyReserve::Client.new.get_transaction.to_yaml
-  end
+  def welcome
+    @min_y = Trade.where("created_at >= ?", DateTime.now.advance(:hours => -48)).minimum(:ppc) - Trade.where("created_at >= ?", DateTime.now.advance(:hours => -48)).maximum(:ppc) * 0.3
+    @max_y = Trade.where("created_at >= ?", DateTime.now.advance(:hours => -48)).maximum(:ppc) * 1.3
+    @y_tick_size = (@max_y - @min_y) / 10.0
 
-  def index
-    if session[:current_user_id]
-      redirect_to account_path
-    else
-      render :action => :faq
-    end
   end
 end

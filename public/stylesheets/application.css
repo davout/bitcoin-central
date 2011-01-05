@@ -469,3 +469,14 @@ table.default td.amount, .amount {
     text-align: right;
 }
 
+/* Charts */
+div.chart-container {
+
+}
+
+div#price-chart-container {
+    width: 400px;
+    float: right;
+    margin-right: 1em;
+    margin-left: 2em;
+}
