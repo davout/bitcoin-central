@@ -15,7 +15,7 @@
 
   <tr>
     <td>
-      <%= link_to image_tag("bitcoin-logo.jpg"), "http://www.bitcoin.org/", :target => "_blank", :title => "Bitcoin home" %>
+      <%= link_to image_tag("bitcoin-logo.jpg"), "http://www.bitcoin.org/", :target => "_blank", :title => "Bitcoin" %>
     </td>
     <td>
       BTC
@@ -41,7 +41,7 @@
 
   <tr>
     <td rowspan="2">
-      <%= link_to image_tag("liberty_reserve.gif"), "https://www.libertyreserve.com/?ref=U8651415", :target => "_blank", :title => "Liberty Reserve home" %>
+      <%= link_to image_tag("liberty_reserve.gif"), "https://www.libertyreserve.com/?ref=U8651415", :target => "_blank", :title => "Liberty Reserve" %>
     </td>
     <td>
       LRUSD
@@ -60,27 +60,16 @@
     </td>
   </tr>
 
-  <% if false %>
-    <!-- No LiqPay for now -->
-    <tr>
-      <td rowspan="2">
-        <%=  link_to image_tag("liqpay.gif"), "https://www.liqpay.com/", :target => "_blank", :title => "LiqPAY home" %>
-      </td>
-      <td>
-        LPUSD
-      </td>
-      <td class="account-balance <%= @current_user.balance(:lpusd) > 0 ? "green" : (@current_user.balance(:lpusd) < 0 ? "red" : "") %>">
-        <%= @current_user.balance(:lpusd) > 0 ? "+" : (@current_user.balance(:lpusd) < 0 ? "-" : "") %> <%= number_to_currency @current_user.balance(:lpusd).abs, :unit => "" %>
-      </td>
-    </tr>
+  <tr>
+    <td>
+      <%= link_to image_tag("euros.png"), "http://www.ecb.int/", :target => "_blank", :title => "Cash EUR" %>
+    </td>
+    <td>
+      EUR
+    </td>
+    <td class="account-balance <%= @current_user.balance(:eur) > 0 ? "green" : (@current_user.balance(:eur) < 0 ? "red" : "") %>">
+      <%= @current_user.balance(:eur) > 0 ? "+" : (@current_user.balance(:eur) < 0 ? "-" : "") %> <%= number_to_currency @current_user.balance(:eur).abs, :unit => "" %>
+    </td>
+  </tr>
 
-    <tr>
-      <td>
-        LPEUR
-      </td>
-      <td class="account-balance <%= @current_user.balance(:lpeur) > 0 ? "green" : (@current_user.balance(:lpeur) < 0 ? "red" : "") %>">
-        <%= @current_user.balance(:lpeur) > 0 ? "+" : (@current_user.balance(:lpeur) < 0 ? "-" : "") %> <%= number_to_currency @current_user.balance(:lpeur).abs, :unit => "" %>
-      </td>
-    </tr>
-  <% end %>
 </table>

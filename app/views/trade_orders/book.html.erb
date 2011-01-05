@@ -32,7 +32,7 @@
         <tr>
           <td class="auto-sized"><%= to[:orders] %></td>
           <td class="amount"><%= number_to_bitcoins to[:amount], :precision => 4 %></td>
-          <td class="amount"><%= "#{number_to_currency(to[:price].to_f, :unit => "", :precision => 5)} #{to[:currency]}" %></td>
+          <td class="amount"><%= "#{number_to_currency(to[:price].to_f, :unit => "", :precision => 5)} #{to[:currency] + ("&nbsp;" * (5 - to[:currency].size))}".html_safe %></td>
           <td class="auto-sized"><%= image_tag "#{to.currency}.png", :alt => to.currency, :title => to.currency %></td>
         </tr>
       <% end %>
@@ -58,7 +58,7 @@
         <tr>
           <td class="auto-sized"><%= to[:orders] %></td>
           <td class="amount"><%= number_to_bitcoins to[:amount], :precision => 4 %></td>
-          <td class="amount"><%= "#{number_to_currency(to[:price].to_f, :unit => "", :precision => 5)} #{to[:currency]}" %></td>
+          <td class="amount"><%= "#{number_to_currency(to[:price].to_f, :unit => "", :precision => 5)} #{to[:currency] + ("&nbsp;" * (5 - to[:currency].size))}".html_safe %></td>
           <td class="auto-sized"><%= image_tag "#{to.currency}.png", :alt => to.currency, :title => to.currency %></td>
         </tr>
       <% end %>

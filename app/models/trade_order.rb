@@ -41,7 +41,7 @@ class TradeOrder < ActiveRecord::Base
 
   validates :currency,
     :presence => true,
-    :inclusion => { :in => ["LRUSD", "LREUR"] }
+    :inclusion => { :in => ["LRUSD", "LREUR", "EUR"] }
 
   validates :category,
     :presence => true,
