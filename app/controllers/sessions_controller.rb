@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
   def destroy
     reset_session
     
-    redirect_to new_session_path,
+    redirect_to root_path,
       :notice => "You logged out successfully"
   end
 end

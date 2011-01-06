@@ -46,7 +46,7 @@ class Trade < ActiveRecord::Base
 
   def execute!
     # credit seller /w currency
-    transfers << LibertyReserveTransfer.create!(
+    transfers << klass_for_currency(currency).create!(
       :currency => currency,
       :amount => traded_currency,
       :user_id => sale_order.user_id,
@@ -56,7 +56,7 @@ class Trade < ActiveRecord::Base
     )
 
     # debit buyer of currency
-    transfers << LibertyReserveTransfer.create!(
+    transfers << klass_for_currency(currency).create!(
       :currency => currency,
       :amount =>  -traded_currency,
       :user_id => purchase_order.user_id,
@@ -81,5 +81,15 @@ class Trade < ActiveRecord::Base
     sale.execute!
     
     save!
+  end
+
+  def klass_for_currency(c)
+    klass_map = {
+      :lrusd => LibertyReserveTransfer,
+      :lreur => LibertyReserveTransfer,
+      :eur => CashTransfer
+    }
+
+    klass_map[c.to_s.downcase.to_sym] || raise("No mapping for this currency")
   end
 end

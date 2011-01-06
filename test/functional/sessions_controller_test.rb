@@ -6,7 +6,7 @@ class SessionsControllerTest < ActionController::TestCase
       :password => "pass"
 
     assert_response :redirect
-    assert_redirected_to root_path
+    assert_redirected_to account_path
     assert_equal session[:current_user_id], users(:trader1).id
   end
 
@@ -15,7 +15,7 @@ class SessionsControllerTest < ActionController::TestCase
       :password => "pass"
 
     assert_response :redirect
-    assert_redirected_to root_path
+    assert_redirected_to account_path
     assert_equal session[:current_user_id], users(:trader1).id
   end
 
@@ -25,5 +25,6 @@ class SessionsControllerTest < ActionController::TestCase
 
     delete :destroy
     assert_nil session[:current_user_id]
+    assert_redirected_to root_path
   end
 end

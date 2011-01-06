@@ -29,31 +29,54 @@
   [
     {
       data: [
-<%=
-Trade.
-  with_currency(:lrusd).
-  where("created_at >= ?", DateTime.now.advance(:hours => -48)).
-  all.
-  map { |t| "[#{t.created_at.to_i}, #{t.ppc}]"}.
-  join(",")
-%>
+        <%=
+          trades = Trade.
+            with_currency(:lrusd).
+            where("created_at >= ?", DateTime.now.advance(:hours => -48)).
+            all.
+            map { |t| "[#{t.created_at.to_i}, #{t.ppc}]"}
+
+          trades << "[#{DateTime.now.to_i}, #{Trade.with_currency(:lrusd).last.ppc}]" unless Trade.with_currency(:lrusd).count.zero?
+
+          trades.join(",")
+        %>
       ],
       label: "LRUSD",
       color: "#068300"
     },
     {
       data: [
-<%=
-Trade.
-  with_currency(:lreur).
-  where("created_at >= ?", DateTime.now.advance(:hours => -48)).
-  all.
-  map { |t| "[#{t.created_at.to_i}, #{t.ppc}]"}.
-  join(",")
-%>
+        <%=
+          trades = Trade.
+            with_currency(:lreur).
+            where("created_at >= ?", DateTime.now.advance(:hours => -48)).
+            all.
+            map { |t| "[#{t.created_at.to_i}, #{t.ppc}]"}
+
+          trades << "[#{DateTime.now.to_i}, #{Trade.with_currency(:lreur).last.ppc}]" unless Trade.with_currency(:lreur).count.zero?
+
+          trades.join(",")
+        %>
       ],
       label: "LREUR",
       color:"#0E00C1"
+    },
+    {
+      data: [
+        <%=
+          trades = Trade.
+            with_currency(:eur).
+            where("created_at >= ?", DateTime.now.advance(:hours => -48)).
+            all.
+            map { |t| "[#{t.created_at.to_i}, #{t.ppc}]"}
+
+          trades << "[#{DateTime.now.to_i}, #{Trade.with_currency(:eur).last.ppc}]" unless Trade.with_currency(:eur).count.zero?
+
+          trades.join(",")
+        %>
+      ],
+      label: "EUR",
+      color:"#AFAAF3"
     }
   ],
   {
