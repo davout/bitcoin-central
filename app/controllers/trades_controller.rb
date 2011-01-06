@@ -13,7 +13,7 @@ class TradesController < ApplicationController
   def ticker
     @ticker = {}
 
-    %w{LRUSD LREUR}.each do |currency|
+    %w{LRUSD LREUR EUR}.each do |currency|
       @ticker[currency] = {
         :high => Trade.with_currency(currency).last_24h.maximum(:ppc),
         :low => Trade.with_currency(currency).last_24h.minimum(:ppc),
