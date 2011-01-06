@@ -3,7 +3,7 @@ class TradesController < ApplicationController
     :only => [:all_trades, :ticker]
 
   def index
-    @trades = @current_user.purchase_trades + @current_user.sale_trades
+    @trades = Trade.where("seller_id = ? OR buyer_id = ?", @current_user.id, @current_user.id).all
   end
 
   def all_trades
