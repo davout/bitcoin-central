@@ -32,7 +32,7 @@
         <%=
           trades = []
           
-          with_exclusive_scope do
+          Trade.with_exclusive_scope do
             trades = Trade.
               with_currency(:lrusd).
               where("created_at >= ?", DateTime.now.advance(:hours => -48)).
@@ -51,7 +51,7 @@
     {
       data: [
         <%=
-          with_exclusive_scope do
+          Trade.with_exclusive_scope do
             trades = Trade.
               with_currency(:lreur).
               where("created_at >= ?", DateTime.now.advance(:hours => -48)).
@@ -70,7 +70,7 @@
     {
       data: [
         <%=
-          with_exclusive_scope do
+          Trade.with_exclusive_scope do
             trades = Trade.
               with_currency(:eur).
               where("created_at >= ?", DateTime.now.advance(:hours => -48)).
