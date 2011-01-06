@@ -30,15 +30,15 @@
     {
       data: [
         <%=
-          trades = []
+          #trades = []
           
-          Trade.with_exclusive_scope do
+          #Trade.with_exclusive_scope do
             trades = Trade.
               with_currency(:lrusd).
               where("created_at >= ?", DateTime.now.advance(:hours => -48)).
               all.
               map { |t| "[#{t.created_at.to_i}, #{t.ppc}]"}
-          end
+          #end
 
           trades << "[#{DateTime.now.to_i}, #{Trade.with_currency(:lrusd).last.ppc}]" unless Trade.with_currency(:lrusd).count.zero?
 
@@ -51,13 +51,13 @@
     {
       data: [
         <%=
-          Trade.with_exclusive_scope do
+          #Trade.with_exclusive_scope do
             trades = Trade.
               with_currency(:lreur).
               where("created_at >= ?", DateTime.now.advance(:hours => -48)).
               all.
               map { |t| "[#{t.created_at.to_i}, #{t.ppc}]"}
-          end
+          #end
 
           trades << "[#{DateTime.now.to_i}, #{Trade.with_currency(:lreur).last.ppc}]" unless Trade.with_currency(:lreur).count.zero?
 
@@ -70,13 +70,13 @@
     {
       data: [
         <%=
-          Trade.with_exclusive_scope do
+          #Trade.with_exclusive_scope do
             trades = Trade.
               with_currency(:eur).
               where("created_at >= ?", DateTime.now.advance(:hours => -48)).
               all.
               map { |t| "[#{t.created_at.to_i}, #{t.ppc}]"}
-          end
+          #end
 
           trades << "[#{DateTime.now.to_i}, #{Trade.with_currency(:eur).last.ppc}]" unless Trade.with_currency(:eur).count.zero?
 
