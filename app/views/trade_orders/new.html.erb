@@ -21,16 +21,25 @@
       <%= f.radio_button :category, "buy" %> <%= f.label :category_buy, "Buy" %>
       <%= f.radio_button :category, "sell" %> <%= f.label :category_sell, "Sell" %>
     </div>
+    <div class="explanation">
+      Whether you want to buy or sell bitcoins
+    </div>
   </div>
 
   <div class="form-field">
-    <%= f.label :amount, "Amount (BTC)" %>
+    <%= f.label :amount %>
     <%= f.text_field :amount, :size => 8, :value => "" %>
+    <div class="explanation">
+      BTC amount you're trading
+    </div>
   </div>
 
   <div class="form-field">
     <%= f.label :ppc, "Price" %>
     <%= f.text_field :ppc, :size => 8, :value => "" %>
+    <div class="explanation">
+      Price for 1 BTC
+    </div>
   </div>
 
   <div class="form-field">
@@ -39,6 +48,17 @@
       <%= f.radio_button :currency, "LRUSD" %> <%= f.label :currency_lrusd, "LRUSD" %>
       <%= f.radio_button :currency, "LREUR" %> <%= f.label :currency_lreur, "LREUR" %>
       <%= f.radio_button :currency, "EUR" %> <%= f.label :currency_eur, "EUR" %>
+    </div>
+    <div class="explanation">
+      Currency you're trading
+    </div>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :dark_pool %>
+    <%= f.check_box :dark_pool, :class => "checkbox" %>
+    <div class="explanation">
+      Should the order be public ?
     </div>
   </div>
 

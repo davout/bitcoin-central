@@ -10,7 +10,7 @@ class TradeOrdersController < ApplicationController
     @trade_order.user = @current_user
 
     if @trade_order.save
-      @trade_order.execute!
+      report = @trade_order.execute!
 
       redirect_to account_trade_orders_path,
         :notice => "Your trade order was created successfully"

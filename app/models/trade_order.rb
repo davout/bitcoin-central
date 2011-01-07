@@ -82,15 +82,15 @@ class TradeOrder < ActiveRecord::Base
 
   scope :active_with_category, lambda { |cat|
     with_exclusive_scope do
-      where("category = ?", cat.to_s).
+      where(:category => cat.to_s).
         active.
         order("ppc #{(cat.to_s == 'buy') ? 'DESC' : 'ASC'}")
     end
   }
 
-  scope :active, lambda {
-    where("active = ?", true)
-  }
+  scope :active, lambda { where(:active => true) }
+
+  scope :visible, lambda { where(:dark_pool => false) }
 
   def inactivate_if_needed!
     if category == "sell"
@@ -187,6 +187,7 @@ class TradeOrder < ActiveRecord::Base
         select("MAX(created_at) AS created_at").
         select("currency").
         active.
+        visible.
         with_currency(options[:currency] || :all).
         group("#{options[:separated] ? "id" : "ppc"}").
         group("currency").

@@ -239,6 +239,10 @@ div.form-field div.radios input {
     width: inherit;
 }
 
+div.form-field input.checkbox {
+    width: inherit;
+}
+
 div.field_with_errors {
     display: inline;
     color: red;
