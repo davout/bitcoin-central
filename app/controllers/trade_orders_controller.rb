@@ -10,10 +10,18 @@ class TradeOrdersController < ApplicationController
     @trade_order.user = @current_user
 
     if @trade_order.save
-      report = @trade_order.execute!
+      result = @trade_order.execute!
+
+      if result[:trades].zero?
+        notice = "Your order has been saved but no compatible orders have been found yet"
+      else
+        notice = "Your order was #{@trade_order.destroyed? ? "completely" : "partially"} filled, 
+          you #{@trade_order.buying? ? "bought" : "sold"} #{"%.4f" % result[:total_traded_btc]} BTC
+          for #{"%.4f" % result[:total_traded_currency]} #{result[:currency]} @ #{"%.5f" % result[:ppc]} #{result[:currency]}/BTC"
+      end
 
       redirect_to account_trade_orders_path,
-        :notice => "Your trade order was created successfully"
+        :notice => notice
     else
       render :action => :new
     end
@@ -32,10 +40,12 @@ class TradeOrdersController < ApplicationController
 
   def book
     @sales = TradeOrder.get_orders :sell,
+      :user => @current_user,
       :currency => params[:currency],
       :separated => params[:separated]
 
     @purchases = TradeOrder.get_orders :buy,
+      :user => @current_user,
       :currency => params[:currency],
       :separated => params[:separated]
       

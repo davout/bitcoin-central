@@ -330,6 +330,8 @@ table.default td, table.default th {
 
 table.default td.auto-sized, table.default th.auto-sized {
     min-width: 0;
+    padding-left: .3em;
+    padding-right: .3em;
 }
 
 table.default tr:hover th, table.default tr th {
