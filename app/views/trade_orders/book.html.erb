@@ -26,6 +26,7 @@
         <th>Amount</th>
         <th>Price</th>
         <th class="auto-sized"></th>
+        <th class="auto-sized"></th>
       </tr>
 
       <% @purchases.each do |to| %>
@@ -33,6 +34,7 @@
           <td class="auto-sized"><%= to[:orders] %></td>
           <td class="amount"><%= number_to_bitcoins to[:amount], :precision => 4 %></td>
           <td class="amount"><%= "#{number_to_currency(to[:price].to_f, :unit => "", :precision => 5)} #{to[:currency] + ("&nbsp;" * (5 - to[:currency].size))}".html_safe %></td>
+          <td class="auto-sized"><%= image_tag("dark-pool.png", :alt => dark_pool_message(to[:orders]), :title => dark_pool_message(to[:orders])) if to.dark_pool? %></td>
           <td class="auto-sized"><%= image_tag "#{to.currency}.png", :alt => to.currency, :title => to.currency %></td>
         </tr>
       <% end %>
@@ -52,6 +54,7 @@
         <th>Amount</th>
         <th>Price</th>
         <th class="auto-sized"></th>
+        <th class="auto-sized"></th>
       </tr>
 
       <% @sales.each do |to| %>
@@ -59,6 +62,7 @@
           <td class="auto-sized"><%= to[:orders] %></td>
           <td class="amount"><%= number_to_bitcoins to[:amount], :precision => 4 %></td>
           <td class="amount"><%= "#{number_to_currency(to[:price].to_f, :unit => "", :precision => 5)} #{to[:currency] + ("&nbsp;" * (5 - to[:currency].size))}".html_safe %></td>
+          <td class="auto-sized"><%= image_tag("dark-pool.png", :alt => dark_pool_message(to[:orders]), :title => dark_pool_message(to[:orders])) if to.dark_pool? %></td>
           <td class="auto-sized"><%= image_tag "#{to.currency}.png", :alt => to.currency, :title => to.currency %></td>
         </tr>
       <% end %>

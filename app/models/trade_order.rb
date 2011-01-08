@@ -1,5 +1,6 @@
 class TradeOrder < ActiveRecord::Base
   MIN_AMOUNT = 1.0
+  MIN_DARK_POOL_AMOUNT = 3000.0
 
   default_scope order('created_at DESC')
 
@@ -29,12 +30,18 @@ class TradeOrder < ActiveRecord::Base
         errors[:amount] << "must be greater than #{MIN_AMOUNT} BTC"
       end
 
-      if (amount > user.balance(:btc)) and (category == "sell")
+      if (amount > user.balance(:btc)) and selling?
         errors[:amount] << "is greater than your available balance (#{"%.4f" % user.balance(:btc)} BTC)"
       end
 
-      if ((user.balance(currency) / ppc) < amount ) and (category == "buy")
-        errors[:amount] << "is greater than your buying capacity (#{"%.4f" % (user.balance(currency) / ppc)} BTC @ #{ppc} BTC/#{currency})"
+      unless currency.blank?
+        if ((user.balance(currency) / ppc) < amount ) and buying?
+          errors[:amount] << "is greater than your buying capacity (#{"%.4f" % (user.balance(currency) / ppc)} BTC @ #{ppc} BTC/#{currency})"
+        end
+      end
+
+      if dark_pool? and amount < MIN_DARK_POOL_AMOUNT
+        errors[:dark_pool] << "orders must have a 3,000 BTC minimal amount"
       end
     end
   end
@@ -82,14 +89,20 @@ class TradeOrder < ActiveRecord::Base
 
   scope :active_with_category, lambda { |cat|
     with_exclusive_scope do
-      where("category = ?", cat.to_s).
+      where(:category => cat.to_s).
         active.
         order("ppc #{(cat.to_s == 'buy') ? 'DESC' : 'ASC'}")
     end
   }
 
-  scope :active, lambda {
-    where("active = ?", true)
+  scope :active, lambda { where(:active => true) }
+
+  scope :visible, lambda { |user|
+    if user
+      where("(dark_pool = ? OR user_id = ?)", false, user.id)
+    else
+      where(:dark_pool => false)
+    end
   }
 
   def inactivate_if_needed!
@@ -103,6 +116,8 @@ class TradeOrder < ActiveRecord::Base
   end
 
   def execute!
+    executed_trades = []
+
     TradeOrder.connection.execute("SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE")
 
     TradeOrder.transaction do
@@ -150,6 +165,8 @@ class TradeOrder < ActiveRecord::Base
           # Execute it (record the different fund transfers)
           trade.execute!
 
+          executed_trades << trade
+
           # TODO : Split orders if an user has enough funds to partially honor an order ?
           # Destroy or save them according to the remaining balance
           [self, mo].each do |o|
@@ -164,6 +181,7 @@ class TradeOrder < ActiveRecord::Base
         end
       rescue
         @exception = $!
+        executed_trades = []
         raise ActiveRecord::Rollback
       ensure
         raise @exception if @exception
@@ -171,6 +189,21 @@ class TradeOrder < ActiveRecord::Base
     end
 
     TradeOrder.connection.execute("SET SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READ")
+
+    result = {
+      :trades => 0,
+      :total_traded_btc => 0,
+      :total_traded_currency => 0,
+      :currency => currency
+    }
+
+    executed_trades.inject(result) do |r, t|
+      r[:trades] += 1
+      r[:total_traded_btc] += t.traded_btc
+      r[:total_traded_currency] += t.traded_currency
+      r[:ppc] = r[:total_traded_currency] / r[:total_traded_btc]
+      r
+    end
   end
 
   def round_to(arg, precision)
@@ -186,7 +219,9 @@ class TradeOrder < ActiveRecord::Base
         select("SUM(amount) AS amount").
         select("MAX(created_at) AS created_at").
         select("currency").
+        select("dark_pool").
         active.
+        visible(options[:user]).
         with_currency(options[:currency] || :all).
         group("#{options[:separated] ? "id" : "ppc"}").
         group("currency").

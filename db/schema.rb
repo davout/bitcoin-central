@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110101105004) do
+ActiveRecord::Schema.define(:version => 20110107095311) do
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
@@ -23,14 +23,16 @@ ActiveRecord::Schema.define(:version => 20110101105004) do
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "trade_orders", :force => true do |t|
-    t.integer  "user_id",                                                     :null => false
-    t.decimal  "amount",     :precision => 16, :scale => 8, :default => 0.0
-    t.decimal  "ppc",        :precision => 16, :scale => 8, :default => 0.0
-    t.string   "currency",                                                    :null => false
-    t.string   "category",                                                    :null => false
+    t.integer  "user_id",                                                                     :null => false
+    t.decimal  "amount",                    :precision => 16, :scale => 8, :default => 0.0
+    t.decimal  "ppc",                       :precision => 16, :scale => 8, :default => 0.0
+    t.string   "currency",                                                                    :null => false
+    t.string   "category",                                                                    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "active",                                    :default => true
+    t.boolean  "active",                                                   :default => true
+    t.boolean  "dark_pool",                                                :default => false, :null => false
+    t.boolean  "dark_pool_exclusive_match",                                :default => false, :null => false
   end
 
   create_table "trades", :force => true do |t|

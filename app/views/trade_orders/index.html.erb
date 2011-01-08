@@ -10,6 +10,7 @@
       <th>Total</th>
       <th class="auto-sized"></th>
       <th class="auto-sized"></th>
+      <th class="auto-sized"></th>
     </tr>
 
     <% @trade_orders.each do |to| %>
@@ -17,12 +18,13 @@
         <td><%= l to.created_at %></td>
         <td><%= to.category.capitalize %></td>
         <td class="amount"><%= number_to_bitcoins to.amount, :precision => 4 %></td>
-        <td class="amount"><%= "#{number_to_currency(to.ppc, :unit => "", :precision => 5)} #{to.currency}" %></td>
-        <td class="amount"><%= "#{number_to_currency(to.ppc * to.amount, :unit => "", :precision => 4)} #{to.currency}" %></td>
+        <td class="amount"><%= "#{number_to_currency(to.ppc, :unit => "", :precision => 5)} #{to[:currency] + ("&nbsp;" * (5 - to[:currency].size))}".html_safe %></td>
+        <td class="amount"><%= "#{number_to_currency(to.ppc * to.amount, :unit => "", :precision => 4)} #{to[:currency] + ("&nbsp;" * (5 - to[:currency].size))}".html_safe %></td>
+        <td class="auto-sized"><%= image_tag("dark-pool.png", :alt => "Dark pool order", :title => "Dark pool order") if to.dark_pool? %></td>
         <td class="auto-sized"><%= image_tag "#{to.currency}.png", :alt => to.currency, :title => to.currency %></td>
         <td  class="auto-sized">
           <%=
-            link_to image_tag("delete.png"),
+            link_to image_tag("delete.png", :title => "Delete this trade order", :alt => "Delete this trade order"),
               account_trade_order_path(to),
               :method => :delete,
               :class => "delete",
