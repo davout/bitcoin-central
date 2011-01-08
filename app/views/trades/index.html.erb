@@ -23,7 +23,7 @@
         </td>
         <td class="amount"><%= number_to_bitcoins trade.traded_btc, :precision => 4 %></td>
         <td class="amount"><%= number_to_currency trade.ppc, :unit => "", :precision => 5 %> <%= trade.currency %></td>
-        <td class="amount"><%= number_to_currency trade.traded_currency, :unit => "", :precision => 4 %> <%= trade.currency %> </td>
+        <td class="amount"><%= number_to_currency trade.traded_currency, :unit => "", :precision => 4 %> <%= "#{trade.currency + ("&nbsp;" * (5 - trade.currency.size))}".html_safe %> </td>
         <td class="auto-sized"><%= image_tag "#{trade.currency}.png", :alt => trade.currency, :title => trade.currency %></td>
       </tr>
     <% end %>
