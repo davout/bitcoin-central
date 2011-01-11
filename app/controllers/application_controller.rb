@@ -7,7 +7,8 @@ class ApplicationController < ActionController::Base
     :authenticate,
     :authorize,
     :set_time_zone,
-    :remove_params
+    :remove_params,
+    :set_locale
 
   def authenticate
     if session[:current_user_id]
@@ -39,5 +40,16 @@ class ApplicationController < ActionController::Base
   def remove_params
     params.delete :skip_captcha
     params.delete :skip_password
+  end
+
+  # Changes the locale if *locale* (en|fr|...) is passed as GET parameter
+  def set_locale
+    locale = params[:locale] or session[:locale]
+    locale = locale.to_sym if locale
+
+    if locale and I18n.available_locales.include?(locale)
+      I18n.locale = locale
+      session[:locale] = locale
+    end
   end
 end

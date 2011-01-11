@@ -179,3 +179,12 @@ fr:
         <<: *errors_template
       full_messages:
         format: "%{attribute} %{message}"
+
+
+  # layouts/user_informations.html
+  generate_new_address_legend: Générer une nouvelle addresse de réception
+  your_last_address: Votre addresse
+  logout: Déconnexion
+  signed_in_as: Connecté en tant que
+  sign_up: S'enregistrer
+  sign_in: Se connecter

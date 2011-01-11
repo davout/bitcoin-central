@@ -263,3 +263,10 @@ en:
            new_password_confirmation: Confirmation
       
 
+  # layouts/user_informations.html
+  generate_new_address_legend: Generate a new receiving address, refresh at will
+  your_last_address: Your address
+  logout: Logout
+  signed_in_as: Signed-in as
+  sign_up: Sign-up
+  sign_in: Login
