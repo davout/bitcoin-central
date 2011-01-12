@@ -32,6 +32,9 @@ class InformationsController < ApplicationController
 
   def jqchart_defaults
     {
+      :legend => {
+        :show => true
+      },
       :axes => {
         :yaxis => {
           :tickOptions => {
@@ -52,9 +55,18 @@ class InformationsController < ApplicationController
         :showMarker => true
 		  },
       :series => [
-        {:color => "#068300"},
-        {:color => "#0E00C1"},
-        {:color => "#AFAAF3"}
+        {
+          :label => "LRUSD",
+          :color => "#068300"
+        },
+        {
+          :label => "LREUR",
+          :color => "#0E00C1"
+        },
+        {
+          :label => "EUR",
+          :color => "#AFAAF3"
+        }
       ]
     }
   end
