@@ -12,6 +12,9 @@ module BitcoinBank
     config.filter_parameters += [:password]
     config.action_dispatch.session_store = :active_record_store
 
+    # Use jQuery instead of Prototype
+    config.action_view.javascript_expansions[:defaults] = %w(jquery jquery-ui rails)
+
     config.autoload_paths << File.join(config.root, "lib")
     config.autoload_paths << File.join(config.root, "lib", "bitcoin")
     config.autoload_paths << File.join(config.root, "lib", "validators")
