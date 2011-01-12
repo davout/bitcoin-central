@@ -5,7 +5,7 @@ class InformationsController < ApplicationController
     @min_y = [0.3 * (Trade.minimum(:ppc) or 0) - (Trade.maximum(:ppc) or 0), 0].max
     @max_y = 1.3 * (Trade.maximum(:ppc) or 0)
 
-    @max_x = Trade.maximum(:created_at)
+    @max_x = DateTime.now
     @min_x = @max_x.advance(:days => -7)
 
     @series = []
@@ -22,7 +22,7 @@ class InformationsController < ApplicationController
         [trade.created_at.strftime("%Y-%m-%d %H:%M:%S"), trade.ppc.to_f]
       end
 
-      if !line.blank? and line.last[0] != @max_x.strftime("%Y-%m-%d %H:%M:%S")
+     unless line.blank?
         line << [@max_x.strftime("%Y-%m-%d %H:%M:%S"), line.last[1]]
       end
 
