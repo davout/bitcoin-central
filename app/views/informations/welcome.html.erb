@@ -22,3 +22,13 @@
   More detailed explanations can be found at <strong><%= link_to "bitcoin.org", "http://bitcoin.org" %></strong>.
 </p>
 </div>
+
+<script type="text/javascript">
+  options = <%= @options.to_json.html_safe %>;
+  options.axes.xaxis.renderer = $.jqplot.DateAxisRenderer;
+
+  $.jqplot('price-chart',
+    <%= @series.to_json.html_safe %>,
+    options
+  )
+</script>
