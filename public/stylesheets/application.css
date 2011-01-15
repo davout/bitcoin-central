@@ -386,6 +386,12 @@ table#history td.amount {
     text-align: center;
 }
 
+/* New trade order */
+.js-calculation {
+    margin-left: 1em;
+    display: none;
+}
+
 /* Trade orders history */
 table#trade-orders tr td {
     height: 2em;

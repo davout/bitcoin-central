@@ -1,29 +1,39 @@
 <h1>Create a trade order</h1>
 
 <%= form_for @trade_order, :url => account_trade_orders_path do |f| %>
-  <% if @trade_order.errors.any? %>
-    <div id="errors">
-      <h2>
-        <%= pluralize(@trade_order.errors.count, "error") %> prohibited this trade order from being created
-      </h2>
+  <%=
+  render :partial => 'layouts/errors', :locals => {
+    :model => @trade_order,
+    :message => "prevented your trade order from being created"
+  }
+%>
 
-      <ul>
-        <% @trade_order.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+  <div class="form-field">
+    <%= f.label :currency %>
+    <div class="radios">
+      <%= f.radio_button :currency, "LRUSD", :class => "currency-select" %> <%= f.label :currency_lrusd, "LRUSD" %>
+      <%= f.radio_button :currency, "LREUR", :class => "currency-select" %> <%= f.label :currency_lreur, "LREUR" %>
+      <%= f.radio_button :currency, "EUR", :class => "currency-select" %> <%= f.label :currency_eur, "EUR" %>
     </div>
-  <% end %>
+    <div class="explanation">
+      Currency you want to trade
+    </div>
+  </div>
 
   <div class="form-field">
     <%= f.label :category %>
     <div class="radios">
-      <%= f.radio_button :category, "buy" %> <%= f.label :category_buy, "Buy" %>
-      <%= f.radio_button :category, "sell" %> <%= f.label :category_sell, "Sell" %>
+      <%= f.radio_button :category, "buy", :class => "category-select" %> <%= f.label :category_buy, "Buy" %>
+      <%= f.radio_button :category, "sell", :class => "category-select" %> <%= f.label :category_sell, "Sell" %>
     </div>
     <div class="explanation">
       Whether you want to buy or sell bitcoins
     </div>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :balance, "Your balance" %>
+    <%= text_field_tag :balance, nil, :disabled => true %>
   </div>
 
   <div class="form-field">
@@ -36,21 +46,10 @@
 
   <div class="form-field">
     <%= f.label :ppc, "Price" %>
+    <span class="js-calculation buy">Calculate max. PPC for amount</span>
     <%= f.text_field :ppc, :size => 8, :value => "" %>
     <div class="explanation">
       Price for 1 BTC
-    </div>
-  </div>
-
-  <div class="form-field">
-    <%= f.label :currency %>
-    <div class="radios">
-      <%= f.radio_button :currency, "LRUSD" %> <%= f.label :currency_lrusd, "LRUSD" %>
-      <%= f.radio_button :currency, "LREUR" %> <%= f.label :currency_lreur, "LREUR" %>
-      <%= f.radio_button :currency, "EUR" %> <%= f.label :currency_eur, "EUR" %>
-    </div>
-    <div class="explanation">
-      Currency you're trading
     </div>
   </div>
 
