@@ -59,12 +59,14 @@
     </div>
   </div>
 
-  <div class="recaptcha-field">
-    <label for="recaptcha_response_field">Are you human ?</label>
-    <div class="recaptcha-input">
-      <%= recaptcha_tags :ssl => true %>
+  <% if @user.new_record? %>
+    <div class="recaptcha-field">
+      <label for="recaptcha_response_field">Are you human ?</label>
+      <div class="recaptcha-input">
+        <%= recaptcha_tags :ssl => true %>
+      </div>
     </div>
-  </div>
+  <% end %>
 
   <div class="form-field">
     <%= f.submit :class => 'submit' %>

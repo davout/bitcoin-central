@@ -28,8 +28,6 @@ class UsersController < ApplicationController
 
     params[:user].delete(:account)
 
-    verify_recaptcha and @user.captcha_checked!
-
     if @user.update_attributes(params[:user])
       redirect_to edit_user_path,
         :notice => 'Your account was successfully updated'
