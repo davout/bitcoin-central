@@ -22,6 +22,8 @@ BitcoinBank::Application.routes.draw do
         get :lr_transfer_success
         get :lr_transfer_fail
       end
+
+      resources :invoices
     end
 
     # Should be *cancel/close* instead of destroy
