@@ -44,15 +44,6 @@ function setBalance(currency) {
     );
 }
 
-function setLinksFor(category) {
-    $(".js-calculation").each(function(idx, e) {
-        $(e).hide();
-    });
-    $(".js-calculation." + category).each(function(idx, e) {
-        $(e).show();
-    });
-}
-
 function updateTotal() {
     precision = 5;
     currency = getSelectedCurrency();
