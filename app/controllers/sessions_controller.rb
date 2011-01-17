@@ -3,10 +3,13 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find :first,
-      :conditions => ['account = ? OR email = ?', params[:account].strip, params[:account].strip]
+      :conditions => [
+        'account = ? OR email = ?',
+        params[:account].strip,
+        params[:account].strip
+      ]
 
-    if (user and user.check_password(params[:password]))
-        #and verify_recaptcha)
+    if (user and user.check_password(params[:password]) and verify_recaptcha)
       session[:current_user_id] = user.id
       flash[:notice] = "You logged-in successfully to your account."
       redirect_to account_path
