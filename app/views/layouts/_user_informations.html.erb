@@ -5,7 +5,12 @@
         <%= t :signed_in_as %>  <%= link_to @current_user.account, edit_user_path %> - <%= link_to t(:logout), session_path, :method => :delete %>
       </p>
       <p>
-        <%= t :your_last_address %> : <span class="bitcoin-address" id="last-bitcoin-address"><%= @current_user.last_address %></span>
+        <span class="address-label">
+          <%= t :your_last_address %>
+        </span> :
+        <span class="bitcoin-address" id="last-bitcoin-address">
+          <%= @current_user.last_address %>
+        </span>
         <%= link_to image_tag('refresh.png'),
           user_addresses_path,
           :remote => true,

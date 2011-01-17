@@ -1,6 +1,8 @@
 BitcoinBank::Application.routes.draw do
   resource :user, :only => [:new, :create, :edit, :update] do
     resources :addresses, :only => [:index, :show, :create]
+
+    get :balance
   end
 
   resource :session
