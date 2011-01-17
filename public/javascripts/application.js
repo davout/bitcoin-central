@@ -15,8 +15,6 @@ function updateTradeOrderForm() {
     
 
     if (category) {
-        setLinksFor(category);
-
         if (category == "sell") {
             setBalance("BTC");
         }
