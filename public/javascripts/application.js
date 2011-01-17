@@ -6,6 +6,9 @@ $(document).ready(function() {
     // TODO : DRY this up with body class/id
     $("input.currency-select").click(updateTradeOrderForm);
     $("input.category-select").click(updateTradeOrderForm);
+
+    // In case we're modifying an order rejected because it was invalid
+    updateTotal();
 });
 
 
