@@ -93,12 +93,15 @@ h1#main-title a span{
     display: none;
 }
 
-/* Identification information */
+/* User information */
 div#user-information {
     position: absolute;
     top: 25px;
     right: 125px;
     text-align: right;
+}
+
+div#user-information a, div#user-information .address-label {
     font-weight: bold;
 }
 
@@ -481,6 +484,10 @@ div#order-book-filter input.submit {
 table.default td.amount, .amount {
     font-family: Lucidatypewriter, monospace;
     text-align: right;
+}
+
+input.amount {
+    text-align: inherit;
 }
 
 /* Charts */

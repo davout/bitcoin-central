@@ -136,7 +136,7 @@ class TradeOrderTest < ActiveSupport::TestCase
     assert_equal buy_order.reload.amount, 600.0
   end
 
-  test "should correctly perform a trade order with 4 decimal places rounding" do
+  test "should correctly perform a trade order with 5 decimal places rounding" do
     buy_order = TradeOrder.new(
       :user => users(:trader1),
       :amount => 100.0,
