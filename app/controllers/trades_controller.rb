@@ -13,14 +13,19 @@ class TradesController < ApplicationController
   def ticker
     @ticker = {}
 
+    @ticker[:at] = DateTime.now.to_i
+
     %w{LRUSD LREUR EUR}.each do |currency|
-      @ticker[currency] = {
-        :high => Trade.with_currency(currency).last_24h.maximum(:ppc),
-        :low => Trade.with_currency(currency).last_24h.minimum(:ppc),
-        :volume => Trade.with_currency(currency).last_24h.sum(:traded_btc),
-        :buy => TradeOrder.with_currency(currency).with_category(:buy).active.maximum(:ppc),
-        :sell => TradeOrder.with_currency(currency).with_category(:sell).active.minimum(:ppc),
-        :last_trade => Trade.with_currency(currency).last
+      @ticker[currency.downcase] = {
+        :high => Trade.with_currency(currency).last_24h.maximum(:ppc).to_f,
+        :low => Trade.with_currency(currency).last_24h.minimum(:ppc).to_f,
+        :volume => Trade.with_currency(currency).last_24h.sum(:traded_btc).to_f,
+        :buy => TradeOrder.with_currency(currency).with_category(:buy).active.maximum(:ppc).to_f,
+        :sell => TradeOrder.with_currency(currency).with_category(:sell).active.minimum(:ppc).to_f,
+        :last_trade => {
+          :at => Trade.with_currency(currency).last.created_at.to_i,
+          :price => Trade.with_currency(currency).last.ppc.to_f
+        }
       }
     end
   end

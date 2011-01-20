@@ -9,8 +9,6 @@ class Transfer < ActiveRecord::Base
 
   belongs_to :user
 
-  belongs_to :trade
-
   validates :user,
     :presence => true
 

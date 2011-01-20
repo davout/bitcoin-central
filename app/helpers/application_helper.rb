@@ -2,7 +2,10 @@ module ApplicationHelper
   def menu_item(*args, &block)
     options = args.extract_options!
 
-    if (options[:logged_in] and @current_user) or options[:logged_in].nil?
+    if (options[:logged_in].nil? and options[:admin].nil?) or
+        (options[:logged_in] and @current_user) or
+        (options[:admin] and @current_user and @current_user.admin?)
+
       content_tag :li do
         args[0] or block.call
       end
