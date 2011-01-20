@@ -2,7 +2,7 @@ xml.instruct!
 
 xml.ticker :at => DateTime.now.to_i do
   %w{lrusd lreur eur}.each do |k|
-    v = @ticker[k]
+    v = @ticker[:pairs][k]
     xml.tag! k do
       xml.high v[:high]
       xml.low v[:low]
