@@ -8,10 +8,10 @@ class Invoice < ActiveRecord::Base
   validates :payee_id,
     :presence => true
 
-  validates :amount
+#  validates :amount
     # TODO : Minimum charge
 
-  validates :currency
+#  validates :currency
     # TODO : Validate properly
 
 
