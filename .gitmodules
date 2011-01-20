@@ -1,3 +1,0 @@
-[submodule "vendor/plugins/active_scaffold"]
-	path = vendor/plugins/active_scaffold
-	url = git@github.com:vhochstein/active_scaffold.git
