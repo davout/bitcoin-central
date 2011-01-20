@@ -48,7 +48,7 @@ class BitcoinTransfer < Transfer
   end
 
   def confirmed?
-    (bt_tx_confirmations >= MIN_BTC_CONFIRMATIONS) or bt_tx_id.nil?
+    (bt_tx_confirmations >= MIN_BTC_CONFIRMATIONS) or bt_tx_id.nil? or (amount < 0)
   end
 
   def self.synchronize_transactions!
