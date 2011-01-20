@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TestRedirectionAfterLoginTest < ActionDispatch::IntegrationTest
+class RedirectionAfterLoginTest < ActionDispatch::IntegrationTest
   fixtures :all
 
   test "should redirect to originally requested page after login" do
