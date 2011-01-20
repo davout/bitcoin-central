@@ -46,6 +46,10 @@ BitcoinBank::Application.routes.draw do
     resource :server, :only => [] do
       get :infos
     end
+    
+    resources :transfers do
+      as_routes
+    end
   end
 
   match '/frequently_asked_questions' => 'informations#faq',

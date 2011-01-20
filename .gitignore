@@ -7,3 +7,5 @@ nbproject/*
 nbproject/**/*
 Thumbs.db
 **/Thumbs.db
+public/**/active_scaffold
+public/blank.html

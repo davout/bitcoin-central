@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110107095311) do
+ActiveRecord::Schema.define(:version => 20110120142138) do
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
@@ -67,14 +67,15 @@ ActiveRecord::Schema.define(:version => 20110107095311) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "account",      :null => false
+    t.string   "account",                         :null => false
     t.string   "email"
-    t.string   "password",     :null => false
+    t.string   "password",                        :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "last_address"
     t.string   "salt"
     t.string   "time_zone"
+    t.boolean  "admin",        :default => false
   end
 
 end
