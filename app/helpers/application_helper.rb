@@ -3,7 +3,7 @@ module ApplicationHelper
     options = args.extract_options!
 
     if (options[:logged_in].nil? and options[:admin].nil?) or
-        (options[:logged_in] and @current_user) or
+        (options[:admin].nil? and options[:logged_in] and @current_user) or
         (options[:admin] and @current_user and @current_user.admin?)
 
       content_tag :li do

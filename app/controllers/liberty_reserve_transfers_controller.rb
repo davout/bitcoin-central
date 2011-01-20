@@ -1,5 +1,9 @@
 class LibertyReserveTransfersController < ApplicationController
-  skip_before_filter :verify_authenticity_token, :get_bitcoin_client, :authenticate, :authorize, :set_time_zone,
+  skip_before_filter :verify_authenticity_token,
+    :get_bitcoin_client,
+    :authenticate,
+    :authorize,
+    :set_time_zone,
     :only => [:lr_create_from_sci]
 
   def new
@@ -8,6 +12,9 @@ class LibertyReserveTransfersController < ApplicationController
 
   def create
     @liberty_reserve_transfer = @current_user.liberty_reserve_transfers.new(params[:liberty_reserve_transfer])
+
+    # Round-off to two decimal places since LR will truncate it anyway
+    @liberty_reserve_transfer.amount = ((amount * 100.0).to_i / 100.0)
 
     verify_recaptcha and @liberty_reserve_transfer.captcha_checked!
 
