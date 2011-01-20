@@ -12,7 +12,8 @@ class SessionsController < ApplicationController
     if (user and user.check_password(params[:password]) and verify_recaptcha)
       session[:current_user_id] = user.id
       flash[:notice] = "You logged-in successfully to your account."
-      redirect_to account_path
+
+      redirect_to (session.delete(:original_request_path) or account_path)
     else
       flash.now[:error] = "Authentication failed, check your credentials and the captcha answer"
       render :action => 'new'

@@ -14,6 +14,6 @@ xml.ticker :at => DateTime.now.to_i do
         xml.tag! "last-trade", :at => v[:last_trade][:at],
           :price => v[:last_trade][:price]
       end
-    end
+    end if v
   end
 end

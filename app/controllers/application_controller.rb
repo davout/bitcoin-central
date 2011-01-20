@@ -23,6 +23,8 @@ class ApplicationController < ActionController::Base
   end
 
   def deny_request!
+    session[:original_request_path] = request.url if request.get?
+
     render :template => 'sessions/forbidden',
       :status => :forbidden
   end
