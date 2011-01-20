@@ -20,6 +20,13 @@
     </ul>
   <% end %>
 
+  <%= menu_item :admin => true do %>
+    <%= link_to "<span>Admin</span>".html_safe, "#" %>
+    <ul>
+      <li><%= link_to "<span>Transfers</span>".html_safe, admin_transfers_path %></li>
+    </ul>
+  <% end %>
+
   <%= menu_item do %>
     <%= link_to "<span>Help</span>".html_safe, "#" %>
     <ul>

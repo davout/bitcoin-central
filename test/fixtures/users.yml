@@ -11,3 +11,11 @@ trader2:
   email: trader2@bitcoin-central.net
   password: 74f11276b5ca0087b0c419de0e1d802c81d184b9d1349a50c5e1de6507089d18
   salt: pass
+
+admin:
+  account: BC-A000000
+  email: admin@bitcoin-central.net
+  password: 74f11276b5ca0087b0c419de0e1d802c81d184b9d1349a50c5e1de6507089d18
+  salt: pass
+  admin: true
+
