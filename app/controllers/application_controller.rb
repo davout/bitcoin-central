@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+  # Maximum age for an API authentication token is 30 minutes
+  TOKEN_MAX_AGE = 60 * 30
+
   protect_from_forgery
 
   helper :all
@@ -11,8 +14,10 @@ class ApplicationController < ActionController::Base
     :set_locale
 
   def authenticate
-    if session[:current_user_id]
-      @current_user = User.find session[:current_user_id]
+    current_user_id = session[:current_user_id] or api_authentication
+
+    if current_user_id
+      @current_user = User.find current_user_id
     end
   end
 
@@ -52,6 +57,19 @@ class ApplicationController < ActionController::Base
     if locale and I18n.available_locales.include?(locale)
       I18n.locale = locale
       session[:locale] = locale
+    end
+  end
+
+  def api_authentication
+    if %w{account token timestamp}.all? { |i| params[i] }
+      token_age = (Time.now.to_i - Time.at(params[:timestamp]).to_i)
+      user = User.find_by_account(params[:account])
+
+      if (token_age < 0) or (token_age > TOKEN_MAX_AGE) or user.blank?
+        nil
+      else
+        user.id if user and user.check_token(params[:token], params[:timestamp])
+      end
     end
   end
 end

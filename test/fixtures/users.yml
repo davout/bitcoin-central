@@ -19,3 +19,10 @@ admin:
   salt: pass
   admin: true
 
+merchant:
+  account: BC-M000000
+  email: merchant@bitcoin-central.net
+  password: 74f11276b5ca0087b0c419de0e1d802c81d184b9d1349a50c5e1de6507089d18
+  salt: pass
+  secret_token: selling-stuff-ftw
+

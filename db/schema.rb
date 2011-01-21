@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110120142138) do
+ActiveRecord::Schema.define(:version => 20110121112916) do
 
   create_table "invoices", :force => true do |t|
     t.integer  "payee_id"
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(:version => 20110120142138) do
     t.string   "salt"
     t.string   "time_zone"
     t.boolean  "admin",        :default => false
+    t.string   "secret_token"
   end
 
 end

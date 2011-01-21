@@ -1,5 +1,3 @@
-require 'digest'
-
 class User < ActiveRecord::Base
   attr_accessor :new_password, 
     :new_password_confirmation,
@@ -71,17 +69,17 @@ class User < ActiveRecord::Base
 
   def check_password(p)
     unless p.blank?
-      self.password == Digest::SHA2.new.update(p + salt).to_s
+      self.password == Digest::SHA2.hexdigest(p + salt)
     end
   end
   
   def password=(p)
     generate_salt!
-    self[:password] = Digest::SHA2.new.update(p + salt).to_s
+    self[:password] = Digest::SHA2.hexdigest(p + salt)
   end
 
   def generate_salt!
-    self.salt = Digest::SHA2.new.update((rand * 10 ** 9).to_s).to_s
+    self.salt = Digest::SHA2.hexdigest((rand * 10 ** 9).to_s)
   end
 
   def generate_new_address
@@ -111,5 +109,9 @@ class User < ActiveRecord::Base
 
   def send_registration_confirmation
     UserMailer.registration_confirmation(self).deliver
+  end
+
+  def check_token(token, timestamp)
+    token == Digest::SHA2.hexdigest(secret_token + timestamp.to_s)
   end
 end
