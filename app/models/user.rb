@@ -42,8 +42,8 @@ class User < ActiveRecord::Base
     :format => { :with => /[^\s]+@[^\s]{1,150}\.[a-zA-Z]{2,5}/} # Naive e-mail regexp :)
     
   validate :current_password do
-    unless new_record?
-      errors[:current_password] << "is invalid" unless check_password(current_password)
+    unless new_record? or check_password(current_password)
+      errors[:current_password] << "is invalid"
     end
   end
 
