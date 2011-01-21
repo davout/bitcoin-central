@@ -15,10 +15,11 @@ class ApplicationController < ActionController::Base
     :set_locale
 
   def authenticate
-    current_user_id = session[:current_user_id] or api_authentication
+    current_user_id = (session[:current_user_id] or api_authentication)
 
     if current_user_id
-      @current_user = User.find current_user_id
+      session[:current_user_id] = current_user_id
+      @current_user = User.find(current_user_id)
     end
   end
 
@@ -62,12 +63,12 @@ class ApplicationController < ActionController::Base
   end
 
   def api_authentication
-    if %w{account token timestamp}.all? { |i| params[i] }
-      token_age = (Time.now.to_i - Time.at(params[:timestamp].to_i).to_i)
-      user = User.find_by_account(params[:account])
+    if params[:authentication] and %w{account token timestamp}.all? { |i| params[:authentication][i] }
+      token_age = (Time.now.to_i - Time.at(params[:authentication][:timestamp].to_i).to_i)
+      user = User.find_by_account(params[:authentication][:account])
 
       if (token_age >= 0) and (token_age <= TOKEN_MAX_AGE) and user
-        user.check_token(params[:token], params[:timestamp]) ? user.id : nil
+        user.check_token(params[:authentication][:token], params[:authentication][:timestamp]) ? user.id : nil
       end
     end
   end

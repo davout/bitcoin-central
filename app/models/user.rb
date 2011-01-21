@@ -112,6 +112,8 @@ class User < ActiveRecord::Base
   end
 
   def check_token(token, timestamp)
-    token == Digest::SHA2.hexdigest(secret_token + timestamp.to_s)
+    if secret_token
+      token == Digest::SHA2.hexdigest("#{secret_token}#{timestamp}")
+    end
   end
 end
