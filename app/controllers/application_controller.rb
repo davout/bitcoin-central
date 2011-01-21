@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   helper :all
 
   before_filter :get_bitcoin_client,
+    :move_xml_params,
     :authenticate,
     :authorize,
     :set_time_zone,
@@ -62,14 +63,21 @@ class ApplicationController < ActionController::Base
 
   def api_authentication
     if %w{account token timestamp}.all? { |i| params[i] }
-      token_age = (Time.now.to_i - Time.at(params[:timestamp]).to_i)
+      token_age = (Time.now.to_i - Time.at(params[:timestamp].to_i).to_i)
       user = User.find_by_account(params[:account])
 
-      if (token_age < 0) or (token_age > TOKEN_MAX_AGE) or user.blank?
-        nil
-      else
-        user.id if user and user.check_token(params[:token], params[:timestamp])
+      if (token_age >= 0) and (token_age <= TOKEN_MAX_AGE) and user
+        user.check_token(params[:token], params[:timestamp]) ? user.id : nil
       end
+    end
+  end
+
+  # This method is used to work around the fact that there is only
+  # one allowed root node in a well formed XML document, we remove 
+  # the root node so we get to pretend that XML === JSON
+  def move_xml_params
+    if request.content_type =~ /xml/
+      params.merge! params.delete(:api)
     end
   end
 end
