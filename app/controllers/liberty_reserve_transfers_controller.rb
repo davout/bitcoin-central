@@ -14,7 +14,7 @@ class LibertyReserveTransfersController < ApplicationController
     @liberty_reserve_transfer = @current_user.liberty_reserve_transfers.new(params[:liberty_reserve_transfer])
 
     # Round-off to two decimal places since LR will truncate it anyway
-    @liberty_reserve_transfer.amount = ((amount * 100.0).to_i / 100.0)
+    @liberty_reserve_transfer.amount = ((@liberty_reserve_transfer.amount * 100.0).to_i / 100.0)
 
     verify_recaptcha and @liberty_reserve_transfer.captcha_checked!
 
