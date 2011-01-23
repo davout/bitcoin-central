@@ -20,14 +20,21 @@ class LibertyReserveTransfersController < ApplicationController
 
     @liberty_reserve_transfer.withdrawal!
 
-    if @liberty_reserve_transfer.save
-      @liberty_reserve_transfer.execute!
+    # TODO : Make the isolation level increase automatic when using transactional blocks
+    Transfer.connection.execute("SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE")
 
-      redirect_to account_transfers_path,
-        :notice =>"You successfuly transferred #{@liberty_reserve_transfer.amount.abs} #{@liberty_reserve_transfer.currency} to the #{@liberty_reserve_transfer.lr_account_id} Liberty Reserve account"
-    else
-      render :action => :new
+    Transfer.transaction do
+      if @liberty_reserve_transfer.save
+        @liberty_reserve_transfer.execute!
+
+        redirect_to account_transfers_path,
+          :notice =>"You successfuly transferred #{@liberty_reserve_transfer.amount.abs} #{@liberty_reserve_transfer.currency} to the #{@liberty_reserve_transfer.lr_account_id} Liberty Reserve account"
+      else
+        render :action => :new
+      end
     end
+
+    Transfer.connection.execute("SET SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READ")
   end
 
   # Liberty Reserve bounce URLs
