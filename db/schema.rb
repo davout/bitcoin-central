@@ -12,6 +12,18 @@
 
 ActiveRecord::Schema.define(:version => 20110120142138) do
 
+  create_table "invoices", :force => true do |t|
+    t.integer  "payee_id"
+    t.integer  "payer_id"
+    t.decimal  "amount",             :precision => 10, :scale => 0
+    t.string   "currency"
+    t.string   "merchant_reference"
+    t.string   "comment"
+    t.datetime "paid_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
     t.text     "data"
