@@ -14,6 +14,7 @@ class TradesController < ApplicationController
     @ticker = {}
 
     @ticker[:at] = DateTime.now.to_i
+    @ticker[:pairs] = {}
 
     %w{LRUSD LREUR EUR}.each do |currency|
       if Trade.with_currency(currency).count > 0

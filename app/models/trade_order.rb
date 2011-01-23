@@ -118,8 +118,6 @@ class TradeOrder < ActiveRecord::Base
   def execute!
     executed_trades = []
 
-    TradeOrder.connection.execute("SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE")
-
     TradeOrder.transaction do
       begin
         mos = TradeOrder.matching_orders(self)
@@ -187,8 +185,6 @@ class TradeOrder < ActiveRecord::Base
         raise @exception if @exception
       end
     end
-
-    TradeOrder.connection.execute("SET SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READ")
 
     result = {
       :trades => 0,
