@@ -14,10 +14,6 @@ class User < ActiveRecord::Base
   has_many :transfers,
     :dependent => :destroy
 
-  has_many :bitcoin_transfers
-  
-  has_many :liberty_reserve_transfers
-
   has_many :trade_orders,
     :dependent => :destroy
 

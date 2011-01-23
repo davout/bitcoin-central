@@ -3,34 +3,7 @@ class LibertyReserveTransfersController < ApplicationController
     :get_bitcoin_client,
     :authenticate,
     :authorize,
-    :set_time_zone,
-    :only => [:lr_create_from_sci]
-
-  def new
-    @liberty_reserve_transfer = LibertyReserveTransfer.new
-  end
-
-  def create
-    @liberty_reserve_transfer = @current_user.liberty_reserve_transfers.new(params[:liberty_reserve_transfer])
-
-    # Round-off to two decimal places since LR will truncate it anyway
-    @liberty_reserve_transfer.amount = ((@liberty_reserve_transfer.amount * 100.0).to_i / 100.0)
-
-    verify_recaptcha and @liberty_reserve_transfer.captcha_checked!
-
-    @liberty_reserve_transfer.withdrawal!
-
-    Transfer.transaction do
-      if @liberty_reserve_transfer.save
-        @liberty_reserve_transfer.execute!
-
-        redirect_to account_transfers_path,
-          :notice =>"You successfuly transferred #{@liberty_reserve_transfer.amount.abs} #{@liberty_reserve_transfer.currency} to the #{@liberty_reserve_transfer.lr_account_id} Liberty Reserve account"
-      else
-        render :action => :new
-      end
-    end
-  end
+    :set_time_zone
 
   # Liberty Reserve bounce URLs
   def lr_transfer_success

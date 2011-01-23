@@ -37,7 +37,7 @@ function getSelectedCurrency() {
 }
 
 function setBalance(currency) {
-    $.get("/user/balance", {
+    $.get("/account/balance", {
             "currency" : currency
         },
         function(data) {
