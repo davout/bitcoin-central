@@ -1,5 +1,5 @@
 class Transfer < ActiveRecord::Base
-  MIN_BTC_CONFIRMATIONS = 3
+  MIN_BTC_CONFIRMATIONS = 5
 
   default_scope order('created_at DESC')
 

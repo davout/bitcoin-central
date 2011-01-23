@@ -1,39 +1,64 @@
-<h1>Deposit Liberty Reserve</h1>
+<h1>Transfer funds</h1>
+<p>You can send funds to a 
+  <ul>
+    <li><strong>bitcoin</strong> address (BTC currency only),</li>
+    <li>an <strong>e-mail address</strong> (all currencies),</li>
+    <li>a <strong>Bitcoin-Central</strong> account (all currencies), or a</li>
+    <li><strong>Liberty Reserve</strong> account (LREUR and LRUSD only)</li>
+  </ul>
+</p>
 
-<%= render :partial => 'lr_sci_form' %>
+<br />
 
-<h1>Withdraw Liberty Reserve</h1>
-
-<%= form_for @liberty_reserve_transfer, :url => account_liberty_reserve_transfers_path do |f| %>
+<%= form_for @transfer, :url => account_transfers_path do |f| %>
   <%=
-    render :partial => 'layouts/errors', :locals => {
-      :model => @liberty_reserve_transfer,
-      :message => "prevented your funds from being sent"
-    }
-  %>
-
-  <div class="form-field">
-    <%= f.label :lr_account_id %>
-    <%= f.text_field :lr_account_id, :autocomplete => "off" %>
-  </div>
-
-  <div class="form-field">
-    <%= f.label :amount %>
-    <%= f.text_field :amount, :value => amount_field_value(@liberty_reserve_transfer.amount), :autocomplete => "off" %>
-  </div>
+  render :partial => 'layouts/errors', :locals => {
+    :model => @transfer,
+    :message => "prevented your funds from being sent"
+  }
+%>
 
   <div class="form-field">
     <%= f.label :currency %>
 
     <div class="radios">
-      <%= f.radio_button :currency, "LRUSD" %> <%= f.label :currency_lrusd, "USD" %>
-      <%= f.radio_button :currency, "LREUR" %> <%= f.label :currency_lreur, "EUR" %>
+      <%= f.radio_button :currency, "LRUSD" %> <%= f.label :currency_lrusd, "LRUSD" %>
+      <%= f.radio_button :currency, "LREUR" %> <%= f.label :currency_lreur, "LREUR" %>
+      <%= f.radio_button :currency, "EUR" %> <%= f.label :currency_eur, "EUR" %>
+      <%= f.radio_button :currency, "BTC" %> <%= f.label :currency_btc, "BTC" %>
+    </div>
+  </div>
+
+  <div class="form-field">
+    <%= label_tag :payee %>
+    <%= text_field_tag :payee, nil, :autocomplete => "off" %>
+    <div class="explanation">
+      Account number, e-mail or bitcoin address
+    </div>
+  </div>
+
+  <div class="form-field">
+    <%= label_tag :balance %>
+    <%= text_field_tag :balance, amount_field_value(@current_user.balance(@transfer.currency)), :disabled => true %>
+    <div class="explanation">
+      Your confirmed balance
+    </div>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :amount %>
+    <%= f.text_field :amount, :value => amount_field_value(@transfer.amount), :autocomplete => "off" %>
+    <div class="explanation">
+      The amount you want to transfer
     </div>
   </div>
 
   <div class="form-field">
     <%= f.label :password %>
     <%= f.password_field :password %>
+    <div class="explanation">
+      Your current password
+    </div>
   </div>
 
   <div class="recaptcha-field">
@@ -44,6 +69,6 @@
   </div>
 
   <div class="form-field">
-    <%= f.submit :value => "Send", :class => "submit" %>
+    <%= f.submit :value => "Transfer", :class => "submit" %>
   </div>
 <% end %>

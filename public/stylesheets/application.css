@@ -264,8 +264,9 @@ div.form-field div.explanation {
     margin-top: .4em;
     margin-bottom: 1.2em;
     margin-left: 180px;
-    width: 220px;
-    text-align: justify;
+    /* width: 220px; */
+    width: 280px;
+    text-align: left;
 }
 
 div.form-field div.explanation a {

@@ -12,8 +12,11 @@ BitcoinBank::Application.routes.draw do
   resource :account, :only => [:show] do
     get :balance
 
-    resources :transfers,
-      :only => [:index, :new, :create]
+    resources :transfers, :only => [:index, :new, :create] do
+      collection do
+        get :deposit
+      end
+    end
     
     resources :trades, 
       :only => [:index]

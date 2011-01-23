@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110121112916) do
+ActiveRecord::Schema.define(:version => 20110123220843) do
 
   create_table "invoices", :force => true do |t|
     t.integer  "payee_id"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(:version => 20110121112916) do
     t.integer  "bt_tx_confirmations",                                  :default => 0
     t.string   "lr_account_id"
     t.integer  "payee_id"
+    t.string   "email"
   end
 
   create_table "users", :force => true do |t|

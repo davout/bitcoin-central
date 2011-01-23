@@ -4,8 +4,8 @@
     <ul>
       <%= menu_item link_to("<span>Balance</span>".html_safe, account_path), :logged_in => true %>
       <%= menu_item link_to("<span>History</span>".html_safe, account_transfers_path), :logged_in => true %>
-      <%= menu_item link_to("<span>Add/Send LR</span>".html_safe, new_account_liberty_reserve_transfer_path), :logged_in => true %>
-      <%= menu_item link_to("<span>Add/Send BTC</span>".html_safe, new_account_bitcoin_transfer_path), :logged_in => true %>
+      <%= menu_item link_to("<span>Transfer money</span>".html_safe, new_account_transfer_path), :logged_in => true %>
+      <%= menu_item link_to("<span>Deposit money</span>".html_safe, deposit_account_transfers_path), :logged_in => true %>
     </ul>
   <% end %>
 
@@ -16,7 +16,6 @@
       <%= menu_item link_to("<span>Your orders</span>".html_safe, account_trade_orders_path), :logged_in => true %>
       <%= menu_item link_to("<span>Order book</span>".html_safe, book_account_trade_orders_path) %>
       <%= menu_item link_to("<span>Trade history</span>".html_safe, account_trades_path), :logged_in => true %>
-      <%= menu_item link_to("<span>Trade data</span>".html_safe, statistics_trades_path), :logged_in => true %>
     </ul>
   <% end %>
 

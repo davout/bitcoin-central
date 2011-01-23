@@ -1,10 +1,10 @@
 <%= form_for @user, :url => user_path do |f| %>
   <%=
-  render :partial => 'layouts/errors', :locals => {
-    :model => @user,
-    :message => "prevented your account details from being updated"
-  }
-%>
+    render :partial => 'layouts/errors', :locals => {
+      :model => @user,
+      :message => "prevented your account details from being updated"
+    }
+  %>
 
   <% unless @user.new_record? %>
     <div class="form-field">
@@ -55,7 +55,7 @@
     <%= f.label :time_zone %>
     <%= f.time_zone_select :time_zone, nil, :prompt => "--" %>
     <div class="explanation">
-      Select your time-zone to get data displayed in local time
+      Select your time-zone to get data displayed in local time format
     </div>
   </div>
 

@@ -1,0 +1,9 @@
+<h1>Deposit Bitcoins</h1>
+<p>Simply transfer funds to any of your addresses and they'll show up in your account after a couple of minutes.</p>
+<p>Please note that you will only be able to use these funds after the bitcoin network has confirmed the transfer (approx. <%= Transfer::MIN_BTC_CONFIRMATIONS * 10 %>  minutes).</p>
+
+<h1>Deposit EUR</h1>
+<p>Please send an e-mail to <a href="mailto:support@bitcoin-central.net">support@bitcoin-central.net</a> using PGP encryption <a href="http://pgp.mit.edu:11371/pks/lookup?op=get&search=0x49FA50FC091469DA">(public key)</a>.</p>
+
+<h1>Deposit Liberty Reserve</h1>
+<%= render :partial => 'lr_sci_form' %>
