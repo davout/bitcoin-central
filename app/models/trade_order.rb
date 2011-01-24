@@ -40,7 +40,7 @@ class TradeOrder < ActiveRecord::Base
         end
       end
 
-      if dark_pool? and amount and amount < MIN_DARK_POOL_AMOUNT
+      if dark_pool? and amount < MIN_DARK_POOL_AMOUNT
         errors[:dark_pool] << "orders must have a 3,000 BTC minimal amount"
       end
     end
