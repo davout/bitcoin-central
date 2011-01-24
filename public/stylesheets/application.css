@@ -50,6 +50,18 @@ strong {
     font-weight: bold;
 }
 
+ul {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 2em;
+}
+
+ul > li {
+    list-style-position: outside;
+    list-style-image: url("/images/square.png");
+    margin-bottom: .7em;
+}
+
 /* Footer */
 div#footer {
     text-align: center;
@@ -123,6 +135,8 @@ ul#menu > li {
     width: 9em;
     float: left;
     height: 2.5em;
+    list-style-type: none;
+    list-style-image: none;
 
     /* HACK : We don't want anything to move when setting actual borders */
     border-top: 1px solid white;
@@ -172,6 +186,8 @@ ul#menu > li > ul > li {
     width: 100%;
     margin: 0;
     height: 2.5em;
+    list-style-type: none;
+    list-style-image: none;
 }
 
 ul#menu > li > ul > li:hover {
@@ -294,18 +310,6 @@ div#faq {
 
 div#faq div.question {
     margin-bottom: 3em;
-}
-
-div#faq div.question ul {
-    list-style-type: square;
-    margin-top: 1em;
-    margin-bottom: 1em;
-    margin-left: 2em;
-}
-
-div#faq div.question ul li {
-    list-style: square inside;
-    margin-bottom: .7em;
 }
 
 /* Tables */

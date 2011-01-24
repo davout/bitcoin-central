@@ -26,21 +26,21 @@ class TradeOrder < ActiveRecord::Base
 
   validate :amount do
     if new_record?
-      if amount < MIN_AMOUNT
+      if amount and (amount < MIN_AMOUNT)
         errors[:amount] << "must be greater than #{MIN_AMOUNT} BTC"
       end
 
-      if (amount > user.balance(:btc)) and selling?
+      if amount and (amount > user.balance(:btc)) and selling?
         errors[:amount] << "is greater than your available balance (#{"%.4f" % user.balance(:btc)} BTC)"
       end
 
       unless currency.blank?
-        if ((user.balance(currency) / ppc) < amount ) and buying?
+        if amount and ppc and ((user.balance(currency) / ppc) < amount ) and buying?
           errors[:amount] << "is greater than your buying capacity (#{"%.4f" % (user.balance(currency) / ppc)} BTC @ #{ppc} BTC/#{currency})"
         end
       end
 
-      if dark_pool? and amount < MIN_DARK_POOL_AMOUNT
+      if dark_pool? and amount and amount < MIN_DARK_POOL_AMOUNT
         errors[:dark_pool] << "orders must have a 3,000 BTC minimal amount"
       end
     end

@@ -18,7 +18,7 @@
 
     <%= render :partial => "layouts/google_analytics" %>
   </head>
-  <body>
+  <body class="<%= request[:controller]%>" id="<%= "#{request[:controller]}-#{request[:action]}" %>">
     <div id="content">
       <h1 id="main-title">
         <%= link_to "<span>Bitcoin Central</span>".html_safe, root_path %>

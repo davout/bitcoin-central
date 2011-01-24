@@ -41,7 +41,9 @@
 
   <div class="form-field">
     <%= f.label :amount %>
-    <%= f.text_field :amount, :size => 8, :class => "trigger-total-update amount" %>
+    <%= f.text_field :amount, :value => amount_field_value(@trade_order.amount),
+      :size => 8,
+      :class => "trigger-total-update amount" %>
     <div class="explanation">
       BTC amount you're trading
     </div>
@@ -49,7 +51,9 @@
 
   <div class="form-field">
     <%= f.label :ppc, "Price" %>
-    <%= f.text_field :ppc, :size => 8, :class => "trigger-total-update amount" %>
+    <%= f.text_field :ppc,  :value => amount_field_value(@trade_order.ppc),
+      :size => 8,
+      :class => "trigger-total-update amount" %>
     <div class="explanation">
       Price for 1 BTC
     </div>

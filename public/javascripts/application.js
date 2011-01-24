@@ -1,22 +1,26 @@
 $(document).ready(function() {
-    $(".trigger-total-update").bind("click keypress keyup blur", updateTotal);
+    /* Trade order creation form */
+    $("body.trade_orders .trigger-total-update").bind("click keypress keyup blur", updateTotal);
+
+    if ($("body.trade_orders input#trade_order_amount").length) { updateTradeOrderForm(); }
 
     // Triggered by a currency or category selection on
     // the trade order creation form
-    // TODO : DRY this up with body class/id
-    $("input.currency-select").click(updateTradeOrderForm);
-    $("input.category-select").click(updateTradeOrderForm);
+    $("body.trade_orders input.trigger-total-update").click(updateTradeOrderForm);
 
-    // In case we're modifying an order rejected because it was invalid
-    updateTotal();
+
+     /* Transfer creation form */
+     $("body.transfers input.trigger-balance-update").click(
+        function() {
+            setBalance(getSelectedCurrency());
+        }
+     );
 });
-
 
 function updateTradeOrderForm() {
     currency = getSelectedCurrency();
     category = $("input:radio.category-select:checked").val();
     
-
     if (category) {
         if (category == "sell") {
             setBalance("BTC");
@@ -30,6 +34,8 @@ function updateTradeOrderForm() {
             }
         }
     }
+
+    updateTotal();
 }
 
 function getSelectedCurrency() {

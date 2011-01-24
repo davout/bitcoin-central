@@ -37,8 +37,4 @@ class UsersController < ApplicationController
       render :action => :edit
     end
   end
-
-  def balance
-    render :text => "%2.5f" % @current_user.balance(params[:currency])
-  end
 end
