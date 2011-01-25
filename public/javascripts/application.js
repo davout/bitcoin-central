@@ -2,19 +2,26 @@ $(document).ready(function() {
     /* Trade order creation form */
     $("body.trade_orders .trigger-total-update").bind("click keypress keyup blur", updateTotal);
 
-    if ($("body.trade_orders input#trade_order_amount").length) { updateTradeOrderForm(); }
+    if ($("body.trade_orders input#trade_order_amount").length) {
+        updateTradeOrderForm();
+    }
 
     // Triggered by a currency or category selection on
     // the trade order creation form
     $("body.trade_orders input.trigger-total-update").click(updateTradeOrderForm);
 
 
-     /* Transfer creation form */
-     $("body.transfers input.trigger-balance-update").click(
+    /* Transfer creation form */
+    $("body.transfers input.trigger-balance-update").click(
         function() {
             setBalance(getSelectedCurrency());
+            updateTransferPayeeExplanation();
         }
-     );
+    );
+
+    if ($("body.transfers div#payee-explanation").length) {
+        updateTransferPayeeExplanation();
+    }
 });
 
 function updateTradeOrderForm() {
@@ -44,11 +51,11 @@ function getSelectedCurrency() {
 
 function setBalance(currency) {
     $.get("/account/balance", {
-            "currency" : currency
-        },
-        function(data) {
-            balance = $("#balance").val(data + " " + currency);
-        }
+        "currency" : currency
+    },
+    function(data) {
+        balance = $("#balance").val(data + " " + currency);
+    }
     );
 }
 
@@ -77,9 +84,22 @@ function roundTo(value, precision) {
     return((Math.round(value * Math.pow(10, precision))) / Math.pow(10, precision));
 }
 
+function updateTransferPayeeExplanation() {
+    transferExplanations = {
+        "EUR"   : "Bitcoin Central account or e-mail address",
+        "LRUSD" : "Bitcoin Central, Liberty Reserve account or e-mail address",
+        "LREUR" : "Bitcoin Central, Liberty Reserve account or e-mail address",
+        "BTC"   : "Bitcoin Central account, e-mail or bitcoin address",
+        "none"  : "Payee identification"
+    }
 
-
-
+    if (transferExplanations[getSelectedCurrency()]) {
+        $("#payee-explanation").html(transferExplanations[getSelectedCurrency()]);
+    }
+    else {
+        $("#payee-explanation").html(transferExplanations["none"]);
+    }
+}
 
 
 

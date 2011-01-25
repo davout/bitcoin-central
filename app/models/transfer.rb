@@ -3,9 +3,11 @@ class Transfer < ActiveRecord::Base
 
   default_scope order('created_at DESC')
 
+  before_save :set_payee
+
   after_save :inactivate_orders
 
-  attr_accessor :password, :captcha, :skip_captcha, :skip_password, :internal
+  attr_accessor :password, :skip_password, :internal, :payee
 
   belongs_to :user
 
@@ -64,6 +66,10 @@ class Transfer < ActiveRecord::Base
 
   def inactivate_orders
     user.reload.trade_orders.each { |t| t.inactivate_if_needed! }
+  end
+
+  def set_payee
+    raise "unimplemented"
   end
 
   scope :with_currency, lambda { |currency|

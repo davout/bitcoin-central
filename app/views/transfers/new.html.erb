@@ -30,16 +30,16 @@
   </div>
 
   <div class="form-field">
-    <%= label_tag :payee %>
-    <%= text_field_tag :payee, nil, :autocomplete => "off" %>
-    <div class="explanation">
-      Account number, e-mail or bitcoin address
-    </div>
+    <%= f.label :payee %>
+    <%= f.text_field :payee, :autocomplete => "off" %>
+    <div class="explanation" id="payee-explanation"></div>
   </div>
 
   <div class="form-field">
     <%= label_tag :balance %>
-    <%= text_field_tag :balance, amount_field_value(@current_user.balance(@transfer.currency)), :disabled => true %>
+    <%= text_field_tag :balance, amount_field_value(@current_user.balance(@transfer.currency)),
+      :class => "amount",
+      :disabled => true %>
     <div class="explanation">
       Your confirmed balance
     </div>
@@ -58,13 +58,6 @@
     <%= f.password_field :password %>
     <div class="explanation">
       Your current password
-    </div>
-  </div>
-
-  <div class="recaptcha-field">
-    <label for="recaptcha_response_field">Are you human ?</label>
-    <div class="recaptcha-input">
-      <%= recaptcha_tags :ssl => true %>
     </div>
   </div>
 
