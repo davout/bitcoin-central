@@ -7,7 +7,7 @@ class TradeOrderTest < ActiveSupport::TestCase
 
   test "should correctly perform a simple trade order" do
     # We need an extra little something so we get to create the order
-    LibertyReserveTransfer.create!(
+    Transfer.create!(
       :amount => 10.0,
       :user => users(:trader1),
       :currency => "LRUSD"
@@ -85,14 +85,13 @@ class TradeOrderTest < ActiveSupport::TestCase
   end
 
   test "should correctly perform a trade order with a limiting balance" do
-    BitcoinTransfer.create(
+    Transfer.create(
       :amount => 9900.0,
       :user => users(:trader2),
-      :currency => "BTC",
-      :bt_tx_confirmations => 10
+      :currency => "BTC"
     )
 
-    LibertyReserveTransfer.create!(
+    Transfer.create!(
       :amount => 75.0,
       :user => users(:trader1),
       :currency => "LRUSD"
@@ -225,10 +224,8 @@ class TradeOrderTest < ActiveSupport::TestCase
 
     assert_difference "TradeOrder.count", -1 do
       assert_difference "Trade.count" do
-        assert_difference "BitcoinTransfer.count", 2 do
-          assert_difference "LibertyReserveTransfer.count", 2 do
+        assert_difference "Transfer.count", 4 do
             t.execute!
-          end
         end
       end
     end
@@ -297,10 +294,8 @@ class TradeOrderTest < ActiveSupport::TestCase
 
     assert_difference "TradeOrder.count", -1 do
       assert_difference "Trade.count" do
-        assert_difference "BitcoinTransfer.count", 2 do
-          assert_difference "LibertyReserveTransfer.count", 2 do
-            t2.execute!
-          end
+        assert_difference "Transfer.count", 4 do
+          t2.execute!
         end
       end
     end
@@ -328,11 +323,10 @@ class TradeOrderTest < ActiveSupport::TestCase
     assert t.save, "Order is valid, should be saved smoothly"
     assert t.reload.active?, "Order should be active"
 
-    LibertyReserveTransfer.create!(
+    Transfer.create!(
       :amount => -5.0,
       :user => users(:trader1),
-      :currency => "LRUSD",
-      :internal => true
+      :currency => "LRUSD"
     )
 
     assert_equal 20.0, users(:trader1).balance(:lrusd)

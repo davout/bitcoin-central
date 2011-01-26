@@ -18,7 +18,6 @@ class ApplicationController < ActionController::Base
     current_user_id = (session[:current_user_id] or api_authentication)
 
     if current_user_id
-      session[:current_user_id] = current_user_id
       @current_user = User.find(current_user_id)
     end
   end
@@ -63,18 +62,23 @@ class ApplicationController < ActionController::Base
   end
 
   def api_authentication
-    if params[:authentication] and %w{account token timestamp}.all? { |i| params[:authentication][i] }
-      token_age = (Time.now.to_i - Time.at(params[:authentication][:timestamp].to_i).to_i)
+    if params[:authentication] and params[:authentication][:account]
       user = User.find_by_account(params[:authentication][:account])
 
-      if (token_age >= 0) and (token_age <= TOKEN_MAX_AGE) and user
-        user.check_token(params[:authentication][:token], params[:authentication][:timestamp]) ? user.id : nil
+      if user and %w{token timestamp}.all? { |i| params[:authentication][i] }
+        token_age = (Time.now.to_i - Time.at(params[:authentication][:timestamp].to_i).to_i)
+
+        if (token_age >= 0) and (token_age <= TOKEN_MAX_AGE) and user
+          user.check_token(params[:authentication][:token], params[:authentication][:timestamp]) ? user.id : nil
+        end
+      elsif params[:authentication][:password]
+        user.check_password(params[:authentication][:password]) ? user.id : nil
       end
     end
   end
-
+  
   # This method is used to work around the fact that there is only
-  # one allowed root node in a well formed XML document, we remove 
+  # one allowed root node in a well formed XML document, we remove
   # the root node so we get to pretend that XML === JSON
   def move_xml_params
     if request.content_type =~ /xml/

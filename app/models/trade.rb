@@ -1,6 +1,8 @@
 class Trade < ActiveRecord::Base
 #  default_scope order("created_at DESC")
 
+  after_create :execute
+
   belongs_to :purchase_order,
     :class_name => "TradeOrder"
 
@@ -46,52 +48,21 @@ class Trade < ActiveRecord::Base
     where("currency = ?", currency.to_s.upcase)
   }
 
-  def execute!
-    # credit seller /w currency
-    transfers << klass_for_currency(currency).create!(
-      :currency => currency,
-      :amount => traded_currency,
-      :user_id => sale_order.user_id,
-      :internal => true,
-      :skip_captcha => true,
-      :skip_password => true
-    )
-
-    # debit buyer of currency
-    transfers << klass_for_currency(currency).create!(
+  def execute
+    transfers << InternalTransfer.create!(
       :currency => currency,
       :amount =>  -traded_currency,
       :user_id => purchase_order.user_id,
-      :internal => true,
-      :skip_captcha => true,
-      :skip_password => true
+      :payee_id => sale_order.user_id
     )
 
-    # debit buyer of coins
-    transfers << sale = BitcoinTransfer.create!(
+    transfers << BitcoinTransfer.create!(
       :currency => "BTC",
       :amount => -traded_btc,
       :user_id => sale_order.user_id,
-      :payee_id => purchase_order.user_id,
-      :internal => true,
-      :skip_captcha => true,
-      :skip_password => true
+      :payee_id => purchase_order.user_id
     )
 
-    # Don't forget to update bitcoin internal accounting (which also 
-    # automatically credits the buyer /w his coins)
-    sale.execute!
-    
     save!
-  end
-
-  def klass_for_currency(c)
-    klass_map = {
-      :lrusd => LibertyReserveTransfer,
-      :lreur => LibertyReserveTransfer,
-      :eur => CashTransfer
-    }
-
-    klass_map[c.to_s.downcase.to_sym] || raise("No mapping for this currency")
   end
 end

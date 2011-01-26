@@ -8,17 +8,9 @@ class TransfersController < ApplicationController
   end
 
   def create
-    @transfer = @current_user.transfers.new(params[:transfer])
+    @transfer = Transfer.from_params(params[:payee], params[:transfer])
 
-    @transfer.set_payee!(params[:payee])
-    
-
-    # TODO : GTFO to model level bitch
-    ## Round-off to two decimal places since LR will truncate it anyway
-    # @liberty_reserve_transfer.amount = ((@liberty_reserve_transfer.amount * 100.0).to_i / 100.0)
-
-    # GTFO at model level
-    #@transfer.withdrawal!
+    @transfer.user = @current_user
 
     Transfer.transaction do
       if @transfer.save

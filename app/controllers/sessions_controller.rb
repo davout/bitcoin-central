@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
         params[:account].strip
       ]
 
-    if (user and user.check_password(params[:password]) and verify_recaptcha)
+    if (user and user.check_password(params[:password]))
       session[:current_user_id] = user.id
       flash[:notice] = "You logged-in successfully to your account."
 

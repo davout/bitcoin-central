@@ -149,7 +149,7 @@ class TradeOrder < ActiveRecord::Base
           save!
 
           # Record the trade
-          trade = Trade.new(
+          trade = Trade.create!(
             :traded_btc => traded_btc,
             :traded_currency => traded_currency,
             :currency => currency,
@@ -159,9 +159,6 @@ class TradeOrder < ActiveRecord::Base
             :purchase_order_id => purchase.id,
             :sale_order_id => sale.id
           )
-
-          # Execute it (record the different fund transfers)
-          trade.execute!
 
           executed_trades << trade
 

@@ -3,11 +3,8 @@ class Transfer < ActiveRecord::Base
 
   default_scope order('created_at DESC')
 
-  before_save :set_payee
-
-  after_save :inactivate_orders
-
-  attr_accessor :password, :skip_password, :internal, :payee
+  after_create :execute,
+    :inactivate_orders
 
   belongs_to :user
 
@@ -23,28 +20,19 @@ class Transfer < ActiveRecord::Base
   validates :currency,
     :presence => true
 
-  validate :password do
-    if !skip_password and !internal and (amount <= 0) and !user.check_password(password)
-      errors[:password] << "is invalid"
-    end
-  end
-
-  validate :captcha do
-    if !skip_captcha and !internal and captcha.nil? and new_record? and (amount <= 0)
-      errors[:captcha] << "answer is incorrect"
-    end
-  end
+#  validate :user do
+#    if self.class == Transfer
+#      errors[:base] << "You must provide a payee"
+#    end
+#  end
 
   def type_name
     type.gsub(/Transfer/, "").underscore.gsub(/\_/, " ").titleize
   end
 
-  def captcha_checked!
-    self.captcha = true
-  end
-
   def withdrawal!
     self.amount = -(amount.abs) if amount
+    self
   end
 
   # Placeholder
@@ -52,24 +40,11 @@ class Transfer < ActiveRecord::Base
     true
   end
 
-  def skip_captcha!
-    @skip_captcha = true
-  end
-
-  def skip_password!
-    @skip_password = true
-  end
-
-  def internal!
-    @internal = true
+  def execute
   end
 
   def inactivate_orders
     user.reload.trade_orders.each { |t| t.inactivate_if_needed! }
-  end
-
-  def set_payee
-    raise "unimplemented"
   end
 
   scope :with_currency, lambda { |currency|
@@ -81,4 +56,23 @@ class Transfer < ActiveRecord::Base
       where("currency <> 'BTC' OR bt_tx_confirmations >= ? OR amount <= 0 OR bt_tx_id IS NULL", MIN_BTC_CONFIRMATIONS)
     end
   }
+
+  def self.from_params(payee, params)
+    transfer = Transfer.new
+
+    if payee
+      if payee =~ /^BC-[A-Z][0-9]{6}$/
+        transfer = InternalTransfer.new(params)
+        transfer.payee = User.find_by_account(payee)
+      elsif Bitcoin::Util.valid_bitcoin_address?(payee)
+        transfer = BitcoinTransfer.new(params)
+        transfer.address = payee
+      elsif payee =~ /^U[0-9]{7}$/
+        transfer = LibertyReserveTransfer.new(params)
+        transfer.lr_account_id = payee
+      end
+
+      transfer.withdrawal!
+    end
+  end
 end

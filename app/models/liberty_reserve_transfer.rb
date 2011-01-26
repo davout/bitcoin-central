@@ -5,16 +5,16 @@ class LibertyReserveTransfer < Transfer
     :inclusion => { :in => ["LRUSD", "LREUR"] }
 
   # An account ID is only mandatory when money is withdrawn
-  # TODO : How the hell could an amount be nil ? Must be a reason... can't remember
   validate :lr_account_id do
-    if amount.nil? or amount <= 0 # Outgoing transfer
-      unless internal
-        errors[:lr_account_id] << "can't be blank" if lr_account_id.blank?
-      end
+    if amount and amount <= 0 # Outgoing transfer
+      errors[:lr_account_id] << "can't be blank" if lr_account_id.blank?
     end
   end
 
-  def execute!
+  def execute
+    # If amount is too precise we need to round it
+    self.amount = ((amount * 100.0).to_i / 100.0)
+
     result = LibertyReserve::Client.new.transfer(lr_account_id, amount.to_f.abs, currency)
     self.lr_transaction_id = result['TransferResponse']['Receipt']['ReceiptId']
     save(false)

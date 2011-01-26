@@ -11,10 +11,8 @@ class BitcoinTransfer < Transfer
 
   # An address is only mandatory when money is withdrawn
   validate :address do
-    if amount.nil? or amount <= 0 # Outgoing transfer
-      unless internal
-        errors[:address] << "can't be blank" if address.blank?
-      end
+    if (amount and amount <= 0) and payee_id.nil? # Outgoing bitcoin transfer
+      errors[:address] << "can't be blank" if address.blank?
     end
   end
 
@@ -26,7 +24,7 @@ class BitcoinTransfer < Transfer
     Rails.env == "production"
   end
 
-  def execute!
+  def execute
     raise "You can only execute an outgoing transfer!" if amount > 0
 
     @bitcoin = Bitcoin::Client.new
@@ -37,7 +35,7 @@ class BitcoinTransfer < Transfer
       # to_f = WTF, doesn't work without it...
       update_attribute(:bt_tx_id, @bitcoin.send_from(user.id.to_s, address, amount.to_f.abs)) if perform_transfers?
     else
-      BitcoinTransfer.create!(
+      Transfer.create!(
         :user_id => @destination_account.to_i,
         :amount => amount.abs,
         :currency => "BTC"

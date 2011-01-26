@@ -2,14 +2,13 @@ require 'test_helper'
 
 class TradeOrdersControllerTest < ActionController::TestCase
   def setup
-    LibertyReserveTransfer.create!(
+    Transfer.create!(
       :amount => 25.0,
       :user => users(:trader1),
-      :currency => "LRUSD",
-      :internal => true
+      :currency => "LRUSD"
     )
 
-    BitcoinTransfer.create(
+    Transfer.create(
       :amount => 100.0,
       :user => users(:trader1),
       :currency => "BTC"
