@@ -20,12 +20,6 @@ class Transfer < ActiveRecord::Base
   validates :currency,
     :presence => true
 
-#  validate :user do
-#    if self.class == Transfer
-#      errors[:base] << "You must provide a payee"
-#    end
-#  end
-
   def type_name
     type.gsub(/Transfer/, "").underscore.gsub(/\_/, " ").titleize
   end

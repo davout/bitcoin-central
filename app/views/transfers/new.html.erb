@@ -10,7 +10,7 @@
 
 <br />
 
-<%= form_for @transfer, :url => account_transfers_path do |f| %>
+<%= form_for :transfer, @transfer, :url => account_transfers_path do |f| %>
   <%=
     render :partial => 'layouts/errors', :locals => {
       :model => @transfer,
