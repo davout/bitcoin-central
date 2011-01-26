@@ -58,10 +58,10 @@ class Transfer < ActiveRecord::Base
       if payee =~ /^BC-[A-Z][0-9]{6}$/
         transfer = InternalTransfer.new(params)
         transfer.payee = User.find_by_account(payee)
-      elsif Bitcoin::Util.valid_bitcoin_address?(payee)
+      elsif (params[:currency].downcase == "btc") or Bitcoin::Util.valid_bitcoin_address?(payee)
         transfer = BitcoinTransfer.new(params)
         transfer.address = payee
-      elsif payee =~ /^U[0-9]{7}$/
+      elsif (params[:currency].downcase =~ /^LR.+$/) and (payee =~ /^U[0-9]{7}$/)
         transfer = LibertyReserveTransfer.new(params)
         transfer.lr_account_id = payee
       end
