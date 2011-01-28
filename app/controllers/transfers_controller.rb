@@ -10,6 +10,20 @@ class TransfersController < ApplicationController
   def create
     @transfer = Transfer.from_params(params[:payee], params[:transfer])
 
+    
+    puts "-------------------------------------------------------------"
+    puts "-------------------------------------------------------------"
+    
+    puts params.to_yaml
+
+    puts "-------------------------------------------------------------"
+    puts "-------------------------------------------------------------"
+
+    puts @transfer.to_yaml
+
+    puts "-------------------------------------------------------------"
+    puts "-------------------------------------------------------------"
+
     @transfer.user = @current_user
 
     Transfer.transaction do
