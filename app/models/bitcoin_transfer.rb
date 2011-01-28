@@ -62,7 +62,7 @@ class BitcoinTransfer < Transfer
       end
 
       transactions.each do |tx|
-        t = BitcoinTransfer.find(
+        t = Transfer.find(
           :first,
           :conditions => ['bt_tx_id = ? AND user_id = ?', tx["txid"], u.id]
         )
@@ -70,7 +70,7 @@ class BitcoinTransfer < Transfer
         if t
           t.bt_tx_confirmations = tx["confirmations"]
         else
-          t = BitcoinTransfer.new(
+          t = Transfer.new(
             :user_id => u.id,
             :amount => tx["amount"],
             :bt_tx_id => tx["txid"],

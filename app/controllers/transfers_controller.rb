@@ -8,7 +8,7 @@ class TransfersController < ApplicationController
   end
 
   def create
-    @transfer = Transfer.from_params(params[:payee], params[:transfer])
+    @transfer = Transfer.from_params(params[:payee].strip, params[:transfer])
 
     @transfer.user = @current_user
 
