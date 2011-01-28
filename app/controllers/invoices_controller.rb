@@ -15,6 +15,9 @@ class InvoicesController < ApplicationController
 
   # Should be easy
   def create
+    @invoice = Invoice.new(params[:invoice])
+    @invoice.user = @current_user
+
   end
 
   # Should only be allowed for unpaid invoices ?

@@ -1,4 +1,8 @@
 class Invoice < ActiveRecord::Base
+  attr_accessor :payee_account
+
+  before_save :set_payee
+
   belongs_to :payee,
     :class_name => "User"
 
@@ -8,11 +12,12 @@ class Invoice < ActiveRecord::Base
   validates :payee_id,
     :presence => true
 
-#  validates :amount
-    # TODO : Minimum charge
+  validates :amount,
+    :presence => true,
+    :numericality => { :greater_than => 1 }
 
-#  validates :currency
-    # TODO : Validate properly
+  validates :currency,
+    :inclusion => { :in => Transfer::CURRENCIES }
 
 
   def pay!
@@ -21,5 +26,11 @@ class Invoice < ActiveRecord::Base
 
   def cancel!
     # TODO : Implement me
+  end
+
+  def set_payee
+    if payee_account and payee.nil?
+      self.payee = User.find_by_account(payee_account)
+    end
   end
 end

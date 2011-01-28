@@ -1,5 +1,6 @@
 class Transfer < ActiveRecord::Base
   MIN_BTC_CONFIRMATIONS = 5
+  CURRENCIES = ["LRUSD", "LREUR", "EUR", "BTC"]
 
   default_scope order('created_at DESC')
 
@@ -18,7 +19,8 @@ class Transfer < ActiveRecord::Base
     :minimal_amount => true
 
   validates :currency,
-    :presence => true
+    :presence => true,
+    :inclusion => { :in => CURRENCIES}
 
   def type_name
     type.gsub(/Transfer/, "").underscore.gsub(/\_/, " ").titleize
@@ -61,7 +63,7 @@ class Transfer < ActiveRecord::Base
       elsif (params[:currency].downcase == "btc") or Bitcoin::Util.valid_bitcoin_address?(payee)
         transfer = BitcoinTransfer.new(params)
         transfer.address = payee
-      elsif (params[:currency].downcase =~ /^LR.+$/) and (payee =~ /^U[0-9]{7}$/)
+      elsif (params[:currency].downcase =~ /^lr.+$/) and (payee =~ /^U[0-9]{7}$/)
         transfer = LibertyReserveTransfer.new(params)
         transfer.lr_account_id = payee
       end

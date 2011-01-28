@@ -1,4 +1,4 @@
-class LibertyReserveTransfersController < ApplicationController
+class ThirdPartyCallbacksController < ApplicationController
   skip_before_filter :verify_authenticity_token,
     :get_bitcoin_client,
     :authenticate,
