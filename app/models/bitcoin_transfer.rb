@@ -25,23 +25,24 @@ class BitcoinTransfer < Transfer
   end
 
   def execute
-    raise "You can only execute an outgoing transfer!" if amount > 0
+    # TODO : Make transactional
+    if amount < 0
+      @bitcoin = Bitcoin::Client.new
 
-    @bitcoin = Bitcoin::Client.new
+      @destination_account = payee_id || @bitcoin.get_account(address)
 
-    @destination_account = payee_id || @bitcoin.get_account(address)
+      if @destination_account.blank?
+        # to_f = WTF, doesn't work without it...
+        update_attribute(:bt_tx_id, @bitcoin.send_from(user.id.to_s, address, amount.to_f.abs)) if perform_transfers?
+      else
+        BitcoinTransfer.create!(
+          :user_id => @destination_account.to_i,
+          :amount => amount.abs,
+          :currency => "BTC"
+        )
 
-    if @destination_account.blank?
-      # to_f = WTF, doesn't work without it...
-      update_attribute(:bt_tx_id, @bitcoin.send_from(user.id.to_s, address, amount.to_f.abs)) if perform_transfers?
-    else
-      Transfer.create!(
-        :user_id => @destination_account.to_i,
-        :amount => amount.abs,
-        :currency => "BTC"
-      )
-
-      @bitcoin.move(user.id.to_s, @destination_account.to_s, amount.to_f.abs) if perform_transfers?
+        @bitcoin.move(user.id.to_s, @destination_account.to_s, amount.to_f.abs) if perform_transfers?
+      end
     end
   end
 
@@ -62,7 +63,7 @@ class BitcoinTransfer < Transfer
       end
 
       transactions.each do |tx|
-        t = Transfer.find(
+        t = BitcoinTransfer.find(
           :first,
           :conditions => ['bt_tx_id = ? AND user_id = ?', tx["txid"], u.id]
         )
@@ -70,7 +71,7 @@ class BitcoinTransfer < Transfer
         if t
           t.bt_tx_confirmations = tx["confirmations"]
         else
-          t = Transfer.new(
+          t = BitcoinTransfer.new(
             :user_id => u.id,
             :amount => tx["amount"],
             :bt_tx_id => tx["txid"],
