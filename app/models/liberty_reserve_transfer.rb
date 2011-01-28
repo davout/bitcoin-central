@@ -12,12 +12,14 @@ class LibertyReserveTransfer < Transfer
   end
 
   def execute
-    # If amount is too precise we need to round it
-    self.amount = ((amount * 100.0).to_i / 100.0)
+    if amount < 0
+      # If amount is too precise we need to round it
+      self.amount = ((amount * 100.0).to_i / 100.0)
 
-    result = LibertyReserve::Client.new.transfer(lr_account_id, amount.to_f.abs, currency)
-    self.lr_transaction_id = result['TransferResponse']['Receipt']['ReceiptId']
-    save(false)
+      result = LibertyReserve::Client.new.transfer(lr_account_id, amount.to_f.abs, currency)
+      self.lr_transaction_id = result['TransferResponse']['Receipt']['ReceiptId']
+      save(false)
+    end
   end
 
   def self.create_from_lr_post!(confirmation)
