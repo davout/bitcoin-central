@@ -12,16 +12,4 @@ class TransferTest < ActiveSupport::TestCase
 
     assert_equal 10.0, users(:trader1).balance(:lreur)
   end
-
-  test "bitcoin transfer execution should explode if it is an incoming one" do
-    t = BitcoinTransfer.new(
-      :amount => 10.0,
-      :user => users(:trader1),
-      :currency => "BTC"
-    )
-
-    assert_raise RuntimeError do
-      t.save
-    end
-  end
 end
