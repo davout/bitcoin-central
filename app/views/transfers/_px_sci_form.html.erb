@@ -1,6 +1,6 @@
-<form action="https://pri.pecunix.com/money.refined" method="post">
+<form id="pecunix-sci-form" action="https://pri.pecunix.com/money.refined" method="post">
   <input type="hidden" name="PAYEE_ACCOUNT" value="<%= config["account"] %>" />
-  <input name="PAYMENT_AMOUNT " value="100" />
+  <input name="PAYMENT_AMOUNT" value="" />
 
   <input type="hidden" name="PAYMENT_URL" value="<%= config["payment_url"] %>" />
   <input type="hidden" name="PAYMENT_URL_METHOD" value="POST" />
@@ -19,6 +19,4 @@
   <input type="hidden" name="PAYMENT_ID" value="" />
 
   <input type="hidden" name="SUGGESTED_MEMO" value="MEMO" />
-
-  <input type="submit" value="Pay with Pecunix" />
 </form>

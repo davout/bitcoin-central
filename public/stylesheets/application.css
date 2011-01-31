@@ -62,6 +62,10 @@ ul > li {
     margin-bottom: .7em;
 }
 
+.hidden {
+    display: none;
+}
+
 /* Footer */
 div#footer {
     text-align: center;
@@ -288,6 +292,10 @@ div.form-field div.explanation {
 div.form-field div.explanation a {
     color: inherit;
 }
+
+/*div#pecunix-sci-form{
+    display: none;
+}*/
 
 /* Rails errors */
 div#errors ul {

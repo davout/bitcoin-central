@@ -8,5 +8,26 @@
 <h1>Deposit Liberty Reserve</h1>
 <%= render :partial => 'lr_sci_form' %>
 
-<h1>Deposit Pecunix</h1>
-<%= render :partial => 'px_sci_form', :locals => { :config => @pecunix_config } %>
+<h1>Deposit Pecunix gold</h1>
+<p>
+  Use this form to specify the amount of gold grams to deposit, upon submission
+  you'll be taken to the Pecunix interface to confirm the transfer. Once the transfer
+  is completed, the gold will appear in your balance.
+</p>
+
+<br />
+
+<%= form_tag pecunix_deposit_form_account_transfers_path, :method => :get, :remote => true do %>
+  <div class="form-field">
+    <%= label_tag :amount %>
+    <%= text_field_tag :amount, nil %>
+  </div>
+
+  <div class="form-field">
+    <%= submit_tag "Deposit Pecunix", :class => "submit" %>
+  </div>
+<% end %>
+
+<div id="pecunix-sci-form-container" class="hidden"></div>
+
+

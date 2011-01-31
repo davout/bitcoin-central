@@ -1,0 +1,2 @@
+$("div#pecunix-sci-form-container").html("<%= escape_javascript(render(:partial => "transfers/px_sci_form.html", :locals => { :config => @pecunix_config })).html_safe %>");
+$("#pecunix-sci-form").submit();

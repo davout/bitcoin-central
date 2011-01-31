@@ -7,7 +7,7 @@ class TransfersController < ApplicationController
     @transfer = Transfer.new
   end
 
-  def deposit
+  def pecunix_deposit_form
     @pecunix_config = YAML::load(File.read(File.join(Rails.root, "config", "pecunix.yml")))[Rails.env]
   end
 
