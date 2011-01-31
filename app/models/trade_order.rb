@@ -115,6 +115,22 @@ class TradeOrder < ActiveRecord::Base
     save!
   end
 
+  def activate!
+    raise "Order is already active" if active?
+
+    if ((category == "sell") and (user.balance(:btc) < amount))
+      raise "User doesn't have enough BTC balance"
+    end
+
+    if (category == "buy" and ((amount * ppc) > user.balance(currency)))
+      raise "User doesn't have enough #{currency.upcase} balance"
+    end
+
+    self.active = true
+
+    save! and execute!
+  end
+
   def execute!
     executed_trades = []
 
