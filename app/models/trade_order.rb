@@ -2,6 +2,9 @@ class TradeOrder < ActiveRecord::Base
   MIN_AMOUNT = 1.0
   MIN_DARK_POOL_AMOUNT = 3000.0
 
+  attr_protected :skip_min_amount
+  attr_accessor :skip_min_amount
+
   default_scope order('created_at DESC')
 
   belongs_to :user
@@ -26,7 +29,7 @@ class TradeOrder < ActiveRecord::Base
 
   validate :amount do
     if new_record?
-      if amount and (amount < MIN_AMOUNT)
+      if amount and (amount < MIN_AMOUNT) and !skip_min_amount
         errors[:amount] << "must be greater than #{MIN_AMOUNT} BTC"
       end
 

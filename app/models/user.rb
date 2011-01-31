@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  attr_protected :admin, :skip_captcha
+
   attr_accessor :new_password, 
     :new_password_confirmation,
     :current_password,

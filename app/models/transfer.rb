@@ -2,6 +2,9 @@ class Transfer < ActiveRecord::Base
   MIN_BTC_CONFIRMATIONS = 5
   CURRENCIES = ["LRUSD", "LREUR", "EUR", "BTC"]
 
+  attr_protected :skip_min_amount
+  attr_accessor :skip_min_amount
+
   default_scope order('created_at DESC')
 
   after_create :execute,

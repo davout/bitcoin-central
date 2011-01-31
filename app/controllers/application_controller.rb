@@ -11,7 +11,6 @@ class ApplicationController < ActionController::Base
     :authenticate,
     :authorize,
     :set_time_zone,
-    :remove_params,
     :set_locale
 
   def authenticate
@@ -43,11 +42,6 @@ class ApplicationController < ActionController::Base
     if @current_user and !@current_user.time_zone.blank?
       Time.zone = ActiveSupport::TimeZone[@current_user.time_zone]
     end
-  end
-
-  def remove_params
-    params.delete :skip_captcha
-    params.delete :skip_password
   end
 
   # Changes the locale if *locale* (en|fr|...) is passed as GET parameter
