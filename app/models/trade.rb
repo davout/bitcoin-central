@@ -1,5 +1,6 @@
 class Trade < ActiveRecord::Base
-#  default_scope order("created_at DESC")
+  # TODO : Why is this commented out ?
+  # default_scope order("created_at DESC")
 
   after_create :execute
 
@@ -53,14 +54,16 @@ class Trade < ActiveRecord::Base
       :currency => currency,
       :amount =>  -traded_currency,
       :user_id => purchase_order.user_id,
-      :payee_id => sale_order.user_id
+      :payee_id => sale_order.user_id,
+      :skip_min_amount => true
     )
 
     transfers << BitcoinTransfer.create!(
       :currency => "BTC",
       :amount => -traded_btc,
       :user_id => sale_order.user_id,
-      :payee_id => purchase_order.user_id
+      :payee_id => purchase_order.user_id,
+      :skip_min_amount => true
     )
 
     save!

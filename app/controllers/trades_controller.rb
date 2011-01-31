@@ -16,9 +16,9 @@ class TradesController < ApplicationController
     @ticker[:at] = DateTime.now.to_i
     @ticker[:pairs] = {}
 
-    %w{LRUSD LREUR EUR}.each do |currency|
+    %w{LRUSD LREUR EUR PGAU}.each do |currency|
       if Trade.with_currency(currency).count > 0
-        @ticker[currency.downcase] = {
+        @ticker[:pairs][currency.downcase] = {
           :high => Trade.with_currency(currency).last_24h.maximum(:ppc).to_f,
           :low => Trade.with_currency(currency).last_24h.minimum(:ppc).to_f,
           :volume => Trade.with_currency(currency).last_24h.sum(:traded_btc).to_f,

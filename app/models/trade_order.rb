@@ -2,6 +2,9 @@ class TradeOrder < ActiveRecord::Base
   MIN_AMOUNT = 1.0
   MIN_DARK_POOL_AMOUNT = 3000.0
 
+  attr_protected :skip_min_amount
+  attr_accessor :skip_min_amount
+
   default_scope order('created_at DESC')
 
   belongs_to :user
@@ -26,7 +29,7 @@ class TradeOrder < ActiveRecord::Base
 
   validate :amount do
     if new_record?
-      if amount and (amount < MIN_AMOUNT)
+      if amount and (amount < MIN_AMOUNT) and !skip_min_amount
         errors[:amount] << "must be greater than #{MIN_AMOUNT} BTC"
       end
 
@@ -113,6 +116,22 @@ class TradeOrder < ActiveRecord::Base
     end
 
     save!
+  end
+
+  def activate!
+    raise "Order is already active" if active?
+
+    if ((category == "sell") and (user.balance(:btc) < amount))
+      raise "User doesn't have enough BTC balance"
+    end
+
+    if (category == "buy" and ((amount * ppc) > user.balance(currency)))
+      raise "User doesn't have enough #{currency.upcase} balance"
+    end
+
+    self.active = true
+
+    save! and execute!
   end
 
   def execute!
