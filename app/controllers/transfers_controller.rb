@@ -7,6 +7,10 @@ class TransfersController < ApplicationController
     @transfer = Transfer.new
   end
 
+  def deposit
+    @pecunix_config = YAML::load(File.read(File.join(Rails.root, "config", "pecunix.yml")))[Rails.env]
+  end
+
   def create
     @transfer = Transfer.from_params(params[:payee].strip, params[:transfer])
 

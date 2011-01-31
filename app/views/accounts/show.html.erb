@@ -72,4 +72,16 @@
     </td>
   </tr>
 
+  <tr>
+    <td>
+      <%= link_to image_tag("gold.jpg"), "http://www.pecunix.com/", :target => "_blank", :title => "Pecunix Gold" %>
+    </td>
+    <td>
+      PGAU
+    </td>
+    <td class="account-balance <%= @current_user.balance(:pgau) > 0 ? "green" : (@current_user.balance(:pgau) < 0 ? "red" : "") %>">
+      <%= @current_user.balance(:pgau) > 0 ? "+" : (@current_user.balance(:pgau) < 0 ? "-" : "") %> <%= number_to_currency @current_user.balance(:pgau).abs, :unit => "" %>
+    </td>
+  </tr>
+
 </table>

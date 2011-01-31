@@ -1,0 +1,24 @@
+<form action="https://pri.pecunix.com/money.refined" method="post">
+  <input type="hidden" name="PAYEE_ACCOUNT" value="<%= config["account"] %>" />
+  <input name="PAYMENT_AMOUNT " value="100" />
+
+  <input type="hidden" name="PAYMENT_URL" value="<%= config["payment_url"] %>" />
+  <input type="hidden" name="PAYMENT_URL_METHOD" value="POST" />
+
+  <input type="hidden" name="NOPAYMENT_URL" value="<%= config["no_payment_url"] %>" />
+  <input type="hidden" name="NOPAYMENT_URL_METHOD" value="POST" />
+
+  <input type="hidden" name="STATUS_URL" value="<%= config["status_url"] %>" />
+  <input type="hidden" name="STATUS_TYPE" value="FORM" />
+
+  <input type="hidden" name="INPUT_HASH" value="F9834F5C15191E9DDF60CA783682E3D030E7F23F" />
+
+
+  <input type="hidden" name="PAYMENT_UNITS" value="GAU" />
+  <input type="hidden" name="WHO_PAYS_FEES" value="PAYER" />
+  <input type="hidden" name="PAYMENT_ID" value="" />
+
+  <input type="hidden" name="SUGGESTED_MEMO" value="MEMO" />
+
+  <input type="submit" value="Pay with Pecunix" />
+</form>

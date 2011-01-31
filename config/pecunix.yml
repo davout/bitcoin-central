@@ -1,0 +1,20 @@
+development:
+  account: test@bitcoin-central.net
+  secret: secret word is secret
+
+  # Pecunix POSTs here to confirm payment
+  status_url: https://bitcoin-central.net/third_party_callbacks/px_status
+
+  # Pecunix POSTs here from the users browser
+  payment_url: https://bitcoin-central.net/third_party_callbacks/px_payment
+
+  # Pecunix POSTs here from the browser if payment was cancelled
+  no_payment_url: https://bitcoin-central.net/third_party_callbacks/px_cancel
+
+test:
+  account: test@bitcoin-central.net
+  secret: secret word is secret
+  status_url: https://bitcoin-central.net/third_party_callbacks/px_status
+  payment_url: https://bitcoin-central.net/third_party_callbacks/px_payment
+  no_payment_url: https://bitcoin-central.net/third_party_callbacks/px_cancel
+  

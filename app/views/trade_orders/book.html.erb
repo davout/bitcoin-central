@@ -7,6 +7,7 @@
       <%= radio_button_tag 'currency', 'lrusd', params[:currency] == 'lrusd', :onclick => "$(this).parents('form').submit()" %> <%= label_tag "currency_lrusd", "LRUSD" %>
       <%= radio_button_tag 'currency', 'lreur', params[:currency] == 'lreur', :onclick => "$(this).parents('form').submit()" %> <%= label_tag "currency_lreur", "LREUR" %>
       <%= radio_button_tag 'currency', 'eur', params[:currency] == 'eur', :onclick => "$(this).parents('form').submit()" %> <%= label_tag "currency_eur", "EUR" %>
+    <%= radio_button_tag 'currency', 'pgau', params[:currency] == 'pgau', :onclick => "$(this).parents('form').submit()" %> <%= label_tag "currency_pgau", "PGAU" %>
 
       <%= submit_tag 'Filter', :class => "submit", :id => "order-book-filter-submit" %>
       <script type="text/javascript">
