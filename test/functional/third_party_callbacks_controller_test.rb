@@ -31,7 +31,7 @@ class ThirdPartyCallbacksControllerTest < ActionController::TestCase
       assert_response :success
     end
 
-    assert_equal 1000.0, users(:trader1).balance(:pgau)
+    assert_equal 1.0, users(:trader1).balance(:pgau)
     assert Transfer.find_by_px_tx_id("123456")
     assert Transfer.find_by_px_payer("user@domain.com")
   end

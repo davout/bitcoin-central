@@ -72,7 +72,8 @@ class ThirdPartyCallbacksController < ApplicationController
         :amount => (params["PAYMENT_GRAMS"].to_f - params["PAYMENT_FEE"].to_f),
         :px_tx_id => params["PAYMENT_REC_ID"],
         :px_payer => params["PAYER_ACCOUNT"],
-        :px_fee => params["PAYMENT_FEE"].to_f
+        :px_fee => params["PAYMENT_FEE"].to_f,
+        :skip_min_amount => true
       )
     end
 
