@@ -54,7 +54,7 @@ class ThirdPartyCallbacksController < ApplicationController
 
     # Check payment hash
     px_data = %w{PAYEE_ACCOUNT PAYMENT_AMOUNT PAYMENT_UNITS PAYER_ACCOUNT PAYMENT_REC_ID PAYMENT_GRAMS PAYMENT_ID PAYMENT_FEE TXN_DATETIME}
-    px_hash = Digest::SHA1.hexdigest(px_data.map{ |i| i or "" }.join(":")).upcase
+    px_hash = Digest::SHA1.hexdigest("#{px_data.map{ |i| i or "" }.join(":")}:#{config["secret"]}").upcase
     raise "Verification hash was wrong" unless (params["PAYMENT_HASH"] == px_hash)
 
     # We want to make sure it is the first time the callback is called for this
