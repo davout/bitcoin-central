@@ -26,7 +26,7 @@
         unconfirmed_btc_balance = @current_user.balance(:btc, :unconfirmed => true) - btc_balance
       %>
 
-      <span class="<%= @current_user.balance(:btc) > 0 ? "green" : (@current_user.balance(:btc) < 0 ? "red" : "") %>">
+      <span <%= exact_balance_title(:btc) %> class="<%= @current_user.balance(:btc) > 0 ? "green" : (@current_user.balance(:btc) < 0 ? "red" : "") %>">
         <%= btc_balance > 0 ? "+" : (btc_balance < 0 ? "-" : "") %> <%= number_to_currency btc_balance.abs, :unit => "" %>
       </span>
 
@@ -46,7 +46,7 @@
     <td>
       LRUSD
     </td>
-    <td class="account-balance <%= @current_user.balance(:lrusd) > 0 ? "green" : (@current_user.balance(:lrusd) < 0 ? "red" : "") %>">
+    <td <%= exact_balance_title(:lrusd) %> class="account-balance <%= @current_user.balance(:lrusd) > 0 ? "green" : (@current_user.balance(:lrusd) < 0 ? "red" : "") %>">
       <%= @current_user.balance(:lrusd) > 0 ? "+" : (@current_user.balance(:lrusd) < 0 ? "-" : "") %> <%= number_to_currency @current_user.balance(:lrusd).abs, :unit => "" %>
     </td>
   </tr>
@@ -55,7 +55,7 @@
     <td>
       LREUR
     </td>
-    <td class="account-balance <%= @current_user.balance(:lreur) > 0 ? "green" : (@current_user.balance(:lreur) < 0 ? "red" : "") %>">
+    <td <%= exact_balance_title(:lreur) %> class="account-balance <%= @current_user.balance(:lreur) > 0 ? "green" : (@current_user.balance(:lreur) < 0 ? "red" : "") %>">
       <%= @current_user.balance(:lreur) > 0 ? "+" : (@current_user.balance(:lreur) < 0 ? "-" : "") %> <%= number_to_currency @current_user.balance(:lreur).abs, :unit => "" %>
     </td>
   </tr>
@@ -67,7 +67,7 @@
     <td>
       EUR
     </td>
-    <td class="account-balance <%= @current_user.balance(:eur) > 0 ? "green" : (@current_user.balance(:eur) < 0 ? "red" : "") %>">
+    <td <%= exact_balance_title(:eur) %> class="account-balance <%= @current_user.balance(:eur) > 0 ? "green" : (@current_user.balance(:eur) < 0 ? "red" : "") %>">
       <%= @current_user.balance(:eur) > 0 ? "+" : (@current_user.balance(:eur) < 0 ? "-" : "") %> <%= number_to_currency @current_user.balance(:eur).abs, :unit => "" %>
     </td>
   </tr>
@@ -79,7 +79,7 @@
     <td>
       PGAU
     </td>
-    <td class="account-balance <%= @current_user.balance(:pgau) > 0 ? "green" : (@current_user.balance(:pgau) < 0 ? "red" : "") %>">
+    <td <%= exact_balance_title(:pgau) %> class="account-balance <%= @current_user.balance(:pgau) > 0 ? "green" : (@current_user.balance(:pgau) < 0 ? "red" : "") %>">
       <%= @current_user.balance(:pgau) > 0 ? "+" : (@current_user.balance(:pgau) < 0 ? "-" : "") %> <%= number_to_currency @current_user.balance(:pgau).abs, :unit => "" %>
     </td>
   </tr>
