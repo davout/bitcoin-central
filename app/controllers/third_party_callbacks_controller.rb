@@ -38,8 +38,10 @@ class ThirdPartyCallbacksController < ApplicationController
 
   # Pecunix success redirection URL
   def px_payment
+    t = Transfer.find_by_px_tx_id(params["PAYMENT_REC_ID"])
+
     redirect_to account_transfers_path,
-      :notice => "You successfully transferred #{params["PAYMENT_AMOUNT"]} PGAU to your account"
+      :notice => "You successfully transferred #{t.amount} PGAU to your account (Pecunix charged a #{t.px_fee} PGAU fee)"
   end
 
   # Pecunix success callback
@@ -67,9 +69,10 @@ class ThirdPartyCallbacksController < ApplicationController
       Transfer.create!(
         :user => User.find(params["PAYMENT_ID"]),
         :currency => "PGAU",
-        :amount => params["PAYMENT_GRAMS"].to_f,
+        :amount => (params["PAYMENT_GRAMS"].to_f - params["PAYMENT_FEE"].to_f),
         :px_tx_id => params["PAYMENT_REC_ID"],
-        :px_payer => params["PAYER_ACCOUNT"]
+        :px_payer => params["PAYER_ACCOUNT"],
+        :px_fee => params["PAYMENT_FEE"].to_f
       )
     end
 
