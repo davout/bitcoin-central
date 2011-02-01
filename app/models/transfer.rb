@@ -1,6 +1,6 @@
 class Transfer < ActiveRecord::Base
   MIN_BTC_CONFIRMATIONS = 5
-  CURRENCIES = ["LRUSD", "LREUR", "EUR", "BTC"]
+  CURRENCIES = ["LRUSD", "LREUR", "EUR", "BTC", "PGAU"]
 
   attr_protected :skip_min_amount
   attr_accessor :skip_min_amount

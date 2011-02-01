@@ -19,7 +19,7 @@
 
 <%= form_tag pecunix_deposit_form_account_transfers_path, :method => :get, :remote => true do %>
   <div class="form-field">
-    <%= label_tag :amount %>
+    <%= label_tag :amount, "Amount (PGAU)" %>
     <%= text_field_tag :amount, nil %>
   </div>
 

@@ -37,6 +37,9 @@ BitcoinBank::Application.routes.draw do
       post :lr_create_from_sci
       get :lr_transfer_success
       get :lr_transfer_fail
+      get :px_cancel
+      get :px_payment
+      post :px_status
     end
   end
 

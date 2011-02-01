@@ -22,9 +22,9 @@
     </td>
     <td class="account-balance">
       <%
-      btc_balance = @current_user.balance(:btc)
-      unconfirmed_btc_balance = @current_user.balance(:btc, :unconfirmed => true) - btc_balance
-    %>
+        btc_balance = @current_user.balance(:btc)
+        unconfirmed_btc_balance = @current_user.balance(:btc, :unconfirmed => true) - btc_balance
+      %>
 
       <span class="<%= @current_user.balance(:btc) > 0 ? "green" : (@current_user.balance(:btc) < 0 ? "red" : "") %>">
         <%= btc_balance > 0 ? "+" : (btc_balance < 0 ? "-" : "") %> <%= number_to_currency btc_balance.abs, :unit => "" %>
@@ -83,5 +83,4 @@
       <%= @current_user.balance(:pgau) > 0 ? "+" : (@current_user.balance(:pgau) < 0 ? "-" : "") %> <%= number_to_currency @current_user.balance(:pgau).abs, :unit => "" %>
     </td>
   </tr>
-
 </table>

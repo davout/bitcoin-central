@@ -8,7 +8,10 @@ class TransfersController < ApplicationController
   end
 
   def pecunix_deposit_form
-    @pecunix_config = YAML::load(File.read(File.join(Rails.root, "config", "pecunix.yml")))[Rails.env]
+    @amount = params[:amount]
+    @payment_id = @current_user.id
+    @config = YAML::load(File.read(File.join(Rails.root, "config", "pecunix.yml")))[Rails.env]
+    @hash = Digest::SHA1.hexdigest("#{@config['account']}:#{@amount}:GAU:#{@payment_id}:PAYER:#{@config['secret']}").upcase
   end
 
   def create
@@ -19,7 +22,7 @@ class TransfersController < ApplicationController
     Transfer.transaction do
       if @transfer.save
         redirect_to account_transfers_path,
-          :notice =>"You successfuly transferred #{@transfer.amount.abs} #{@transfer.currency}"
+          :notice => "You successfuly transferred #{@transfer.amount.abs} #{@transfer.currency}"
       else
         render :action => :new
       end
