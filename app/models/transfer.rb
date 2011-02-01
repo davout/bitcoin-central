@@ -60,6 +60,8 @@ class Transfer < ActiveRecord::Base
     transfer = Transfer.new
 
     if payee
+      payee = payee.strip
+
       if payee =~ /^BC-[A-Z][0-9]{6}$/
         transfer = InternalTransfer.new(params)
         transfer.payee = User.find_by_account(payee)

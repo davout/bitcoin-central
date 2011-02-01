@@ -53,7 +53,7 @@ class TradeOrdersControllerTest < ActionController::TestCase
     get :book, :format => :json
     assert_response :success
   end
-  
+
   test "should get order book in XML format" do
     get :book, :format => :xml
     assert_response :success
