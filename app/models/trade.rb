@@ -37,7 +37,7 @@ class Trade < ActiveRecord::Base
     :presence => true
 
   validates :currency,
-    :inclusion => { :in => ["LRUSD", "LREUR", "EUR"] },
+    :inclusion => { :in => Transfer::CURRENCIES },
     :presence => true
 
   scope :last_24h, lambda {
