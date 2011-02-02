@@ -38,8 +38,10 @@ class ThirdPartyCallbacksController < ApplicationController
 
   # Pecunix success redirection URL
   def px_payment
+    t = Transfer.find_by_px_tx_id(params["PAYMENT_REC_ID"])
+
     redirect_to account_transfers_path,
-      :notice => "You successfully transferred #{params["PAYMENT_AMOUNT"]} PGAU to your account"
+      :notice => "You successfully transferred #{t.amount} PGAU to your account (Pecunix charged a #{t.px_fee} PGAU fee)"
   end
 
   # Pecunix success callback
@@ -54,8 +56,12 @@ class ThirdPartyCallbacksController < ApplicationController
 
     # Check payment hash
     px_data = %w{PAYEE_ACCOUNT PAYMENT_AMOUNT PAYMENT_UNITS PAYER_ACCOUNT PAYMENT_REC_ID PAYMENT_GRAMS PAYMENT_ID PAYMENT_FEE TXN_DATETIME}
-    px_hash = Digest::SHA1.hexdigest("#{px_data.map{ |i| i or "" }.join(":")}:#{config["secret"]}").upcase
-    raise "Verification hash was wrong" unless (params["PAYMENT_HASH"] == px_hash)
+    px_data = "#{px_data.map{ |i| params[i] or "" }.join(":")}:#{config["secret"]}"
+    px_hash = Digest::SHA1.hexdigest(px_data).upcase
+
+    unless (params["PAYMENT_HASH"] == px_hash)
+      raise "Verification hash was wrong (hashed string : \"#{px_hash}\", expected : \"#{params["PAYMENT_HASH"]}\")\nData : #{px_data}\""
+    end
 
     # We want to make sure it is the first time the callback is called for this
     # particular PGAU deposit (according to Pecunix docs, multiple calls are possible)
@@ -63,9 +69,11 @@ class ThirdPartyCallbacksController < ApplicationController
       Transfer.create!(
         :user => User.find(params["PAYMENT_ID"]),
         :currency => "PGAU",
-        :amount => params["PAYMENT_GRAMS"].to_f,
+        :amount => (params["PAYMENT_GRAMS"].to_f - params["PAYMENT_FEE"].to_f),
         :px_tx_id => params["PAYMENT_REC_ID"],
-        :px_payer => params["PAYER_ACCOUNT"]
+        :px_payer => params["PAYER_ACCOUNT"],
+        :px_fee => params["PAYMENT_FEE"].to_f,
+        :skip_min_amount => true
       )
     end
 

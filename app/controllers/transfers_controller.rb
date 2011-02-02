@@ -11,7 +11,7 @@ class TransfersController < ApplicationController
     @amount = params[:amount]
     @payment_id = @current_user.id
     @config = YAML::load(File.read(File.join(Rails.root, "config", "pecunix.yml")))[Rails.env]
-    @hash = Digest::SHA1.hexdigest("#{@config['account']}:#{@amount}:GAU:#{@payment_id}:PAYER:#{@config['secret']}").upcase
+    @hash = Digest::SHA1.hexdigest("#{@config['account']}:#{@amount}:GAU:#{@payment_id}:PAYEE:#{@config['secret']}").upcase
   end
 
   def create
