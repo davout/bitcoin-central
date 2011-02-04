@@ -16,7 +16,7 @@ class TradesController < ApplicationController
     @ticker[:at] = DateTime.now.to_i
     @ticker[:pairs] = {}
 
-    %w{LRUSD LREUR EUR PGAU}.each do |currency|
+    Transfer::CURRENCIES.each do |currency|
       if Trade.with_currency(currency).count > 0
         @ticker[:pairs][currency.downcase] = {
           :high => Trade.with_currency(currency).last_24h.maximum(:ppc).to_f,
