@@ -270,3 +270,27 @@ en:
   signed_in_as: Signed-in as
   sign_up: Sign-up
   sign_in: Login
+  
+  # accounts/show.html.erb
+  account: Account
+  currency: Currency
+  balance: Balance
+  balance_unconfirmed: These funds are awaiting confirmation from the bitcoin network
+  currency_btc: BTC
+  currency_btc_legend: Bitcoin
+  currency_lrusd: LRUSD
+  currency_lreur: LREUR
+  currency_lr_legend: Liberty Reserve
+  currency_eur: EUR
+  currency_eur_legend: Cash EUR
+  currency_pgau: PGAU
+  currency_pgau_legend: Pecunix Gold
+  
+  # backup_mailer/wallet_backup.text.erb
+  encrypted_wallet: Encrypted server wallet for %{date}
+  
+  # informations/economy.html.erb
+  economy_summary: Bitcoin economy summarized
+  how_many_generated: How many bitcoins are there ?
+  generated_coins_html: Currently there has been a total of <strong>%{count}</strong> generated bitcoins.
+  

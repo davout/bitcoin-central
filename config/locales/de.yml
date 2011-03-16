@@ -188,3 +188,54 @@ de:
 
       full_messages:
         format: "%{attribute}%{message}"
+
+
+    # bitcoin-central specific
+    attributes:
+       trade_order:
+         ppc: Preis
+         category: Typ
+
+       liberty_reserve_transfer:
+         lr_account_id: Kontonummer
+
+       user:
+         email: E-Mail-Adresse
+         new_password: Neues Passwort
+         new_password_confirmation: Passwort wiederholen
+         time_zone: Zeitzone
+
+    models:
+      user: "Benutzerkonto"
+
+  # layouts/user_informations.html
+  generate_new_address_legend: Neue Empfangsadresse generieren
+  your_last_address: Ihre Addresse
+  logout: Ausloggen
+  signed_in_as: Angemeldet als
+  sign_up: Registrieren
+  sign_in: Anmelden
+  
+  # accounts/show.html.erb
+  account: Finanzstatus
+  currency: Währung
+  balance: Kontostand
+  balance_unconfirmed: Diese Umsätze wurden noch nicht vom Bitcoin-Netzwerk bestätigt.
+  currency_btc: BTC
+  currency_btc_legend: Bitcoin
+  currency_lrusd: LRUSD
+  currency_lreur: LREUR
+  currency_lr_legend: Liberty Reserve
+  currency_eur: EUR
+  currency_eur_legend: Euro
+  currency_pgau: PGAU
+  currency_pgau_legend: Pecunix Gold
+  
+  # backup_mailer/wallet_backup.text.erb
+  encrypted_wallet: Verschlüsselte Brieftasche auf dem Server für %{date}
+  
+  # informations/economy.html.erb
+  economy_summary: Bitcoin-Markt
+  how_many_generated: Wie viele Bitcoins gibt es?
+  generated_coins_html: Bis jetzt wurden insgesamt <strong>%{count}</strong> Bitcoins generiert.
+  
