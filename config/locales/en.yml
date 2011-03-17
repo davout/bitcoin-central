@@ -261,8 +261,7 @@ en:
 
          user:
            new_password_confirmation: Confirmation
-      
-
+  
   # layouts/user_informations.html
   generate_new_address_legend: Generate a new receiving address, refresh at will
   your_last_address: Your address
@@ -290,7 +289,39 @@ en:
   encrypted_wallet: Encrypted server wallet for %{date}
   
   # informations/economy.html.erb
-  economy_summary: Bitcoin economy summarized
+  economy_title: Bitcoin economy summarized
   how_many_generated: How many bitcoins are there ?
   generated_coins_html: Currently there has been a total of <strong>%{count}</strong> generated bitcoins.
   
+  # informations/faq.html.erb
+  faq_title: Frequently asked questions
+  what_is_bitcoin: What is Bitcoin?
+  what_is_bitcoin_body_html: '
+    Bitcoin is a peer-to-peer digital currency. Peer-to-peer means that there is no central authority to issue new money or keep track of transactions. Instead, these tasks are managed collectively by the nodes of the network. Advantages:
+    <ul>
+      <li>
+        Bitcoins can be sent easily through the Internet, without having to trust middlemen.
+      </li>
+      <li>
+        Transactions are designed to be irreversible.
+      </li>
+      <li>
+        Be safe from instability caused by fractional reserve banking and central banks. The limited inflation of the Bitcoin system’s money supply is distributed evenly (by CPU power) throughout the network, not monopolized by banks.
+      </li>
+    </ul>
+    More detailed explanations can be found at <strong><a href="http://bitcoin.org/">bitcoin.org</a></strong>.
+    '
+  
+  # informations/support.html.erb
+  support_title: Support
+  support_body_html: '
+    <p>
+    Please feel free to send an e-mail to <a href="mailto:support@bitcoin-central.net">support@bitcoin-central.net</a> if you have any questions or comments.
+    </p><p>
+    Please use PGP encryption <a href="http://pgp.mit.edu:11371/pks/lookup?op=get&search=0x49FA50FC091469DA">(public key)</a>.
+    </p>
+    '
+  
+  # informations/welcome.html.erb
+  trading_data_title: Last week's trading data
+  welcome: Welcome to bitcoin-central.net!
