@@ -1,26 +1,12 @@
 <div id="price-chart-container" class="chart-container">
-  <h3>Last week's trading data</h3>
+  <h3><%= t :trading_data_title %></h3>
   <div id="price-chart" class="chart" style="margin:auto;margin-top:2em;width:400px;height:300px"></div>
 </div>
 
-<h1>Welcome to bitcoin-central.net!</h1>
+<h1><%= t :welcome %></h1>
 <div class="question" style="text-align:justify">
-  <h2>What is Bitcoin?</h2>
-  <p>
-    Bitcoin is a peer-to-peer digital currency. Peer-to-peer means that there is no central authority to issue new money or keep track of transactions. Instead, these tasks are managed collectively by the nodes of the network. Advantages:
-  <ul>
-    <li>
-      Bitcoins can be sent easily through the Internet, without having to trust middlemen.
-    </li>
-    <li>
-      Transactions are designed to be irreversible.
-    </li>
-    <li>
-      Be safe from instability caused by fractional reserve banking and central banks. The limited inflation of the Bitcoin system’s money supply is distributed evenly (by CPU power) throughout the network, not monopolized by banks.
-    </li>
-  </ul>
-  More detailed explanations can be found at <strong><%= link_to "bitcoin.org", "http://bitcoin.org" %></strong>.
-</p>
+  <h2><%= t :what_is_bitcoin %></h2>
+  <p><%= t :what_is_bitcoin_body_html %></p>
 </div>
 
 <script type="text/javascript">

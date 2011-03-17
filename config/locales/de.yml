@@ -235,7 +235,46 @@ de:
   encrypted_wallet: Verschlüsselte Brieftasche auf dem Server für %{date}
   
   # informations/economy.html.erb
-  economy_summary: Bitcoin-Markt
+  economy_title: Bitcoin-Markt
   how_many_generated: Wie viele Bitcoins gibt es?
   generated_coins_html: Bis jetzt wurden insgesamt <strong>%{count}</strong> Bitcoins generiert.
   
+  # informations/faq.html.erb
+  faq_title: Häufig gestellte Fragen
+  what_is_bitcoin: Was ist Bitcoin?
+  what_is_bitcoin_body_html: '
+    Bitcoin ist eine digitale Peer-to-Peer Währung. Peer-to-Peer bedeutet, dass es keine zentrale
+    Authorität gibt die neues Geld ausgibt oder Transaktionen überwacht. Stattdessen werden diese
+    Aufgaben gemeinsam durch die Teilnehmer des Netzwerks durchgeführt.
+    Das hat folgende Vorteile:
+    <ul>
+      <li>
+        Bitcoins können einfach über das Internet verschickt werden ohne Dienstleistern vertrauen
+        zu müssen.
+      </li>
+      <li>
+        Transaktionen können nicht widerrufen werden.
+      </li>
+      <li>
+        Sie sind sicher vor möglichen Krisen, die durch das partielle Reservesystem und
+        Zentralbanken verursacht werden können. Die begrenzte Steigerung der Geldmenge im Bitcoin-System
+        wird gerecht (nach Leistung des Prozessors) auf das  Netzwerk verteilt und nicht nur
+        durch Banken.
+      </li>
+    </ul>
+    Weitere erläuterungen können sie auf <strong><a href="http://bitcoin.org/">bitcoin.org</a></strong> finden.
+    '
+  
+  # informations/support.html.erb
+  support_title: Kontakt
+  support_body_html: '
+    <p>
+    Bitte schicken sie E-Mails mit Fragen oder Anregungen (in englisch) an <a href="mailto:support@bitcoin-central.net">support@bitcoin-central.net</a>.
+    </p><p>
+    Bitte verwenden sie PGP-Verschlüsselung <a href="http://pgp.mit.edu:11371/pks/lookup?op=get&search=0x49FA50FC091469DA">(öffentlicher Schlüssel)</a>.
+    </p>
+    '
+  
+  # informations/welcome.html.erb
+  trading_data_title: Handelsdaten der letzten Woche
+  welcome: Willkommen auf bitcoin-central.net!
