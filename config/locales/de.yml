@@ -207,16 +207,8 @@ de:
 
     models:
       user: "Benutzerkonto"
-
-  # layouts/user_informations.html
-  generate_new_address_legend: Neue Empfangsadresse generieren
-  your_last_address: Ihre Addresse
-  logout: Ausloggen
-  signed_in_as: Angemeldet als
-  sign_up: Registrieren
-  sign_in: Anmelden
   
-  # accounts/show.html.erb
+  # accounts/show.html
   account: Finanzstatus
   currency: Währung
   balance: Kontostand
@@ -231,15 +223,15 @@ de:
   currency_pgau: PGAU
   currency_pgau_legend: Pecunix Gold
   
-  # backup_mailer/wallet_backup.text.erb
+  # backup_mailer/wallet_backup.text
   encrypted_wallet: Verschlüsselte Brieftasche auf dem Server für %{date}
   
-  # informations/economy.html.erb
+  # informations/economy.html
   economy_title: Bitcoin-Markt
   how_many_generated: Wie viele Bitcoins gibt es?
   generated_coins_html: Bis jetzt wurden insgesamt <strong>%{count}</strong> Bitcoins generiert.
   
-  # informations/faq.html.erb
+  # informations/faq.html
   faq_title: Häufig gestellte Fragen
   what_is_bitcoin: Was ist Bitcoin?
   what_is_bitcoin_body_html: '
@@ -265,7 +257,7 @@ de:
     Weitere erläuterungen können sie auf <strong><a href="http://bitcoin.org/">bitcoin.org</a></strong> finden.
     '
   
-  # informations/support.html.erb
+  # informations/support.html
   support_title: Kontakt
   support_body_html: '
     <p>
@@ -275,6 +267,101 @@ de:
     </p>
     '
   
-  # informations/welcome.html.erb
+  # informations/welcome.html
   trading_data_title: Handelsdaten der letzten Woche
   welcome: Willkommen auf bitcoin-central.net!
+  
+  # layouts/_errors.html
+  # TODO
+  
+  # layouts/_footer.html
+  footer_html: 'Bitte unterstützen sie dieses Projekt indem sie ein paar BTC an folgende Adresse schicken: <span class="bitcoin-address">%{adress}</span>'
+  
+  # layouts/_navigation.html
+  navigation:
+    account:
+      main: Konto
+      balance: Finanzstatus
+      history: Umsätze
+      transfer_money: Überweisung
+      deposit_money: Einzahlung
+    trading:
+      main: Handeln
+      new_order: Neuer Auftrag
+      your_orders: Ihre Aufträge
+      order_book: Auftragsbuch
+      trade_history: Auftragsgeschichte
+    admin:
+      main: Administration
+      transfers: Transaktionen
+    help:
+      main: Hilfe
+      faq: Häufig gestellte Fragen
+      economy: Bitcoin-Markt
+      support: Kontakt
+  
+  # layouts/_user_informations.html
+  generate_new_address_legend: Neue Empfangsadresse generieren
+  your_last_address: Ihre Addresse
+  logout: Ausloggen
+  signed_in_as: Angemeldet als
+  sign_up: Registrieren
+  sign_in: Anmelden
+  
+  # layouts/application.html
+  website_title: Bitcoin Central
+  website_keywords: bitcoin, bitcoin central, bitcoins kaufen, bitcoins verkaufen
+  
+  # sessions/forbidden.html
+  forbidden_title: Sie müssen angemeldet sein um auf diese Seite zuzugreifen
+  forbidden_body_html: Ein Konto zu erstellen ist <strong>schnell</strong>, <strong>anonym</strong> and <strong>einfach</strong>!
+  forbidden_next_steps_html: Vielleicht möchten sie sich <strong><a href="%{login_path}">anmelden</a></strong>
+    oder <strong><a href="%{create_account_path}">ein neues Konto erstellen</a></strong>.
+  
+  # sessions/new.html
+  account_label: Konto-ID
+  account_description: E-Mail-Adresse oder Konto-ID
+  password_label: Passwort
+  password_description: Passwort vergessen?
+  
+  # trade_orders/book.html
+  select_currency: Wählen sie eine Währung aus
+  currency:
+    all: Alle
+    lrusd: LRUSD
+    lreur: LREUR
+    eur: EUR
+    pgau: PGAU
+  buying: Kaufen
+  selling: Verkaufen
+  amount: Menge
+  price: Preis
+  no_buying_orders_found: Es wurden keine Kaufaufträge gefunden.
+  no_selling_orders_found: Es wurden keine Verkaufsaufträge gefunden.
+  
+  # trade_orders/index.html
+  trade_orders: Ihre Aufträge
+  created_at: Erstellt
+  type: Typ
+  amount: Menge
+  price: Preis
+  total: Gesamt
+  dark_pool_order: Dark Pool-Auftrag
+  delete_order: Diesen Auftrag löschen
+  delete_order_confirm: Sind sie sicher, dass sie diesen Auftrag löschen wollen?
+  no_orders_found: Es wurden keine Aufträge gefunden.
+  
+  # trade_orders/new.html
+  # trades/index.html
+  # trades/statistics.html
+  # transfers/_lr_sci_form.html
+  # transfers/_px_sci_form.html
+  # transfers/deposit.html
+  # transfers/index.html
+  # transfers/new.html
+  # user_mailer/registration_confirmation.html
+  # user_mailer/registration_confirmation.text
+  # users/_form.html
+  # users/edit.html
+  # users/index.html
+  # users/new.html

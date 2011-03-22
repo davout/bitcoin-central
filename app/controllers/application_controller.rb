@@ -8,10 +8,10 @@ class ApplicationController < ActionController::Base
 
   before_filter :get_bitcoin_client,
     :move_xml_params,
+    :set_locale,
     :authenticate,
     :authorize,
-    :set_time_zone,
-    :set_locale
+    :set_time_zone
 
   def authenticate
     current_user_id = (session[:current_user_id] or api_authentication)

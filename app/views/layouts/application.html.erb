@@ -4,9 +4,9 @@
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-    <meta name="keywords" lang="en" content="bitcoin, bitcoin central, buy bitcoins, sell bitcoins" />
+    <meta name="keywords" lang="en" content="<%= t :website_keywords %>" />
 
-    <title>Bitcoin Central</title>
+    <title><%= t :website_title %></title>
 
     <%= stylesheet_link_tag %w{reset application jqplot}, :cache => "all" %>
     
@@ -21,7 +21,7 @@
   <body class="<%= request[:controller]%>" id="<%= "#{request[:controller]}-#{request[:action]}" %>">
     <div id="content">
       <h1 id="main-title">
-        <%= link_to "<span>Bitcoin Central</span>".html_safe, root_path %>
+        <%= link_to content_tag(:span, (t :website_title)), root_path %>
       </h1>
 
       <%= render :partial => 'layouts/user_informations' %>
