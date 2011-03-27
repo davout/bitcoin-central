@@ -1,10 +1,10 @@
-<h1>Account history</h1>
+<h1><%= t :account_history %></h1>
 
 <table class="default" id="history">
   <tr>
-    <th>Date</th>
-    <th>Currency</th>
-    <th>Amount</th>
+    <th><%= t :date %></th>
+    <th><%= t :currency %></th>
+    <th><%= t :amount %></th>
   </tr>
 
   <% @transfers.each do |transfer| %>

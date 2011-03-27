@@ -255,6 +255,7 @@ en:
          trade_order:
            ppc: Price
            category: Type
+           amount: Amount
          
          liberty_reserve_transfer:
            lr_account_id: Account ID
@@ -267,15 +268,6 @@ en:
   currency: Currency
   balance: Balance
   balance_unconfirmed: These funds are awaiting confirmation from the bitcoin network
-  currency_btc: BTC
-  currency_btc_legend: Bitcoin
-  currency_lrusd: LRUSD
-  currency_lreur: LREUR
-  currency_lr_legend: Liberty Reserve
-  currency_eur: EUR
-  currency_eur_legend: Cash EUR
-  currency_pgau: PGAU
-  currency_pgau_legend: Pecunix Gold
   
   # backup_mailer/wallet_backup.text
   encrypted_wallet: Encrypted server wallet for %{date}
@@ -308,18 +300,15 @@ en:
   support_title: Support
   support_body_html: '
     <p>
-    Please feel free to send an e-mail to <a href="mailto:support@bitcoin-central.net">support@bitcoin-central.net</a> if you have any questions or comments.
+    Please feel free to send an e-mail to <a href="mailto:%{support_email}">%{support_email}</a> if you have any questions or comments.
     </p><p>
-    Please use PGP encryption <a href="http://pgp.mit.edu:11371/pks/lookup?op=get&search=0x49FA50FC091469DA">(public key)</a>.
+    Please use PGP encryption <a href="%{pgp_link}">(public key)</a>.
     </p>
     '
   
   # informations/welcome.html
   trading_data_title: Last week's trading data
   welcome: Welcome to bitcoin-central.net!
-  
-  # layouts/_errors.html
-  # TODO
   
   # layouts/_footer.html
   footer_html: 'Feel free to support this project by donating a few BTC to <span class="bitcoin-address">%{adress}</span>'
@@ -373,12 +362,17 @@ en:
   
   # trade_orders/book.html
   select_currency: Select a currency
-  currency:
+  currencies:
     all: All
+    btc: BTC
+    btc_legend: Bitcoin
     lrusd: LRUSD
     lreur: LREUR
+    lr_legend: Liberty Reserve
     eur: EUR
+    eur_legend: Cash EUR
     pgau: PGAU
+    pgau_legend: Pecunix Gold
   buying: Buying
   selling: Selling
   amount: Amount
@@ -399,16 +393,124 @@ en:
   no_orders_found: No orders have been found.
   
   # trade_orders/new.html
+  create_order: Create a trade order
+  currency_to_trade: Currency you want to trade
+  buy: Buy
+  sell: Sell
+  sell_or_buy_description: Whether you want to buy or sell bitcoins
+  your_balance: Your balance
+  your_balance_description: Your available confirmed balance
+  amount_description: BTC amount you're trading
+  ### TODO: translate attributes from models seperately
+  ppc_description: Price for 1 BTC  
+  total_description: The total for your order
+  dark_pool_description: Should the order be hidden ?
+  error_creating_order:
+    one: 1 error prevented your trade order from being created
+    other: %{count} errors prevented your trade order from being created
+  
   # trades/index.html
-  # trades/statistics.html
+  trade_history: Trade history
+  date: Date
+  no_trades_found: No trades were found
+  
   # transfers/_lr_sci_form.html
-  # transfers/_px_sci_form.html
+  click_for_lr_html: <a href="#" onclick="%{action}">Click here</a> to be taken to the Liberty Reserve interface, you'll be able to specify the details of your deposit.
+  
   # transfers/deposit.html
+  deposit_bitcoins_title: Deposit Bitcoins
+  deposit_bitcoins_body_html:
+    <p>Simply transfer funds to any of your addresses and they'll show up in your account after a couple of minutes.</p>
+    <p>Please note that you will only be able to use these funds after the bitcoin network has confirmed the transfer (approx. %{estimation} minutes).</p>
+  deposit_eur_title: Deposit EUR
+  deposit_eur_body_html:
+    <p>Please send an e-mail to <a href="mailto:%{support_email}">%{support_email}</a> using PGP encryption <a href="%{pgp_link}">(public key)</a>.</p>
+  deposit_lr_title: Deposit Liberty Reserve
+  deposit_pgau_title: Deposit Pecunix gold
+  deposit_pgau_body_html:
+    <p>
+    Use this form to specify the amount of gold grams to deposit, upon submission
+    you'll be taken to the Pecunix interface to confirm the transfer. Once the transfer
+    is completed, the gold will appear in your balance.
+    </p>
+  amount_pgau: Amount (PGAU)
+  deposit_pgau: Deposit Pecunix
+  
   # transfers/index.html
+  account_history: Account history
+  currency: Currency
+  
   # transfers/new.html
+  transfer_funds: Transfer funds
+  transfer_funds_body_html: "
+    <p>You can send funds to :
+      <ul>
+        <li>a <strong>bitcoin</strong> address (BTC only),</li>
+        <li>an <strong>e-mail</strong> address (all currencies),</li>
+        <li>a <strong>bitcoin central</strong> account (all currencies), or</li>
+        <li>a <strong>Liberty Reserve</strong> account (LREUR and LRUSD only)</li>
+      </ul>
+    </p>
+    "
+  how_does_it_work: How does it work ?
+  how_does_it_work_body_html:
+    <p>
+      Transferring bitcoins is possible to a bitcoin central account or to a bitcoin address,
+      funds will be sent either through the bitcoin network or inside bitcoin central
+      depending on whether the address is owned by a bitcoin central user, transfers
+      to accounts will always happen inside bitcoin central.
+    </p>
+    <p>
+      Transferring any currency to a bitcoin central account is free.
+    </p>
+    <p>
+      Transferring funds to e-mail addresses will simply deduct the funds from your account
+      and notify the payee that they are waiting for him on bitcoin central. If the payee
+      does not collect the funds after a certain amount of time they will be returned to you.
+      <strong>This functionality is not active yet.</strong>
+    </p>
+  error_transferring_funds:
+    one: 1 error prevented your funds from being transferred
+    other: %{count} errors prevented your funds from being transferred
+  payee: Payee
+  payee_id_eur: Bitcoin Central account or e-mail address
+  payee_id_lrusd: Bitcoin Central, Liberty Reserve account or e-mail address
+  payee_id_lreur: Bitcoin Central, Liberty Reserve account or e-mail address
+  payee_id_btc: Bitcoin Central account, e-mail or bitcoin address
+  payee_id_none: Payee identification
+  confirmed_balance: Your confirmed balance
+  transfer_amount: The amount you want to transfer
+  transfer_button: Transfer
+  
   # user_mailer/registration_confirmation.html
   # user_mailer/registration_confirmation.text
+  thanks_for_registering: Thank you for registering at Bitcoin Central.
+  your_account_id_is: "Your account ID is : %{account_id}"
+  bitcoin_central: Bitcoin Central
+  
   # users/_form.html
+  error_updating_account:
+    one: 1 error prevented your account details from being updated
+    other: %{count} errors prevented your account details from being updated
+  email_explanation: Necessary to recover your password
+  new_password_explanation: Use this field only if you want to change your password
+  new_password_confirmation_explanation: New password confirmation
+  current_password_explanation: This is required to protect your account
+  time_zone_explanation: Select your time-zone to get data displayed in local time format
+  
   # users/edit.html
+  account_details: Account details
+  
   # users/index.html
+  listing_users: Listing users
+  account: Account
+  email: Email
+  password: Password
+  user_show: Show
+  user_edit: Edit
+  user_destroy: Destroy
+  user_destroy_confirm: Are you sure?
+  user_new: New User
+  
   # users/new.html
+  sign_up_for_account: Sign-up for an account

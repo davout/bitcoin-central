@@ -1,10 +1,10 @@
-<h1>Listing users</h1>
+<h1><%= t :listing_users %></h1>
 
 <table>
   <tr>
-    <th>Account</th>
-    <th>Email</th>
-    <th>Password</th>
+    <th><%= t :account %></th>
+    <th><%= t :email %></th>
+    <th><%= t :password %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,13 +15,13 @@
     <td><%= user.account %></td>
     <td><%= user.email %></td>
     <td><%= user.password %></td>
-    <td><%= link_to 'Show', user %></td>
-    <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to (t :user_show), user %></td>
+    <td><%= link_to (t :user_edit), edit_user_path(user) %></td>
+    <td><%= link_to (t :user_destroy), user, :confirm => (t :user_destroy_confirm), :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New User', new_user_path %>
+<%= link_to (t :user_new), new_user_path %>

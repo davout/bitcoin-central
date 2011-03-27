@@ -85,14 +85,6 @@ function roundTo(value, precision) {
 }
 
 function updateTransferPayeeExplanation() {
-    transferExplanations = {
-        "EUR"   : "Bitcoin Central account or e-mail address",
-        "LRUSD" : "Bitcoin Central, Liberty Reserve account or e-mail address",
-        "LREUR" : "Bitcoin Central, Liberty Reserve account or e-mail address",
-        "BTC"   : "Bitcoin Central account, e-mail or bitcoin address",
-        "none"  : "Payee identification"
-    }
-
     if (transferExplanations[getSelectedCurrency()]) {
         $("#payee-explanation").html(transferExplanations[getSelectedCurrency()]);
     }

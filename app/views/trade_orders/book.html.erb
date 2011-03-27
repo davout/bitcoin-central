@@ -3,11 +3,11 @@
 <div id="order-book-filter-wrapper" class="form-field">
   <div id="order-book-filter" class="radios">
     <%= form_tag book_account_trade_orders_path, :method => :get do %>
-      <%= radio_button_tag 'currency', 'all', (params[:currency].blank? or (params[:currency] == 'all')), :onclick => "$(this).parents('form').submit()" %> <%= label_tag "currency_all", (t "currency.all") %>
-      <%= radio_button_tag 'currency', 'lrusd', params[:currency] == 'lrusd', :onclick => "$(this).parents('form').submit()" %> <%= label_tag "currency_lrusd", (t "currency.lrusd") %>
-      <%= radio_button_tag 'currency', 'lreur', params[:currency] == 'lreur', :onclick => "$(this).parents('form').submit()" %> <%= label_tag "currency_lreur", (t "currency.lreur") %>
-      <%= radio_button_tag 'currency', 'eur', params[:currency] == 'eur', :onclick => "$(this).parents('form').submit()" %> <%= label_tag "currency_eur", (t "currency.eur") %>
-    <%= radio_button_tag 'currency', 'pgau', params[:currency] == 'pgau', :onclick => "$(this).parents('form').submit()" %> <%= label_tag "currency_pgau", (t "currency.pgau") %>
+      <%= radio_button_tag 'currency', 'all', (params[:currency].blank? or (params[:currency] == 'all')), :onclick => "$(this).parents('form').submit()" %> <%= label_tag "currency_all", (t "currencies.all") %>
+      <%= radio_button_tag 'currency', 'lrusd', params[:currency] == 'lrusd', :onclick => "$(this).parents('form').submit()" %> <%= label_tag "currency_lrusd", (t "currencies.lrusd") %>
+      <%= radio_button_tag 'currency', 'lreur', params[:currency] == 'lreur', :onclick => "$(this).parents('form').submit()" %> <%= label_tag "currency_lreur", (t "currencies.lreur") %>
+      <%= radio_button_tag 'currency', 'eur', params[:currency] == 'eur', :onclick => "$(this).parents('form').submit()" %> <%= label_tag "currency_eur", (t "currencies.eur") %>
+    <%= radio_button_tag 'currency', 'pgau', params[:currency] == 'pgau', :onclick => "$(this).parents('form').submit()" %> <%= label_tag "currency_pgau", (t "currencies.pgau") %>
 
       <%= submit_tag 'Filter', :class => "submit", :id => "order-book-filter-submit" %>
       <script type="text/javascript">

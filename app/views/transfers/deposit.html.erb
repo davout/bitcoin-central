@@ -1,30 +1,25 @@
-<h1>Deposit Bitcoins</h1>
-<p>Simply transfer funds to any of your addresses and they'll show up in your account after a couple of minutes.</p>
-<p>Please note that you will only be able to use these funds after the bitcoin network has confirmed the transfer (approx. <%= Transfer::MIN_BTC_CONFIRMATIONS * 10 %>  minutes).</p>
+<h1><%= t :deposit_bitcoins_title %></h1>
+<%= t :deposit_bitcoins_body_html, :estimation=>Transfer::MIN_BTC_CONFIRMATIONS * 10%>
 
-<h1>Deposit EUR</h1>
-<p>Please send an e-mail to <a href="mailto:support@bitcoin-central.net">support@bitcoin-central.net</a> using PGP encryption <a href="http://pgp.mit.edu:11371/pks/lookup?op=get&search=0x49FA50FC091469DA">(public key)</a>.</p>
+<h1><%= t :deposit_eur_title %></h1>
+<%= t :deposit_eur_body_html, :support_email=>"support@bitcoin-central.net", :pgp_link=>"http://pgp.mit.edu:11371/pks/lookup?op=get&search=0x49FA50FC091469DA" %>
 
-<h1>Deposit Liberty Reserve</h1>
+<h1><%= t :deposit_lr_title %></h1>
 <%= render :partial => 'lr_sci_form' %>
 
-<h1>Deposit Pecunix gold</h1>
-<p>
-  Use this form to specify the amount of gold grams to deposit, upon submission
-  you'll be taken to the Pecunix interface to confirm the transfer. Once the transfer
-  is completed, the gold will appear in your balance.
-</p>
+<h1><%= t :deposit_pgau_title %></h1>
+<%= t :deposit_pgau_body_html %>
 
 <br />
 
 <%= form_tag pecunix_deposit_form_account_transfers_path, :method => :get, :remote => true do %>
   <div class="form-field">
-    <%= label_tag :amount, "Amount (PGAU)" %>
+    <%= label_tag :amount, (t :amount_pgau) %>
     <%= text_field_tag :amount, nil %>
   </div>
 
   <div class="form-field">
-    <%= submit_tag "Deposit Pecunix", :class => "submit" %>
+    <%= submit_tag (t :deposit_pgau), :class => "submit" %>
   </div>
 <% end %>
 

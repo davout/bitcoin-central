@@ -2,7 +2,7 @@
   <%=
     render :partial => 'layouts/errors', :locals => {
       :model => @user,
-      :message => "prevented your account details from being updated"
+      :message => "error_updating_account"
     }
   %>
 
@@ -17,7 +17,7 @@
     <%= f.label :email %>
     <%= f.text_field :email %>
     <div class="explanation">
-      Necessary to recover your password
+      <%= t :email_explanation %>
     </div>
   </div>
 
@@ -26,7 +26,7 @@
     <%= f.password_field :new_password, :autocomplete => "off" %>
     <% unless @user.new_record? %>
       <div class="explanation">
-        Use this field only if you want to change your password
+        <%= t :new_password_explanation %>
       </div>
     <% end %>
   </div>
@@ -36,7 +36,7 @@
     <%= f.password_field :new_password_confirmation, :autocomplete => "off" %>
     <% unless @user.new_record? %>
       <div class="explanation">
-        New password confirmation
+        <%= t :new_password_confirmation_explanation %>
       </div>
     <% end %>
   </div>
@@ -46,7 +46,7 @@
       <%= f.label :current_password %>
       <%= f.password_field :current_password %>
       <div class="explanation">
-        This is required to protect your account
+        <%= t :current_password_explanation %>
       </div>
     </div>
   <% end %>
@@ -55,7 +55,7 @@
     <%= f.label :time_zone %>
     <%= f.time_zone_select :time_zone, nil, :prompt => "--" %>
     <div class="explanation">
-      Select your time-zone to get data displayed in local time format
+      <%= t :time_zone_explanation %>
     </div>
   </div>
 

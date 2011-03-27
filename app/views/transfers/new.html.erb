@@ -1,29 +1,8 @@
-<h1>Transfer funds</h1>
-<p>You can send funds to :
-  <ul>
-    <li>a <strong>bitcoin</strong> address (BTC only),</li>
-    <li>an <strong>e-mail</strong> address (all currencies),</li>
-    <li>a <strong>bitcoin central</strong> account (all currencies), or</li>
-    <li>a <strong>Liberty Reserve</strong> account (LREUR and LRUSD only)</li>
-  </ul>
-</p>
+<h1><%= t :transfer_funds %></h1>
+<%= t :transfer_funds_body_html %>
 
-<h1>How does it work ?</h1>
-<p>
-  Transferring bitcoins is possible to a bitcoin central account or to a bitcoin address,
-  funds will be sent either through the bitcoin network or inside bitcoin central
-  depending on whether the address is owned by a bitcoin central user, transfers
-  to accounts will always happen inside bitcoin central.
-</p>
-<p>
-  Transferring any currency to a bitcoin central account is free.
-</p>
-<p>
-  Transferring funds to e-mail addresses will simply deduct the funds from your account
-  and notify the payee that they are waiting for him on bitcoin central. If the payee
-  does not collect the funds after a certain amount of time they will be returned to you.
-  <strong>This functionality is not active yet.</strong>
-</p>
+<h1><%= t :how_does_it_work %></h1>
+<%= t :how_does_it_work_body_html %>
 
 <br />
 
@@ -31,7 +10,7 @@
   <%=
     render :partial => 'layouts/errors', :locals => {
       :model => @transfer,
-      :message => "prevented your funds from being transferred"
+      :message => "error_transferring_funds"
     }
   %>
 
@@ -39,26 +18,35 @@
     <%= f.label :currency %>
 
     <div class="radios">
-      <%= f.radio_button :currency, "LRUSD", :class => "currency-select trigger-balance-update" %> <%= f.label :currency_lrusd, "LRUSD" %>
-      <%= f.radio_button :currency, "LREUR", :class => "currency-select trigger-balance-update" %> <%= f.label :currency_lreur, "LREUR" %>
-      <%= f.radio_button :currency, "EUR", :class => "currency-select trigger-balance-update" %> <%= f.label :currency_eur, "EUR" %>
-      <%= f.radio_button :currency, "BTC", :class => "currency-select trigger-balance-update" %> <%= f.label :currency_btc, "BTC" %>
+      <%= f.radio_button :currency, "LRUSD", :class => "currency-select trigger-balance-update" %> <%= f.label :currency_lrusd, (t "currencies.lrusd") %>
+      <%= f.radio_button :currency, "LREUR", :class => "currency-select trigger-balance-update" %> <%= f.label :currency_lreur, (t "currencies.lreur") %>
+      <%= f.radio_button :currency, "EUR", :class => "currency-select trigger-balance-update" %> <%= f.label :currency_eur, (t "currencies.eur") %>
+      <%= f.radio_button :currency, "BTC", :class => "currency-select trigger-balance-update" %> <%= f.label :currency_btc, (t "currencies.btc") %>
     </div>
   </div>
 
+  <script type="text/javascript">
+    transferExplanations = {
+        "EUR"   : "<%= t :payee_id_eur %>",
+        "LRUSD" : "<%= t :payee_id_lrusd %>",
+        "LREUR" : "<%= t :payee_id_lreur %>",
+        "BTC"   : "<%= t :payee_id_btc %>",
+        "none"  : "<%= t :payee_id_none %>"
+    }
+  </script>
   <div class="form-field">
-    <%= label_tag :payee %>
+    <%= label_tag :payee, (t :payee) %>
     <%= text_field_tag :payee, params[:payee], :autocomplete => "off" %>
     <div class="explanation" id="payee-explanation"></div>
   </div>
 
   <div class="form-field">
-    <%= label_tag :balance %>
+    <%= label_tag :balance, (t :balance) %>
     <%= text_field_tag :balance, amount_field_value(@current_user.balance(@transfer.currency)),
       :class => "amount",
       :disabled => true %>
     <div class="explanation">
-      Your confirmed balance
+      <%= t :confirmed_balance %>
     </div>
   </div>
 
@@ -66,11 +54,11 @@
     <%= f.label :amount %>
     <%= f.text_field :amount, :value => amount_field_value(@transfer.amount), :autocomplete => "off" %>
     <div class="explanation">
-      The amount you want to transfer
+      <%= t :transfer_amount %>
     </div>
   </div>
 
   <div class="form-field">
-    <%= f.submit :value => "Transfer", :class => "submit" %>
+    <%= f.submit :value => (t :transfer_button), :class => "submit" %>
   </div>
 <% end %>
