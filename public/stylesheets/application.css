@@ -161,6 +161,8 @@ ul#menu > li > a, ul#menu > li > ul > li > a {
     height: 100%;
     display: block;
     width: 100%;
+    position: relative;
+    top: 2px;
 }
 
 ul#menu > li > ul > li > a {
