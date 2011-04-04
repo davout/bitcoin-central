@@ -22,7 +22,7 @@ class TransfersController < ApplicationController
     Transfer.transaction do
       if @transfer.save
         redirect_to account_transfers_path,
-          :notice => "You successfuly transferred #{@transfer.amount.abs} #{@transfer.currency}"
+          :notice => (t :successful_transfer, :amount=>@transfer.amount.abs, :currency=>@transfer.currency)
       else
         render :action => :new
       end

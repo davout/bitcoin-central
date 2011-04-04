@@ -13,11 +13,15 @@ class TradeOrdersController < ApplicationController
       result = @trade_order.execute!
 
       if result[:trades].zero?
-        notice = "Your order has been saved but no compatible orders have been found yet"
+        notice = (t :order_saved)
       else
-        notice = "Your order was #{@trade_order.destroyed? ? "completely" : "partially"} filled, 
-          you #{@trade_order.buying? ? "bought" : "sold"} #{"%.4f" % result[:total_traded_btc]} BTC
-          for #{"%.4f" % result[:total_traded_currency]} #{result[:currency]} @ #{"%.5f" % result[:ppc]} #{result[:currency]}/BTC"
+        notice = (t :order_filled,
+          :how => (t @trade_order.destroyed? ? :completely : :partially),
+          :action => (t @trade_order.buying? ? :bought : :sold),
+          :traded_btc => ("%.4f" % result[:total_traded_btc]),
+          :amount => ("%.4f" % result[:total_traded_currency]),
+          :currency => (result[:currency]),
+          :ppc => ("%.5f" % result[:ppc]))
       end
 
       redirect_to account_trade_orders_path,
@@ -35,7 +39,7 @@ class TradeOrdersController < ApplicationController
     @current_user.trade_orders.find(params[:id]).destroy
 
     redirect_to account_trade_orders_path,
-      :notice => "Trade order deleted successfully"
+      :notice => (t :order_deleted)
   end
 
   def book

@@ -251,69 +251,102 @@ en:
 
     # Translate model attribute names. Used in Model.human_attribute_name(attribute).
     attributes:
-      # For example,
-         trade_order:
-           ppc: Price
-           category: Type
-           amount: Amount
-         
-         liberty_reserve_transfer:
-           lr_account_id: Account ID
-
-         user:
-           new_password_confirmation: Confirmation
+      trade_order:
+        ppc: Price
+        category: Type
+      liberty_reserve_transfer:
+        lr_account_id: Account ID
   
-  # accounts/show.html
-  account: Account
+  # controllers/informations_controller.rb
+  chart_date_format: %m/%d
+  
+  # controllers/sessions_controller.rb
+  sign_in_success: You logged-in successfully to your account.
+  sign_in_failure: Authentication failed, check your credentials and the captcha answer
+  sign_out_success: You logged out successfully
+  
+  # controllers/third_party_callbacks_controller.rb
+  lr_transfer_success: "Successfully added %{amount} %{currency} to your account (LR fees : %{fee} %{currency})"
+  lr_transfer_failure: Your %{amount} %{currency} transfer failed.
+  px_transfer_canceled: Your Pecunix transfer was canceled
+  px_transfer_success: You successfully transferred %{amount} PGAU to your account (Pecunix charged a %{fee} PGAU fee)
+  
+  # controllers/trade_orders_controller.rb
+  order_saved: Your order has been saved but no compatible orders have been found yet
+  order_filled: Your order was %{how} filled, you %{action} %{traded_btc} BTC for %{amount} %{currency} @ %{ppc} %{currency}/BTC
+  bought: bought
+  sold: sold
+  partially: partially
+  completely: completely
+  order_deleted: Trade order deleted successfully
+  
+  # controllers/transfers_controller.rb
+  successful_transfer: You successfuly transferred %{amount} %{currency}
+  
+  # controllers/user_controller.rb
+  account_created: Your account was successfully created
+  account_updated: Your account was successfully updated
+  
+  # helpers/trade_orders_helper.rb
+  order_dark_pool_some: Some of these orders don't appear in the public order book
+  order_dark_pool: This order doesn't appear in the public order book
+  
+  # helpers/transfers_helper.rb
+  confirmations_left:
+    one: 1 confirmation left
+    other: %{count} confirmations left
+  
+  # mailers/backup_mailer.rb
+  support_from: Bitcoin Central support <%{support_email}>
+  wallet_backup_subject: Wallet backup %{date}
+  
+  # mailers/user_mailer.rb
+  sign_up_confirmation: Registration confirmation
+  
+  # models/*.rb + lib/validators/*.rb
+  errors:
+    not_yourself: cannot be yourself
+    
+    blank: can't be blank
+    
+    must_be_greater: must be greater than %{min} BTC
+    greater_than_balance: is greater than your available balance (%{balance} %{currency})
+    greater_than_capacity: is greater than your buying capacity (%{capacity} BTC @ %{ppc} BTC/%{currency})
+    minimum_dark_pool_order: orders must have a 3,000 BTC minimal amount
+    
+    invalid: is invalid
+    no_match: doesn't match its confirmation
+    answer_incorrect: answer is incorrect
+    
+    not_your_address: can't be one of your addresses
+    min_amount: should not be smaller than %{minimum} %{currency}
+    ppc_minimum: Price per coin should not be smaller than 0.0001 %{currency}
+  
+  # views/accounts/show.html
+  account_balance_title: Account
   currency: Currency
   balance: Balance
   balance_unconfirmed: These funds are awaiting confirmation from the bitcoin network
   
-  # backup_mailer/wallet_backup.text
+  # views/backup_mailer/wallet_backup.text
   encrypted_wallet: Encrypted server wallet for %{date}
   
-  # informations/economy.html
+  # views/informations/economy.html
   economy_title: Bitcoin economy summarized
   how_many_generated: How many bitcoins are there ?
   generated_coins_html: Currently there has been a total of <strong>%{count}</strong> generated bitcoins.
   
-  # informations/faq.html
+  # views/informations/faq.html
   faq_title: Frequently asked questions
-  what_is_bitcoin: What is Bitcoin?
-  what_is_bitcoin_body_html: '
-    Bitcoin is a peer-to-peer digital currency. Peer-to-peer means that there is no central authority to issue new money or keep track of transactions. Instead, these tasks are managed collectively by the nodes of the network. Advantages:
-    <ul>
-      <li>
-        Bitcoins can be sent easily through the Internet, without having to trust middlemen.
-      </li>
-      <li>
-        Transactions are designed to be irreversible.
-      </li>
-      <li>
-        Be safe from instability caused by fractional reserve banking and central banks. The limited inflation of the Bitcoin system’s money supply is distributed evenly (by CPU power) throughout the network, not monopolized by banks.
-      </li>
-    </ul>
-    More detailed explanations can be found at <strong><a href="http://bitcoin.org/">bitcoin.org</a></strong>.
-    '
   
-  # informations/support.html
-  support_title: Support
-  support_body_html: '
-    <p>
-    Please feel free to send an e-mail to <a href="mailto:%{support_email}">%{support_email}</a> if you have any questions or comments.
-    </p><p>
-    Please use PGP encryption <a href="%{pgp_link}">(public key)</a>.
-    </p>
-    '
-  
-  # informations/welcome.html
+  # views/informations/welcome.html
   trading_data_title: Last week's trading data
   welcome: Welcome to bitcoin-central.net!
   
-  # layouts/_footer.html
+  # views/layouts/_footer.html
   footer_html: 'Feel free to support this project by donating a few BTC to <span class="bitcoin-address">%{adress}</span>'
   
-  # layouts/_navigation.html
+  # views/layouts/_navigation.html
   navigation:
     account:
       main: Account
@@ -336,7 +369,7 @@ en:
       economy: Economy
       support: Support
   
-  # layouts/user_informations.html
+  # views/layouts/user_informations.html
   generate_new_address_legend: Generate a new receiving address, refresh at will
   your_last_address: Your address
   logout: Logout
@@ -344,24 +377,19 @@ en:
   sign_up: Sign-up
   sign_in: Login
   
-  # layouts/application.html
+  # views/layouts/application.html
   website_title: Bitcoin Central
   website_keywords: bitcoin, bitcoin central, buy bitcoins, sell bitcoins
   
-  # sessions/forbidden.html
-  forbidden_title: You must be logged-in to access this page
-  forbidden_body_html: Creating an account is <strong>fast</strong>, <strong>anonymous</strong> and <strong>painless</strong> !
-  forbidden_next_steps_html: You might want to <strong><a href="%{login_path}">login</a></strong>
-    or <strong><a href="%{create_account_path}">create an account</a></strong>.
-  
-  # sessions/new.html
+  # views/sessions/new.html
   account_label: Account ID
   account_description: E-mail address or account ID
   password_label: Password
   password_description: Password forgotten?
+  sign_in_submit: Sign-in
   
-  # trade_orders/book.html
-  select_currency: Select a currency
+  # views/trade_orders/book.html
+  order_book_title: Select a currency
   currencies:
     all: All
     btc: BTC
@@ -380,11 +408,10 @@ en:
   no_buying_orders_found: No buying orders have been found.
   no_selling_orders_found: No selling orders have been found.
   
-  # trade_orders/index.html
-  trade_orders: Trade orders
+  # views/trade_orders/index.html
+  trade_orders_title: Trade orders
   created_at: Created at
   type: Type
-  amount: Amount
   price: Price
   total: Total
   dark_pool_order: Dark pool order
@@ -392,32 +419,33 @@ en:
   delete_order_confirm: Are you sure you want to delete this trade order ?
   no_orders_found: No orders have been found.
   
-  # trade_orders/new.html
-  create_order: Create a trade order
+  # views/trade_orders/new.html
+  create_order_title: Create a trade order
   currency_to_trade: Currency you want to trade
+  category: Category
   buy: Buy
   sell: Sell
   sell_or_buy_description: Whether you want to buy or sell bitcoins
   your_balance: Your balance
   your_balance_description: Your available confirmed balance
   amount_description: BTC amount you're trading
-  ### TODO: translate attributes from models seperately
   ppc_description: Price for 1 BTC  
   total_description: The total for your order
   dark_pool_description: Should the order be hidden ?
   error_creating_order:
-    one: 1 error prevented your trade order from being created
-    other: %{count} errors prevented your trade order from being created
+    one: "1 error prevented your trade order from being created :"
+    other: "%{count} errors prevented your trade order from being created :"
   
-  # trades/index.html
-  trade_history: Trade history
+  # views/trades/index.html
+  trade_history_title: Trade history
   date: Date
   no_trades_found: No trades were found
   
-  # transfers/_lr_sci_form.html
+  # views/transfers/_lr_sci_form.html
   click_for_lr_html: <a href="#" onclick="%{action}">Click here</a> to be taken to the Liberty Reserve interface, you'll be able to specify the details of your deposit.
   
-  # transfers/deposit.html
+  # views/transfers/deposit.html
+  support_email: "support@bitcoin-central.net"
   deposit_bitcoins_title: Deposit Bitcoins
   deposit_bitcoins_body_html:
     <p>Simply transfer funds to any of your addresses and they'll show up in your account after a couple of minutes.</p>
@@ -436,12 +464,12 @@ en:
   amount_pgau: Amount (PGAU)
   deposit_pgau: Deposit Pecunix
   
-  # transfers/index.html
-  account_history: Account history
+  # views/transfers/index.html
+  account_history_title: Account history
   currency: Currency
   
-  # transfers/new.html
-  transfer_funds: Transfer funds
+  # views/transfers/new.html
+  transfer_funds_title: Transfer funds
   transfer_funds_body_html: "
     <p>You can send funds to :
       <ul>
@@ -452,7 +480,7 @@ en:
       </ul>
     </p>
     "
-  how_does_it_work: How does it work ?
+  how_does_it_work_title: How does it work ?
   how_does_it_work_body_html:
     <p>
       Transferring bitcoins is possible to a bitcoin central account or to a bitcoin address,
@@ -470,8 +498,8 @@ en:
       <strong>This functionality is not active yet.</strong>
     </p>
   error_transferring_funds:
-    one: 1 error prevented your funds from being transferred
-    other: %{count} errors prevented your funds from being transferred
+    one: "1 error prevented your funds from being transferred :"
+    other: "%{count} errors prevented your funds from being transferred :"
   payee: Payee
   payee_id_eur: Bitcoin Central account or e-mail address
   payee_id_lrusd: Bitcoin Central, Liberty Reserve account or e-mail address
@@ -482,29 +510,30 @@ en:
   transfer_amount: The amount you want to transfer
   transfer_button: Transfer
   
-  # user_mailer/registration_confirmation.html
-  # user_mailer/registration_confirmation.text
+  # views/user_mailer/registration_confirmation.html
+  # views/user_mailer/registration_confirmation.text
   thanks_for_registering: Thank you for registering at Bitcoin Central.
   your_account_id_is: "Your account ID is : %{account_id}"
-  bitcoin_central: Bitcoin Central
   
-  # users/_form.html
+  # views/users/_form.html
   error_updating_account:
-    one: 1 error prevented your account details from being updated
-    other: %{count} errors prevented your account details from being updated
+    one: "1 error prevented your account details from being updated :"
+    other: "%{count} errors prevented your account details from being updated :"
+  email: Email
   email_explanation: Necessary to recover your password
   new_password_explanation: Use this field only if you want to change your password
+  new_password_confirmation: Confirmation
   new_password_confirmation_explanation: New password confirmation
   current_password_explanation: This is required to protect your account
-  time_zone_explanation: Select your time-zone to get data displayed in local time format
+  time_zone: Time zone
+  time_zone_explanation: Select your time-zone to get data display
   
-  # users/edit.html
-  account_details: Account details
+  # views/users/edit.html
+  account_details_title: Account details
   
-  # users/index.html
-  listing_users: Listing users
+  # views/users/index.html
+  listing_users_title: Listing users
   account: Account
-  email: Email
   password: Password
   user_show: Show
   user_edit: Edit
@@ -512,5 +541,5 @@ en:
   user_destroy_confirm: Are you sure?
   user_new: New User
   
-  # users/new.html
-  sign_up_for_account: Sign-up for an account
+  # views/users/new.html
+  sign_up_for_account_title: Sign-up for an account

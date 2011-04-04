@@ -8,13 +8,13 @@
 
   <% unless @user.new_record? %>
     <div class="form-field">
-      <%= f.label :account %>
+      <%= label_tag :account, (t :account) %>
       <%= f.text_field :account, :disabled => true %>
     </div>
   <% end %>
 
   <div class="form-field">
-    <%= f.label :email %>
+    <%= label_tag :email, (t :email) %>
     <%= f.text_field :email %>
     <div class="explanation">
       <%= t :email_explanation %>
@@ -32,7 +32,7 @@
   </div>
 
   <div class="form-field">
-    <%= f.label :new_password_confirmation %>
+    <%= label_tag :new_password_confirmation, (t :new_password_confirmation) %>
     <%= f.password_field :new_password_confirmation, :autocomplete => "off" %>
     <% unless @user.new_record? %>
       <div class="explanation">
@@ -52,7 +52,7 @@
   <% end %>
 
   <div class="form-field">
-    <%= f.label :time_zone %>
+    <%= label_tag :time_zone, (t :time_zone) %>
     <%= f.time_zone_select :time_zone, nil, :prompt => "--" %>
     <div class="explanation">
       <%= t :time_zone_explanation %>

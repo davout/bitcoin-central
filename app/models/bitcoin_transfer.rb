@@ -12,7 +12,7 @@ class BitcoinTransfer < Transfer
   # An address is only mandatory when money is withdrawn
   validate :address do
     if (amount and amount <= 0) and payee_id.nil? # Outgoing bitcoin transfer
-      errors[:address] << "can't be blank" if address.blank?
+      errors[:address] << (I18n.t "errors.blank") if address.blank?
     end
   end
 

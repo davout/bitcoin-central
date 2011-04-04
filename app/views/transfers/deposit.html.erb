@@ -2,7 +2,7 @@
 <%= t :deposit_bitcoins_body_html, :estimation=>Transfer::MIN_BTC_CONFIRMATIONS * 10%>
 
 <h1><%= t :deposit_eur_title %></h1>
-<%= t :deposit_eur_body_html, :support_email=>"support@bitcoin-central.net", :pgp_link=>"http://pgp.mit.edu:11371/pks/lookup?op=get&search=0x49FA50FC091469DA" %>
+<%= t :deposit_eur_body_html, :support_email=>(t :support_email), :pgp_link=>"http://pgp.mit.edu:11371/pks/lookup?op=get&search=0x49FA50FC091469DA" %>
 
 <h1><%= t :deposit_lr_title %></h1>
 <%= render :partial => 'lr_sci_form' %>

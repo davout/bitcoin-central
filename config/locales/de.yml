@@ -192,93 +192,119 @@ de:
 
     # bitcoin-central specific
     attributes:
-       trade_order:
-         ppc: Preis
-         category: Kategorie
-         amount: Betrag
-         currency: Währung
-         total: Gesamtbetrag
-         dark_pool: Dark Pool
+      liberty_reserve_transfer:
+        lr_account_id: Liberty Reserve Kontonummer
+      trade_order:
+        amount: Betrag
+        dark_pool: Dark Pool
+        ppc: Preis
+        category: Typ
+        currency: Währung
+        total: Gesamtbetrag
+      transfer:
+        amount: Betrag
+        address: Empfängeradresse
+        currency: Währung
 
-       liberty_reserve_transfer:
-         lr_account_id: Kontonummer
-
-       user:
-         email: E-Mail-Adresse
-         new_password: Neues Passwort
-         new_password_confirmation: Passwort wiederholen
-         time_zone: Zeitzone
-         account: Konto
-         current_password: Aktuelles Passwort
-
-       transfer:
-         currency: Währung
-         amount: Betrag
-         
-
+      user:
+        current_password: Aktuelles Passwort
+        new_password: Neues Passwort
+    
     models:
       user: Benutzerkonto
       trade_order: Auftrag
       transfer: Überweisung
   
-  # accounts/show.html
-  account: Finanzstatus
+  # controllers/informations_controller.rb
+  chart_date_format: %d.%m.
+  
+  # controllers/sessions_controller.rb
+  sign_in_success: Sie haben sich erfolgreich angemeldet.
+  sign_in_failure: Anmeldung fehlgeschlagen, bitte überprüfen sie ihre Anmeldedaten.
+  sign_out_success: Sie haben sich erfolgreich abgemeldet.
+
+  # controllers/third_party_callbacks_controller.rb
+  lr_transfer_success: "Sie haben erfolgreich %{amount} %{currency} auf ihr Konto eingezahlt (LR Gebühr: %{fee} %{currency})"
+  lr_transfer_failure: Ihre Überweisung von %{amount} %{currency} ist fehlgeschlagen.
+  px_transfer_canceled: Ihre Pecunix-Überweisung wurde abgebrochen.
+  px_transfer_success: Sie haben erfolgreich %{amount} PGAU auf ihr Konto eingezahlt (Pecunix erhob eine Gebühr von %{fee} PGAU).
+  
+  # controllers/trade_orders_controller.rb
+  order_saved: Ihr Auftrag wurde gespeichert, aber es wurden noch keine passenden Angebote gefunden.
+  order_filled: Ihr Auftrag wurde %{how} erfüllt, sie haben %{traded_btc} BTC für %{amount} %{currency} bei %{ppc} %{currency}/BTC %{action}
+  bought: gekauft
+  sold: verkauft
+  partially: teilweise
+  completely: vollständig
+  order_deleted: Auftrag erfolgreich gelöscht
+  
+  # controllers/transfers_controller.rb
+  successful_transfer: Sie haben erfolgreich %{amount} %{currency} überwiesen.
+  
+  # controllers/user_controller.rb
+  account_created: Ihr Konto wurde erfolgreich erstellt
+  account_updated: Ihr Konto wurde erfolgreich aktualisiert
+  
+  # helpers/trade_orders_helper.rb
+  order_dark_pool_some: Einige dieser Aufträge erscheinen nicht im öffentlichen Auftragsbuch
+  order_dark_pool: Dieser Auftrag erscheint nicht im öffentlichen Auftragsbuch
+  
+  # helpers/transfers_helper.rb
+  confirmations_left:
+    one: Eine Bestätigung ausstehend
+    other: %{count} Bestätigungen ausstehend
+  
+  # mailers/backup_mailer.rb
+  support_from: Bitcoin Central Support <%{support_email}>
+  wallet_backup_subject: Backup ihrer Brieftasche vom %{date}
+  
+  # mailers/user_mailer.rb
+  sign_up_confirmation: Registrierungsbestätigung
+  
+  # models/*.rb + lib/validators/*.rb
+  errors:
+    not_yourself: können nicht sie selbst sein
+    
+    blank: darf nicht leer sein
+    
+    must_be_greater: muss größer als %{min} BTC sein
+    greater_than_balance: ist größer als ihr Kontostand (%{balance} %{currency})
+    greater_than_capacity: ist größer als ihr Kontostand (%{capacity} BTC bei %{ppc} BTC/%{currency})
+    minimum_dark_pool_order: Aufträge müssen einen Mindestbetrag von 3.000 BTC haben
+    
+    invalid: ist nicht korrekt
+    no_match: stimmt nicht mit der Wiederholung überein
+    answer_incorrect: ist nicht korrekt
+    
+    not_your_address: kann nicht eine ihrer eigenen sein
+    min_amount: sollte nicht kleiner sein als %{minimum} %{currency}
+    ppc_minimum: Price per coin should not be smaller than 0.0001 %{currency}
+  
+  # views/accounts/show.html
+  account_balance_title: Finanzstatus
   currency: Währung
   balance: Kontostand
   balance_unconfirmed: Diese Umsätze wurden noch nicht vom Bitcoin-Netzwerk bestätigt.
   
-  # backup_mailer/wallet_backup.text
+  # views/backup_mailer/wallet_backup.text
   encrypted_wallet: Verschlüsselte Brieftasche auf dem Server für %{date}
   
-  # informations/economy.html
+  # views/informations/economy.html
   economy_title: Bitcoin-Markt
   how_many_generated: Wie viele Bitcoins gibt es?
   generated_coins_html: Bis jetzt wurden insgesamt <strong>%{count}</strong> Bitcoins generiert.
   
-  # informations/faq.html
+  # views/informations/faq.html
   faq_title: Häufig gestellte Fragen
-  what_is_bitcoin: Was ist Bitcoin?
-  what_is_bitcoin_body_html: '
-    Bitcoin ist eine digitale Peer-to-Peer Währung. Peer-to-Peer bedeutet, dass es keine zentrale
-    Authorität gibt die neues Geld ausgibt oder Transaktionen überwacht. Stattdessen werden diese
-    Aufgaben gemeinsam durch die Teilnehmer des Netzwerks durchgeführt.
-    Das hat folgende Vorteile:
-    <ul>
-      <li>
-        Bitcoins können einfach über das Internet verschickt werden ohne Dienstleistern vertrauen
-        zu müssen.
-      </li>
-      <li>
-        Transaktionen können nicht widerrufen werden.
-      </li>
-      <li>
-        Sie sind sicher vor möglichen Krisen, die durch das partielle Reservesystem und
-        Zentralbanken verursacht werden können. Die begrenzte Steigerung der Geldmenge im Bitcoin-System
-        wird gerecht (nach Leistung des Prozessors) auf das  Netzwerk verteilt und nicht nur
-        durch Banken.
-      </li>
-    </ul>
-    Weitere erläuterungen können sie auf <strong><a href="http://bitcoin.org/">bitcoin.org</a></strong> finden.
-    '
   
-  # informations/support.html
-  support_title: Kontakt
-  support_body_html: '
-    <p>
-    Bitte schicken sie E-Mails mit Fragen oder Anregungen (in englisch) an <a href="mailto:%{support_email}">%{support_email}</a>.
-    </p><p>
-    Bitte verwenden sie PGP-Verschlüsselung <a href="{pgp_link}">(öffentlicher Schlüssel)</a>.
-    </p>
-    '
-  
-  # informations/welcome.html
+  # views/informations/welcome.html
   trading_data_title: Handelsdaten der letzten Woche
   welcome: Willkommen auf bitcoin-central.net!
   
-  # layouts/_footer.html
+  # views/layouts/_footer.html
   footer_html: 'Bitte unterstützen sie dieses Projekt indem sie ein paar BTC an folgende Adresse schicken: <span class="bitcoin-address">%{adress}</span>'
   
-  # layouts/_navigation.html
+  # views/layouts/_navigation.html
   navigation:
     account:
       main: Konto
@@ -293,7 +319,7 @@ de:
       order_book: Auftragsbuch
       trade_history: Auftragsgeschichte
     admin:
-      main: Administration
+      main: Admin
       transfers: Transaktionen
     help:
       main: Hilfe
@@ -301,7 +327,7 @@ de:
       economy: Bitcoin-Markt
       support: Kontakt
   
-  # layouts/_user_informations.html
+  # views/layouts/_user_informations.html
   generate_new_address_legend: Neue Empfangsadresse generieren
   your_last_address: Ihre Addresse
   logout: Ausloggen
@@ -309,24 +335,19 @@ de:
   sign_up: Registrieren
   sign_in: Anmelden
   
-  # layouts/application.html
+  # views/layouts/application.html
   website_title: Bitcoin Central
   website_keywords: bitcoin, bitcoin central, bitcoins kaufen, bitcoins verkaufen
   
-  # sessions/forbidden.html
-  forbidden_title: Sie müssen angemeldet sein um auf diese Seite zuzugreifen
-  forbidden_body_html: Ein Konto zu erstellen ist <strong>schnell</strong>, <strong>anonym</strong> and <strong>einfach</strong>!
-  forbidden_next_steps_html: Vielleicht möchten sie sich <strong><a href="%{login_path}">anmelden</a></strong>
-    oder <strong><a href="%{create_account_path}">ein neues Konto erstellen</a></strong>.
-  
-  # sessions/new.html
+  # views/sessions/new.html
   account_label: Konto-ID
   account_description: E-Mail-Adresse oder Konto-ID
   password_label: Passwort
   password_description: Passwort vergessen?
+  sign_in_submit: Anmelden
   
-  # trade_orders/book.html
-  select_currency: Wählen sie eine Währung aus
+  # views/trade_orders/book.html
+  order_book_title: Wählen sie eine Währung aus
   currencies:
     all: Alle
     btc: BTC
@@ -340,25 +361,24 @@ de:
     pgau_legend: Pecunix Gold
   buying: Kaufen
   selling: Verkaufen
-  amount: Menge
+  amount: Betrag
   price: Preis
   no_buying_orders_found: Es wurden keine Kaufaufträge gefunden.
   no_selling_orders_found: Es wurden keine Verkaufsaufträge gefunden.
+  total: Gesamtbetrag
   
-  # trade_orders/index.html
-  trade_orders: Ihre Aufträge
+  # views/trade_orders/index.html
+  trade_orders_title: Ihre Aufträge
   created_at: Erstellt
   type: Typ
-  amount: Betrag
   price: Preis
-  total: Gesamtbetrag
   dark_pool_order: Dark Pool-Auftrag
   delete_order: Diesen Auftrag löschen
   delete_order_confirm: Sind sie sicher, dass sie diesen Auftrag löschen wollen?
   no_orders_found: Es wurden keine Aufträge gefunden.
   
-  # trade_orders/new.html
-  create_order: Neuer Auftrag
+  # views/trade_orders/new.html
+  create_order_title: Neuer Auftrag
   currency_to_trade: Zu handelnde Währung
   buy: Kaufen
   sell: Verkaufen
@@ -366,24 +386,23 @@ de:
   your_balance: Kontostand
   your_balance_description: Ihr bestätigter Kontostand
   amount_description: Der zu handelnde BTC-Betrag
-  ### TODO: translate attributes from models seperately
   ppc_description: Preis für 1 BTC
   total_description: Der Gesamtbetrag des Auftrags
   dark_pool_description: Soll der Auftrag vom Markt verborgen werden?
   error_creating_order:
-    one: 1 Fehler verhinderte, dass ihr Auftrag erstellt werden konnte
-    other: %{count} Fehler verhinderten, dass ihr Auftrag erstellt werden konnte
+    one: "Ein Fehler verhinderte, dass ihr Auftrag erstellt werden konnte:"
+    other: "%{count} Fehler verhinderten, dass ihr Auftrag erstellt werden konnte:"
   
-  # trades/index.html
-  trade_history: Auftragsgeschichte
+  # views/trades/index.html
+  trade_history_title: Auftragsgeschichte
   date: Datum
   no_trades_found: Es wurden keine Aufträge gefunden.
-  ### TODO: trades != trade orders!!!
   
-  # transfers/_lr_sci_form.html
+  # views/transfers/_lr_sci_form.html
   click_for_lr_html: Klicken sie <a href="#" onclick="%{action}">hier</a> um zur Liberty Reserve-Website zu gelangen um die Einzahlung vorzunehmen.
   
-  # transfers/deposit.html
+  # views/transfers/deposit.html
+  support_email: support@bitcoin-central.net
   deposit_bitcoins_title: Bitcoins einzahlen
   deposit_bitcoins_body_html:
     <p>Führen sie eine Überweisung an eine beliebige ihrer Adressen durch und das Geld wird nach ein paar Minuten auf ihrem Konto verfügbar sein.</p>
@@ -401,13 +420,12 @@ de:
   amount_pgau: Betrag (PGAU)
   deposit_pgau: Pecunix Gold einzahlen
   
-  # transfers/index.html
-  account_history: Umsätze
-  ### TODO: mit nav zusammenfassen??
+  # views/transfers/index.html
+  account_history_title: Umsätze
   currency: Währung
   
-  # transfers/new.html
-  transfer_funds: Überweisung
+  # views/transfers/new.html
+  transfer_funds_title: Überweisung
   transfer_funds_body_html: "
     <p>Sie können Geld überweisen an:
       <ul>
@@ -418,7 +436,7 @@ de:
       </ul>
     </p>
     "
-  how_does_it_work: Wie funktioniert das?
+  how_does_it_work_title: Wie funktioniert es?
   how_does_it_work_body_html:
     <p>
       Bitcoins lassen sich an ein Bitcoin Central Konto oder eine Bitcoin-Adresse überweisen.
@@ -437,8 +455,8 @@ de:
       <strong>Diese Funktionalität ist noch nicht aktiv.</strong>
     </p>
   error_transferring_funds:
-    one: 1 Fehler verhinderte, dass ihre Überweisung erfolgreich abgeschlossen werden konnte
-    other: %{count} Fehler verhinderten, dass ihre Überweisung erfolgreich abgeschlossen werden konnte
+    one: "Ein Fehler verhinderte, dass ihre Überweisung erfolgreich abgeschlossen werden konnte:"
+    other: "%{count} Fehler verhinderten, dass ihre Überweisung erfolgreich abgeschlossen werden konnte:"
   payee: Empfänger
   payee_id_eur: Bitcoin Central Konto oder E-Mail-Adresse
   payee_id_lrusd: Bitcoin Central, Liberty Reserve Konto oder E-Mail-Adresse
@@ -449,29 +467,30 @@ de:
   transfer_amount: Der zu überweisende Betrag
   transfer_button: Überweisung durchführen
   
-  # user_mailer/registration_confirmation.html
-  # user_mailer/registration_confirmation.text
+  # views/user_mailer/registration_confirmation.html
+  # views/user_mailer/registration_confirmation.text
   thanks_for_registering: Vielen Dank, dass sie sich bei Bitcoin Central registriert haben.
   your_account_id_is: "Ihre Konto-ID ist: %{account_id}"
-  bitcoin_central: Bitcoin Central
 
-  # users/_form.html
+  # views/users/_form.html
   error_updating_account:
-    one: 1 Fehler verhinderte, dass das Benutzerkonto aktualisiert werden konnte
-    other: %{count} Fehler verhinderten, dass das Benutzerkonto aktualisiert werden konnte
+    one: "Ein Fehler verhinderte, dass das Benutzerkonto aktualisiert werden konnte:"
+    other: "%{count} Fehler verhinderten, dass das Benutzerkonto aktualisiert werden konnte:"
+  email: E-Mail
   email_explanation: Erforderlich um ihr Passwort wiederherzustellen
   new_password_explanation: Verwenden sie dieses Feld nur wenn sie ihr Passwort ändern wollen
+  new_password_confirmation: Passwort wiederholen
   new_password_confirmation_explanation: Bestätigung des neuen Passwortes
   current_password_explanation: Dies ist erforderlich um ihr Konto zu schützen
+  time_zone: Zeitzone
   time_zone_explanation: Wählen sie ihre Zeitzone
   
-  # users/edit.html
-  account_details: Kontodetails
+  # views/users/edit.html
+  account_details_title: Kontodetails
   
-  # users/index.html
-  listing_users: Registrierte Benutzer
+  # views/users/index.html
+  listing_users_title: Registrierte Benutzer
   account: Konto
-  email: E-Mail
   password: Passwort
   user_show: Anzeigen
   user_edit: Bearbeiten
@@ -479,5 +498,5 @@ de:
   user_destroy_confirm: Sind sie sicher?
   user_new: Neuen Benutzer anlegen
   
-  # users/new.html
-  sign_up_for_account: Neues Benutzerkonto erstellen
+  # views/users/new.html
+  sign_up_for_account_title: Neues Benutzerkonto erstellen

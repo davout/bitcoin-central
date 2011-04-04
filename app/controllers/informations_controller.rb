@@ -43,8 +43,7 @@ class InformationsController < ApplicationController
         },
         :xaxis => {
           :tickOptions => {
-            # TODO : Take locale into account
-            :formatString => "%m/%d"
+            :formatString => (t :chart_date_format)
           },
           :tickInterval => "1 day"
         }
