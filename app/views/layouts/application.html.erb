@@ -9,6 +9,16 @@
     <title><%= t :website_title %></title>
 
     <%= stylesheet_link_tag %w{reset application jqplot}, :cache => "all" %>
+    <style type="text/css">
+      h1#main-title a {
+        background-image: url('/images/bitcoin.<%= I18n.locale %>.png');
+        background-repeat: no-repeat;
+        display: block;
+        width: 300px;
+        height: 60px;
+      }
+    </style>
+
     
     <%= javascript_include_tag :defaults, :cache => "all" %>
 
