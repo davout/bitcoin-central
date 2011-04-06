@@ -16,7 +16,7 @@
     <% @trade_orders.each do |to| %>
       <tr<%= " class=\"inactive\"" unless to.active? %>>
         <td><%= l to.created_at %></td>
-        <td><%= to.category.capitalize %></td>
+        <td><%= t to.category %></td>
         <td class="amount"><%= number_to_bitcoins to.amount, :precision => 4 %></td>
         <td class="amount"><%= "#{number_to_currency(to.ppc, :unit => "", :precision => 5)} #{to[:currency] + ("&nbsp;" * (5 - to[:currency].size))}".html_safe %></td>
         <td class="amount"><%= "#{number_to_currency(to.ppc * to.amount, :unit => "", :precision => 4)} #{to[:currency] + ("&nbsp;" * (5 - to[:currency].size))}".html_safe %></td>
