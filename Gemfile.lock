@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/davout/recaptcha.git
-  revision: 2e3bfac0a0e29dcbd0e77262d54264949df1d8d6
+  revision: e31aced0f46bcd7f806903502c0bb745493a8e94
   specs:
     recaptcha (0.2.3)
 
