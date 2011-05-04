@@ -101,10 +101,20 @@ h1#main-title a span{
     display: none;
 }
 
+/* Locale selection */
+div#locale-select {
+    position: absolute;
+    top: 25px;
+    /*top: 25px;*/
+    right: 125px;
+    text-align: right;
+}
+
 /* User information */
 div#user-information {
     position: absolute;
-    top: 25px;
+    top: 50px;
+    /*top: 25px;*/
     right: 125px;
     text-align: right;
 }

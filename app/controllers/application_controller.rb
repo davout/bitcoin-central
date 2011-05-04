@@ -46,9 +46,8 @@ class ApplicationController < ActionController::Base
 
   # Changes the locale if *locale* (en|fr|...) is passed as GET parameter
   def set_locale
-    # TODO : Try to guess locale with IP lookup
-    locale = params[:locale] or session[:locale]
-    locale = "de"
+    # TODO : Try to guess locale with IP lookup and/or headers
+    locale = params[:locale] or session[:locale] or "en"
     locale = locale.to_sym if locale
 
     if locale and I18n.available_locales.include?(locale)

@@ -7,6 +7,7 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 module BitcoinBank
   class Application < Rails::Application
     config.i18n.default_locale = :en
+    config.i18n.available_locales = [:en, :de, :fr, :it]
     
     config.encoding = "utf-8"
     config.filter_parameters += [:password]

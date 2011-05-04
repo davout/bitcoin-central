@@ -298,7 +298,7 @@ it:
 
   # mailers/backup_mailer.rb
   support_from: Supporto di Bitcoin Central <%{support_email}>
-  wallet_backup_subject: Backup del portafoglio: %{date}
+  wallet_backup_subject: Backup del portafoglio %{date}
 
   # mailers/user_mailer.rb
   sign_up_confirmation: Conferma di registrazione
