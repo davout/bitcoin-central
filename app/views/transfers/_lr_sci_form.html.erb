@@ -17,4 +17,4 @@
   <input type="hidden" name="account_id" value="<%= @current_user.id %>" />
 </form>
 
-<a href="#" onclick="$('#add_lr').submit();">Click here</a> to be taken to the Liberty Reserve interface, you'll be able to specify the details of your deposit.
+<p> <%= t :click_for_lr_html, :action => "$('#add_lr').submit();" %> </p>

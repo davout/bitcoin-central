@@ -41,14 +41,14 @@ class User < ActiveRecord::Base
     
   validate :current_password do
     unless new_record? or check_password(current_password)
-      errors[:current_password] << "is invalid"
+      errors[:current_password] << (I18n.t "errors.invalid")
     end
   end
 
   validate :new_password do
     unless new_password.blank?
       unless new_password == new_password_confirmation
-        errors[:new_password] << "doesn't match its confirmation"
+        errors[:new_password] << (I18n.t "errors.no_match")
       end
     end
   end
@@ -56,7 +56,7 @@ class User < ActiveRecord::Base
   validate :captcha do
     if captcha.nil? and new_record?
       unless skip_captcha
-        errors[:captcha] << "answer is incorrect"
+        errors[:captcha] << (I18n.t "errors.answer_incorrect")
       end
     end
   end

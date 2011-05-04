@@ -4,7 +4,7 @@ class NotMineValidator < ActiveModel::EachValidator
       if Bitcoin::Util.valid_bitcoin_address?(value)
         if Bitcoin::Util.my_bitcoin_address?(record.address)
           if Bitcoin::Util.get_account(record.address).to_i == record.user.id
-           record.errors[field] << "can't be one of your addresses"
+           record.errors[field] << (I18n.t "errors.not_your_address")
           end
         end
       end

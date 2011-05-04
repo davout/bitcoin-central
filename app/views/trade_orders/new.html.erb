@@ -1,42 +1,42 @@
-<h1>Create a trade order</h1>
+<h1><%= t :create_order_title %></h1>
 
 <%= form_for @trade_order, :url => account_trade_orders_path do |f| %>
   <%=
     render :partial => 'layouts/errors', :locals => {
       :model => @trade_order,
-      :message => "prevented your trade order from being created"
+      :message => "error_creating_order"
     }
   %>
 
   <div class="form-field">
     <%= f.label :currency %>
     <div class="radios">
-      <%= f.radio_button :currency, "LRUSD", :class => "currency-select trigger-total-update" %> <%= f.label :currency_lrusd, "LRUSD" %>
-      <%= f.radio_button :currency, "LREUR", :class => "currency-select trigger-total-update" %> <%= f.label :currency_lreur, "LREUR" %>
-      <%= f.radio_button :currency, "EUR", :class => "currency-select trigger-total-update" %> <%= f.label :currency_eur, "EUR" %>
-      <%= f.radio_button :currency, "PGAU", :class => "currency-select trigger-total-update" %> <%= f.label :currency_pgau, "PGAU" %>
+      <%= f.radio_button :currency, "LRUSD", :class => "currency-select trigger-total-update" %> <%= f.label :currency_lrusd, (t "currencies.lrusd") %>
+      <%= f.radio_button :currency, "LREUR", :class => "currency-select trigger-total-update" %> <%= f.label :currency_lreur, (t "currencies.lreur") %>
+      <%= f.radio_button :currency, "EUR", :class => "currency-select trigger-total-update" %> <%= f.label :currency_eur, (t "currencies.eur") %>
+      <%= f.radio_button :currency, "PGAU", :class => "currency-select trigger-total-update" %> <%= f.label :currency_pgau, (t "currencies.pgau") %>
     </div>
     <div class="explanation">
-      Currency you want to trade
+      <%= t :currency_to_trade %>
     </div>
   </div>
 
   <div class="form-field">
     <%= f.label :category %>
     <div class="radios">
-      <%= f.radio_button :category, "buy", :class => "category-select trigger-total-update" %> <%= f.label :category_buy, "Buy" %>
-      <%= f.radio_button :category, "sell", :class => "category-select trigger-total-update" %> <%= f.label :category_sell, "Sell" %>
+      <%= f.radio_button :category, "buy", :class => "category-select trigger-total-update" %> <%= f.label :category_buy, (t :buy) %>
+      <%= f.radio_button :category, "sell", :class => "category-select trigger-total-update" %> <%= f.label :category_sell, (t :sell) %>
     </div>
     <div class="explanation">
-      Whether you want to buy or sell bitcoins
+      <%= t :sell_or_buy_description %>
     </div>
   </div>
 
   <div class="form-field">
-    <%= label_tag :balance, "Your balance" %>
+    <%= label_tag :balance, (t :your_balance) %>
     <%= text_field_tag :balance, nil, :disabled => true, :class => "amount" %>
     <div class="explanation">
-      Your available confirmed balance
+      <%= t :your_balance_description %>
     </div>
   </div>
 
@@ -46,25 +46,25 @@
       :size => 8,
       :class => "trigger-total-update amount" %>
     <div class="explanation">
-      BTC amount you're trading
+      <%= t :amount_description %>
     </div>
   </div>
 
   <div class="form-field">
-    <%= f.label :ppc, "Price" %>
-    <%= f.text_field :ppc,  :value => amount_field_value(@trade_order.ppc),
+    <%= f.label :ppc %>
+    <%= f.text_field :ppc, :value => amount_field_value(@trade_order.ppc),
       :size => 8,
       :class => "trigger-total-update amount" %>
     <div class="explanation">
-      Price for 1 BTC
+      <%= t :ppc_description %>
     </div>
   </div>
 
   <div class="form-field">
-    <%= label_tag :total %>
+    <%= f.label :total %>
     <%= text_field_tag :total, nil, :size => 8, :disabled => true, :class => "amount" %>
     <div class="explanation">
-      The total for your order
+      <%= t :total_description %>
     </div>
   </div>
 
@@ -72,7 +72,7 @@
     <%= f.label :dark_pool %>
     <%= f.check_box :dark_pool, :class => "checkbox" %>
     <div class="explanation">
-      Should the order be hidden ?
+      <%= t :dark_pool_description %>
     </div>
   </div>
 

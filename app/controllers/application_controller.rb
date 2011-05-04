@@ -8,10 +8,10 @@ class ApplicationController < ActionController::Base
 
   before_filter :get_bitcoin_client,
     :move_xml_params,
+    :set_locale,
     :authenticate,
     :authorize,
-    :set_time_zone,
-    :set_locale
+    :set_time_zone
 
   def authenticate
     current_user_id = (session[:current_user_id] or api_authentication)
@@ -47,6 +47,7 @@ class ApplicationController < ActionController::Base
   # Changes the locale if *locale* (en|fr|...) is passed as GET parameter
   def set_locale
     locale = params[:locale] or session[:locale]
+    locale="de"
     locale = locale.to_sym if locale
 
     if locale and I18n.available_locales.include?(locale)

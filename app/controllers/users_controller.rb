@@ -17,7 +17,7 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:current_user_id] = @user.id
-      redirect_to account_path, :notice => 'Your account was successfully created'
+      redirect_to account_path, :notice => (t :account_created)
     else
       render :action => :new
     end
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
 
     if @user.update_attributes(params[:user])
       redirect_to edit_user_path,
-        :notice => 'Your account was successfully updated'
+        :notice => (t :account_updated)
     else
       render :action => :edit
     end

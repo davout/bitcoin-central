@@ -1,7 +1,6 @@
 <h1>
-  <%= t :account %>
+  <%= t :account_balance_title %>
 </h1>
-
 <table class="default" id="account-balances">
   <tr>
     <th />
@@ -15,10 +14,10 @@
 
   <tr>
     <td>
-      <%= link_to image_tag("bitcoin-logo.jpg"), "http://www.bitcoin.org/", :target => "_blank", :title => t(:currency_btc_legend) %>
+      <%= link_to image_tag("bitcoin-logo.jpg"), "http://www.bitcoin.org/", :target => "_blank", :title => t("currencies.btc_legend") %>
     </td>
     <td>
-      <%= t :currency_btc %>
+      <%= t "currencies.btc" %>
     </td>
     <td class="account-balance">
       <%
@@ -41,10 +40,10 @@
 
   <tr>
     <td rowspan="2">
-      <%= link_to image_tag("liberty_reserve.gif"), "https://www.libertyreserve.com/?ref=U8651415", :target => "_blank", :title => t(:currency_lr_legend) %>
+      <%= link_to image_tag("liberty_reserve.gif"), "https://www.libertyreserve.com/?ref=U8651415", :target => "_blank", :title => t("currencies.lr_legend") %>
     </td>
     <td>
-      <%= t :currency_lrusd %>
+      <%= t "currencies.lrusd" %>
     </td>
     <td <%= exact_balance_title(:lrusd) %> class="account-balance <%= @current_user.balance(:lrusd) > 0 ? "green" : (@current_user.balance(:lrusd) < 0 ? "red" : "") %>">
       <%= @current_user.balance(:lrusd) > 0 ? "+" : (@current_user.balance(:lrusd) < 0 ? "-" : "") %> <%= number_to_currency @current_user.balance(:lrusd).abs, :unit => "" %>
@@ -53,7 +52,7 @@
 
   <tr>
     <td>
-      <%= t :currency_lreur %>
+      <%= t "currencies.lreur" %>
     </td>
     <td <%= exact_balance_title(:lreur) %> class="account-balance <%= @current_user.balance(:lreur) > 0 ? "green" : (@current_user.balance(:lreur) < 0 ? "red" : "") %>">
       <%= @current_user.balance(:lreur) > 0 ? "+" : (@current_user.balance(:lreur) < 0 ? "-" : "") %> <%= number_to_currency @current_user.balance(:lreur).abs, :unit => "" %>
@@ -62,10 +61,10 @@
 
   <tr>
     <td>
-      <%= link_to image_tag("euros.png"), "http://www.ecb.int/", :target => "_blank", :title => t(:currency_eur_legend) %>
+      <%= link_to image_tag("euros.png"), "http://www.ecb.int/", :target => "_blank", :title => t("currencies.eur_legend") %>
     </td>
     <td>
-      <%= t :currency_eur %>
+      <%= t "currencies.eur" %>
     </td>
     <td <%= exact_balance_title(:eur) %> class="account-balance <%= @current_user.balance(:eur) > 0 ? "green" : (@current_user.balance(:eur) < 0 ? "red" : "") %>">
       <%= @current_user.balance(:eur) > 0 ? "+" : (@current_user.balance(:eur) < 0 ? "-" : "") %> <%= number_to_currency @current_user.balance(:eur).abs, :unit => "" %>
@@ -74,10 +73,10 @@
 
   <tr>
     <td>
-      <%= link_to image_tag("gold.jpg"), "http://www.pecunix.com/", :target => "_blank", :title => t(:currency_pgau_legend) %>
+      <%= link_to image_tag("gold.jpg"), "http://www.pecunix.com/", :target => "_blank", :title => t("currencies.pgau_legend") %>
     </td>
     <td>
-      <%= t :currency_pgau %>
+      <%= t "currencies.pgau" %>
     </td>
     <td <%= exact_balance_title(:pgau) %> class="account-balance <%= @current_user.balance(:pgau) > 0 ? "green" : (@current_user.balance(:pgau) < 0 ? "red" : "") %>">
       <%= @current_user.balance(:pgau) > 0 ? "+" : (@current_user.balance(:pgau) < 0 ? "-" : "") %> <%= number_to_currency @current_user.balance(:pgau).abs, :unit => "" %>

@@ -4,11 +4,11 @@ class InternalTransfer < Transfer
 
   validate :payee_id do
     if payee_id == user_id
-      errors[:payee] << "cannot be yourself"
+      errors[:payee] << (I18n.t "errors.not_yourself")
     end
 
     if (amount and amount < 0) and payee.nil?
-      errors[:payee] << "can't be blank"
+      errors[:payee] << (I18n.t "errors.blank")
     end
   end
 

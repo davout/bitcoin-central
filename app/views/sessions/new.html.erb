@@ -1,21 +1,19 @@
 <%= form_tag session_path, :method => :post do %>
   <div class="form-field">
-    <label for="account">Account ID</label>
+    <label for="account"><%= t :account_label %></label>
     <input name="account" id="account" />
-    <div class="explanation">
-      E-mail address or account ID
-    </div>
+    <div class="explanation"><%= t :account_description %></div>
   </div>
 
   <div class="form-field">
-    <label for="password">Password</label>
+    <label for="password"><%= t :password_label %></label>
     <input name="password" id="password" type="password" />
     <div class="explanation">
-      <a href="mailto:support@bitcoin-central.net" tabindex="-1">Password forgotten?</a>
+      <a href="mailto:support@bitcoin-central.net" tabindex="-1"><%= t :password_description %></a>
     </div>
   </div>
 
   <div class="form-field">
-    <input type="submit" class="submit" value="Sign-in" />
+    <input type="submit" class="submit" value="<%= t :sign_in_submit %>" />
   </div>
 <% end %>

@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default :from => "Bitcoin Central support <support@bitcoin-central.net>"
+  default :from => (t :support_from, :support_email=>(t :support_email))
 
   def registration_confirmation(user)
     @user = user
@@ -7,6 +7,6 @@ class UserMailer < ActionMailer::Base
     attachments.inline['bitcoin.png'] = File.read(File.join(Rails.root, "public", "images", "bitcoin.png"))
 
     mail :to => user.email,
-      :subject => "Registration confirmation"
+      :subject => (t :sign_up_confirmation)
   end
 end

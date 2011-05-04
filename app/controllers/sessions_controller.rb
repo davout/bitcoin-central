@@ -11,11 +11,11 @@ class SessionsController < ApplicationController
 
     if (user and user.check_password(params[:password]))
       session[:current_user_id] = user.id
-      flash[:notice] = "You logged-in successfully to your account."
+      flash[:notice] = (t :sign_in_success)
 
       redirect_to (session.delete(:original_request_path) or account_path)
     else
-      flash.now[:error] = "Authentication failed, check your credentials and the captcha answer"
+      flash.now[:error] = (t :sign_in_failure)
       render :action => 'new'
     end
   end
@@ -24,6 +24,6 @@ class SessionsController < ApplicationController
     reset_session
     
     redirect_to root_path,
-      :notice => "You logged out successfully"
+      :notice => (t :sign_out_success)
   end
 end

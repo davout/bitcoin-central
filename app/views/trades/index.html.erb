@@ -1,13 +1,13 @@
-<h1>Trade history</h1>
+<h1><%= t :trade_history_title %></h1>
 
 <% unless @trades.blank? %>
   <table class="default" id="trade-history">
     <tr>
-      <th>Date</th>
-      <th>Type</th>
-      <th>Amount</th>
-      <th>Price</th>
-      <th>Total</th>
+      <th><%= t :date %></th>
+      <th><%= t :type %></th>
+      <th><%= t :amount %></th>
+      <th><%= t :price %></th>
+      <th><%= t :total %></th>
       <th class="auto-sized"></th>
     </tr>
 
@@ -16,9 +16,9 @@
         <td><%= l trade.created_at %></td>
         <td>
           <% if trade.buyer_id == @current_user.id %>
-            Buy
+            <%= t :buy %>
           <% else %>
-            Sell
+            <%= t :sell %>
           <% end %>
         </td>
         <td class="amount"><%= number_to_bitcoins trade.traded_btc, :precision => 4 %></td>
@@ -29,5 +29,5 @@
     <% end %>
   </table>
 <% else %>
-  <p>No trades were found</p>
+  <p><%= t :no_trades_found %></p>
 <% end %>

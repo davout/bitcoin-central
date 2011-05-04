@@ -5,7 +5,7 @@ module TransfersHelper
 
   def confirmation_tooltip_for(transfer)
     unless transfer.confirmed?
-      "title=\"#{pluralize(Transfer::MIN_BTC_CONFIRMATIONS - transfer.bt_tx_confirmations, "confirmation")} left\"".html_safe
+      "title=\"#{t :confirmations_left, :count=>Transfer::MIN_BTC_CONFIRMATIONS - transfer.bt_tx_confirmations}\"".html_safe
     end
   end
 end

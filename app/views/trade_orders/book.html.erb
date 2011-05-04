@@ -1,13 +1,13 @@
-<h1>Select a currency</h1>
+<h1><%= t :order_book_title %></h1>
 
 <div id="order-book-filter-wrapper" class="form-field">
   <div id="order-book-filter" class="radios">
     <%= form_tag book_account_trade_orders_path, :method => :get do %>
-      <%= radio_button_tag 'currency', 'all', (params[:currency].blank? or (params[:currency] == 'all')), :onclick => "$(this).parents('form').submit()" %> <%= label_tag "currency_all", "All" %>
-      <%= radio_button_tag 'currency', 'lrusd', params[:currency] == 'lrusd', :onclick => "$(this).parents('form').submit()" %> <%= label_tag "currency_lrusd", "LRUSD" %>
-      <%= radio_button_tag 'currency', 'lreur', params[:currency] == 'lreur', :onclick => "$(this).parents('form').submit()" %> <%= label_tag "currency_lreur", "LREUR" %>
-      <%= radio_button_tag 'currency', 'eur', params[:currency] == 'eur', :onclick => "$(this).parents('form').submit()" %> <%= label_tag "currency_eur", "EUR" %>
-    <%= radio_button_tag 'currency', 'pgau', params[:currency] == 'pgau', :onclick => "$(this).parents('form').submit()" %> <%= label_tag "currency_pgau", "PGAU" %>
+      <%= radio_button_tag 'currency', 'all', (params[:currency].blank? or (params[:currency] == 'all')), :onclick => "$(this).parents('form').submit()" %> <%= label_tag "currency_all", (t "currencies.all") %>
+      <%= radio_button_tag 'currency', 'lrusd', params[:currency] == 'lrusd', :onclick => "$(this).parents('form').submit()" %> <%= label_tag "currency_lrusd", (t "currencies.lrusd") %>
+      <%= radio_button_tag 'currency', 'lreur', params[:currency] == 'lreur', :onclick => "$(this).parents('form').submit()" %> <%= label_tag "currency_lreur", (t "currencies.lreur") %>
+      <%= radio_button_tag 'currency', 'eur', params[:currency] == 'eur', :onclick => "$(this).parents('form').submit()" %> <%= label_tag "currency_eur", (t "currencies.eur") %>
+    <%= radio_button_tag 'currency', 'pgau', params[:currency] == 'pgau', :onclick => "$(this).parents('form').submit()" %> <%= label_tag "currency_pgau", (t "currencies.pgau") %>
 
       <%= submit_tag 'Filter', :class => "submit", :id => "order-book-filter-submit" %>
       <script type="text/javascript">
@@ -18,14 +18,14 @@
 </div>
 
 <div id="purchase-orders" class="order-book">
-  <h2>Buying</h2>
+  <h2><%= t :buying %></h2>
 
   <% unless @purchases.blank? %>
     <table class="default">
       <tr>
         <th class="auto-sized">#</th>
-        <th>Amount</th>
-        <th>Price</th>
+        <th><%= t :amount %></th>
+        <th><%= t :price %></th>
         <th class="auto-sized"></th>
         <th class="auto-sized"></th>
       </tr>
@@ -41,19 +41,19 @@
       <% end %>
     </table>
   <% else %>
-    <p>No buying orders have been found.</p>
+    <p><%= t :no_buying_orders_found %></p>
   <% end %>
 </div>
 
 <div id="sale-orders" class="order-book">
-  <h2>Selling</h2>
+  <h2><%= t :selling %></h2>
 
   <% unless @sales.blank? %>
     <table class="default">
       <tr>
         <th class="auto-sized">#</th>
-        <th>Amount</th>
-        <th>Price</th>
+        <th><%= t :amount %></th>
+        <th><%= t :price %></th>
         <th class="auto-sized"></th>
         <th class="auto-sized"></th>
       </tr>
@@ -69,7 +69,7 @@
       <% end %>
     </table>
   <% else %>
-    <p>No selling orders have been found.</p>
+    <p><%= t :no_selling_orders_found %></p>
   <% end %>
 </div>
 

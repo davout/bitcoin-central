@@ -7,7 +7,7 @@ class LibertyReserveTransfer < Transfer
   # An account ID is only mandatory when money is withdrawn
   validate :lr_account_id do
     if amount and amount <= 0 # Outgoing transfer
-      errors[:lr_account_id] << "can't be blank" if lr_account_id.blank?
+      errors[:lr_account_id] << (I18n.t "errors.blank") if lr_account_id.blank?
     end
   end
 

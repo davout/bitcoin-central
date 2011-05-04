@@ -1,9 +1,9 @@
 module TradeOrdersHelper
   def dark_pool_message(count)
     if count.to_i > 1
-      "Some of these orders don't appear in the public order book"
+      t :order_dark_pool_some
     else
-      "This order doesn't appear in the public order book"
+      t :order_dark_pool
     end
   end
 end
