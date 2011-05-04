@@ -40,8 +40,8 @@ class ThirdPartyCallbacksController < ApplicationController
   def px_payment
     t = Transfer.find_by_px_tx_id(params["PAYMENT_REC_ID"])
 
-    redirect_to account_transfers_path,
-      :notice => (t :px_transfer_success, :amount=>t.amount, :fee=>t.px_fee)
+    redirect_to(account_transfers_path,
+      :notice => t(:px_transfer_success), :amount => t.amount, :fee => t.px_fee)
   end
 
   # Pecunix success callback
