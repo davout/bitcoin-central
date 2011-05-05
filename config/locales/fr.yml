@@ -307,7 +307,7 @@ fr:
       main: Achat/Vente
       new_order: Nouvel ordre
       your_orders: Vos ordres
-      order_book: Offres publiées
+      order_book: Offres en cours
       trade_history: Historique
     admin:
       main: Administration
@@ -470,7 +470,7 @@ fr:
   email: E-Mail
   email_explanation: Erforderlich um ihr Passwort wiederherzustellen
   new_password_explanation: Verwenden sie dieses Feld nur wenn sie ihr Passwort ändern wollen
-  new_password_confirmation: Passwort wiederholen
+  new_password_confirmation: Confirmation
   new_password_confirmation_explanation: Bestätigung des neuen Passwortes
   current_password_explanation: Dies ist erforderlich um ihr Konto zu schützen
   time_zone: Zeitzone
@@ -490,4 +490,4 @@ fr:
   user_new: Neuen Benutzer anlegen
 
   # views/users/new.html
-  sign_up_for_account_title: Neues Benutzerkonto erstellen
+  sign_up_for_account_title: Créer un compte

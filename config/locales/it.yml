@@ -518,13 +518,13 @@ it:
     one: "1 errore ha impedito l'aggiornamento dei dettagli del tuo account:"
     other: "%{count} errori hanno impedito l'aggiornamento dei dettagli del tuo account:"
   email: Email
-  email_explanation: Necessario per poter recuperare la tua password
+  email_explanation: Necessaria per poter recuperare la tua password
   new_password_explanation: Utilizza questo campo per cambiare la tua password
   new_password_confirmation: Conferma
   new_password_confirmation_explanation: Conferma nuova password
   current_password_explanation: Necessario per proteggere il tuo account
   time_zone: Time zone
-  time_zone_explanation: Seleziona la tua time zone per visualizzare correttamente le date
+  time_zone_explanation: Seleziona il tuo fuso orario
 
   # views/users/edit.html
   account_details_title: Dettagli account
