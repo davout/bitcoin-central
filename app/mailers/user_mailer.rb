@@ -4,7 +4,7 @@ class UserMailer < ActionMailer::Base
   def registration_confirmation(user)
     @user = user
 
-    attachments.inline['bitcoin.png'] = File.read(File.join(Rails.root, "public", "images", "bitcoin.png"))
+    attachments.inline['bitcoin.png'] = File.read(File.join(Rails.root, "public", "images", "bitcoin.#{I18n.locale}.png"))
 
     mail :to => user.email,
       :subject => (I18n.t :sign_up_confirmation)
