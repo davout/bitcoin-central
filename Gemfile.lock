@@ -1,10 +1,4 @@
 GIT
-  remote: git://github.com/davout/recaptcha.git
-  revision: 09bf432ba1dd8fbb78f90905186f4fc09b2cc221
-  specs:
-    recaptcha (0.2.3)
-
-GIT
   remote: git://github.com/rails/exception_notification
   revision: 192a49a02d63d28b23ed41cebadfedd490929cf1
   specs:
@@ -91,6 +85,7 @@ GEM
       rake (>= 0.8.4)
       thor (~> 0.14.0)
     rake (0.8.7)
+    recaptcha (0.3.1)
     thor (0.14.6)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
@@ -110,5 +105,5 @@ DEPENDENCIES
   json
   mysql (= 2.8.1)
   rails (= 3.0.0)
-  recaptcha!
+  recaptcha
   whenever

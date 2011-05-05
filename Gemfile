@@ -8,9 +8,7 @@ gem 'json'
 
 gem 'addressable'
 
-gem 'recaptcha', 
-  :git => 'git://github.com/davout/recaptcha.git',
-  :require => 'recaptcha/rails'
+gem 'recaptcha', :require => 'recaptcha/rails'
 
 gem "exception_notification",
   :git => "git://github.com/rails/exception_notification",
