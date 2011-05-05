@@ -396,20 +396,20 @@ fr:
   support_email: support@bitcoin-central.net
   deposit_bitcoins_title: Déposer des Bitcoins
   deposit_bitcoins_body_html:
-    <p>Führen sie eine Überweisung an eine beliebige ihrer Adressen durch und das Geld wird nach ein paar Minuten auf ihrem Konto verfügbar sein.</p>
-    <p>Bitte berücksichtigen sie, dass sie auf die Bestätigung des Bitcoin-Netzwerkes warten müssen, das dauert ca. %{estimation} Minuten.</p>
-  deposit_eur_title: Euro einzahlen
+    <p>Envoyez les fonds vers votre addresse bitcoin affichée en haut de l'écran, le transfert sera visible après quelques minutes.</p>
+    <p>Veuillez-noter que les fonds transférés ne seront utilisables qu'après confirmation du transfert par le réseau bitcoin (environ %{estimation} minutes).</p>
+  deposit_eur_title: Déposer des fonds en Euros
   deposit_eur_body_html:
-    <p>Bitte schicken sie eine E-Mail (in englisch) an <a href="mailto:%{support_email}">%{support_email}</a> und verwenden sie dabei PGP-Verschlüsselung <a href="%{pgp_link}">(öffentlicher Schlüssel)</a>.</p>
-  deposit_lr_title: Über Liberty Reserve einzahlen
-  deposit_pgau_title: Pecunix Gold einzahlen
+    <p>Merci d'envoyer un e-mail à l'adresse du support &colon; <a href="mailto:%{support_email}">%{support_email}</a>.</p>
+  deposit_lr_title: Dépôt de Liberty Reserve
+  deposit_pgau_title: "Dépôt d'or Pecunix"
   deposit_pgau_body_html:
     <p>
-    Bitte geben sie an wieviel Gramm Gold sie einzahlen wollen, beim abschicken werden sie zur Pecunix-Website weitergeleitet um die Überweisung zu bestätigen.
-    Sobald die Überweisung abgeschlossen ist wird der Betrag ihrem Konto gutgeschrieben.
+    Indiquez la quantité d&#146;or à transférer, vous serez redirigé vers l&#146;interface Pecunix pour confirmer le transfert.
+    L&#146;or sera immédiatement porté au crédit de votre compte une fois le transfert confirmé.
     </p>
-  amount_pgau: Betrag (PGAU)
-  deposit_pgau: Pecunix Gold einzahlen
+  amount_pgau: Montant (PGAU)
+  deposit_pgau: Continuer
 
   # views/transfers/index.html
   account_history_title: Historique
@@ -418,76 +418,74 @@ fr:
   # views/transfers/new.html
   transfer_funds_title: Transfert de fonds
   transfer_funds_body_html: "
-    <p>Sie können Geld überweisen an:
+    <p>Vous pouvez transférer des fonds vers :
       <ul>
-        <li>eine <strong>Bitcoin</strong>-Adresse (nur BTC),</li>
-        <li>eine <strong>E-Mail</strong>-Adresse (alle Währung),</li>
-        <li>ein <strong>Bitcoin Central</strong> Konto (alle Währung), or</li>
-        <li>ein <strong>Liberty Reserve</strong> Konto (nur LREUR und LRUSD)</li>
+        <li>une adresse <strong>bitcoin</strong> (BTC uniquement),</li>
+        <li>une adresse <strong>e-mail</strong> (toutes devises),</li>
+        <li>une n° de compte <strong>Bitcoin Central</strong> (toutes devises), ou</li>
+        <li>un compte <strong>Liberty Reserve</strong> (LREUR et LRUSD)</li>
       </ul>
     </p>
     "
-  how_does_it_work_title: Wie funktioniert es?
+  how_does_it_work_title: Comment ça marche ?
   how_does_it_work_body_html:
     <p>
-      Bitcoins lassen sich an ein Bitcoin Central Konto oder eine Bitcoin-Adresse überweisen.
-      Die Transaktion wird entweder über das Bitcoin Netzwerk oder direkt innerhalb von Bitcoin Central abgewickelt,
-      je nachdem ob die Adresse einem Nutzer von Bitcoin Central gehört.
-      Alle anderen überweisungen werden immer von Bitcoin Central durgeführt.
+      Les transferts en bitcoins peuvent-être effectués vers un compte Bitcoin Central ou vers une adresse e-mail.
+      Le transfert reste interne à Bitcoin Central dans le cas d&#146;un envoi vers une adresse bitcoin si cette adresse
+      appartient à un de ses utilisateurs, sinon ils sont effectués via le réseau bitcoin.
     </p>
     <p>
-      Jede Überweisung zu einem Bitcoin Central Konto ist kostenlos.
+      Les transferts entre comptes Bitcoin Central sont entièrement gratuits.
     </p>
     <p>
-      Bei einer Überweisungen an eine E-Mail-Adresse wird einfach der Betrag von ihrem Konto
-      abgezogen und der Empfänger per E-Mail informiert, dass das Geld für ihn bei Bitcoin Cental
-      bereitsteht. Falls der Empfänger das Geld nach einer gewissen Zeit noch nicht entgegen
-      genommen hat wird es ihrem Konto wieder gutgeschrieben.
-      <strong>Diese Funktionalität ist noch nicht aktiv.</strong>
+      Les transferts vers une adresse e-mail déclenchent l&#146;envoi d&#146;un message si son propriétaire
+      ne possède pas de compte Bitcoin Central, dans ce cas, le message l&#146;informe que les fonds sont
+      disponibles sur Bitcoin Central. Si les fonds ne sont pas récupérés par leur destinataire ils sont
+      re-crédités sur le compte de l&#146;expéditeur après un certain temps. <strong>Cette fonctionnalité n&#146;est pas encore disponible.</strong>
     </p>
   error_transferring_funds:
-    one: "Ein Fehler verhinderte, dass ihre Überweisung erfolgreich abgeschlossen werden konnte:"
-    other: "%{count} Fehler verhinderten, dass ihre Überweisung erfolgreich abgeschlossen werden konnte:"
-  payee: Empfänger
-  payee_id_eur: Bitcoin Central Konto oder E-Mail-Adresse
-  payee_id_lrusd: Bitcoin Central, Liberty Reserve Konto oder E-Mail-Adresse
-  payee_id_lreur: Bitcoin Central, Liberty Reserve Konto oder E-Mail-Adresse
-  payee_id_btc: Bitcoin Central Konto, E-Mail oder Bitcoin Adresse
-  payee_id_none: Identifizierung des Empfängers
-  confirmed_balance: Ihr bestätigter Kontostand
-  transfer_amount: Der zu überweisende Betrag
-  transfer_button: Überweisung durchführen
+    one: "Une erreur a empêché votre transfert d'être effectué :"
+    other: "%{count} erreurs ont empêché votre transfert d'être effectué :"
+  payee: Destinataire
+  payee_id_eur: N° de compte Bitcoin Central ou adresse e-mail
+  payee_id_lrusd: N° de compte Bitcoin Central, Liberty Reserve, ou adresse e-mail
+  payee_id_lreur: N° de compte Bitcoin Central, Liberty Reserve, ou adresse e-mail
+  payee_id_btc: N° de compte Bitcoin Central, adresse bitcoin ou e-mail
+  payee_id_none: Identification du destinataire
+  confirmed_balance: Votre solde disponible
+  transfer_amount: Montant
+  transfer_button: Transférer
 
   # views/user_mailer/registration_confirmation.html
   # views/user_mailer/registration_confirmation.text
-  thanks_for_registering: Vielen Dank, dass sie sich bei Bitcoin Central registriert haben.
-  your_account_id_is: "Ihre Konto-ID ist: %{account_id}"
+  thanks_for_registering: "Merci d'avoir créé votre compte Bitcoin Central."
+  your_account_id_is: "Votre n° de compte : %{account_id}"
 
   # views/users/_form.html
   error_updating_account:
-    one: "Ein Fehler verhinderte, dass das Benutzerkonto aktualisiert werden konnte:"
-    other: "%{count} Fehler verhinderten, dass das Benutzerkonto aktualisiert werden konnte:"
-  email: E-Mail
-  email_explanation: Erforderlich um ihr Passwort wiederherzustellen
-  new_password_explanation: Verwenden sie dieses Feld nur wenn sie ihr Passwort ändern wollen
+    one: "Une erreur a empêché vos informations d'être enregistrées :"
+    other: "%{count} erreurs ont empêché vos informations d'être enregistrées :"
+  email: Adresse e-mail
+  email_explanation: Nécessaire pour récupérer votre mot de passe
+  new_password_explanation: Remplissez ce champ pour changer votre mot de passe
   new_password_confirmation: Confirmation
-  new_password_confirmation_explanation: Bestätigung des neuen Passwortes
-  current_password_explanation: Dies ist erforderlich um ihr Konto zu schützen
-  time_zone: Zeitzone
-  time_zone_explanation: Wählen sie ihre Zeitzone
+  new_password_confirmation_explanation: Confirmation du nouveau mot de passe
+  current_password_explanation: Nécessaire pour protéger votre compte
+  time_zone: Fuseau horaire
+  time_zone_explanation: Nécessaire pour afficher correctement les dates
 
   # views/users/edit.html
-  account_details_title: Kontodetails
+  account_details_title: Détails de votre compte
 
   # views/users/index.html
-  listing_users_title: Registrierte Benutzer
-  account: Konto
-  password: Passwort
-  user_show: Anzeigen
-  user_edit: Bearbeiten
-  user_destroy: Löschen
-  user_destroy_confirm: Sind sie sicher?
-  user_new: Neuen Benutzer anlegen
+  listing_users_title: Liste des utilisateurs
+  account: Compte
+  password: Mot de passe
+  user_show: Montrer
+  user_edit: Editer
+  user_destroy: Supprimer
+  user_destroy_confirm: Êtes-vous sûr(e) ?
+  user_new: Nouvel utilisateur
 
   # views/users/new.html
   sign_up_for_account_title: Créer un compte
