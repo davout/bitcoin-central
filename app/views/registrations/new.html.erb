@@ -1,0 +1,64 @@
+<h1><%= t :sign_up_for_account_title %></h1>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <% unless resource.new_record? %>
+    <div class="form-field">
+      <%= f.label :account %>
+      <%= f.text_field :account, :disabled => true %>
+    </div>
+  <% end %>
+
+  <div class="form-field">
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :password %>
+    <%= f.password_field :password, :autocomplete => "off" %>
+    <% unless resource.new_record? %>
+      <div class="explanation">
+        <%= t :new_password_explanation %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, :autocomplete => "off" %>
+    <% unless resource.new_record? %>
+      <div class="explanation">
+        <%= t :new_password_confirmation_explanation %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="form-field">
+    <%= f.label :time_zone %>
+    <%= f.time_zone_select :time_zone, nil, :prompt => "--" %>
+    <div class="explanation">
+      <%= t :time_zone_explanation %>
+    </div>
+  </div>
+
+  <% if resource.new_record? %>
+    <div class="recaptcha-field">
+      <label for="recaptcha_response_field">Are you human ?</label>
+      <div class="recaptcha-input">
+        <%= recaptcha_tags :ssl => true %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-field">
+    <%= f.submit :class => 'submit' %>
+  </div>
+
+
+
+
+<% end %>
+
+<%= render :partial => "devise/shared/links" %>

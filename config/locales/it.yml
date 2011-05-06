@@ -257,6 +257,13 @@ it:
       liberty_reserve_transfer:
         lr_account_id: Account ID
 
+  password_forgotten: Password dimenticata ?
+  didnt_receive_confirmation: Non ha ricevuto istruzioni di conferma ?
+  didnt_receive_unlock_instructions: "Non ha ricevuto istruzioni di sbloccare ?"
+  resend_confirmation: Reinvia e-mail di conferma
+  submit: Convalidare
+  change_password: Cambia password
+
   # controllers/informations_controller.rb
   chart_date_format: %m/%d
 
@@ -518,7 +525,6 @@ it:
     one: "1 errore ha impedito l'aggiornamento dei dettagli del tuo account:"
     other: "%{count} errori hanno impedito l'aggiornamento dei dettagli del tuo account:"
   email: Email
-  email_explanation: Necessaria per poter recuperare la tua password
   new_password_explanation: Utilizza questo campo per cambiare la tua password
   new_password_confirmation: Conferma
   new_password_confirmation_explanation: Conferma nuova password

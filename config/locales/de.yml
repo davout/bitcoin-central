@@ -215,6 +215,13 @@ de:
       trade_order: Auftrag
       transfer: Überweisung
 
+  password_forgotten: Passwort vergessen?
+  didnt_receive_confirmation: Ich habe keine Bestätigungs Anweisungen
+  didnt_receive_unlock_instructions: Haben Sie nicht erhalten entsperren Anweisungen ?
+  resend_confirmation: Erneutes senden Bestätigung Anweisungen
+  submit: Validieren
+  change_password: Passwort ändern
+
   # controllers/informations_controller.rb
   chart_date_format: %d.%m.
 
@@ -477,7 +484,6 @@ de:
     one: "Ein Fehler verhinderte, dass das Benutzerkonto aktualisiert werden konnte:"
     other: "%{count} Fehler verhinderten, dass das Benutzerkonto aktualisiert werden konnte:"
   email: E-Mail
-  email_explanation: Erforderlich um ihr Passwort wiederherzustellen
   new_password_explanation: Verwenden sie dieses Feld nur wenn sie ihr Passwort ändern wollen
   new_password_confirmation: Passwort wiederholen
   new_password_confirmation_explanation: Bestätigung des neuen Passwortes

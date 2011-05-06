@@ -2,7 +2,7 @@
   <p>
     <% if @current_user %>
       <p class="identification">
-        <%= t :signed_in_as %>  <%= link_to @current_user.account, edit_user_path %> - <%= link_to t(:logout), session_path, :method => :delete %>
+        <%= t :signed_in_as %>  <%= link_to @current_user.account, edit_user_path %> - <%= link_to t(:logout), destroy_session_path(:user) %>
       </p>
       <p>
         <span class="address-label">
@@ -19,7 +19,7 @@
           :title => t(:generate_new_address_legend)  %>
       </p>
     <% else %>
-      <%= link_to t(:sign_up), new_user_path %> | <%= link_to t(:sign_in), new_session_path %>
+      <%= link_to t(:sign_up), new_registration_path(:user) %> | <%= link_to t(:sign_in), new_session_path(:user) %>
     <% end %>
   </p>
 </div>

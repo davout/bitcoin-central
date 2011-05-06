@@ -33,6 +33,9 @@ BitcoinBank::Application.configure do
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
 
-  config.
-    colorize_logging = false
+  config.colorize_logging = false
+
+  config.action_mailer.default_url_options = {
+    :host => "dummy.net"
+  }  
 end

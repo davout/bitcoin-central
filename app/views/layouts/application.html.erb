@@ -6,7 +6,7 @@
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
     <!-- TODO : Give correct locale for keywords, put a localized description -->
-    <meta name="keywords" lang="en" content="<%= t :website_keywords %>" />
+    <meta name="keywords" lang="<%= I18n.locale %>" content="<%= t :website_keywords %>" />
 
     <title><%= t :website_title %></title>
 
@@ -47,11 +47,5 @@
     </div>
 
     <%= render :partial => 'layouts/footer' %>
-
-    <!-- Locale debugging, remove me at some point
-    <div style="font-family:fixed;width:15em;margin:auto;">
-      Locale : <%= I18n.locale %>
-    </div>
-    -->
   </body>
 </html>

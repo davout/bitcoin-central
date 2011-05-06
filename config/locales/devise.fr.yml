@@ -1,4 +1,4 @@
-en:
+fr:
   errors:
     messages:
       not_found: "not found"
@@ -7,7 +7,7 @@ en:
 
   devise:
     failure:
-      unauthenticated: 'You must be logged-in to access this page'
+      unauthenticated: 'Vous devez-être connecté pour accéder à cette page'
       unconfirmed: 'You have to confirm your account before continuing'
       locked: 'Your account is locked'
       invalid: 'Invalid email or password'

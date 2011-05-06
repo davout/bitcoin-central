@@ -14,7 +14,9 @@ class User < ActiveRecord::Base
   attr_protected :admin, :skip_captcha, :account
 
   attr_accessor :captcha,
-    :skip_captcha
+    :skip_captcha,
+    :new_password,
+    :new_password_confirmation
 
   before_create :generate_account_id
 
@@ -74,7 +76,16 @@ class User < ActiveRecord::Base
     self.account = "BC-U#{"%06d" % (rand * 10 ** 6).to_i}"
   end
 
+  # TODO : Remove ?
   def send_registration_confirmation
     UserMailer.registration_confirmation(self).deliver
+  end
+
+  protected
+
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    account = conditions.delete(:account)
+    where(conditions).where(["account = :value OR email = :value", { :value => account }]).first
   end
 end

@@ -3,6 +3,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
     change_table(:users) do |t|
       # t.database_authenticatable
       t.string :encrypted_password, :null => false, :default => ''
+      t.string :password_salt, :null => false, :default => ''
 
       t.confirmable
       t.recoverable
@@ -13,11 +14,14 @@ class DeviseCreateUsers < ActiveRecord::Migration
     end
 
     add_index :users, :email, :unique => true
+
+    execute "ALTER TABLE `users` MODIFY COLUMN `password` VARCHAR(255) NULL"
   end
 
   def self.down
     change_table :users do |t|
       t.remove :encrypted_password
+      t.remove :password_salt
       t.remove :authentication_token
       t.remove :confirmation_token
       t.remove :confirmed_at

@@ -256,7 +256,14 @@ en:
         category: Type
       liberty_reserve_transfer:
         lr_account_id: Account ID
-  
+
+  password_forgotten: Password forgotten?
+  didnt_receive_confirmation: "Didn't receive confirmation instructions?"
+  didnt_receive_unlock_instructions: "Didn't receive unlock instructions?"
+  resend_confirmation: Resend confirmation instructions
+  submit: Submit
+  change_password: Change password
+
   # controllers/informations_controller.rb
   chart_date_format: %m/%d
   
@@ -375,7 +382,7 @@ en:
   logout: Logout
   signed_in_as: Signed-in as
   sign_up: Sign-up
-  sign_in: Login
+  sign_in: Sign-in
   
   # views/layouts/application.html
   website_title: Bitcoin Central
@@ -520,7 +527,6 @@ en:
     one: "1 error prevented your account details from being updated :"
     other: "%{count} errors prevented your account details from being updated :"
   email: Email
-  email_explanation: Necessary to recover your password
   new_password_explanation: Use this field only if you want to change your password
   new_password_confirmation: Confirmation
   new_password_confirmation_explanation: New password confirmation

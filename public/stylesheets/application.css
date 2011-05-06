@@ -263,12 +263,25 @@ div.form-field div.radios label {
     width: 4em;
 }
 
-div.form-field div.radios input {
+div.form-field div.checkboxes label {
+    font-weight: normal;
+    margin-left: .7em;
+    width: 10em;
+}
+
+div.form-field div.radios input, div.form-field input.checkbox, div.form-field div.checkboxes input {
     width: inherit;
 }
 
-div.form-field input.checkbox {
-    width: inherit;
+/* TODO : Consolidate checkbox styles */
+
+div.form-field div.checkboxes input {
+    position: relative;
+    top: 2px;
+}
+
+div.form-field div.checkboxes {
+    margin-left: 180px;
 }
 
 div.field_with_errors {
@@ -430,7 +443,7 @@ div.flash div.notice {
     color: green;
 }
 
-div.flash div.error {
+div.flash div.alert, div.flash div.error {
     color: red;
 }
 
@@ -518,4 +531,14 @@ div#price-chart-container {
     float: right;
     margin-right: 1em;
     margin-left: 2em;
+}
+
+/* Devise */
+ul#devise-actions {
+    margin-left: 180px;
+    margin-top: 30px;
+}
+
+ul#devise-actions li {
+    list-style-image: none;
 }

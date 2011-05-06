@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(:version => 20110506082222) do
   create_table "users", :force => true do |t|
     t.string   "account",                                 :null => false
     t.string   "email"
-    t.string   "password",                                :null => false
+    t.string   "password"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "last_address"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(:version => 20110506082222) do
     t.boolean  "admin",                :default => false
     t.string   "secret_token"
     t.string   "encrypted_password",   :default => "",    :null => false
+    t.string   "password_salt",        :default => "",    :null => false
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"

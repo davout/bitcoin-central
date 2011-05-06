@@ -206,6 +206,12 @@ fr:
       trade_order: Ordre
       transfer: Transfert
 
+  password_forgotten: Mot de passe oublié ?
+  didnt_receive_confirmation: "E-mail de confirmation non reçu ?"
+  didnt_receive_unlock_instructions: "E-mail de déverrouillage non reçu ?"
+  resend_confirmation: Renvoyer l'email de confirmation
+  submit: Valider
+
   # controllers/informations_controller.rb
   chart_date_format: %d.%m.
 
@@ -228,6 +234,7 @@ fr:
   partially: partiellement
   completely: complètement
   order_deleted: Votre ordre a été supprimé
+  change_password: Changement de mot de passe
 
   # controllers/transfers_controller.rb
   successful_transfer: Vous avez transféré %{amount} %{currency} avec succès
@@ -466,7 +473,6 @@ fr:
     one: "Une erreur a empêché vos informations d'être enregistrées :"
     other: "%{count} erreurs ont empêché vos informations d'être enregistrées :"
   email: Adresse e-mail
-  email_explanation: Nécessaire pour récupérer votre mot de passe
   new_password_explanation: Remplissez ce champ pour changer votre mot de passe
   new_password_confirmation: Confirmation
   new_password_confirmation_explanation: Confirmation du nouveau mot de passe
