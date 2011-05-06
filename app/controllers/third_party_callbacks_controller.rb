@@ -1,8 +1,7 @@
 class ThirdPartyCallbacksController < ApplicationController
   skip_before_filter :verify_authenticity_token,
     :get_bitcoin_client,
-    :authenticate,
-    :authorize,
+    :authenticate_user!,
     :set_time_zone
 
   # Liberty Reserve bounce URLs

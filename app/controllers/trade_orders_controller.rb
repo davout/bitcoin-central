@@ -1,5 +1,6 @@
 class TradeOrdersController < ApplicationController
-  skip_before_filter :authorize, :only => :book
+  skip_before_filter :authenticate_user!,
+    :only => :book
 
   def new
     @trade_order = TradeOrder.new
@@ -13,14 +14,14 @@ class TradeOrdersController < ApplicationController
       result = @trade_order.execute!
 
       if result[:trades].zero?
-        notice = (t :order_saved)
+        notice = t(:order_saved)
       else
-        notice = (t :order_filled,
-          :how => (t @trade_order.destroyed? ? :completely : :partially),
-          :action => (t @trade_order.buying? ? :bought : :sold),
+        notice = t(:order_filled,
+          :how => (t(@trade_order.destroyed?) ? :completely : :partially),
+          :action => (t(@trade_order.buying?) ? :bought : :sold),
           :traded_btc => ("%.4f" % result[:total_traded_btc]),
           :amount => ("%.4f" % result[:total_traded_currency]),
-          :currency => (result[:currency]),
+          :currency => result[:currency],
           :ppc => ("%.5f" % result[:ppc]))
       end
 

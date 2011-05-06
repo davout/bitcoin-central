@@ -3,6 +3,8 @@ BitcoinBank::Application.routes.draw do
     resources :addresses, :only => [:create]
   end
 
+  devise_for :users
+
   resource :session
 
   resource :chart, :path => "charts", :only => [] do
@@ -61,6 +63,10 @@ BitcoinBank::Application.routes.draw do
 
   match '/support' => 'informations#support',
     :as => :support
+
+  authenticate :user do
+    root :to => "accounts#show"
+  end
 
   root :to => 'informations#welcome'
 end

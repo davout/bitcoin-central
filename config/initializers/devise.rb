@@ -69,7 +69,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :validatable
   # Range for password length
-  config.password_length = 6..20
+  config.password_length = 6..100
 
   # Regex to use to validate the email address
   config.email_regexp = /^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i
@@ -94,10 +94,10 @@ Devise.setup do |config|
 
   # Number of authentication tries before locking an account if lock_strategy
   # is failed attempts.
-  config.maximum_attempts = 5
+  config.maximum_attempts = 3
 
   # Time interval to unlock the account if :time is enabled as unlock_strategy.
-  config.unlock_in = 3.hours
+  config.unlock_in = 24.hours
 
   # ==> Configuration for :token_authenticatable
   # Defines name of the authentication token params key

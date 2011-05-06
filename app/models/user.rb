@@ -1,13 +1,20 @@
 class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :confirmable, :lockable and :timeoutable
+  devise :database_authenticatable,
+    :registerable,
+    :confirmable,
+    :recoverable,
+    :rememberable,
+    :trackable,
+    :validatable
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_protected :admin, :skip_captcha, :account
 
-  attr_accessor :new_password, 
-    :new_password_confirmation,
-    :current_password,
-    :captcha,
+  attr_accessor :captcha,
     :skip_captcha
-
-  before_save :update_password
 
   before_create :generate_account_id
 
@@ -30,28 +37,9 @@ class User < ActiveRecord::Base
   validates :account,
     :uniqueness => true
 
-  validates :new_password,
-    :presence => true,
-    :length => { :minimum => 4},
-    :on => :create
-
   validates :email,
     :uniqueness => true,
-    :format => { :with => /[^\s]+@[^\s]{1,150}\.[a-zA-Z]{2,5}/} # Naive e-mail regexp :)
-    
-  validate :current_password do
-    unless new_record? or check_password(current_password)
-      errors[:current_password] << (I18n.t "errors.invalid")
-    end
-  end
-
-  validate :new_password do
-    unless new_password.blank?
-      unless new_password == new_password_confirmation
-        errors[:new_password] << (I18n.t "errors.no_match")
-      end
-    end
-  end
+    :presence => true
 
   validate :captcha do
     if captcha.nil? and new_record?
@@ -63,21 +51,6 @@ class User < ActiveRecord::Base
 
   def captcha_checked!
     self.captcha = true
-  end
-
-  def check_password(p)
-    unless p.blank?
-      self.password == Digest::SHA2.hexdigest(p + salt)
-    end
-  end
-  
-  def password=(p)
-    generate_salt!
-    self[:password] = Digest::SHA2.hexdigest(p + salt)
-  end
-
-  def generate_salt!
-    self.salt = Digest::SHA2.hexdigest((rand * 10 ** 9).to_s)
   end
 
   def generate_new_address
@@ -97,21 +70,11 @@ class User < ActiveRecord::Base
     transfers.with_currency(currency).with_confirmations(options[:unconfirmed]).map(&:amount).sum
   end
 
-  def update_password
-    self.password = new_password unless new_password.blank?
-  end
-
   def generate_account_id
     self.account = "BC-U#{"%06d" % (rand * 10 ** 6).to_i}"
   end
 
   def send_registration_confirmation
     UserMailer.registration_confirmation(self).deliver
-  end
-
-  def check_token(token, timestamp)
-    if secret_token
-      token == Digest::SHA2.hexdigest("#{secret_token}#{timestamp}")
-    end
   end
 end
