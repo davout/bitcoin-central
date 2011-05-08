@@ -1,0 +1,57 @@
+== Bitcoin Central
+Bitcoin Central powers bitcoin-central.net, a bitcoin trading platform. It is :
+
+* Open Source,
+* Based on Ruby on Rails,
+* Fully localizable,
+* Multi-currency.
+
+It's composed of 12 modules:
+
+== Installation
+Linux and Windows setup work well, I found the easiest to be an Ubuntu install
+
+=== Windows
+* Install Ruby and MySQL
+* Install Ruby Development Kit (https://github.com/oneclick/rubyinstaller/wiki/development-kit)
+* Install rubygems
+
+=== Linux (Debian flavors)
+* Install required packages
+ $ sudo apt-get install ruby ruby-dev libssl-dev irb rubygems mysql
+
+* Add gem binaries to path and re-login
+ # First line of /etc/environment should show something like this
+ PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/var/lib/gems/1.8/bin"
+
+* Update rubygems if necessary (http://programmers-blog.com/2009/04/12/ruby-gem-update-system-is-disabled-on-debian)
+
+=== Common
+* Install rails and bundler
+ $ sudo gem install rails bundler
+
+* Fork project if relevant
+* Check out sources with git
+* Install the required gems
+ $ cd [SOURCE PATH]
+ $ bundle
+
+* Log-in to MySQL console and run the following
+ GRANT ALL PRIVILEGES ON bitcoin-bank_development.* TO 'rails'@'localhost' IDENTIFIED BY 'rails';
+
+* Run a couple of rake tasks
+ $ rake db:create
+ $ rake db:migrate
+
+* Edit config/bitcoin.yml to be able to connect your instance to a bitcoin client
+
+* Run the rails server
+ $ rails s
+
+Your fresh instance should now be running on http://localhost:3000/ !
+
+== Contributions
+All are welcome, improvements, fixes and translations (the string extraction bounty has been paid).
+
+== License
+AGPL License. Copyright 2010-2011 David FRANCOIS

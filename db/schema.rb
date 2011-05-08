@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110201210946) do
+ActiveRecord::Schema.define(:version => 20110506082222) do
 
   create_table "invoices", :force => true do |t|
     t.integer  "payee_id"
@@ -83,16 +83,35 @@ ActiveRecord::Schema.define(:version => 20110201210946) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "account",                         :null => false
+    t.string   "account",                                 :null => false
     t.string   "email"
-    t.string   "password",                        :null => false
+    t.string   "password"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "last_address"
     t.string   "salt"
     t.string   "time_zone"
-    t.boolean  "admin",        :default => false
+    t.boolean  "admin",                :default => false
     t.string   "secret_token"
+    t.string   "encrypted_password",   :default => "",    :null => false
+    t.string   "password_salt",        :default => "",    :null => false
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "reset_password_token"
+    t.string   "remember_token"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",        :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.integer  "failed_attempts",      :default => 0
+    t.string   "unlock_token"
+    t.datetime "locked_at"
+    t.string   "authentication_token"
   end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
 
 end
