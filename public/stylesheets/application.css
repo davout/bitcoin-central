@@ -102,6 +102,14 @@ h1#main-title a span{
     display: none;
 }
 
+h1#main-title a {
+    background-image: url('/images/bitcoin.png');
+    background-repeat: no-repeat;
+    display: block;
+    width: 300px;
+    height: 60px;
+}
+
 /* Locale selection */
 div#locale-select {
     position: absolute;
