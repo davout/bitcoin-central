@@ -20,8 +20,6 @@ class User < ActiveRecord::Base
 
   before_create :generate_account_id
 
-  after_create :send_registration_confirmation
-
   has_many :transfers,
     :dependent => :destroy
 
@@ -76,8 +74,8 @@ class User < ActiveRecord::Base
     self.account = "BC-U#{"%06d" % (rand * 10 ** 6).to_i}"
   end
 
-  # TODO : Remove ?
-  def send_registration_confirmation
+  def confirm!
+    super
     UserMailer.registration_confirmation(self).deliver
   end
 

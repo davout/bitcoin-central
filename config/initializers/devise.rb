@@ -3,7 +3,7 @@
 Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in DeviseMailer.
-  config.mailer_sender = "no-reply@bitcoin-central.net"
+  config.mailer_sender = "Bitcoin Central support <support@bitcoin-central.net>"
 
   # Configure the class responsible to send e-mails.
   # config.mailer = "Devise::Mailer"
