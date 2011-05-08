@@ -23,10 +23,14 @@ BitcoinBank::Application.configure do
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
 
+  # Uncomment this to test e-mails in development mode
+  # config.action_mailer.delivery_method = :sendmail
+
+  # Comment this line if testing e-mails in development mode
   config.action_mailer.delivery_method = :test
 
   config.action_mailer.default_url_options = {
-    :host => "dummy.net"
+    :host => "development.bitcoin-central.net"
   }
 end
 
