@@ -6,8 +6,6 @@ Bitcoin Central powers bitcoin-central.net, a bitcoin trading platform. It is :
 * Fully localizable,
 * Multi-currency.
 
-It's composed of 12 modules:
-
 == Installation
 Linux and Windows setup work well, I found the easiest to be an Ubuntu install
 
