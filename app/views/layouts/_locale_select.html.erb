@@ -1,14 +1,12 @@
 <div id="locale-select">
-  <%
-    languages = {
-      "fr" => "Français",
-      "en" => "English",
-      "de" => "Deutsch",
-      "it" => "Italiano"
-    }
+  <% I18n.available_locales.sort{ |a,b| a.to_s <=> b.to_s }.each do |locale| %>
+    <%= link_to(
+      image_tag("flags/#{locale}.png",
+        :title => I18n::Locales[locale],
+        :alt => I18n::Locales[locale]
+      ),
+      "?#{[request.query_string.split("&").reject{ |l| l =~ /\locale=[a-zA-Z\-]{2,5}/ }, "locale=#{locale}"].flatten.join("&")}"
+    )
   %>
-
-  <% I18n.available_locales.map(&:to_s).sort.each do |locale| %>
-    <%= link_to(image_tag("flags/#{locale}.png", :title => languages[locale], :alt => languages[locale]), "?locale=#{locale}") %>
   <% end %>
 </div>
