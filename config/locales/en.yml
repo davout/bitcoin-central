@@ -370,6 +370,8 @@ en:
     admin:
       main: Admin
       transfers: Transfers
+      users: Users
+      information: Informations
     help:
       main: Help
       faq: FAQ
@@ -445,7 +447,6 @@ en:
   
   # views/trades/index.html
   trade_history_title: Trade history
-  date: Date
   no_trades_found: No trades were found
   
   # views/transfers/_lr_sci_form.html

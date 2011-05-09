@@ -319,6 +319,8 @@ fr:
     admin:
       main: Administration
       transfers: Transferts
+      users: Utilisateurs
+      information: Informations
     help:
       main: Aide
       faq: Foire aux questions
@@ -393,7 +395,6 @@ fr:
 
   # views/trades/index.html
   trade_history_title: Historique
-  date: Date
   no_trades_found: Aucune transaction trouvée
 
   # views/transfers/_lr_sci_form.html

@@ -1,0 +1,18 @@
+<h1>General Informations</h1>
+
+<table>
+  <tr>
+    <th>Currency</th>
+    <th>Balance</th>
+  </tr>
+  <% @balances.each do |currency, balance| %>
+    <tr>
+      <td>
+        <%= currency.to_s.upcase %>
+      </td>
+      <td>
+        <%= balance %>
+      </td>
+    </tr>
+  <% end %>
+</table>

@@ -328,6 +328,8 @@ de:
     admin:
       main: Admin
       transfers: Transaktionen
+      users: Users
+      information: Informations
     help:
       main: Hilfe
       faq: Häufig gestellte Fragen
@@ -402,7 +404,6 @@ de:
 
   # views/trades/index.html
   trade_history_title: Auftragsgeschichte
-  date: Datum
   no_trades_found: Es wurden keine Aufträge gefunden.
 
   # views/transfers/_lr_sci_form.html
