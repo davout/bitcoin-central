@@ -1,0 +1,25 @@
+fr:
+  activerecord:
+    attributes:
+      liberty_reserve_transfer:
+        lr_account_id: Transfert Liberty Reserve
+      trade_order:
+        amount: Montant
+        dark_pool: Ordre masqué
+        ppc: Prix
+        category: Type
+        currency: Devise
+        total: Total
+      transfer:
+        amount: Montant
+        address: Adresse
+        currency: Devise
+
+    user:
+      current_password: Mot de passe
+      new_password: Nouveau mot de passe
+
+    models:
+      user: Utilisateur
+      trade_order: Ordre
+      transfer: Transfert
