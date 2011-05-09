@@ -20,4 +20,5 @@ gem 'whenever'
 
 gem 'capistrano'
 
-gem 'active_scaffold_vho'
+gem 'active_scaffold_vho',
+  :git => 'git://github.com/vhochstein/active_scaffold.git'

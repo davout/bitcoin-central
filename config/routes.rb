@@ -44,9 +44,8 @@ BitcoinBank::Application.routes.draw do
   end
 
   namespace :admin do
-    resources :transfers do
-      as_routes
-    end
+    resources :transfers
+    resources :users
   end
 
   match '/trades' => 'trades#all_trades'
