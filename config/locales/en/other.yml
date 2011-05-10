@@ -1,0 +1,294 @@
+en:
+  password_forgotten: Password forgotten?
+  didnt_receive_confirmation: "Didn't receive confirmation instructions?"
+  didnt_receive_unlock_instructions: "Didn't receive unlock instructions?"
+  resend_confirmation: Resend confirmation instructions
+  submit: Submit
+  change_password: Change password
+
+  # controllers/informations_controller.rb
+  chart_date_format: %m/%d
+
+  # controllers/sessions_controller.rb
+  sign_in_success: You logged-in successfully to your account.
+  sign_in_failure: Authentication failed, check your credentials and the captcha answer
+  sign_out_success: You logged out successfully
+
+  # controllers/third_party_callbacks_controller.rb
+  lr_transfer_success: "Successfully added %{amount} %{currency} to your account (LR fees : %{fee} %{currency})"
+  lr_transfer_failure: Your %{amount} %{currency} transfer failed.
+  px_transfer_canceled: Your Pecunix transfer was canceled
+  px_transfer_success: You successfully transferred %{amount} PGAU to your account (Pecunix charged a %{fee} PGAU fee)
+
+  # controllers/trade_orders_controller.rb
+  order_saved: Your order has been saved but no compatible orders have been found yet
+  order_filled: Your order was %{how} filled, you %{action} %{traded_btc} BTC for %{amount} %{currency} @ %{ppc} %{currency}/BTC
+  bought: bought
+  sold: sold
+  partially: partially
+  completely: completely
+  order_deleted: Trade order deleted successfully
+
+  # controllers/transfers_controller.rb
+  successful_transfer: You successfuly transferred %{amount} %{currency}
+
+  # controllers/user_controller.rb
+  account_created: Your account was successfully created
+  account_updated: Your account was successfully updated
+
+  # helpers/trade_orders_helper.rb
+  order_dark_pool_some: Some of these orders don't appear in the public order book
+  order_dark_pool: This order doesn't appear in the public order book
+
+  # helpers/transfers_helper.rb
+  confirmations_left:
+    one: 1 confirmation left
+    other: %{count} confirmations left
+
+  # mailers/backup_mailer.rb
+  support_from: Bitcoin Central support <%{support_email}>
+  wallet_backup_subject: Wallet backup %{date}
+
+  # mailers/user_mailer.rb
+  sign_up_confirmation: Registration confirmation
+
+  # models/*.rb + lib/validators/*.rb
+  errors:
+    not_yourself: cannot be yourself
+
+    blank: can't be blank
+
+    must_be_greater: must be greater than %{min} BTC
+    greater_than_balance: is greater than your available balance (%{balance} %{currency})
+    greater_than_capacity: is greater than your buying capacity (%{capacity} BTC @ %{ppc} BTC/%{currency})
+    minimum_dark_pool_order: orders must have a 3,000 BTC minimal amount
+
+    invalid: is invalid
+    no_match: doesn't match its confirmation
+    answer_incorrect: answer is incorrect
+
+    not_your_address: can't be one of your addresses
+    min_amount: should not be smaller than %{minimum} %{currency}
+    ppc_minimum: Price per coin should not be smaller than 0.0001 %{currency}
+
+  # views/accounts/show.html
+  account_balance_title: Account
+  currency: Currency
+  balance: Balance
+  balance_unconfirmed: These funds are awaiting confirmation from the bitcoin network
+
+  # views/backup_mailer/wallet_backup.text
+  encrypted_wallet: Encrypted server wallet for %{date}
+
+  # views/informations/economy.html
+  economy_title: Bitcoin economy summarized
+  how_many_generated: How many bitcoins are there ?
+  generated_coins_html: Currently there has been a total of <strong>%{count}</strong> generated bitcoins.
+
+  # views/informations/faq.html
+  faq_title: Frequently asked questions
+
+  # views/informations/welcome.html
+  trading_data_title: Last week's trading data
+  welcome: Welcome to bitcoin-central.net!
+
+  # views/layouts/_footer.html
+  footer_html: 'Feel free to support this project by donating a few BTC to <span class="bitcoin-address">%{adress}</span>'
+
+  # views/layouts/_navigation.html
+  navigation:
+    account:
+      main: Account
+      balance: Balance
+      history: History
+      transfer_money: Transfer money
+      deposit_money: Deposit money
+    trading:
+      main: Trading
+      new_order: New order
+      your_orders: Your orders
+      order_book: Order book
+      trade_history: Trade history
+    admin:
+      main: Admin
+      transfers: Transfers
+      users: Users
+      information: Informations
+    help:
+      main: Help
+      faq: FAQ
+      economy: Economy
+      support: Support
+
+  # views/layouts/user_informations.html
+  generate_new_address_legend: Generate a new receiving address, refresh at will
+  your_last_address: Your address
+  logout: Logout
+  signed_in_as: Signed-in as
+  sign_up: Sign-up
+  sign_in: Sign-in
+
+  # views/layouts/application.html
+  website_title: Bitcoin Central
+  website_keywords: bitcoin, bitcoin central, buy bitcoins, sell bitcoins
+
+  # views/sessions/new.html
+  account_label: Account ID
+  account_description: E-mail address or account ID
+  password_label: Password
+  password_description: Password forgotten?
+  sign_in_submit: Sign-in
+
+  # views/trade_orders/book.html
+  order_book_title: Select a currency
+  currencies:
+    all: All
+    btc: BTC
+    btc_legend: Bitcoin
+    lrusd: LRUSD
+    lreur: LREUR
+    lr_legend: Liberty Reserve
+    eur: EUR
+    eur_legend: Cash EUR
+    pgau: PGAU
+    pgau_legend: Pecunix Gold
+  buying: Buying
+  selling: Selling
+  amount: Amount
+  price: Price
+  no_buying_orders_found: No buying orders have been found.
+  no_selling_orders_found: No selling orders have been found.
+
+  # views/trade_orders/index.html
+  trade_orders_title: Trade orders
+  created_at: Created at
+  type: Type
+  price: Price
+  total: Total
+  dark_pool_order: Dark pool order
+  delete_order: Delete this trade order
+  delete_order_confirm: Are you sure you want to delete this trade order ?
+  no_orders_found: No orders have been found.
+
+  # views/trade_orders/new.html
+  create_order_title: Create a trade order
+  currency_to_trade: Currency you want to trade
+  category: Category
+  buy: Buy
+  sell: Sell
+  sell_or_buy_description: Whether you want to buy or sell bitcoins
+  your_balance: Your balance
+  your_balance_description: Your available confirmed balance
+  amount_description: BTC amount you're trading
+  ppc_description: Price for 1 BTC
+  total_description: The total for your order
+  dark_pool_description: Should the order be hidden ?
+  error_creating_order:
+    one: "1 error prevented your trade order from being created :"
+    other: "%{count} errors prevented your trade order from being created :"
+
+  # views/trades/index.html
+  trade_history_title: Trade history
+  no_trades_found: No trades were found
+
+  # views/transfers/_lr_sci_form.html
+  click_for_lr_html: <a href="#" onclick="%{action}">Click here</a> to be taken to the Liberty Reserve interface, you'll be able to specify the details of your deposit.
+
+  # views/transfers/deposit.html
+  support_email: "support@bitcoin-central.net"
+  deposit_bitcoins_title: Deposit Bitcoins
+  deposit_bitcoins_body_html:
+    <p>Simply transfer funds to any of your addresses and they'll show up in your account after a couple of minutes.</p>
+    <p>Please note that you will only be able to use these funds after the bitcoin network has confirmed the transfer (approx. %{estimation} minutes).</p>
+  deposit_eur_title: Deposit EUR
+  deposit_eur_body_html:
+    <p>Please send an e-mail to <a href="mailto:%{support_email}">%{support_email}</a> using PGP encryption <a href="%{pgp_link}">(public key)</a>.</p>
+  deposit_lr_title: Deposit Liberty Reserve
+  deposit_pgau_title: Deposit Pecunix gold
+  deposit_pgau_body_html:
+    <p>
+    Use this form to specify the amount of gold grams to deposit, upon submission
+    you'll be taken to the Pecunix interface to confirm the transfer. Once the transfer
+    is completed, the gold will appear in your balance.
+    </p>
+  amount_pgau: Amount (PGAU)
+  deposit_pgau: Deposit Pecunix
+
+  # views/transfers/index.html
+  account_history_title: Account history
+  currency: Currency
+
+  # views/transfers/new.html
+  transfer_funds_title: Transfer funds
+  transfer_funds_body_html: "
+    <p>You can send funds to :
+      <ul>
+        <li>a <strong>bitcoin</strong> address (BTC only),</li>
+        <li>an <strong>e-mail</strong> address (all currencies),</li>
+        <li>a <strong>bitcoin central</strong> account (all currencies), or</li>
+        <li>a <strong>Liberty Reserve</strong> account (LREUR and LRUSD only)</li>
+      </ul>
+    </p>
+    "
+  how_does_it_work_title: How does it work ?
+  how_does_it_work_body_html:
+    <p>
+      Transferring bitcoins is possible to a bitcoin central account or to a bitcoin address,
+      funds will be sent either through the bitcoin network or inside bitcoin central
+      depending on whether the address is owned by a bitcoin central user, transfers
+      to accounts will always happen inside bitcoin central.
+    </p>
+    <p>
+      Transferring any currency to a bitcoin central account is free.
+    </p>
+    <p>
+      Transferring funds to e-mail addresses will simply deduct the funds from your account
+      and notify the payee that they are waiting for him on bitcoin central. If the payee
+      does not collect the funds after a certain amount of time they will be returned to you.
+      <strong>This functionality is not active yet.</strong>
+    </p>
+  error_transferring_funds:
+    one: "1 error prevented your funds from being transferred :"
+    other: "%{count} errors prevented your funds from being transferred :"
+  payee: Payee
+  payee_id_eur: Bitcoin Central account or e-mail address
+  payee_id_lrusd: Bitcoin Central, Liberty Reserve account or e-mail address
+  payee_id_lreur: Bitcoin Central, Liberty Reserve account or e-mail address
+  payee_id_btc: Bitcoin Central account, e-mail or bitcoin address
+  payee_id_none: Payee identification
+  confirmed_balance: Your confirmed balance
+  transfer_amount: The amount you want to transfer
+  transfer_button: Transfer
+
+  # views/user_mailer/registration_confirmation.html
+  # views/user_mailer/registration_confirmation.text
+  thanks_for_registering: Thank you for registering at Bitcoin Central.
+  your_account_id_is: "Your account ID is : %{account_id}"
+
+  # views/users/_form.html
+  error_updating_account:
+    one: "1 error prevented your account details from being updated :"
+    other: "%{count} errors prevented your account details from being updated :"
+  email: Email
+  new_password_explanation: Use this field only if you want to change your password
+  new_password_confirmation: Confirmation
+  new_password_confirmation_explanation: New password confirmation
+  current_password_explanation: This is required to protect your account
+  time_zone: Time zone
+  time_zone_explanation: Select your time-zone to get data display
+
+  # views/users/edit.html
+  account_details_title: Account details
+
+  # views/users/index.html
+  listing_users_title: Listing users
+  account: Account
+  password: Password
+  user_show: Show
+  user_edit: Edit
+  user_destroy: Destroy
+  user_destroy_confirm: Are you sure?
+  user_new: New User
+
+  # views/users/new.html
+  sign_up_for_account_title: Sign-up for an account

@@ -1,0 +1,8 @@
+en:
+  activerecord:
+    attributes:
+      trade_order:
+        ppc: Price
+        category: Type
+      liberty_reserve_transfer:
+        lr_account_id: Account ID

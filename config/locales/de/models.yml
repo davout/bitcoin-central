@@ -1,0 +1,26 @@
+de:
+  activerecord:
+    # bitcoin-central specific
+    attributes:
+      liberty_reserve_transfer:
+        lr_account_id: Liberty Reserve Kontonummer
+      trade_order:
+        amount: Betrag
+        dark_pool: Dark Pool
+        ppc: Preis
+        category: Typ
+        currency: Währung
+        total: Gesamtbetrag
+      transfer:
+        amount: Betrag
+        address: Empfängeradresse
+        currency: Währung
+
+      user:
+        current_password: Aktuelles Passwort
+        new_password: Neues Passwort
+
+    models:
+      user: Benutzerkonto
+      trade_order: Auftrag
+      transfer: Überweisung
