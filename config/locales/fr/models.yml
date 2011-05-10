@@ -14,12 +14,45 @@ fr:
         amount: Montant
         address: Adresse
         currency: Devise
-
-    user:
-      current_password: Mot de passe
-      new_password: Nouveau mot de passe
+      user:
+        email: Adresse e-mail
+        password: Mot de passe
+        account: N° de compte
+        admin: Administration
+        authentication_token: Jeton d'authentification
+        confirmation_sent_at: Envoi du mail de confirmation
+        confirmation_token: Jeton de confirmation
+        confirmed_at: Confirmation
+        current_sign_in_at: Connexion courante
+        current_sign_in_ip: IP de connexion courante
+        encrypted_password: Mot de passe crypté
+        failed_attempts: Echecs d'authentification
+        last_address: Dernière adresse Bitcoin
+        last_sign_in_at: Dernière connexion
+        last_sign_in_ip: IP de dernière connexion
+        locked_at: Verouillé le
+        password_salt: Sel de mot de passe
+        remember_created_at: Rappel
+        remeber_token: Jeton de rappel
+        reset_password_token: Jeton de changement de mot de passe
+        salt: Sel
+        secret_token: Jeton secret
+        time_zone: Fuseau horaire
+        unlock_token: Jeton de déverouillage
+        purchase_trades: Transactions d'achat
+        sale_trades: Transactions de vente
+        trade_orders: Ordres
+        transfers: Transactions
+        current_password: Mot de passe
+        new_password: Nouveau mot de passe
 
     models:
-      user: Utilisateur
-      trade_order: Ordre
-      transfer: Transfert
+      user:
+        one: Utilisateur
+        other: Utilisateurs
+      trade_order:
+        one: Ordre
+        other: Ordres
+      transfer:
+        one: Transaction
+        other: Transactions

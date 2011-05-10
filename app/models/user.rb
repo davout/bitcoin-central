@@ -79,6 +79,10 @@ class User < ActiveRecord::Base
     UserMailer.registration_confirmation(self).deliver
   end
 
+  def to_label
+    account
+  end
+
   protected
 
   def self.find_for_database_authentication(warden_conditions)
