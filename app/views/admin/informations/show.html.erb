@@ -1,16 +1,16 @@
 <h1>General Informations</h1>
 
-<table>
+<table class="default">
   <tr>
-    <th>Currency</th>
-    <th>Balance</th>
+    <th><%= t "activerecord.attributes.transfer.currency" %></th>
+    <th><%= t "activerecord.attributes.transfer.amount" %></th>
   </tr>
   <% @balances.each do |currency, balance| %>
     <tr>
       <td>
         <%= currency.to_s.upcase %>
       </td>
-      <td>
+      <td class="account-balance">
         <%= balance %>
       </td>
     </tr>

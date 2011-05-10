@@ -56,6 +56,10 @@ class Transfer < ActiveRecord::Base
     end
   }
 
+  def to_label
+    "#{I18n.t("activerecord.models.transfer.one")} n°#{id}"
+  end
+
   def self.from_params(payee, params)
     transfer = Transfer.new
 
