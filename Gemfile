@@ -21,3 +21,5 @@ gem 'whenever'
 gem 'capistrano'
 
 gem 'active_scaffold_vho'
+
+gem 'haml'
