@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = @current_user
+    @user = current_user
   end
 
   def create
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = @current_user
+    @user = current_user
 
     # White list acceptable input instead of blacklisting dangerous params
     params[:user].delete(:account)

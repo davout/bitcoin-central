@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110506082222) do
+ActiveRecord::Schema.define(:version => 20110511194431) do
 
   create_table "invoices", :force => true do |t|
     t.integer  "payee_id"
@@ -81,6 +81,8 @@ ActiveRecord::Schema.define(:version => 20110506082222) do
     t.string   "px_payer"
     t.decimal  "px_fee",                :precision => 16, :scale => 8, :default => 0.0
   end
+
+  add_index "transfers", ["lr_transaction_id"], :name => "index_transfers_on_lr_transaction_id", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "account",                                 :null => false

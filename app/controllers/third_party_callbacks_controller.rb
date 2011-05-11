@@ -6,14 +6,16 @@ class ThirdPartyCallbacksController < ApplicationController
 
   # Liberty Reserve bounce URLs
   def lr_transfer_success
-    transfer = LibertyReserveTransfer.find_by_lr_transaction_id(params[:lr_transfer])
+    # Following line costs an LR API call but won't explode if LR forgot to
+    # hit our callback URL when a user deposited some funds
+    transfer = Transfer.create_from_lr_transaction_id(params[:lr_transfer])
 
     redirect_to account_transfers_path,
-      :notice => (t :lr_transfer_success, :amount=>transfer.amount, :currency=>params[:lr_currency], :fee=>(transfer.lr_merchant_fee + params[:lr_fee_amnt].to_f))
+      :notice => t(:lr_transfer_success, :amount => transfer.amount, :currency => params[:lr_currency], :fee => (transfer.lr_merchant_fee + params[:lr_fee_amnt].to_f))
   end
 
   def lr_transfer_fail
-    flash[:error] = (t :lr_transfer_failure, :amount=>params[:lr_amnt], :currency=>params[:lr_currency])
+    flash[:error] = t(:lr_transfer_failure, :amount => params[:lr_amnt], :currency => params[:lr_currency])
     redirect_to account_transfers_path
   end
 
@@ -31,7 +33,7 @@ class ThirdPartyCallbacksController < ApplicationController
 
   # Pecunix cancel callback
   def px_cancel
-    flash[:error] = (t :px_transfer_canceled)
+    flash[:error] = t(:px_transfer_canceled)
     redirect_to account_transfers_path
   end
 

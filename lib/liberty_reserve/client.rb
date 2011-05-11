@@ -19,10 +19,10 @@ module LibertyReserve
       end
     end
 
-    def get_transaction(transaction_id = "49869203")
+    def get_transaction(transaction_id)
       account_id = BitcoinBank::LibertyReserve['account']
 
-      send_request("history") do |xml|
+      r = send_request("history") do |xml|
         xml.HistoryRequest :id => random_id do
           authentication_block(xml)
           
@@ -32,6 +32,8 @@ module LibertyReserve
           end
         end
       end
+
+      format_transaction(r["HistoryResponse"]["Receipt"])
     end
 
     def transfer(account, amount, currency)
@@ -51,6 +53,25 @@ module LibertyReserve
           end
         end
       end
+    end
+
+    # Get history for last 7 days and last 20 transactions
+    def history(currency)
+      account_id = BitcoinBank::LibertyReserve['account']
+
+      r = send_request("history") do |xml|
+        xml.HistoryRequest :id => random_id do
+          authentication_block(xml)
+
+          xml.History do
+            xml.CurrencyId currency
+            xml.AccountId account_id
+            xml.PageSize  "20"
+          end
+        end
+      end
+
+      r["HistoryResponse"]["Receipt"].map { |t| format_transaction(t) }.compact
     end
 
     private
@@ -87,6 +108,24 @@ module LibertyReserve
       xml.instruct!
       yield(xml)
       CGI::escape(request)
+    end
+
+    # Makes ugly transaction data easier to re-use and nukes any non SCI
+    # transaction, which we don't care about for now
+    def format_transaction(t)
+      if t["Transfer"]["Source"] == "SCI"
+        account = t["Transfer"]["Memo"].match(/BC\-[A-Z][0-9]+/) and t["Transfer"]["Memo"].match(/BC\-[A-Z][0-9]+/)[0]
+
+        {
+          :currency => t["Transfer"]["CurrencyId"],
+          :lr_transaction_id => t["ReceiptId"],
+          :lr_account_id => t["Transfer"]["Payer"],
+          :lr_merchant_fee => t["Fee"].to_f,
+          :lr_transferred_amount => t["Amount"].to_f,
+          :amount => t["Amount"].to_f - t["Fee"].to_f,
+          :user => account ? User.where(:account => account[0]).first : nil
+        }
+      end
     end
   end
 end
