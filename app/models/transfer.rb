@@ -80,4 +80,13 @@ class Transfer < ActiveRecord::Base
       transfer.withdrawal!
     end
   end
+
+  def self.create_from_lr_transaction_id(lr_tx_id)
+    # We create a plain Transfer since we don't want
+    # anything to be executed after creation
+
+    unless Transfer.where(:lr_transaction_id => lr_tx_id).first
+      Transfer.create! LibertyReserve::Client.new.get_transaction(lr_tx_id)
+    end
+  end
 end
