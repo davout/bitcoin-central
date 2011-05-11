@@ -16,7 +16,8 @@ class User < ActiveRecord::Base
   attr_accessor :captcha,
     :skip_captcha,
     :new_password,
-    :new_password_confirmation
+    :new_password_confirmation,
+    :current_password
 
   before_create :generate_account_id
 

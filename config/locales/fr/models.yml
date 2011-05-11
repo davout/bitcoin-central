@@ -2,7 +2,7 @@ fr:
   activerecord:
     attributes:
       liberty_reserve_transfer:
-        lr_account_id: Transfert Liberty Reserve
+        lr_account_id: Compte Liberty Reserve
       trade_order:
         amount: Montant
         dark_pool: Ordre masqué
@@ -51,7 +51,7 @@ fr:
         sale_trades: Transactions de vente
         trade_orders: Ordres
         transfers: Transactions
-        current_password: Mot de passe
+        current_password: Mot de passe actuel
         new_password: Nouveau mot de passe
 
     models:

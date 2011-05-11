@@ -53,6 +53,23 @@ module LibertyReserve
       end
     end
 
+    # Get history for last 7 days and last 20 transactions
+    def history(currency)
+      account_id = BitcoinBank::LibertyReserve['account']
+
+      send_request("history") do |xml|
+        xml.HistoryRequest :id => random_id do
+          authentication_block(xml)
+
+          xml.History do
+            xml.CurrencyId currency
+            xml.AccountId account_id
+            xml.PageSize  "20"
+          end
+        end
+      end
+    end
+
     private
 
     def send_request(operation)
