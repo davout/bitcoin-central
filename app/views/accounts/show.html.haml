@@ -1,0 +1,45 @@
+%h1= t :account_balance_title
+
+%table#account-balances.default
+  %tr
+    %th
+    %th= t :currency
+    %th= t :balance
+
+  %tr
+    %td= link_to image_tag("bitcoin-logo.jpg"), "http://www.bitcoin.org/", :target => "_blank", :title => t("currencies.btc_legend")
+    %td.account-balance{ :title => exact_balance(current_user, :btc) }
+      %span{ :class => color_for_balance(current_user, :btc) }
+        = #{sign_for_balance(current_user, :btc)} #{number_to_currency current_user.balance(:btc), :unit => ""}
+
+        - unless unconfirmed_btc_balance_part(current_user).zero?
+          %span.unconfirmed{ :title => t(:balance_unconfirmed) }
+            =  number_to_currency unconfirmed_btc_balance.abs, :unit => ""
+
+  %tr
+    %td{ :rowspan => 2}
+      = link_to image_tag("liberty_reserve.gif"), "https://www.libertyreserve.com/?ref=U8651415", :target => "_blank", :title => t("currencies.lr_legend")
+    %td= t("currencies.lrusd")
+    %td.account-balance{ :title => exact_balance(current_user, :lrusd) }
+      %div{ :class => color_for_balance(current_user, :lrusd) }
+        = #{sign_for_balance(current_user, :lrusd)} #{number_to_currency current_user.balance(:lrusd), :unit => ""}
+
+  %tr
+    %td= t("currencies.lreur")
+    %td.account-balance{ :title => exact_balance(current_user, :lreur) }
+      %div{ :class => color_for_balance(current_user, :lreur) }
+        = #{sign_for_balance(current_user, :lreur)} #{number_to_currency current_user.balance(:lreur), :unit => ""}
+
+  %tr
+    %td= link_to image_tag("euros.png"), "http://www.ecb.int/", :target => "_blank", :title => t("currencies.eur_legend")
+    %td= t("currencies.eur")
+    %td.account-balance{ :title => exact_balance(current_user, :eur) }
+      %div{ :class => color_for_balance(current_user, :eur) }
+        = #{sign_for_balance(current_user, :eur)} #{number_to_currency current_user.balance(:eur), :unit => ""}
+
+  %tr
+    %td= link_to image_tag("gold.jpg"), "http://www.pecunix.com/", :target => "_blank", :title => t("currencies.pgau_legend")
+    %td= t("currencies.pgau")
+    %td.account-balance{ :title => exact_balance(current_user, :pgau) }
+      %div{ :class => color_for_balance(current_user, :pgau) }
+        = #{sign_for_balance(current_user, :pgau)} #{number_to_currency current_user.balance(:pgau), :unit => ""}
