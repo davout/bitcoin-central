@@ -39,4 +39,9 @@ class ApplicationController < ActionController::Base
       params.merge! params.delete(:api)
     end
   end
+
+  # Redirects users to their account page after sign-in
+  def after_sign_in_path_for(resource)
+    account_path
+  end
 end
