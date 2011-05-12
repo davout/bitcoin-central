@@ -3,26 +3,22 @@
 trader1:
   account: BC-T000000
   email: trader1@bitcoin-central.net
-  password: 74f11276b5ca0087b0c419de0e1d802c81d184b9d1349a50c5e1de6507089d18
-  salt: pass
+  confirmed_at: <%= DateTime.now %>
 
 trader2:
   account: BC-T000001
   email: trader2@bitcoin-central.net
-  password: 74f11276b5ca0087b0c419de0e1d802c81d184b9d1349a50c5e1de6507089d18
-  salt: pass
+  confirmed_at: <%= DateTime.now %>
 
 admin:
   account: BC-A000000
   email: admin@bitcoin-central.net
-  password: 74f11276b5ca0087b0c419de0e1d802c81d184b9d1349a50c5e1de6507089d18
-  salt: pass
   admin: true
+  confirmed_at: <%= DateTime.now %>
 
 merchant:
   account: BC-M000000
   email: merchant@bitcoin-central.net
-  password: 74f11276b5ca0087b0c419de0e1d802c81d184b9d1349a50c5e1de6507089d18
-  salt: pass
   secret_token: selling-stuff-ftw
+  confirmed_at: <%= DateTime.now %>
 

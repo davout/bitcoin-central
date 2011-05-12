@@ -291,3 +291,6 @@ de:
 
   # views/users/new.html
   sign_up_for_account_title: Neues Benutzerkonto erstellen
+
+  # Admin
+  insufficient_privileges: Insufficient privileges to view this page

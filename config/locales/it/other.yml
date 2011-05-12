@@ -290,3 +290,6 @@ it:
 
   # views/users/new.html
   sign_up_for_account_title: Iscriviti e crea una nuova utenza
+
+  # Admin
+  insufficient_privileges: Insufficient privileges to view this page

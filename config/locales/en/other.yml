@@ -292,3 +292,6 @@ en:
 
   # views/users/new.html
   sign_up_for_account_title: Sign-up for an account
+
+  # Admin
+  insufficient_privileges: Insufficient privileges to view this page

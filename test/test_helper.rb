@@ -6,7 +6,7 @@ class ActiveSupport::TestCase
   fixtures :all
 
   def login_with(user)
-    session[:current_user_id] = users(user).id
+    sign_in :user, users(user)
   end
 
   def assert_destroyed(instance, message = nil)
@@ -18,4 +18,8 @@ class ActiveSupport::TestCase
     assert instance.class.find(:first, :conditions => ["id = ?", instance.id]),
       message || "#{instance.class} with ID #{instance.id} shouldn't have been destroyed"
   end
+end
+
+class ActionController::TestCase
+  include Devise::TestHelpers
 end

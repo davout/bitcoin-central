@@ -289,3 +289,6 @@ fr:
 
   # views/users/new.html
   sign_up_for_account_title: Créer un compte
+
+  # Admin
+  insufficient_privileges: Droits insuffisants pour visiter cette page
