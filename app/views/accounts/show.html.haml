@@ -16,7 +16,7 @@
         - unless unconfirmed_btc_balance_part(current_user).zero?
           %br
           %span.unconfirmed{ :title => t(:balance_unconfirmed) }
-            #{number_to_currency unconfirmed_btc_balance_part(current_user).abs, :unit => ""}
+            + #{number_to_currency unconfirmed_btc_balance_part(current_user).abs, :unit => ""}
 
   %tr
     %td{ :rowspan => 2}

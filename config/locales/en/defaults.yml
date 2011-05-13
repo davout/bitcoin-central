@@ -46,7 +46,7 @@ en:
 
     currency:
       format:
-        format: "%u%n"
+        format: "%n %u"
         unit: "$"
         separator: "."
         delimiter: ","
