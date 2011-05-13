@@ -16,7 +16,7 @@ set :use_sudo, false
 set :user, "rails"
 set :scm_passphrase, Capistrano::CLI.password_prompt("Rails user password on django : ")
 
-set :branch, "master"
+set :branch, "production"
 
 role :web, django
 role :app, django
