@@ -14,6 +14,7 @@
         #{sign_for_balance(current_user, :btc)} #{number_to_currency current_user.balance(:btc), :unit => ""}
 
         - unless unconfirmed_btc_balance_part(current_user).zero?
+          %br
           %span.unconfirmed{ :title => t(:balance_unconfirmed) }
             #{number_to_currency unconfirmed_btc_balance_part(current_user).abs, :unit => ""}
 

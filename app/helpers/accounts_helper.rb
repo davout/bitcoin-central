@@ -1,6 +1,6 @@
 module AccountsHelper
   def exact_balance(user, currency)
-    "#{"%.5f" % user.balance(currency)} #{currency.to_s.upcase}\""
+    "#{"%.5f" % user.balance(currency)} #{currency.to_s.upcase}"
   end
 
   def unconfirmed_btc_balance_part(user)
