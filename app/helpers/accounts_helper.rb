@@ -8,12 +8,18 @@ module AccountsHelper
   end
 
   def color_for_balance(user, currency)
-    "green" if user.balance(currency) > 0
-    "red"   if user.balance(currency) < 0
+    if user.balance(currency) > 0
+      "green"
+    elsif user.balance(currency) < 0
+      "red"
+    end
   end
 
   def sign_for_balance(user, currency)
-    "+" if user.balance(currency) > 0
-    "-" if user.balance(currency) < 0
+    if user.balance(currency) > 0
+      "+"
+    elsif user.balance(currency) < 0
+      "-"
+    end
   end
 end
