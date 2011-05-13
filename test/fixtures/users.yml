@@ -1,6 +1,5 @@
 # Passwords are : password
-#this creates a shitty extra fixture
-common: &common
+DEFAULTS: &DEFAULTS
   confirmed_at: <%= DateTime.now %>
   encrypted_password: $2a$10$nzApbnZzQU5TuHqMSYY0POxhd5JzhfvL11tismiLH5qViIPokAL66
   password_salt: $2a$10$nzApbnZzQU5TuHqMSYY0PO
@@ -8,21 +7,21 @@ common: &common
 trader1:
   account: BC-T000000
   email: trader1@bitcoin-central.net
-  <<: *common
+  <<: *DEFAULTS
 
 trader2:
   account: BC-T000001
   email: trader2@bitcoin-central.net
-  <<: *common
+  <<: *DEFAULTS
 
 admin:
   account: BC-A000000
   email: admin@bitcoin-central.net
   admin: true
-  <<: *common
+  <<: *DEFAULTS
 
 merchant:
   account: BC-M000000
   email: merchant@bitcoin-central.net
   secret_token: selling-stuff-ftw
-  <<: *common
+  <<: *DEFAULTS
