@@ -1,0 +1,30 @@
+!!! XML
+!!!
+
+%html
+  %head
+    %title= t(:website_title)
+
+    // TODO : Give correct locale for keywords, put a localized description
+    %meta{ :name => "keywords", :lang => I18n.locale, :content => t(:website_keyword) }
+    %meta{ :"http-equiv" => "content-type", :content => "text/html;charset=UTF-8" }
+
+    = stylesheet_link_tag %w{reset application jqplot}, :cache => "all"
+    = javascript_include_tag :defaults, :cache => "all"
+    = active_scaffold_includes
+    = csrf_meta_tag
+
+    = render :partial => 'layouts/google_analytics'
+
+  %body{ :class => [request[:controller], "#{request[:controller]}-#{request[:action]}"] }
+    #content
+      %h1#main-title= link_to(content_tag(:span, t(:website_title)), root_path)
+
+      = render :partial => 'layouts/locale_select'
+      = render :partial => 'layouts/user_informations'
+      = render :partial => 'layouts/navigation'
+      = render :partial => 'layouts/flash', :object => flash
+
+      #right-content= yield
+
+    = render :partial => 'layouts/footer'
