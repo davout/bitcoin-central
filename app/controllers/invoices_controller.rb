@@ -1,0 +1,2 @@
+class InvoicesController < ApplicationController
+end

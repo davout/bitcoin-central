@@ -25,4 +25,5 @@ gem 'active_scaffold_vho'
 gem 'haml'
 
 # State machine functionality
-gem 'transitions'
+gem 'transitions',
+  :require => ["transitions", "active_record/transitions"]

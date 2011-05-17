@@ -10,19 +10,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110511194431) do
+ActiveRecord::Schema.define(:version => 20110517105159) do
 
   create_table "invoices", :force => true do |t|
-    t.integer  "payee_id"
-    t.integer  "payer_id"
-    t.decimal  "amount",             :precision => 10, :scale => 0
-    t.string   "currency"
-    t.string   "merchant_reference"
-    t.string   "comment"
+    t.string   "state",                                                             :null => false
+    t.integer  "user_id",                                                           :null => false
+    t.decimal  "amount",            :precision => 16, :scale => 8, :default => 0.0, :null => false
+    t.string   "receiving_address",                                                 :null => false
+    t.string   "callback_url",                                                      :null => false
     t.datetime "paid_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "invoices", ["receiving_address"], :name => "index_invoices_on_receiving_address", :unique => true
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
