@@ -5,7 +5,7 @@ class InvoiceTest < ActiveSupport::TestCase
     @invoice = Invoice.create(
       :user => users(:trader1),
       :amount => 100,
-      :receiving_address => '1FXWhKPChEcUnSEoFQ3DGzxKe44MDbatz',
+      :payment_address => '1FXWhKPChEcUnSEoFQ3DGzxKe44MDbatz',
       :callback_url => "http://domain.tld"
     )
   end

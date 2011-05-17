@@ -1,6 +1,14 @@
 fr:
   activerecord:
     attributes:
+      invoice:
+        id: Identifiant
+        user: Emetteur
+        payment_address: Adresse de paiement
+        amount: Montant
+        callback_url: URL de notification
+        state: Etat
+        paid_at: Payé le
       liberty_reserve_transfer:
         lr_account_id: Compte Liberty Reserve
       trade_order:
@@ -55,6 +63,9 @@ fr:
         new_password: Nouveau mot de passe
 
     models:
+      invoice:
+        one: Facture
+        other: Factures
       user:
         one: Utilisateur
         other: Utilisateurs

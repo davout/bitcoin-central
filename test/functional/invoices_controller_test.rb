@@ -1,8 +1,17 @@
 require 'test_helper'
 
 class InvoicesControllerTest < ActionController::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  def setup
+    login_with :trader1
+  end
+
+  test "should get invoice list" do
+    get :index
+    assert_response :success
+  end
+
+  test "should get invoice creation form" do
+    get :new
+    assert_response :success
   end
 end

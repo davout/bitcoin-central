@@ -1,0 +1,23 @@
+%h1= t("activerecord.models.invoice.other")
+
+%table.default
+  %tr
+    %th= t("activerecord.attributes.invoice.id")
+    %th= t("activerecord.attributes.invoice.amount")
+    %th= t("activerecord.attributes.invoice.state")
+    %th= t("activerecord.attributes.invoice.paid_at")
+
+  - if @invoices.size > 0
+    - @invoices.each do |invoice|
+      %tr
+        %td= invoice.id
+        %td= invoice.amount
+        %td= invoice.state
+        %td= invoice.paid_at
+  - else
+    %tr
+      %td.no-records{ :colspan => 4 }
+        = t(:no_data)
+
+
+

@@ -1,0 +1,9 @@
+fr:
+  invoices:
+    new:
+      create_invoice: Créer une facture
+      error: Erreur de création de facture
+      amount_explanation: Montant à payer
+      payment_explanation: Adresse de réception des fonds
+      callback_url_explanation: URL de notification vers laquelle POSTer
+      submit: Créer facture

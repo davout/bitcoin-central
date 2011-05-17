@@ -5,6 +5,9 @@ fr:
   resend_confirmation: Renvoyer l'email de confirmation
   submit: Valider
 
+  # Generic
+  no_data: Aucune donnée
+
   # controllers/informations_controller.rb
   chart_date_format: %d.%m.
 
@@ -119,6 +122,8 @@ fr:
       faq: Foire aux questions
       economy: Économie
       support: Contact
+    ecommerce:
+      main: E-commerce
 
   # views/layouts/_user_informations.html
   generate_new_address_legend: Générer une nouvelle addresse

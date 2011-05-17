@@ -29,6 +29,13 @@
   <% end %>
 
   <%= menu_item do %>
+    <%= link_to content_tag(:span, t("navigation.ecommerce.main")), "#" %>
+    <ul>
+      <li><%= link_to content_tag(:span, (t "activerecord.models.invoice.other")), invoices_path %></li>
+    </ul>
+  <% end %>
+
+  <%= menu_item do %>
     <%= link_to content_tag(:span, (t "navigation.help.main")), "#" %>
     <ul>
       <li><%= link_to content_tag(:span, (t "navigation.help.faq")), faq_path %></li>

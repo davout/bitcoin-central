@@ -6,6 +6,9 @@ en:
   submit: Submit
   change_password: Change password
 
+  # Generic
+  no_data: No data was found
+
   # controllers/informations_controller.rb
   chart_date_format: %m/%d
 
@@ -119,6 +122,8 @@ en:
       faq: FAQ
       economy: Economy
       support: Support
+    ecommerce:
+      main: E-commerce
 
   # views/layouts/user_informations.html
   generate_new_address_legend: Generate a new receiving address, refresh at will

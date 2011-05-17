@@ -35,6 +35,9 @@ class User < ActiveRecord::Base
     :class_name => "Trade",
     :foreign_key => "seller_id"
 
+  has_many :invoices,
+    :dependent => :destroy
+
   validates :account,
     :uniqueness => true
 

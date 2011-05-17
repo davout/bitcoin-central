@@ -1,6 +1,14 @@
 en:
   activerecord:
     attributes:
+      invoice:
+        id: ID
+        user: Payee
+        payment_address: Payment address
+        amount: Amount
+        callback_url: Callback URL
+        state: State
+        paid_at: Paid at
       liberty_reserve_transfer:
         lr_account_id: Liberty Reserve account ID
       trade_order:
@@ -54,6 +62,9 @@ en:
         new_password: New password
 
     models:
+      invoice:
+        one: Invoice
+        other: Invoices
       user:
         one: User
         other: Users

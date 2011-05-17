@@ -11,7 +11,7 @@ class CreateInvoices < ActiveRecord::Migration
         :default => 0,
         :null => false
 
-      t.string :receiving_address, :null => false
+      t.string :payment_address, :null => false
 
       t.string :callback_url, :null => false
 
@@ -20,7 +20,7 @@ class CreateInvoices < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :invoices, :receiving_address, :unique => true
+    add_index :invoices, :payment_address, :unique => true
   end
 
   def self.down

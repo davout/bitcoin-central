@@ -6,7 +6,7 @@ class Invoice < ActiveRecord::Base
   validates :user,
     :presence => true
 
-  validates :receiving_address,
+  validates :payment_address,
     :presence => true,
     :bitcoin_address => true
 

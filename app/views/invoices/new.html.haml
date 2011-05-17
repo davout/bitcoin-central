@@ -1,0 +1,22 @@
+%h1= t(".create_invoice")
+
+= form_for @invoice do |f|
+  = errors_for @invoice, :message => t(:error)
+
+  .form-field
+    = f.label :amount
+    = f.text_field :amount, :class => "amount"
+    .explanation= t(".amount_explanation")
+
+  .form-field
+    = f.label :payment_address
+    = f.text_field :payment_address
+    .explanation= t(".payment_explanation")
+
+  .form-field
+    = f.label :callback_url
+    = f.text_field :callback_url
+    .explanation= t(".callback_url_explanation")
+
+  .form-field
+    = f.submit t(".submit"), :class => 'submit'

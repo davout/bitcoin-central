@@ -382,6 +382,19 @@ table.default tr:hover th, table.default tr th {
     height: 2em;
 }
 
+table.default tr td.no-records {
+    background: #F7F5F5;
+    height: 2.5em;
+    border-bottom: 1px solid #F7F5F5;
+    font-size: 105%;
+    font-weight: bold;
+    font-style: italic;
+
+    /* Hide the bottom table border */
+    position: relative;
+    top:1px;
+}
+
 /* Fund transfers */
 a.transfer-funds {
     font-size: 110%;
