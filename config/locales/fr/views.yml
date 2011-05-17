@@ -7,3 +7,4 @@ fr:
       payment_explanation: Adresse de réception des fonds
       callback_url_explanation: URL de notification vers laquelle POSTer
       submit: Créer facture
+      created: Facture créée avec succès

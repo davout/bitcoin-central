@@ -7,3 +7,4 @@ en:
       payment_explanation: The address at which the funds should be sent
       callback_url_explanation: The URL that should be POST'ed to upon payment
       submit: Post invoice
+      created: Invoice successfully posted

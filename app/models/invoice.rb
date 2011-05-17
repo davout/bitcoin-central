@@ -8,11 +8,13 @@ class Invoice < ActiveRecord::Base
 
   validates :payment_address,
     :presence => true,
-    :bitcoin_address => true
+    :bitcoin_address => true,
+    :uniqueness => true
 
   validates :amount,
     :presence => true,
-    :minimal_amount => true
+    :numericality => true,
+    :inclusion => (0.1..21000000)
 
   validates :callback_url,
     :presence => true,

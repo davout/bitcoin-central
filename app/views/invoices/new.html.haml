@@ -1,7 +1,7 @@
 %h1= t(".create_invoice")
 
 = form_for @invoice do |f|
-  = errors_for @invoice, :message => t(:error)
+  = errors_for @invoice, :message => "invoices.new.error"
 
   .form-field
     = f.label :amount
