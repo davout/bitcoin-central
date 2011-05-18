@@ -1,4 +1,7 @@
 class InvoicesController < ApplicationController
+  skip_before_filter :authenticate_user!,
+    :only => :show
+
   def index
     @invoices = current_user.invoices
   end
