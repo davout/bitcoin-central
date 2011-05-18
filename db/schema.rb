@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110518094622) do
+ActiveRecord::Schema.define(:version => 20110518211846) do
 
   create_table "invoices", :force => true do |t|
     t.string   "state",                                                           :null => false
@@ -21,9 +21,11 @@ ActiveRecord::Schema.define(:version => 20110518094622) do
     t.datetime "paid_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "reference",                                                       :null => false
   end
 
   add_index "invoices", ["payment_address"], :name => "index_invoices_on_payment_address", :unique => true
+  add_index "invoices", ["reference"], :name => "index_invoices_on_reference", :unique => true
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false

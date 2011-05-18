@@ -8,6 +8,20 @@ fr:
       callback_url_explanation: URL de notification vers laquelle POSTer
       submit: Créer facture
       created: Facture créée avec succès
+    index:
+      pending: En attente
+      paid: Payée
+      details: Voir le détail de la facture
+    show:
+      details: Détails de la facture
+      payee: Bénéficiaire
+      pending: En attente
+      paid: Payée
+      payment-explanations: >
+        Pour payer, transférez simplement le montant indiqué
+        à l'adresse de paiement, la page se rafraîchira automatiquement
+        afin de vous indiquer l'avancement du processus.
+
 
   users:
     form:

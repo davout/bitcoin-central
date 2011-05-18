@@ -7,6 +7,10 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.new
   end
 
+  def show
+    @invoice = Invoice.find(params[:id])
+  end
+
   def create
     @invoice = Invoice.new(params[:invoice])
     @invoice.user = current_user

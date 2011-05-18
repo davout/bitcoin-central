@@ -24,7 +24,7 @@ en:
   px_transfer_success: You successfully transferred %{amount} PGAU to your account (Pecunix charged a %{fee} PGAU fee)
 
   # controllers/trade_orders_controller.rb
-  order_saved: Your order has been saved but no compatible orders have been found yet
+  order_saved: Your order has been saved but no matching orders have been found yet
   order_filled: Your order was %{how} filled, you %{action} %{traded_btc} BTC for %{amount} %{currency} @ %{ppc} %{currency}/BTC
   bought: bought
   sold: sold

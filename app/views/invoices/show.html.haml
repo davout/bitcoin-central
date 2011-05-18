@@ -1,0 +1,22 @@
+%h1= t(".details")
+
+%table.default.invoice-details
+  %tr
+    %th= t(".payee")
+    %td= @invoice.user.account
+  %tr
+    %th= t("activerecord.attributes.invoice.reference")
+    %td= @invoice.reference
+  %tr
+    %th= t("activerecord.attributes.invoice.amount")
+    %td.amount= number_to_bitcoins @invoice.amount
+  %tr
+    %th= t("activerecord.attributes.invoice.state")
+    %td= t(".#{@invoice.state}")
+  %tr
+    %th= t("activerecord.attributes.invoice.payment_address")
+    %td.bitcoin-address= @invoice.payment_address
+
+%br
+
+.payment-explanations= t(".payment-explanations")

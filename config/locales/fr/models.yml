@@ -2,13 +2,13 @@ fr:
   activerecord:
     attributes:
       invoice:
-        id: Identifiant
+        reference: Référence
         user: Emetteur
         payment_address: Adresse de paiement
         amount: Montant
         callback_url: URL de notification
         state: Etat
-        paid_at: Payé le
+        paid_at: Payée le
       liberty_reserve_transfer:
         lr_account_id: Compte Liberty Reserve
       trade_order:

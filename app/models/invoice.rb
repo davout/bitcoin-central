@@ -23,6 +23,8 @@ class Invoice < ActiveRecord::Base
   before_validation :generate_payment_address,
     :on => :create
 
+  before_create :generate_reference
+
   attr_protected :user_id, 
     :payment_address
   
@@ -69,7 +71,11 @@ class Invoice < ActiveRecord::Base
     bitcoin = Bitcoin::Client.new
     bitcoin.get_received_by_address(payment_address, Transfer::MIN_BTC_CONFIRMATIONS)
   end
-  
+
+  def generate_reference
+    self.reference = "#{"%06d" % (rand * 10 ** 6).to_i}"
+  end
+
   def self.process_pending
     where(:state => 'pending').each &:check_payment
   end

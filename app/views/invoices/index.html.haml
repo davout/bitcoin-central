@@ -2,17 +2,19 @@
 
 %table.default
   %tr
-    %th= t("activerecord.attributes.invoice.id")
-    %th= t("activerecord.attributes.invoice.amount")
+    %th= t("activerecord.attributes.invoice.reference")
     %th= t("activerecord.attributes.invoice.state")
     %th= t("activerecord.attributes.invoice.paid_at")
+    %th= t("activerecord.attributes.invoice.amount")
+    %th.auto-sized
 
   - if @invoices.size > 0
     - @invoices.each do |invoice|
       %tr
-        %td= invoice.id
-        %td= invoice.amount
-        %td= invoice.state
-        %td= invoice.paid_at
+        %td= invoice.reference
+        %td= t ".#{invoice.state}"
+        %td= invoice.paid? ? l(invoice.paid_at) : "N/A"
+        %td.amount= number_to_bitcoins invoice.amount
+        %td.auto-sized= invoice_details(invoice)
   - else
     = render :partial => "layouts/no_data"

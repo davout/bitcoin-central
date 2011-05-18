@@ -8,6 +8,19 @@ en:
       callback_url_explanation: The URL that should be POST'ed to upon payment
       submit: Post invoice
       created: Invoice successfully posted
+    index:
+      pending: Pending
+      paid: Paid
+      details: Show invoice details
+    show:
+      details: Invoice details
+      payee: Payee
+      pending: Pending
+      paid: Paid
+      payment-explanations: >
+        To pay this invoice, simply transfer the requested amount to
+        the payment address, the page will automatically refresh and
+        show you the progress of your payment.
 
   users:
     form:

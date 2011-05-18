@@ -1,5 +1,5 @@
 BitcoinBank::Application.routes.draw do
-  resources :invoices
+  resources :invoices, :only => [:index, :new, :create, :show]
 
   resource :user, :only => [:new, :create, :edit, :update] do
     resources :addresses, :only => [:create]
