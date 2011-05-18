@@ -1,0 +1,32 @@
+= form_for @user do |f|
+  = errors_for @user, :message => "error_updating_account"
+
+  - unless @user.new_record?
+    .form-field
+      = f.label :account
+      = f.text_field :account, :disabled => true
+
+  .form-field
+    = f.label :email
+    = f.text_field :email, :disabled => true
+
+  .form-field
+    = f.label :time_zone
+    = f.time_zone_select :time_zone, nil, :prompt => "--"
+    .explanation
+      = t :time_zone_explanation
+
+  .form-field
+    = f.label :merchant
+    = f.check_box :merchant, :class => "checkbox"
+    .explanation
+      = t ".merchant_explanation"
+
+  - if @user.new_record?
+    .recaptcha-field
+      %label{ :for => "recaptcha_response_field" } t(".turing_test")
+      = f.text_field :account, :disabled => true
+      .recaptcha-input= recaptcha_tags :ssl => true
+
+  .form-field
+    = f.submit t(".submit"), :class => 'submit'

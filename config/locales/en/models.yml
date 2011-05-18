@@ -60,6 +60,7 @@ en:
         transfers: Transfers
         current_password: Current password
         new_password: New password
+        merchant: Merchant API
 
     models:
       invoice:

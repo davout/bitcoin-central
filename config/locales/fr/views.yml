@@ -8,3 +8,8 @@ fr:
       callback_url_explanation: URL de notification vers laquelle POSTer
       submit: Créer facture
       created: Facture créée avec succès
+
+  users:
+    form:
+      submit: Enregistrer
+      merchant_explanation: Activer votre boutique en ligne

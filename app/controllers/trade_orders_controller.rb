@@ -53,7 +53,9 @@ class TradeOrdersController < ApplicationController
       :user => @current_user,
       :currency => params[:currency],
       :separated => params[:separated]
-      
+
+    @selected_currency = params[:currency]
+
     respond_to do |format|
       format.html
       format.xml

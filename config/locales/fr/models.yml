@@ -61,6 +61,7 @@ fr:
         transfers: Transactions
         current_password: Mot de passe actuel
         new_password: Nouveau mot de passe
+        merchant: API E-commerce
 
     models:
       invoice:

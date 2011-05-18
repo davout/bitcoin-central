@@ -1,0 +1,27 @@
+%h1= t :trade_orders_title
+
+%table#trade-orders.default
+  %tr
+    %th= t :created_at
+    %th= t :type
+    %th= t :amount
+    %th= t :price
+    %th= t :total
+    %th.auto-sized
+    %th.auto-sized
+    %th.auto-sized
+
+  - if @trade_orders.size > 0
+    - @trade_orders.each do |to|
+      %tr{ :class => (to.active? ? "" : "inactive") }
+        %td= l to.created_at
+        %td= t to.category
+        %td.amount= number_to_bitcoins to.amount, :precision => 4
+        %td.amount= format_amount(to.ppc, to[:currency], 5)
+        %td.amount= format_amount(to.ppc * to.amount, to[:currency], 4)
+        %td.auto-sized= dark_pool_icon_for(to)
+        %td.auto-sized= currency_icon_for(to[:currency])
+        %td.auto-sized= delete_link_for(to)
+
+  - else
+    = render :partial => "layouts/no_data"

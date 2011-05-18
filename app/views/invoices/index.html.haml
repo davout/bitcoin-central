@@ -15,9 +15,4 @@
         %td= invoice.state
         %td= invoice.paid_at
   - else
-    %tr
-      %td.no-records{ :colspan => 4 }
-        = t(:no_data)
-
-
-
+    = render :partial => "layouts/no_data"

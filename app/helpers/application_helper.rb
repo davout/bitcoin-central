@@ -2,14 +2,15 @@ module ApplicationHelper
   def menu_item(*args, &block)
     options = args.extract_options!
 
-    if (options[:logged_in].nil? and options[:admin].nil?) or
-        (options[:admin].nil? and options[:logged_in] and @current_user) or
-        (options[:admin] and @current_user and @current_user.admin?)
-
+    if options.blank? or display_menu?(current_user, options)
       content_tag :li do
         args[0] or block.call
       end
     end
+  end
+  
+  def display_menu?(user, options)
+    options.blank? || (user && (user.admin? || (user.merchant? && options[:merchant]) || (user && options[:logged_in])))
   end
 
   def number_to_bitcoins(amount, options = {})

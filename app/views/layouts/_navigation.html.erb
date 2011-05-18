@@ -28,7 +28,7 @@
     </ul>
   <% end %>
 
-  <%= menu_item do %>
+  <%= menu_item :merchant => true do %>
     <%= link_to content_tag(:span, t("navigation.ecommerce.main")), "#" %>
     <ul>
       <li><%= link_to content_tag(:span, (t "activerecord.models.invoice.other")), invoices_path %></li>

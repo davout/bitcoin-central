@@ -8,3 +8,8 @@ en:
       callback_url_explanation: The URL that should be POST'ed to upon payment
       submit: Post invoice
       created: Invoice successfully posted
+
+  users:
+    form:
+      submit: Save user
+      merchant_explanation: Activate merchant tools

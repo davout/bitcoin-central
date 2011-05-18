@@ -1,0 +1,18 @@
+%h1= t :account_history_title
+
+%table#history.default
+  %tr
+    %th Date
+    %th= t :currency
+    %th= t :amount
+
+  - if @transfers.size > 0
+    - @transfers.each do |transfer|
+      %tr
+        %td= l transfer.created_at
+        %td= transfer.currency
+        %td.amount
+          %span{ :class => color_for(transfer), :title => confirmation_tooltip_for(transfer) }
+            = "#{transfer.amount > 0 ? "+" : "-"} #{number_to_currency transfer.amount.abs, :unit => ""}"
+  - else
+    = render :partial => "layouts/no_data"

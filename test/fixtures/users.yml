@@ -24,4 +24,5 @@ merchant:
   account: BC-M000000
   email: merchant@bitcoin-central.net
   secret_token: selling-stuff-ftw
+  merchant: true
   <<: *DEFAULTS

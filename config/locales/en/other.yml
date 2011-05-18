@@ -7,7 +7,7 @@ en:
   change_password: Change password
 
   # Generic
-  no_data: No data was found
+  no_data: No data has been found
 
   # controllers/informations_controller.rb
   chart_date_format: %m/%d

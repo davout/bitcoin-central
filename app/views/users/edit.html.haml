@@ -1,0 +1,6 @@
+%h1= t :account_details_title
+
+= render 'form'
+
+%ul#devise-actions
+  %li= link_to t(:change_password), edit_password_path(@user)

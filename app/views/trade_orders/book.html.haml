@@ -1,0 +1,18 @@
+%h1= t(:order_book_title)
+
+#order-book-filter-wrapper.form-field
+  #order-book-filter.radios
+    - form_tag book_account_trade_orders_path, :method => :get do 
+      = radio_for('all',   @selected_currency)
+      = radio_for('lrusd', @selected_currency)
+      = radio_for('lreur', @selected_currency)
+      = radio_for('eur',   @selected_currency)
+      = radio_for('pgau',  @selected_currency)
+
+      = submit_tag 'Filter', :class => "submit", :id => "order-book-filter-submit"
+      %script{ :type => "text/javascript" }
+        $('#order-book-filter-submit').hide();
+
+= render :partial => "list", :locals => { :type => "purchase", :title => :buying, :orders => @purchases }
+
+= render :partial => "list", :locals => { :type => "sale", :title => :selling, :orders => @sales }
