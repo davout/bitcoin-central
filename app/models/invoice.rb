@@ -2,7 +2,7 @@ class Invoice < ActiveRecord::Base
   include ActiveRecord::Transitions
 
   belongs_to :user
-
+  
   validates :user,
     :presence => true
 
@@ -20,6 +20,12 @@ class Invoice < ActiveRecord::Base
     :presence => true,
     :url => true
 
+  before_validation :generate_payment_address,
+    :on => :create
+
+  attr_protected :user_id, 
+    :payment_address
+  
   state_machine do
     state :pending
     state :paid
@@ -28,9 +34,9 @@ class Invoice < ActiveRecord::Base
       transitions :to => :paid,
         :from => :pending,
         :on_transition => lambda { |i|
-          i.credit_funds
-          i.ping_callback
-        }
+        i.credit_funds
+        i.ping_callback
+      }
     end
   end
 
@@ -48,6 +54,23 @@ class Invoice < ActiveRecord::Base
   end
 
   def ping_callback
-    # Implement me
+    # TODO : Implement me
+  end
+  
+  def generate_payment_address
+    self.payment_address = Bitcoin::Client.new.get_new_address
+  end
+  
+  def check_payment   
+    pay! if payments_received >= amount
+  end
+  
+  def payments_received
+    bitcoin = Bitcoin::Client.new
+    bitcoin.get_received_by_address(payment_address, Transfer::MIN_BTC_CONFIRMATIONS)
+  end
+  
+  def self.process_pending
+    where(:state => 'pending').each &:check_payment
   end
 end

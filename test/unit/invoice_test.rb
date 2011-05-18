@@ -32,4 +32,17 @@ class InvoiceTest < ActiveSupport::TestCase
     @invoice.pay!
     assert @invoice.paid_at
   end
+  
+  test "should automatically generate a payment address" do
+    invoice = Invoice.new({
+        :user => users(:trader1),
+        :amount => 100,
+        :callback_url => "http://domain.tld"
+      })
+    
+    assert_nil invoice.payment_address
+    
+    assert invoice.save
+    assert invoice.payment_address
+  end
 end

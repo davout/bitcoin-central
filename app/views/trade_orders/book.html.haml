@@ -2,7 +2,7 @@
 
 #order-book-filter-wrapper.form-field
   #order-book-filter.radios
-    - form_tag book_account_trade_orders_path, :method => :get do 
+    = form_tag book_account_trade_orders_path, :method => :get do 
       = radio_for('all',   @selected_currency)
       = radio_for('lrusd', @selected_currency)
       = radio_for('lreur', @selected_currency)

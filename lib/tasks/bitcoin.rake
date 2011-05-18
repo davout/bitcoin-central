@@ -17,4 +17,9 @@ namespace :bitcoin do
       system("rm -f #{temp_file}*")
     end
   end
+  
+  desc "Processes pending invoices and update their state if necessary"
+  task :process_pending_invoices => :environment do
+    Invoice.process_pending
+  end
 end
