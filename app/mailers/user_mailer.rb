@@ -11,6 +11,6 @@ class UserMailer < ActionMailer::Base
     @invoice = invoice
     
     mail :to => @user.email,
-      :subject => I18n.t("emails.payment_notification.subject")
+      :subject => I18n.t("emails.invoice_payment_notification.subject")
   end
 end

@@ -1,1 +1,1 @@
-= t("emails.invoice_payment_notification.body")
+= t("emails.invoice_payment_notification.body", :amount => @invoice.amount.to_f, :reference => @invoice.reference)
