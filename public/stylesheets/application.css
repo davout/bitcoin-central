@@ -428,6 +428,31 @@ div.payment-explanations {
   text-align: center;
 }
 
+/* Invoices */
+span.invoice-state {
+    font-weight: bold;
+}
+
+img.state-icon {
+    position: relative;
+    top: 2px;
+}
+
+/* Creation links */
+div.creation-link {
+    margin-bottom: .8em;
+    float: right;
+}
+
+div.creation-link img {
+    position: relative;
+    top: 3px;
+}
+
+div.creation-link a {
+    font-weight: bold;
+}
+
 /* Fund transfers */
 a.transfer-funds {
     font-size: 110%;
@@ -503,6 +528,10 @@ div.flash div.alert, div.flash div.error {
 
 .green {
     color: green;
+}
+
+.orange {
+    color: orange;
 }
 
 .red {

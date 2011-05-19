@@ -19,7 +19,7 @@ class InvoicesController < ApplicationController
     @invoice.user = current_user
 
     if @invoice.save
-      redirect_to invoices_path,
+      redirect_to @invoice,
         :notice => t("invoices.new.created")
     else
       render :action => :new

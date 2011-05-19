@@ -1,0 +1,11 @@
+!!! XML
+!!!
+
+%html
+  %head
+    %title= t(:website_title)
+  %body
+    .content
+      = link_to image_tag(attachments['bitcoin.png'].url), "https://bitcoin-central.net"
+      %p= yield
+    

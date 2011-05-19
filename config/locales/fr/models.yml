@@ -8,7 +8,17 @@ fr:
         amount: Montant
         callback_url: URL de notification
         state: Etat
-        paid_at: Payée le
+        paid_at: Payé le
+        merchant_reference: Réf. bénéficiaire
+        merchant_memo: Commentaire
+        state_translations:
+          pending: En attente de paiement
+          processing: Traitement en cours
+          paid: Payé
+        state_tooltips:
+          pending: Aucun paiement n'a encore été reçu
+          processing: Un paiement a été reçu, il est en attente de confirmation par le réseau Bitcoin
+          paid: Paiement a été confirmé
       liberty_reserve_transfer:
         lr_account_id: Compte Liberty Reserve
       trade_order:

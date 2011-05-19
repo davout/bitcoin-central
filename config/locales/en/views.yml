@@ -9,14 +9,11 @@ en:
       submit: Post invoice
       created: Invoice successfully posted
     index:
-      pending: Pending
-      paid: Paid
       details: Show invoice details
+      create: Create invoice
     show:
       details: Invoice details
       payee: Payee
-      pending: Pending
-      paid: Paid
       payment-explanations: >
         To pay this invoice, simply transfer the requested amount to
         the payment address, the page will automatically refresh and

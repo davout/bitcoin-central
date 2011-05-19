@@ -9,6 +9,16 @@ en:
         callback_url: Callback URL
         state: State
         paid_at: Paid at
+        merchant_reference: Merchant ref.
+        merchant_memo: Comment        
+        state_translations:
+          pending: Pending payment
+          processing: Processing payment
+          paid: Paid
+        state_tooltips:
+          pending: No payment has been received yet
+          processing: A payment has been detected and awaits confirmation from the Bitcoin network
+          paid: Payment has been confirmed
       liberty_reserve_transfer:
         lr_account_id: Liberty Reserve account ID
       trade_order:

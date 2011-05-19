@@ -4,9 +4,17 @@
   = errors_for @invoice, :message => "invoices.new.error"
 
   .form-field
+    = f.label :merchant_reference
+    = f.text_field :merchant_reference
+
+  .form-field
     = f.label :amount
     = f.text_field :amount, :class => "amount"
     .explanation= t(".amount_explanation")
+
+  .form-field
+    = f.label :merchant_memo
+    = f.text_area :merchant_memo, :rows => 5
 
   .form-field
     = f.label :callback_url

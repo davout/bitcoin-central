@@ -30,14 +30,20 @@ class Invoice < ActiveRecord::Base
   
   state_machine do
     state :pending
+    state :processing
     state :paid
+
+    event :payment_seen do
+      transitions :to => :processing, :from => :pending
+    end
 
     event :pay do
       transitions :to => :paid,
-        :from => :pending,
+        :from => [:pending, :processing],
         :on_transition => lambda { |i|
         i.credit_funds
         i.ping_callback
+        i.email_confirmation
       }
     end
   end
@@ -58,18 +64,26 @@ class Invoice < ActiveRecord::Base
   def ping_callback
     # TODO : Implement me
   end
-  
+
+  def email_confirmation
+    UserMailer.invoice_payment_notification(self).deliver
+  end
+
   def generate_payment_address
     self.payment_address = Bitcoin::Client.new.get_new_address
   end
   
-  def check_payment   
-    pay! if payments_received >= amount
+  def check_payment
+    if !paid? && (payments_received >= amount)
+      pay!
+    elsif pending? && (payments_received(0) >= amount)
+      payment_seen!      
+    end
   end
   
-  def payments_received
+  def payments_received(confirmations = Transfer::MIN_BTC_CONFIRMATIONS)
     bitcoin = Bitcoin::Client.new
-    bitcoin.get_received_by_address(payment_address, Transfer::MIN_BTC_CONFIRMATIONS)
+    bitcoin.get_received_by_address(payment_address, confirmations)
   end
 
   def generate_reference

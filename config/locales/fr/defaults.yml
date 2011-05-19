@@ -22,7 +22,7 @@ fr:
 
   time:
     formats:
-      default: "%d %B %Y %H:%M:%S"
+      default: "%d/%m/%Y %H:%M"
       short: "%d %b %H:%M"
       long: "%A %d %B %Y %H:%M"
     am: 'am'

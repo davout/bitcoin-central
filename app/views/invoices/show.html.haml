@@ -4,18 +4,39 @@
   %tr
     %th= t(".payee")
     %td= @invoice.user.account
+
   %tr
     %th= t("activerecord.attributes.invoice.reference")
     %td= @invoice.reference
+
+  - unless @invoice.merchant_reference.blank?
+    %tr
+      %th= t("activerecord.attributes.invoice.merchant_reference")
+      %td= @invoice.merchant_reference
+
   %tr
     %th= t("activerecord.attributes.invoice.amount")
     %td.amount= number_to_bitcoins @invoice.amount
+
   %tr
     %th= t("activerecord.attributes.invoice.state")
-    %td= t(".#{@invoice.state}")
-  %tr
-    %th= t("activerecord.attributes.invoice.payment_address")
-    %td.bitcoin-address= @invoice.payment_address
+    %td= invoice_state(@invoice.state, :icon => true)
+
+  - if @invoice.paid_at
+    %tr
+      %th= t("activerecord.attributes.invoice.paid_at")
+      %td= l(@invoice.paid_at)
+
+  - unless @invoice.paid?
+    %tr
+      %th= t("activerecord.attributes.invoice.payment_address")
+      %td.bitcoin-address= @invoice.payment_address
+
+  - unless @invoice.merchant_memo.blank?
+    %tr
+      %th= t("activerecord.attributes.invoice.merchant_memo")
+      %td
+        %pre= @invoice.merchant_memo
 
 %br
 

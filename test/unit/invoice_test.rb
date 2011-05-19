@@ -22,7 +22,9 @@ class InvoiceTest < ActiveSupport::TestCase
   test "should credit user when invoice is paid" do
     assert_difference 'Transfer.count' do
       assert_difference 'users(:trader1).balance(:btc)', 100 do
-        @invoice.pay!
+        assert_difference "ActionMailer::Base.deliveries.size" do
+          @invoice.pay!
+        end
       end
     end
   end

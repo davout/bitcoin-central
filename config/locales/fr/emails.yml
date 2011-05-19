@@ -1,0 +1,5 @@
+fr:
+  emails:
+    invoice_payment_notification:
+      subject: Vous avez reçu un paiement bitcoin!
+      body: "Vous avez reçu un paiement de %{amount} BTC en paiement de la facture %{reference}"

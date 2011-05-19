@@ -23,7 +23,7 @@ class InvoicesControllerTest < ActionController::TestCase
       }
 
       assert_response :redirect
-      assert_redirected_to invoices_path
+      assert_redirected_to Invoice.last
     end
   end
   

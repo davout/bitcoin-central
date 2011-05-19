@@ -1,5 +1,7 @@
 %h1= t("activerecord.models.invoice.other")
 
+= creation_link :invoice, t(".create")
+
 %table.default
   %tr
     %th= t("activerecord.attributes.invoice.reference")
@@ -12,7 +14,7 @@
     - @invoices.each do |invoice|
       %tr
         %td= invoice.reference
-        %td= t ".#{invoice.state}"
+        %td= invoice_state(invoice.state)
         %td= invoice.paid? ? l(invoice.paid_at) : "N/A"
         %td.amount= number_to_bitcoins invoice.amount
         %td.auto-sized= invoice_details(invoice)
