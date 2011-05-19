@@ -91,6 +91,6 @@ class Invoice < ActiveRecord::Base
   end
 
   def self.process_pending
-    where(:state => 'pending').each &:check_payment
+    where("state <> ?", "paid").each &:check_payment
   end
 end
