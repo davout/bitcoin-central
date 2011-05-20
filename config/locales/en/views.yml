@@ -17,7 +17,7 @@ en:
       payment-explanations: >
         To pay this invoice, simply transfer the requested amount to
         the payment address, the page will automatically refresh and
-        show you the progress of your payment.
+        show you its progress.
 
   users:
     form:

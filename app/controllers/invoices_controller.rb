@@ -2,6 +2,9 @@ class InvoicesController < ApplicationController
   skip_before_filter :authenticate_user!,
     :only => :show
 
+  skip_before_filter :verify_authenticity_token,
+    :only => :create
+
   def index
     @invoices = current_user.invoices
   end
