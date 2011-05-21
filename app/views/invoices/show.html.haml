@@ -3,16 +3,16 @@
 %table.default.invoice-details
   %tr
     %th= t(".payee")
-    %td= @invoice.user.account
+    %td.fixed= @invoice.user.account
 
   %tr
     %th= t("activerecord.attributes.invoice.reference")
-    %td= @invoice.reference
+    %td.fixed= @invoice.reference
 
   - unless @invoice.merchant_reference.blank?
     %tr
       %th= t("activerecord.attributes.invoice.merchant_reference")
-      %td= @invoice.merchant_reference
+      %td.fixed= @invoice.merchant_reference
 
   %tr
     %th= t("activerecord.attributes.invoice.amount")
@@ -38,6 +38,10 @@
       %td
         %pre= @invoice.merchant_memo
 
-%br
+- if @invoice.item_url
+  .invoice-item-link
+    = link_to(t(".return_to_item"), @invoice.item_url)
 
-.payment-explanations= t(".payment-explanations")
+- unless @invoice.paid?
+  %br
+  .payment-explanations= t(".payment-explanations")

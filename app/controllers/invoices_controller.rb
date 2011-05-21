@@ -14,7 +14,13 @@ class InvoicesController < ApplicationController
   end
 
   def show
-    @invoice = Invoice.find(params[:id])
+    if params[:authentication_token]
+      unless @invoice = Invoice.where(:id => params[:id], :authentication_token => params[:authentication_token]).first
+        redirect_to root_path
+      end
+    elsif authenticate_user!
+      @invoice = current_user.invoices.find(params[:id])
+    end
   end
 
   def create

@@ -11,6 +11,8 @@ fr:
         paid_at: Payé le
         merchant_reference: Réf. bénéficiaire
         merchant_memo: Commentaire
+        authentication_token: Jeton d'authentification
+        item_url: URL de référence
         state_translations:
           pending: En attente de paiement
           processing: Traitement en cours

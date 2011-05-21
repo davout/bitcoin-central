@@ -18,6 +18,7 @@ fr:
         Pour payer, transférez simplement le montant indiqué
         à l'adresse de paiement, la page se rafraîchira automatiquement
         afin de vous indiquer l'avancement du processus.
+      return_to_item: Return to merchant website
 
 
   users:

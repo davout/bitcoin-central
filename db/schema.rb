@@ -10,22 +10,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110519121047) do
+ActiveRecord::Schema.define(:version => 20110521125911) do
 
   create_table "invoices", :force => true do |t|
-    t.string   "state",                                                              :null => false
-    t.integer  "user_id",                                                            :null => false
-    t.decimal  "amount",             :precision => 16, :scale => 8, :default => 0.0, :null => false
-    t.string   "payment_address",                                                    :null => false
-    t.string   "callback_url",                                                       :null => false
+    t.string   "state",                                                                :null => false
+    t.integer  "user_id",                                                              :null => false
+    t.decimal  "amount",               :precision => 16, :scale => 8, :default => 0.0, :null => false
+    t.string   "payment_address",                                                      :null => false
+    t.string   "callback_url",                                                         :null => false
     t.datetime "paid_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "reference",                                                          :null => false
+    t.string   "reference",                                                            :null => false
     t.string   "merchant_reference"
     t.string   "merchant_memo"
+    t.string   "authentication_token",                                                 :null => false
+    t.string   "item_url"
   end
 
+  add_index "invoices", ["authentication_token"], :name => "index_invoices_on_authentication_token", :unique => true
   add_index "invoices", ["payment_address"], :name => "index_invoices_on_payment_address", :unique => true
   add_index "invoices", ["reference"], :name => "index_invoices_on_reference", :unique => true
 
@@ -118,8 +121,10 @@ ActiveRecord::Schema.define(:version => 20110519121047) do
     t.datetime "locked_at"
     t.string   "authentication_token"
     t.boolean  "merchant",             :default => false
+    t.string   "api_key"
   end
 
+  add_index "users", ["api_key"], :name => "index_users_on_api_key", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
 
 end

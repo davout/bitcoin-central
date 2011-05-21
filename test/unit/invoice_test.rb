@@ -31,7 +31,7 @@ class InvoiceTest < ActiveSupport::TestCase
 
   test "payment should be timestamped" do
     assert_nil @invoice.paid_at
-    @invoice.pay!
+    @invoice.payment_seen!
     assert @invoice.paid_at
   end
   
@@ -46,5 +46,18 @@ class InvoiceTest < ActiveSupport::TestCase
     
     assert invoice.save
     assert invoice.payment_address
+  end
+
+  test "should automatically generate an authentication token" do
+    invoice = Invoice.new({
+        :user => users(:trader1),
+        :amount => 100,
+        :callback_url => "http://domain.tld"
+      })
+
+    assert_nil invoice.authentication_token
+
+    assert invoice.save
+    assert invoice.authentication_token
   end
 end

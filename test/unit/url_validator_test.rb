@@ -11,7 +11,7 @@ class UrlValidatorTest < ActiveSupport::TestCase
     assert !@invoice.valid?
 
     @invoice.callback_url = "http://sub.domain.tld:8080/callback"
-
+    
     assert @invoice.valid?
   end
 end

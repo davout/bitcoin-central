@@ -20,13 +20,26 @@ class Invoice < ActiveRecord::Base
     :presence => true,
     :url => true
 
-  before_validation :generate_payment_address,
-    :on => :create
+  validates :item_url,
+    :url => true
 
-  before_create :generate_reference
+  validates :authentication_token,
+    :presence => true
+
+  validates :reference,
+    :presence => true
+
+  before_validation :on => :create do
+    generate_payment_address
+    generate_authentication_token
+    generate_reference
+  end
 
   attr_protected :user_id, 
-    :payment_address
+    :payment_address,
+    :authenctication_token,
+    :state,
+    :reference
   
   state_machine do
     state :pending
@@ -34,24 +47,26 @@ class Invoice < ActiveRecord::Base
     state :paid
 
     event :payment_seen do
-      transitions :to => :processing, :from => :pending
+      transitions :to => :processing,
+        :from => :pending,
+        :on_transition => lambda { |i|
+          i.paid_at = DateTime.now
+        }
     end
 
     event :pay do
       transitions :to => :paid,
         :from => [:pending, :processing],
         :on_transition => lambda { |i|
-        i.credit_funds
-        i.ping_callback
-        i.email_confirmation
-      }
+          i.credit_funds
+          i.ping_callback
+          i.email_confirmation
+        }
     end
   end
 
-  def credit_funds(paid_at = Time.now)
+  def credit_funds
     Invoice.transaction do
-      self.paid_at = paid_at
-
       user.transfers.create!({
           :amount => self.amount,
           :currency => "BTC"
@@ -87,7 +102,11 @@ class Invoice < ActiveRecord::Base
   end
 
   def generate_reference
-    self.reference = "#{"%06d" % (rand * 10 ** 6).to_i}"
+    self.reference = "R#{"%06d" % (rand * 10 ** 6).to_i}"
+  end
+
+  def generate_authentication_token
+    self.authentication_token = Digest::SHA2.hexdigest("#{DateTime.now}#{rand * 10 ** 9}")
   end
 
   def self.process_pending

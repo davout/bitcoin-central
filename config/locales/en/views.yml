@@ -18,8 +18,10 @@ en:
         To pay this invoice, simply transfer the requested amount to
         the payment address, the page will automatically refresh and
         show you its progress.
+      return_to_item: Revenir sur le site du marchand
 
   users:
     form:
       submit: Save user
       merchant_explanation: Activate merchant tools
+      

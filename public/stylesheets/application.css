@@ -67,6 +67,10 @@ ul > li {
     display: none;
 }
 
+.fixed {
+    font-family: Lucidatypewriter, monospace;
+}
+
 /* Footer */
 div#footer {
     text-align: center;
@@ -436,6 +440,10 @@ span.invoice-state {
 img.state-icon {
     position: relative;
     top: 2px;
+}
+
+div.invoice-item-link {
+  text-align: center;
 }
 
 /* Creation links */

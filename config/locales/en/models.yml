@@ -10,7 +10,9 @@ en:
         state: State
         paid_at: Paid at
         merchant_reference: Merchant ref.
-        merchant_memo: Comment        
+        merchant_memo: Comment
+        authentication_token: Authentication token
+        item_url: Related item URL
         state_translations:
           pending: Pending payment
           processing: Processing payment
