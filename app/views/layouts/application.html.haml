@@ -16,6 +16,8 @@
 
     = render :partial => 'layouts/google_analytics'
 
+    = yield :head
+
   %body{ :class => [request[:controller], "#{request[:controller]}-#{request[:action]}"] }
     #content
       %h1#main-title= link_to(content_tag(:span, t(:website_title)), root_path)

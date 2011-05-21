@@ -17,7 +17,7 @@ en:
       payee: Payee
       payment-explanations: >
         To pay this invoice, simply transfer the requested amount to
-        the payment address, the page will automatically refresh and
+        the payment address, the page will automatically refresh to
         show you its progress.
       return_to_item: Return to merchant website
 
