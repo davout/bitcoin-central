@@ -19,7 +19,10 @@ class InvoicesController < ApplicationController
         redirect_to root_path
       end
     elsif authenticate_user!
-      @invoice = current_user.invoices.find(params[:id])
+      # TODO : Must be a less ugly way to do this
+      unless @invoice = ((current_user.invoices.where(:id => params[:id]).count > 0) && current_user.invoices.find(params[:id]))
+        redirect_to invoices_path
+      end
     end
   end
 

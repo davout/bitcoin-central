@@ -37,7 +37,7 @@ class Invoice < ActiveRecord::Base
 
   attr_protected :user_id, 
     :payment_address,
-    :authenctication_token,
+    :authentication_token,
     :state,
     :reference
   

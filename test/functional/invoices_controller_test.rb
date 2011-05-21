@@ -15,6 +15,19 @@ class InvoicesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should not show other users invoices" do
+    get :show, :id => invoices(:invoice1) # owned by users(:merchant)
+    assert_response :redirect
+    assert_redirected_to invoices_path
+  end
+
+  test "should show owned invoices" do
+    sign_out :user
+    login_with :merchant
+    get :show, :id => invoices(:invoice1)
+    assert_response :success
+  end
+
   test "should create invoice" do    
     assert_difference 'Invoice.count' do
       post :create, :invoice => {
