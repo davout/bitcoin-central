@@ -13,3 +13,7 @@ end
 every 30.minutes do
   rake "bitcoin:backup"
 end
+
+every 1.day do
+  rake "bitcoin:prune_old_pending_invoices"
+end

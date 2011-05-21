@@ -22,4 +22,12 @@ namespace :bitcoin do
   task :process_pending_invoices => :environment do
     Invoice.process_pending
   end
+
+  desc "Prunes pending invoices older than 48h"
+  task :prune_old_pending_invoices => :environment do
+    Invoice.
+      where("created_at < ?", DateTime.now.advance(:hours => -48)).
+      where(:state => "pending").
+      delete_all
+  end
 end
