@@ -12,7 +12,7 @@ en:
         merchant_reference: Merchant ref.
         merchant_memo: Comment
         authentication_token: Authentication token
-        item_url: Related item URL
+        item_url: Related order URL
         state_translations:
           pending: Pending payment
           processing: Processing payment

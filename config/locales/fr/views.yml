@@ -8,6 +8,7 @@ fr:
       callback_url_explanation: URL de notification vers laquelle POSTer
       submit: Créer facture
       created: Facture créée avec succès
+      item_url_explanation: URL de la commande sur le site du vendeur
     index:
       details: Voir le détail de la facture
       create: Créer une facture
@@ -18,7 +19,7 @@ fr:
         Pour payer, transférez simplement le montant indiqué
         à l'adresse de paiement, la page se rafraîchira automatiquement
         afin de vous indiquer l'avancement du processus.
-      return_to_item: Return to merchant website
+      return_to_item: Revenir sur le site du vendeur
 
 
   users:

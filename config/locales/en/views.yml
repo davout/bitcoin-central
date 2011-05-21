@@ -8,6 +8,7 @@ en:
       callback_url_explanation: The URL that should be POST'ed to upon payment
       submit: Post invoice
       created: Invoice successfully posted
+      item_url_explanation: Related order URL on the merchant website
     index:
       details: Show invoice details
       create: Create invoice
@@ -18,7 +19,7 @@ en:
         To pay this invoice, simply transfer the requested amount to
         the payment address, the page will automatically refresh and
         show you its progress.
-      return_to_item: Revenir sur le site du marchand
+      return_to_item: Return to merchant website
 
   users:
     form:

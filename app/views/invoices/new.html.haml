@@ -22,4 +22,9 @@
     .explanation= t(".callback_url_explanation")
 
   .form-field
+    = f.label :item_url
+    = f.text_field :item_url
+    .explanation= t(".item_url_explanation")
+
+  .form-field
     = f.submit t(".submit"), :class => 'submit'

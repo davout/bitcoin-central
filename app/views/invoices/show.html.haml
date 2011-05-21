@@ -39,6 +39,7 @@
         %pre= @invoice.merchant_memo
 
 - if @invoice.item_url
+  %br
   .invoice-item-link
     = link_to(t(".return_to_item"), @invoice.item_url)
 
