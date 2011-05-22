@@ -37,5 +37,8 @@ BitcoinBank::Application.configure do
 
   config.action_mailer.default_url_options = {
     :host => "dummy.net"
-  }  
+  }
+
+  # Used to broadcast invoices public URLs
+  config.base_url = "http://localhost:3000/"
 end

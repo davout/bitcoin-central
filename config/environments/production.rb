@@ -11,4 +11,7 @@ BitcoinBank::Application.configure do
   config.action_mailer.default_url_options = {
     :host => "bitcoin-central.net"
   }
+
+  # Used to broadcast invoices public URLs
+  config.base_url = "https://bitcoin-central.net/"
 end

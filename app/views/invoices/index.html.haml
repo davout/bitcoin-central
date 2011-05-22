@@ -15,7 +15,7 @@
       %tr
         %td= invoice.reference
         %td= invoice_state(invoice.state)
-        %td= invoice.paid? ? l(invoice.paid_at) : "N/A"
+        %td= !invoice.pending? ? l(invoice.paid_at) : "N/A"
         %td.amount= number_to_bitcoins invoice.amount
         %td.auto-sized= invoice_details(invoice)
   - else

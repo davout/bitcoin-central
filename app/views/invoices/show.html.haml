@@ -40,11 +40,11 @@
       %td
         %pre= @invoice.merchant_memo
 
-- if @invoice.item_url
+- if @invoice.item_url && !@invoice.pending?
   %br
   .invoice-item-link
     = link_to(t(".return_to_item"), @invoice.item_url)
 
-- unless @invoice.paid?
+- if @invoice.pending?
   %br
   .payment-explanations= t(".payment-explanations")

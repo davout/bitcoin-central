@@ -27,10 +27,13 @@ BitcoinBank::Application.configure do
    config.action_mailer.delivery_method = :sendmail
 
   # Comment this line if testing e-mails in development mode
-#  config.action_mailer.delivery_method = :test
+  config.action_mailer.delivery_method = :test
 
   config.action_mailer.default_url_options = {
     :host => "development.bitcoin-central.net"
   }
+
+  # Used to broadcast invoices public URLs
+  config.base_url = "http://localhost:3000/"
 end
 

@@ -60,4 +60,17 @@ class InvoiceTest < ActiveSupport::TestCase
     assert invoice.save
     assert invoice.authentication_token
   end
+
+  test "payment should get correctly timestamped even when ditching processing state" do
+    invoice = Invoice.new({
+        :user => users(:trader1),
+        :amount => 100,
+        :callback_url => "http://domain.tld"
+      })
+
+    assert_nil invoice.paid_at
+    assert invoice.save
+    assert invoice.pay!
+    assert invoice.paid_at
+  end
 end

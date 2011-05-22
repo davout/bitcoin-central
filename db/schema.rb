@@ -121,10 +121,8 @@ ActiveRecord::Schema.define(:version => 20110521125911) do
     t.datetime "locked_at"
     t.string   "authentication_token"
     t.boolean  "merchant",             :default => false
-    t.string   "api_key"
   end
 
-  add_index "users", ["api_key"], :name => "index_users_on_api_key", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
 
 end
