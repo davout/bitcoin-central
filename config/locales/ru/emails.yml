@@ -1,0 +1,5 @@
+ru:
+  emails:
+    invoice_payment_notification:
+      subject: You have received a bitcoin payment
+      body: "You have received a %{amount} BTC payment (invoice reference : %{reference})"

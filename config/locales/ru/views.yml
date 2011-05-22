@@ -1,0 +1,25 @@
+ru:
+  invoices:
+    new:
+      create_invoice: Create invoice
+      error: Error posting invoice
+      amount_explanation: The amount to be paid for this invoice
+      payment_explanation: The address at which the funds should be sent
+      callback_url_explanation: The URL that should be POST'ed to upon payment
+      submit: Post invoice
+      created: Invoice successfully posted
+    index:
+      details: Show invoice details
+      create: Create invoice
+    show:
+      details: Invoice details
+      payee: Payee
+      payment-explanations: >
+        To pay this invoice, simply transfer the requested amount to
+        the payment address, the page will automatically refresh and
+        show you its progress.
+
+  users:
+    form:
+      submit: Save user
+      merchant_explanation: Activate merchant tools

@@ -1,0 +1,87 @@
+ru:
+  activerecord:
+    attributes:
+      invoice:
+        reference: Reference
+        user: Payee
+        payment_address: Payment address
+        amount: Amount
+        callback_url: Callback URL
+        state: State
+        paid_at: Paid at
+        merchant_reference: Merchant ref.
+        merchant_memo: Comment        
+        state_translations:
+          pending: Pending payment
+          processing: Processing payment
+          paid: Paid
+        state_tooltips:
+          pending: No payment has been received yet
+          processing: A payment has been detected and awaits confirmation from the Bitcoin network
+          paid: Payment has been confirmed
+      liberty_reserve_transfer:
+        lr_account_id: Liberty Reserve account ID
+      trade_order:
+        amount: Amount
+        dark_pool: Dark pool
+        ppc: Price
+        category: Type
+        currency: Currency
+        total: Total
+      transfer:
+        user: User
+        amount: Amount
+        address: Address
+        currency: Currency
+        bt_tx_confirmations: Bitcoin confirmations
+        bt_tx_from: Senders Bitcoin address
+        email: E-mail address
+        lr_merchant_fee: Liberty Reserve merchant fee
+        lr_transferred_amount: Liberty Reserve transferred amount
+        px_fee: Pecunix fee
+        px_payer: Pecunix payer
+      user:
+        email: E-mail address
+        password: Password
+        account: Account ID
+        admin: Administrator
+        authentication_token: Authentication token
+        confirmation_sent_at: Confirmation e-mail sent at
+        confirmation_token: Confirmation token
+        current_sign_in_at: Current sign-in at
+        current_sign_in_ip: Current sign-in IP
+        encrypted_password: Encrypted password
+        failed_attempts: Failed authentication attempts
+        last_address: Last Bitcoin address
+        last_sign_in_at: Last sign-in at
+        last_sign_in_ip: Last sign-in IP
+        locked_at: Locked at
+        password_salt: Password salt
+        remember_created_at: Remember created at
+        remeber_token: Remember token
+        reset_password_token: Password reset token
+        salt: Salt
+        secret_token: Secret token
+        time_zone: Time-zone
+        unlock_token: Unlock token
+        purchase_trades: Purchase trades
+        sale_trades: Sale trades
+        trade_orders: Trade orders
+        transfers: Transfers
+        current_password: Current password
+        new_password: New password
+        merchant: Merchant API
+
+    models:
+      invoice:
+        one: Invoice
+        other: Invoices
+      user:
+        one: User
+        other: Users
+      trade_order:
+        one: Trade order
+        other: Trade orders
+      transfer:
+        one: Transfer
+        other: Transfers
