@@ -1,25 +1,24 @@
 ru:
   invoices:
     new:
-      create_invoice: Create invoice
-      error: Error posting invoice
-      amount_explanation: The amount to be paid for this invoice
-      payment_explanation: The address at which the funds should be sent
-      callback_url_explanation: The URL that should be POST'ed to upon payment
-      submit: Post invoice
-      created: Invoice successfully posted
+      create_invoice: Новый счет к оплате
+      error: Ошибка создания счета
+      amount_explanation: Сумма к оплате по счету
+      payment_explanation: Адрес на который будет оплачен счет
+      callback_url_explanation: URL на который будет отправлен POST-запрос при оплате
+      submit: Отправить счет
+      created: Счет успешно отправлен
     index:
-      details: Show invoice details
-      create: Create invoice
+      details: Подробности по счету
+      create: Создать счет
     show:
-      details: Invoice details
-      payee: Payee
+      details: Подробности по счету
+      payee: Получатель
       payment-explanations: >
-        To pay this invoice, simply transfer the requested amount to
-        the payment address, the page will automatically refresh and
-        show you its progress.
+        Чтобы оплатить счет, просто переведите указанную сумму на
+        данный адрес, страница будет автоматически отображать состояние перевода.
 
   users:
     form:
-      submit: Save user
-      merchant_explanation: Activate merchant tools
+      submit: Сохранить аккаунт
+      merchant_explanation: Активировать торговые инструменты

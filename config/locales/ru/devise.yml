@@ -1,39 +1,39 @@
 ru:
   errors:
     messages:
-      not_found: "not found"
-      already_confirmed: "was already confirmed"
-      not_locked: "was not locked"
+      not_found: "не найден"
+      already_confirmed: "уже подтвержден"
+      not_locked: "не был заблокирован"
 
   devise:
     failure:
-      unauthenticated: 'You must be logged-in to access this page'
-      unconfirmed: 'You have to confirm your account before continuing'
-      locked: 'Your account is locked'
-      invalid: 'Invalid email or password'
-      invalid_token: 'Invalid authentication token'
-      timeout: 'Your session expired, please sign in again to continue'
-      inactive: 'Your account was not activated yet'
+      unauthenticated: 'Вы должны быть авторизованы для просмотра этой страницы'
+      unconfirmed: 'Вы должны подтвердить аккаунт для продолжения'
+      locked: 'Ваш аккаунт заблокирован'
+      invalid: 'Неверный логин или пароль'
+      invalid_token: 'Неверный токен'
+      timeout: 'Ваша сессия завершена, пожалуйста залогиньтесь снова для продолжения'
+      inactive: 'Ваш аккаунт еще не активирован'
     sessions:
-      signed_in: 'Signed in successfully'
-      signed_out: 'Signed out successfully'
+      signed_in: 'Вы успешно вошли в систему'
+      signed_out: 'Вы успешно вышли из системы'
     passwords:
-      send_instructions: 'You will receive an email with instructions about how to reset your password in a few minutes'
-      updated: 'Your password was changed successfully. You are now signed in'
+      send_instructions: 'В течении нескольких минут вы получите письмо с инструкциями по сбросу пароля'
+      updated: 'Ваш пароль был успешно изменен. Вы залогинены.'
     confirmations:
-      send_instructions: 'You will receive an email with instructions about how to confirm your account in a few minutes'
-      confirmed: 'Your account was successfully confirmed. You are now signed in'
+      send_instructions: 'В течении нескольких минут вы получите письмо с инструкциями по подтверждению аккаунта'
+      confirmed: 'Ваш аккаунт был успешно подтвержден. Вы залогинены.'
     registrations:
-      signed_up: 'You have registered successfully. Confirmation instructions have been sent to you by e-mail'
-      updated: 'You updated your account successfully'
-      destroyed: 'Bye! Your account was successfully cancelled. We hope to see you again soon'
+      signed_up: 'Вы успешно прошли регистрацию. Вам отослано письмо с инструкциями по подтверждению аккаунта'
+      updated: 'Вы успешно обновили свой аккаунт'
+      destroyed: 'Ваш аккаунт был успешно удален. Всего хорошего, заходите еще!'
     unlocks:
-      send_instructions: 'You will receive an email with instructions about how to unlock your account in a few minutes'
-      unlocked: 'Your account was successfully unlocked. You are now signed in'
+      send_instructions: 'В течении нескольких минут вы получите письмо с инструкциями по разблокированию аккаунта'
+      unlocked: 'Ваш аккаунт был успешно разблокирован. Вы залогинены.'
     mailer:
       confirmation_instructions:
-        subject: 'Confirmation instructions'
+        subject: 'Подтверждение аккаунта'
       reset_password_instructions:
-        subject: 'Reset password instructions'
+        subject: 'Сброс пароля'
       unlock_instructions:
-        subject: 'Unlock Instructions'
+        subject: 'Разблокирование аккаунта'
