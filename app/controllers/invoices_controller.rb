@@ -1,4 +1,6 @@
 class InvoicesController < ApplicationController
+  respond_to :html, :json
+  
   skip_before_filter :authenticate_user!,
     :only => :show
 
@@ -31,8 +33,11 @@ class InvoicesController < ApplicationController
     @invoice.user = current_user
 
     if @invoice.save
-      redirect_to @invoice,
-        :notice => t("invoices.new.created")
+      respond_with @invoice  do |format|
+        format.html { 
+          redirect_to @invoice, :notice => t("invoices.new.created") 
+        }
+      end
     else
       render :action => :new
     end

@@ -73,4 +73,8 @@ class InvoiceTest < ActiveSupport::TestCase
     assert invoice.pay!
     assert invoice.paid_at
   end
+  
+  test "json representation should include the public URL" do
+    assert !JSON.parse(invoices(:invoice1).to_json)["invoice"]["public_url"].blank?
+  end
 end

@@ -37,7 +37,7 @@ class Invoice < ActiveRecord::Base
     generate_authentication_token
     generate_reference
   end
-
+  
   attr_protected :user_id, 
     :payment_address,
     :authentication_token,
@@ -88,8 +88,6 @@ class Invoice < ActiveRecord::Base
     require "net/https"
     require "uri"
 
-    invoice_url = "#{Rails.configuration.base_url.gsub(/\/$/, "")}/invoices/#{id}?authentication_token=#{authentication_token}"
-
     uri = URI.parse(callback_url)
 
     http = Net::HTTP.new(uri.host, uri.port)
@@ -104,7 +102,7 @@ class Invoice < ActiveRecord::Base
         "invoice[merchant_reference]" => merchant_reference,
         "invoice[merchant_memo]" => merchant_memo,
         "invoice[amount]" => amount,
-        "invoice[url]" => invoice_url
+        "invoice[public_url]" => public_url
       }
     )
 
@@ -157,5 +155,15 @@ class Invoice < ActiveRecord::Base
   # Processes all pending invoices
   def self.process_pending
     where("state <> ?", "paid").each &:check_payment
+  end
+  
+  # Returns the URL under which this invoice is publicly accessible
+  def public_url
+    "#{Rails.configuration.base_url.gsub(/\/$/, "")}/invoices/#{id}?authentication_token=#{authentication_token}"
+  end
+  
+  # Add public URL in auto-generated JSON representation
+  def as_json(options = {})
+    { :invoice => attributes.merge(:public_url => public_url) }
   end
 end
