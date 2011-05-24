@@ -14,6 +14,7 @@ gem 'recaptcha',
 gem 'devise'
 
 gem 'exception_notification',
+  :git => "http://github.com/rails/exception_notification.git",
   :require => 'exception_notifier'
 
 gem 'whenever'
