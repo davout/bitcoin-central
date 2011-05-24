@@ -50,21 +50,28 @@ class Trade < ActiveRecord::Base
   }
 
   def execute
-    transfers << InternalTransfer.create!(
+    internal_transfer = InternalTransfer.new(
       :currency => currency,
       :amount =>  -traded_currency,
       :user_id => purchase_order.user_id,
-      :payee_id => sale_order.user_id,
-      :skip_min_amount => true
+      :payee_id => sale_order.user_id
     )
 
-    transfers << BitcoinTransfer.create!(
+    bitcoin_transfer = BitcoinTransfer.new(
       :currency => "BTC",
       :amount => -traded_btc,
       :user_id => sale_order.user_id,
-      :payee_id => purchase_order.user_id,
-      :skip_min_amount => true
+      :payee_id => purchase_order.user_id
     )
+
+    internal_transfer.skip_min_amount = true
+    bitcoin_transfer.skip_min_amount = true
+
+    internal_transfer.save!
+    bitcoin_transfer.save!
+
+    transfers << internal_transfer
+    transfers << bitcoin_transfer
 
     save!
   end

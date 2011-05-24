@@ -67,15 +67,17 @@ class ThirdPartyCallbacksController < ApplicationController
     # We want to make sure it is the first time the callback is called for this
     # particular PGAU deposit (according to Pecunix docs, multiple calls are possible)
     unless Transfer.find_by_px_tx_id(params["PAYMENT_REC_ID"])
-      Transfer.create!(
+      t = Transfer.new(
         :user => User.find(params["PAYMENT_ID"]),
         :currency => "PGAU",
         :amount => (params["PAYMENT_GRAMS"].to_f - params["PAYMENT_FEE"].to_f),
         :px_tx_id => params["PAYMENT_REC_ID"],
         :px_payer => params["PAYER_ACCOUNT"],
-        :px_fee => params["PAYMENT_FEE"].to_f,
-        :skip_min_amount => true
+        :px_fee => params["PAYMENT_FEE"].to_f
       )
+
+      t.skip_min_amount = true
+      t.save!
     end
 
     render :text => ""

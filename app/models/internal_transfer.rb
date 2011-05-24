@@ -13,10 +13,13 @@ class InternalTransfer < Transfer
   end
 
   def execute
-    Transfer.create!({
+    t = Transfer.new({
         :user_id => payee_id,
         :amount => amount.abs,
         :currency => currency
       })
+
+    t.skip_min_amount = true
+    t.save!
   end
 end

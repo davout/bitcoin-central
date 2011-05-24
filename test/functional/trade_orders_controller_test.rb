@@ -58,24 +58,4 @@ class TradeOrdersControllerTest < ActionController::TestCase
     get :book, :format => :xml
     assert_response :success
   end
-  
-  test "should post trade order" do
-    login_with :trader1
-    
-    assert_difference "TradeOrder.count" do
-      post :create, :trade_order => {
-        :category => "buy",
-        :ppc => "6.5", 
-        :amount => "7", 
-        :dark_pool => "0", 
-        :currency => "LRUSD"
-      }
-      
-      assert assigns(:trade_order).valid?, 
-        assigns(:trade_order).errors.inspect
-      
-      assert_response :redirect
-      assert_redirected_to account_trade_orders_path
-    end
-  end
 end
