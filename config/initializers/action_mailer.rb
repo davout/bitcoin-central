@@ -13,4 +13,6 @@ module ActionMailerDefaults
   end
 end
 
-ActionMailer::Base.send :include, ActionMailerDefaults
+class BitcoinCentralMailer < ActionMailer::Base
+  include ActionMailerDefaults
+end

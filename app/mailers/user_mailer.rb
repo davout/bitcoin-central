@@ -1,4 +1,4 @@
-class UserMailer < ActionMailer::Base
+class UserMailer < BitcoinCentralMailer
   def registration_confirmation(user)
     @user = user
     
