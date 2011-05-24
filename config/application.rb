@@ -35,9 +35,9 @@ module BitcoinBank
 
     config.after_initialize do
       config.middleware.use ::ExceptionNotifier,
-        :email_prefix => "Exception : ",
+        :email_prefix => "[BC Exception] : ",
         :sender_address => %w{Bitcoin-Central <no-reply@bitcoin-central.net>},
-        :exception_recipients => %w{support@bitcoin-central.net dm.francois@gmail.com}
+        :exception_recipients => %w{support@bitcoin-central.net}
     end
   end
 end
