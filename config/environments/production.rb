@@ -12,6 +12,11 @@ BitcoinBank::Application.configure do
     :host => "bitcoin-central.net"
   }
 
+  config.middleware.use ::ExceptionNotifier,
+    :email_prefix => "[BC Exception]",
+    :sender_address => %w{no-reply@bitcoin-central.net},
+    :exception_recipients => %w{support@bitcoin-central.net}
+  
   # Used to broadcast invoices public URLs
   config.base_url = "https://bitcoin-central.net/"
 end
