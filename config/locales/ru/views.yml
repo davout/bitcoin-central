@@ -1,0 +1,24 @@
+ru:
+  invoices:
+    new:
+      create_invoice: Новый счет к оплате
+      error: Ошибка создания счета
+      amount_explanation: Сумма к оплате по счету
+      payment_explanation: Адрес на который будет оплачен счет
+      callback_url_explanation: URL на который будет отправлен POST-запрос при оплате
+      submit: Отправить счет
+      created: Счет успешно отправлен
+    index:
+      details: Подробности по счету
+      create: Создать счет
+    show:
+      details: Подробности по счету
+      payee: Получатель
+      payment-explanations: >
+        Чтобы оплатить счет, просто переведите указанную сумму на
+        данный адрес, страница будет автоматически отображать состояние перевода.
+
+  users:
+    form:
+      submit: Сохранить аккаунт
+      merchant_explanation: Активировать торговые инструменты

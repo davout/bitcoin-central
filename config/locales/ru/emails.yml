@@ -1,0 +1,5 @@
+ru:
+  emails:
+    invoice_payment_notification:
+      subject: Вы получили перевод Bitcoin
+      body: "Вы получили перевод %{amount} BTC (invoice reference : %{reference})"

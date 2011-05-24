@@ -1,0 +1,87 @@
+ru:
+  activerecord:
+    attributes:
+      invoice:
+        reference: Трекинг-код
+        user: Получатель
+        payment_address: Адрес платежа
+        amount: Сумма
+        callback_url: URL обратного вызова (callback)
+        state: Состояние
+        paid_at: Дата оплаты
+        merchant_reference: Код торговца
+        merchant_memo: Комментарий        
+        state_translations:
+          pending: Платеж ждет очереди
+          processing: Платеж обрабатывается
+          paid: Оплачен
+        state_tooltips:
+          pending: Платеж пока не получен
+          processing: Платеж обнаружен и ожидает подтверждения от сети Bitcoin
+          paid: Платеж получен
+      liberty_reserve_transfer:
+        lr_account_id: ID аккаунта Liberty Reserve
+      trade_order:
+        amount: Сумма
+        dark_pool: Темный пул
+        ppc: Цена
+        category: Тип
+        currency: Валюта
+        total: Всего
+      transfer:
+        user: Пользователь
+        amount: Сумма
+        address: Адрес
+        currency: Валюта
+        bt_tx_confirmations: Подтверждения сети Bitcoin
+        bt_tx_from: Адрес Bitcoin отправителя
+        email: Адрес e-mail
+        lr_merchant_fee: Комиссия Liberty Reserve
+        lr_transferred_amount: Сумма, переведенная Liberty Reserve
+        px_fee: Комиссия Pecunix
+        px_payer: Плательщик Pecunix
+      user:
+        email: Адрес e-mail
+        password: Пароль
+        account: ID аккаунта
+        admin: Админимстратор
+        authentication_token: Токен аутентификации
+        confirmation_sent_at: Дата отсылки письма подтверждения
+        confirmation_token: Токен подтверждения
+        current_sign_in_at: Дата текущего логина
+        current_sign_in_ip: IP текущего логина
+        encrypted_password: Шифрованный пароль
+        failed_attempts: Неудачные попытки логина
+        last_address: Последний адрес Bitcoin
+        last_sign_in_at: Дата последнего логина
+        last_sign_in_ip: IP последнего логина
+        locked_at: Дата блокировки
+        password_salt: Соль пароля
+        remember_created_at: Дата создания напоминания
+        remeber_token: Токен напоминания
+        reset_password_token: Токен сброса пароля
+        salt: Соль
+        secret_token: Секретный токен
+        time_zone: Часовой пояс
+        unlock_token: Токен разблокировки
+        purchase_trades: Сделки покупки
+        sale_trades: Сделки продажи
+        trade_orders: Торговые ордера
+        transfers: Переводы
+        current_password: Текущий пароль
+        new_password: Новый пароль
+        merchant: Торговое API
+
+    models:
+      invoice:
+        one: Счет
+        other: Счета
+      user:
+        one: Пользователь
+        other: Пользователи
+      trade_order:
+        one: Торговый ордер
+        other: Торговые ордера
+      transfer:
+        one: Перевод
+        other: Переводы

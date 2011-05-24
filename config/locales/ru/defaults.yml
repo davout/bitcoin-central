@@ -1,0 +1,182 @@
+# US English translations for Ruby on Rails
+#
+# Use this as the base for the locale file of your language.
+
+ru:
+  date:
+    formats:
+      default: "%d.%m.%Y"
+      short: "%d %b"
+      long: "%d %B %Y"
+
+    day_names: [Воскресенье, Понедельник, Вторник, Среда, Четверг, Пятница, Суббота]
+    abbr_day_names: [Вс, Пн, Вт, Ср, Чт, Пт, Сб]
+
+    month_names: [~, января, февраля, марта, апреля, мая, июня, июля, августа, сентября, октября, ноября, декабря]
+    abbr_month_names: [~, Янв, Фев, Мар, Апр, Май, Июн, Июл, Авг, Сен, Окт, Ноя, Дек]
+    order:
+      - :day
+      - :month
+      - :year
+
+  time:
+    formats:
+      default: "%d.%m.%Y %H:%M"
+      short: "%d %b %H:%M"
+      long: "%d %B %Y, %H:%M"
+    am: "am"
+    pm: "pm"
+
+  support:
+    array:
+      words_connector: ", "
+      two_words_connector: " и "
+      last_word_connector: " и "
+
+    select:
+      prompt: "Пожалуйста выберите"
+
+  number:
+    format:
+      separator: "."
+      delimiter: " "
+      precision: 3
+      significant: false
+      strip_insignificant_zeros: false
+
+    currency:
+      format:
+        format: "%n %u"
+        unit: "р."
+        separator: "."
+        delimiter: " "
+        precision: 2
+        significant: false
+        strip_insignificant_zeros: false
+
+    percentage:
+      format:
+        delimiter: ""
+
+    precision:
+      format:
+        delimiter: ""
+
+    human:
+      format:
+        delimiter: ""
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one:   "байт"
+            other: "байт"
+          kb: "Кб"
+          mb: "Мб"
+          gb: "Гб"
+          tb: "Тб"
+      decimal_units:
+        format: "%n %u"
+        units:
+          unit: ""
+          thousand: тысяч
+          million: миллионов
+          billion: миллиардов
+          trillion: триллионов
+          quadrillion: квадриллионов
+
+  datetime:
+    distance_in_words:
+      half_a_minute: "меньше минуты"
+      less_than_x_seconds:
+        one:   "меньше секунды"
+        other: "меньше %{count} секунд"
+      x_seconds:
+        one:   "1 секунда"
+        other: "%{count} секунд"
+      less_than_x_minutes:
+        one:   "меньше минуты"
+        other: "меньше %{count} минут"
+      x_minutes:
+        one:   "1 минута"
+        other: "%{count} минут"
+      about_x_hours:
+        one:   "около 1 часа"
+        other: "около %{count} часов"
+      x_days:
+        one:   "1 день"
+        other: "%{count} дней"
+      about_x_months:
+        one:   "около 1 месяца"
+        other: "около %{count} месяцев"
+      x_months:
+        one:   "1 месяц"
+        other: "%{count} месяцев"
+      about_x_years:
+        one:   "около 1 года"
+        other: "около %{count} лет"
+      over_x_years:
+        one:   "больше 1 года"
+        other: "больше %{count} лет"
+      almost_x_years:
+        one:   "почти 1 год"
+        other: "почти %{count} лет"
+    prompts:
+      year:   "Год"
+      month:  "Месяц"
+      day:    "День"
+      hour:   "Часов"
+      minute: "Минут"
+      second: "Секунд"
+
+  helpers:
+    select:
+      prompt: "Пожалуйста выберите"
+
+    submit:
+      create: 'Создать %{model}'
+      update: 'Обновить %{model}'
+      submit: 'Сохранить %{model}'
+
+  errors:
+    format: "%{attribute} %{message}"
+
+    messages: &errors_messages
+      inclusion: "отсутствует в списке"
+      exclusion: "зарезервировано"
+      invalid: "некорректно"
+      confirmation: "не соответствует подтверждению"
+      accepted: "должно быть принято"
+      empty: "не может быть пустым"
+      blank: "не может быть незаполненным"
+      too_long: "слишком длинно (максимум %{count} символов)"
+      too_short: "слишком коротко (минимум %{count} символов)"
+      wrong_length: "некорректной длины (должно быть %{count} символов)"
+      not_a_number: "не является числом"
+      not_an_integer: "должно быть целым числом"
+      greater_than: "должно быть больше %{count}"
+      greater_than_or_equal_to: "должно быть не меньше %{count}"
+      equal_to: "должно быть равно %{count}"
+      less_than: "должно быть меньше %{count}"
+      less_than_or_equal_to: "должно быть не больше %{count}"
+      odd: "должно быть нечетным"
+      even: "должно быть четным"
+
+  activerecord:
+    errors:
+      template:
+        header:
+          one:    "Ошибка, не удалось сохранить %{model}"
+          other:  "%{count} ошибок, не удалось сохранить %{model}"
+        body: "Некоторые поля заполнены неправильно:"
+
+      messages:
+        taken: "уже использован"
+        record_invalid: "Возникли ошибки: %{errors}"
+        <<: *errors_messages
+
+      full_messages:
+        format: "%{attribute} %{message}"

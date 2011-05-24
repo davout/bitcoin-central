@@ -1,0 +1,298 @@
+ru:
+  password_forgotten: Забыли пароль?
+  didnt_receive_confirmation: "Не получили письмо подтверждения аккаунта?"
+  didnt_receive_unlock_instructions: "Не получили инструкции по разблокированию?"
+  resend_confirmation: Послать письмо подтверждения еще раз
+  submit: Отправить
+  change_password: Сменить пароль
+
+  # Generic
+  no_data: Нет данных
+
+  # controllers/informations_controller.rb
+  chart_date_format: %d.%m
+
+  # controllers/sessions_controller.rb
+  sign_in_success: Вход выполнен
+  sign_in_failure: Логин, пароль или капча введены неверно
+  sign_out_success: Выход выполнен
+
+  # controllers/third_party_callbacks_controller.rb
+  lr_transfer_success: "Успешно переведены %{amount} %{currency} (комиссия LR: %{fee} %{currency})"
+  lr_transfer_failure: При переводе %{amount} %{currency} возникла ошибка.
+  px_transfer_canceled: Ваш перевод Pecunix был отменен
+  px_transfer_success: "Успешно переведены %{amount} PGAU (комиссия Pecunix: %{fee} PGAU)"
+
+  # controllers/trade_orders_controller.rb
+  order_saved: Ордер открыт, но соответствующих позиций для его выполнения пока нет
+  order_filled: Ордер %{how} закрыт, вы %{action} %{traded_btc} BTC за %{amount} %{currency} @ %{ppc} %{currency}/BTC
+  bought: купили
+  sold: продали
+  partially: частично
+  completely: полностью
+  order_deleted: Ордер успешно удален
+
+  # controllers/transfers_controller.rb
+  successful_transfer: Вы успешно перевели %{amount} %{currency}
+
+  # controllers/user_controller.rb
+  account_created: Ваш аккаунт был успешно создан
+  account_updated: Ваш аккаунт был успешно обновлен
+
+  # helpers/trade_orders_helper.rb
+  order_dark_pool_some: Некоторые ордера недоступны для публичного просмотра
+  order_dark_pool: Этот ордер недоступен для публичного просмотра
+
+  # helpers/transfers_helper.rb
+  confirmations_left:
+    one: "Осталось подтверждений: 1"
+    other: "Осталось подтверждений: %{count}"
+
+  # mailers/backup_mailer.rb
+  support_from: Bitcoin Central support <%{support_email}>
+  wallet_backup_subject: Резервная копия кошелька за %{date}
+
+  # mailers/user_mailer.rb
+  sign_up_confirmation: Подтверждение регистрации
+
+  # models/*.rb + lib/validators/*.rb
+  errors:
+    not_yourself: не может содержать ваш собственный аккаунт
+
+    blank: не может быть пустым
+
+    must_be_greater: должно быть более %{min} BTC
+    greater_than_balance: больше, чем ваш доступный баланс (%{balance} %{currency})
+    greater_than_capacity: больше, чем ваш доступный объем (%{capacity} BTC @ %{ppc} BTC/%{currency})
+    minimum_dark_pool_order: принимаются заказы минимум на 3,000 BTC
+
+    invalid: некорректно
+    no_match: не совпадает с подтверждением
+    answer_incorrect: ответ неверный
+
+    not_your_address: не может быть вашим собственным адресом
+    min_amount: не может быть меньше %{minimum} %{currency}
+    ppc_minimum: не может быть меньше 0.0001 %{currency}
+
+  # views/accounts/show.html
+  account_balance_title: Ваш аккаунт
+  currency: Валюта
+  balance: Баланс
+  balance_unconfirmed: Ожидается подтверждение перевода средств от сети Bitcoin
+
+  # views/backup_mailer/wallet_backup.text
+  encrypted_wallet: Шифрованный кошелек сервера за %{date}
+
+  # views/informations/economy.html
+  economy_title: Сводка экономики Bitcoin
+  how_many_generated: Всего биткоинов?
+  generated_coins_html: На данный момент всего сгенерировано <strong>%{count}</strong> биткоинов.
+
+  # views/informations/faq.html
+  faq_title: Частые вопросы
+
+  # views/informations/welcome.html
+  trading_data_title: Данные по торговле за последнюю неделю
+  welcome: Вас приветствует bitcoin-central.net!
+
+  # views/layouts/_footer.html
+  footer_html: 'Вы можете поддержать проект, переведя немного BTC на <span class="bitcoin-address">%{adress}</span>'
+
+  # views/layouts/_navigation.html
+  navigation:
+    account:
+      main: Ваш аккаунт
+      balance: Профиль
+      history: История
+      transfer_money: Вывод средств
+      deposit_money: Депозит средств
+    trading:
+      main: Трейдинг
+      new_order: Новый ордер
+      your_orders: Ваши ордера
+      order_book: Все ордера
+      trade_history: История сделок
+    admin:
+      main: Админ
+      transfers: Переводы
+      users: Юзера
+      information: Инфо
+    help:
+      main: Справка
+      faq: ЧаВо
+      economy: Экономика
+      support: Служба поддержки
+
+  # views/layouts/user_informations.html
+  generate_new_address_legend: Получить адрес назначения (при обновлении каждый раз генеририруется новый)
+  your_last_address: Ваш адрес
+  logout: Выйти
+  signed_in_as: Вы вошли как
+  sign_up: Регистрация
+  sign_in: Вход
+
+  # views/layouts/application.html
+  website_title: Bitcoin Central
+  website_keywords: bitcoin, bitcoin central, buy bitcoins, sell bitcoins, купля биткоинов, продажа биткоинов
+
+  # views/sessions/new.html
+  account_label: ID аккаунта
+  account_description: Адрес почты или ID аккаунта
+  password_label: Пароль
+  password_description: Забыли пароль?
+  sign_in_submit: Войти
+
+  # views/trade_orders/book.html
+  order_book_title: Выберите валюту
+  currencies:
+    all: Все
+    btc: BTC
+    btc_legend: Bitcoin
+    lrusd: LRUSD
+    lreur: LREUR
+    lr_legend: Liberty Reserve
+    eur: EUR
+    eur_legend: Наличные EUR
+    pgau: PGAU
+    pgau_legend: Pecunix Gold
+  buying: Купля
+  selling: Продажа
+  amount: Количество
+  price: Цена
+  no_buying_orders_found: Ордеров на покупку не найдено.
+  no_selling_orders_found: Ордеров на продажу не найдено.
+
+  # views/trade_orders/index.html
+  trade_orders_title: Торговые ордера
+  created_at: Создан
+  type: Тип
+  price: Цена
+  total: Всего
+  dark_pool_order: Теневой ордер
+  delete_order: Удалить ордер
+  delete_order_confirm: Вы уверены, что хотите удалить этот ордер?
+  no_orders_found: Ордеров не найдено.
+
+  # views/trade_orders/new.html
+  create_order_title: Создать ордер
+  currency_to_trade: Валюта, которой вы хотите торговать
+  category: Категория
+  buy: Купить
+  sell: Продать
+  sell_or_buy_description: Собираетесь ли вы покупать или продавать биткоины
+  your_balance: Ваш баланс
+  your_balance_description: Ваш подтвержденный баланс на данный момент
+  amount_description: Количество BTC, которые вы торгуете
+  ppc_description: Цена 1 BTC
+  total_description: Суммарная стоимость ордера
+  dark_pool_description: Будет ли ордер закрыт для публичного просмотра
+  error_creating_order:
+    one: "Ошибка при создании ордера:"
+    other: "%{count} при создании ордера:"
+
+  # views/trades/index.html
+  trade_history_title: История
+  no_trades_found: Нет сделок
+
+  # views/transfers/_lr_sci_form.html
+  click_for_lr_html: <a href="#" onclick="%{action}">Здесь</a> вы можете перейти на сайт Liberty Reserve и совершить депозит.
+
+  # views/transfers/deposit.html
+  support_email: "support@bitcoin-central.net"
+  deposit_bitcoins_title: Ввести биткоины
+  deposit_bitcoins_body_html:
+    <p>Просто переведите биткоины на любой из ваших адресов, и через пару минут они будут введены на ваш аккаунт.</p>
+    <p>Имейте в виду, что вы сможете их использовать только после подтверждения транзакции сетью Bitcoin (примерно через %{estimation} минут).</p>
+  deposit_eur_title: Ввести EUR
+  deposit_eur_body_html:
+    <p>Пожалуйста, напишите на <a href="mailto:%{support_email}">%{support_email}</a> с использованием шифрования PGP <a href="%{pgp_link}">(публичный ключ)</a>.</p>
+  deposit_lr_title: Ввести Liberty Reserve
+  deposit_pgau_title: Ввести Pecunix gold
+  deposit_pgau_body_html:
+    <p>
+    Укажите кол-во грамм золота, которое хотите ввести, и вы будете переведены на
+    сайт Pecunix для подтверждения. По завершению перевода золото появится на вашем балансе.
+    </p>
+  amount_pgau: Количество (PGAU)
+  deposit_pgau: Депозит Pecunix
+
+  # views/transfers/index.html
+  account_history_title: История аккаунта
+  currency: Валюта
+
+  # views/transfers/new.html
+  transfer_funds_title: Вывести средства
+  transfer_funds_body_html: "
+    <p>Вы можете вывести средства на:
+      <ul>
+        <li>адрес <strong>bitcoin</strong> (только BTC),</li>
+        <li>адрес <strong>e-mail</strong> (все валюты),</li>
+        <li>аккаунт <strong>bitcoin central</strong> (все валюты), or</li>
+        <li>аккаунт <strong>Liberty Reserve</strong> (только LREUR и LRUSD)</li>
+      </ul>
+    </p>
+    "
+  how_does_it_work_title: Как это работает?
+  how_does_it_work_body_html:
+    <p>
+      Перевод биткоинов возможен на другой аккаунт Bitcoin Central или на адрес Bitcoin,
+      в этом случае перевод будет происходить либо через сеть Bitcoin, либо внутри
+      Bitcoin Сentral (если адрес принадлежит пользователю Bitcoin Central).
+    </p>
+    <p>
+      Перевод любой валюты на другой аккаунт Bitcoin Central бесплатен.
+    </p>
+    <p>
+      Перевод денег на адрес e-mail снимает их с вашего счета, а получатель присылается письмо
+      с уведомлением, что они ждут его на Bitcoin Central; через некоторое время, если
+      они так и не были получены, средства возвращаются на ваш аккаунт.
+      <strong>Этот вариант перевода еще не реализован.</strong>
+    </p>
+  error_transferring_funds:
+    one: "Произошла ошибка, средства не переведены:"
+    other: "Произошло %{count} ошибок, средства не переведены:"
+  payee: Получатель
+  payee_id_eur: Аккаунт Bitcoin Central или адрес e-mail
+  payee_id_lrusd: Аккаунт Bitcoin Central, Liberty Reserve или адрес e-mail
+  payee_id_lreur: Аккаунт Bitcoin Central, Liberty Reserve или адрес e-mail
+  payee_id_btc: Аккаунт Bitcoin Central, адрес e-mail или адрес Bitcoin
+  payee_id_none: Идентификация получателя
+  confirmed_balance: Ваш подтвержденный баланс
+  transfer_amount: Сумма перевода
+  transfer_button: Перевести
+
+  # views/user_mailer/registration_confirmation.html
+  # views/user_mailer/registration_confirmation.text
+  thanks_for_registering: Спасибо за регистрацию на Bitcoin Central.
+  your_account_id_is: "ID вашего аккаунта: %{account_id}"
+
+  # views/users/_form.html
+  error_updating_account:
+    one: "Произошла ошибка, изменения аккаунта не были сохранены:"
+    other: "Произошло %{count} ошибок, изменения аккаунта не были сохранены:"
+  email: Адрес электронной почты
+  new_password_explanation: Заполните это поле, если вы хотите сменить пароль
+  new_password_confirmation: Подтверждение
+  new_password_confirmation_explanation: Подтверждение нового пароля
+  current_password_explanation: Это нужно для безопасности вашего аккаунта
+  time_zone: Часовой пояс
+  time_zone_explanation: Выберите часовой пояс, в котором будут отображаться даты
+
+  # views/users/edit.html
+  account_details_title: Настройки аккаунта
+
+  # views/users/index.html
+  listing_users_title: Список пользователей
+  account: Аккаунт
+  password: Пароль
+  user_show: Показать
+  user_edit: Редактировать
+  user_destroy: Удалить
+  user_destroy_confirm: Вы уверены?
+  user_new: Новый пользователь
+
+  # views/users/new.html
+  sign_up_for_account_title: Регистрация нового аккаунта
+
+  # Admin
+  insufficient_privileges: У вас нет прав для просмотра данной страницы
