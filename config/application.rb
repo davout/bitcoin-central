@@ -32,12 +32,5 @@ module BitcoinBank
     config.autoload_paths << File.join(config.root, "lib")
     config.autoload_paths << File.join(config.root, "lib", "bitcoin")
     config.autoload_paths << File.join(config.root, "lib", "validators")
-
-    config.after_initialize do
-      config.middleware.use ::ExceptionNotifier,
-        :email_prefix => "[BC Exception] : ",
-        :sender_address => %w{Bitcoin-Central <no-reply@bitcoin-central.net>},
-        :exception_recipients => %w{support@bitcoin-central.net}
-    end
   end
 end
