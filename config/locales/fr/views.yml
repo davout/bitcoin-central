@@ -12,6 +12,9 @@ fr:
     index:
       details: Voir le détail de la facture
       create: Créer une facture
+      deleted: Facture supprimée avec succès
+      confirm: Êtes-vous sûr(e) de vouloir supprimer cette facture ?
+      delete: Supprimer cette facture
     show:
       details: Détails de la facture
       payee: Bénéficiaire

@@ -35,11 +35,18 @@ class InvoicesController < ApplicationController
     if @invoice.save
       respond_with @invoice  do |format|
         format.html { 
-          redirect_to @invoice, :notice => t("invoices.new.created") 
+          redirect_to @invoice, :notice => t("invoices.new.created")
         }
       end
     else
       render :action => :new
     end
+  end
+  
+  def destroy
+    current_user.invoices.find(params[:id]).destroy
+    
+    redirect_to invoices_path,
+      :notice => t("invoices.index.deleted") 
   end
 end

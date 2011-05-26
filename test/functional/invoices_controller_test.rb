@@ -80,4 +80,14 @@ class InvoicesControllerTest < ActionController::TestCase
     assert_response :success
     assert_equal invoices(:invoice1), assigns(:invoice)
   end
+  
+  test "should destroy invoice" do
+    sign_out :user
+    login_with :merchant
+    
+    assert_difference "Invoice.count", -1 do
+      delete :destroy, :id => invoices(:invoice1).id
+      assert flash[:notice]
+    end
+  end
 end

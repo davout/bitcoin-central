@@ -2,6 +2,10 @@ module InvoicesHelper
   def invoice_details(invoice)
     link_to(image_tag("magnifier.png", :alt => t(".details"), :title => t(".details")), invoice_path(invoice))
   end
+  
+  def invoice_delete(invoice)
+    link_to(image_tag("delete.png", :alt => t(".delete"), :title => t(".delete")), invoice_path(invoice), :method => :delete, :confirm => t(".confirm"))
+  end
 
   def invoice_state(state, options = {})   
     content_tag :span, 
