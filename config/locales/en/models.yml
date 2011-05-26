@@ -73,6 +73,15 @@ en:
         current_password: Current password
         new_password: New password
         merchant: Merchant API
+      trade:
+        type: Type
+        amount: Amount
+        price: Price
+        total: Total
+        created_at: Date
+        types:
+          buy: Buy
+          sell: Sell
 
     models:
       invoice:
@@ -87,3 +96,6 @@ en:
       transfer:
         one: Transfer
         other: Transfers
+      trade:
+        one: Trade
+        other: Trades

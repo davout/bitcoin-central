@@ -1,7 +1,7 @@
 en:
   invoices:
     new:
-      create_invoice: Create invoice
+      create_invoice: Create an invoice
       error: Error posting invoice
       amount_explanation: The amount to be paid for this invoice
       payment_explanation: The address at which the funds should be sent
@@ -23,6 +23,18 @@ en:
         the payment address, the page will automatically refresh to
         show you its progress.
       return_to_item: Return to merchant website
+
+  trade_orders:
+    index:
+      create: Create an order
+      
+  trades:
+    index:
+      title: Trade history
+
+  accounts:
+    show:
+      add_funds: Deposit funds
 
   users:
     form:

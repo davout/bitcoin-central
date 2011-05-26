@@ -1,0 +1,23 @@
+%h1= t(".title")
+
+%table#trade-history.default
+  %tr
+    %th= t("activerecord.attributes.trade.created_at")
+    %th= t("activerecord.attributes.trade.type")
+    %th= t("activerecord.attributes.trade.amount")
+    %th= t("activerecord.attributes.trade.price")
+    %th= t("activerecord.attributes.trade.total")
+    %th.auto-sized
+
+  - if @trades.size > 0
+    - @trades.each do |trade|
+      %tr
+        %td= l trade.created_at
+        %td= type_for_trade(trade)
+        %td.amount= number_to_bitcoins trade.traded_btc, :precision => 4
+        %td.amount= format_amount(trade.ppc, trade.currency, 5)
+        %td.amount= format_amount(trade.traded_currency, trade.currency, 4)
+        %td.auto-sized= currency_icon_for(trade.currency)
+
+  - else
+    = render :partial => "layouts/no_data"

@@ -74,6 +74,15 @@ fr:
         current_password: Mot de passe actuel
         new_password: Nouveau mot de passe
         merchant: API E-commerce
+      trade:
+        type: Type
+        amount: Montant
+        price: Taux
+        total: Total
+        created_at: Date
+        types:
+          buy: Achat
+          sell: Vente
 
     models:
       invoice:
@@ -88,3 +97,6 @@ fr:
       transfer:
         one: Transaction
         other: Transactions
+      trade:
+        one: Echange
+        other: Echanges        

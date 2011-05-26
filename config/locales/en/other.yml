@@ -108,8 +108,7 @@ en:
       deposit_money: Deposit money
     trading:
       main: Trading
-      new_order: New order
-      your_orders: Your orders
+      your_orders: Trade orders
       order_book: Order book
       trade_history: Trade history
     admin:

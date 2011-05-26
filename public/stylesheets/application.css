@@ -252,14 +252,39 @@ div.recaptcha-field div.recaptcha-input {
 div.form-field input.submit {
     float:left;
     margin-left: 180px;
-    border: 1px solid gray;
+/*    border: 1px solid gray;*/
+    border:1px solid rgba(0,0,0,0.4);
+    /*border: 1px solid rgba(175,175,175,1);*/
     background: silver;
-    padding: .4em;
-    padding-left: 1em;
-    padding-right: 1em;
+    padding: .6em;
+    padding-left: 2em;
+    padding-right: 2em;
     font-weight: bold;
     width: inherit;
+
+    font-size: 110%;
+
+    background: -webkit-gradient(linear,0% 0%,0% 100%,from(rgba(255,255,255,1)),to(rgba(185,185,185,1)));
+    background: -moz-linear-gradient(top,rgba(255,255,255,1),rgba(185,185,185,1));
+
+text-shadow: 1px 1px 1px rgba(255,255,255,0.5);
+
+
+    -moz-border-radius: 200px;
+    border-radius: 200px;    
+    
+    -moz-box-shadow: 0px 0px 2px rgba(0,0,0,0.5);
+
+	-webkit-box-shadow: 0px 0px 2px rgba(0,0,0,0.5);
 }
+
+div.form-field input.submit:hover {
+    background: -webkit-gradient(linear,0% 0%,0% 100%,from(rgba(245,245,245,1)),to(rgba(175,175,175,1)));
+    background: -moz-linear-gradient(top,rgba(245,245,245,1),rgba(175,175,175,1));
+/*    color: #ce0701;*/
+}
+
+#FFEEEE
 
 div.form-field input.bitcoin-address {
     width: 22em;
@@ -402,8 +427,8 @@ table.default tr td.no-records {
 /* Invoice details table */
 
 body.invoices-show div#content div#right-content {
-  width: 50%;
-  min-width: 50em;
+    width: 50%;
+    min-width: 50em;
 }
 
 table.invoice-details {
@@ -429,7 +454,7 @@ table.invoice-details tr td, table.invoice-details tr td.amount {
 }
 
 div.payment-explanations {
-  text-align: center;
+    text-align: center;
 }
 
 /* Invoices */
@@ -443,14 +468,15 @@ img.state-icon {
 }
 
 div.invoice-item-link {
-  text-align: center;
-  font-size: 120%;
+    text-align: center;
+    font-size: 120%;
 }
 
 /* Creation links */
 div.creation-link {
-    margin-bottom: .8em;
     float: right;
+    position: relative;
+    top: 4px;
 }
 
 div.creation-link img {

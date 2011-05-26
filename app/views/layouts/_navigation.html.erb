@@ -5,17 +5,15 @@
       <%= menu_item link_to(content_tag(:span, (t "navigation.account.balance")), account_path), :logged_in => true %>
       <%= menu_item link_to(content_tag(:span, (t "navigation.account.history")), account_transfers_path), :logged_in => true %>
       <%= menu_item link_to(content_tag(:span, (t "navigation.account.transfer_money")), new_account_transfer_path), :logged_in => true %>
-      <%= menu_item link_to(content_tag(:span, (t "navigation.account.deposit_money")), deposit_account_transfers_path), :logged_in => true %>
     </ul>
   <% end %>
 
   <%= menu_item do %>
     <%= link_to content_tag(:span, (t "navigation.trading.main")), "#" %>
     <ul>
-      <%= menu_item link_to(content_tag(:span, (t "navigation.trading.new_order")), new_account_trade_order_path), :logged_in => true %>
       <%= menu_item link_to(content_tag(:span, (t "navigation.trading.your_orders")), account_trade_orders_path), :logged_in => true %>
-      <%= menu_item link_to(content_tag(:span, (t "navigation.trading.order_book")), book_account_trade_orders_path) %>
       <%= menu_item link_to(content_tag(:span, (t "navigation.trading.trade_history")), account_trades_path), :logged_in => true %>
+      <%= menu_item link_to(content_tag(:span, (t "navigation.trading.order_book")), book_account_trade_orders_path) %>
     </ul>
   <% end %>
 

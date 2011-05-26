@@ -1,3 +1,6 @@
+.creation-link
+  = link_to("#{image_tag("add.gif", :alt => t(".add_funds"), :title => t(".add_funds"))} #{t(".add_funds")}".html_safe, deposit_account_transfers_path)
+
 %h1= t :account_balance_title
 
 %table#account-balances.default

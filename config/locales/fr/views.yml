@@ -24,6 +24,18 @@ fr:
         afin de vous indiquer l'avancement du processus.
       return_to_item: Revenir sur le site du vendeur
 
+  trade_orders:
+    index:
+      create: Passer un ordre
+
+  trades:
+    index:
+      title: Historique
+
+
+  accounts:
+    show:
+      add_funds: Déposer des fonds
 
   users:
     form:
