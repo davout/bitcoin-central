@@ -6,7 +6,7 @@ class RegistrationsController < Devise::RegistrationsController
 
     if resource.save
       set_flash_message :notice, :signed_up
-      sign_in_and_redirect(resource_name, resource)
+      redirect_to root_path
     else
       clean_up_passwords(resource)
       render_with_scope :new
