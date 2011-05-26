@@ -1,5 +1,6 @@
 class Trade < ActiveRecord::Base
-  default_scope order("created_at DESC")
+  # TODO : Setting this messes the chart up, let's postpone
+  # default_scope order("created_at DESC")
 
   after_create :execute
 
