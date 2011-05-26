@@ -5,8 +5,8 @@ class RegistrationsController < Devise::RegistrationsController
     verify_recaptcha and resource.captcha_checked!
 
     if resource.save
-      set_flash_message :notice, :signed_up
-      redirect_to root_path
+      redirect_to root_path,
+        :notice => t(:signed_up)
     else
       clean_up_passwords(resource)
       render_with_scope :new
