@@ -6,7 +6,7 @@ class RegistrationsController < Devise::RegistrationsController
 
     if resource.save
       redirect_to root_path,
-        :notice => t(:signed_up)
+        :notice => t("devise.registrations.signed_up")
     else
       clean_up_passwords(resource)
       render_with_scope :new

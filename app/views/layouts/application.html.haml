@@ -1,11 +1,11 @@
 !!! XML
-!!!
+!!! 
 
 %html
   %head
     %title= t(:website_title)
 
-    // TODO : Give correct locale for keywords, put a localized description
+    / TODO : Give correct locale for keywords, put a localized description
     %meta{ :name => "keywords", :lang => I18n.locale, :content => t(:website_keyword) }
     %meta{ :"http-equiv" => "content-type", :content => "text/html;charset=UTF-8" }
 
@@ -27,6 +27,10 @@
       = render :partial => 'layouts/navigation'
       = render :partial => 'layouts/flash', :object => flash
 
-      #right-content= yield
+      #right-content
+        = yield
+
+        / This is used to force the container to stretch
+        %div{ :style => "clear:both" }
 
     = render :partial => 'layouts/footer'
