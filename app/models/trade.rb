@@ -44,7 +44,7 @@ class Trade < ActiveRecord::Base
   }
 
   scope :involved, lambda { |user|
-
+    where("seller_id = ? OR buyer_id = ?", user.id, user.id)
   }
 
   # TODO : Dry up (duplicated in TradeOrder)
