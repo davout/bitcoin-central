@@ -6,13 +6,16 @@
     %th= t :currency
     %th= t :amount
 
-  - if @transfers.size > 0
+  - unless @transfers.blank?
     - @transfers.each do |transfer|
-      %tr
+      %tr{ :class => cycle('even', 'odd') }
         %td= l transfer.created_at
         %td= transfer.currency
         %td.amount
           %span{ :class => color_for(transfer), :title => confirmation_tooltip_for(transfer) }
             = "#{transfer.amount > 0 ? "+" : "-"} #{number_to_currency transfer.amount.abs, :unit => ""}"
+
   - else
     = render :partial => "layouts/no_data"
+
+= will_paginate(@transfers)

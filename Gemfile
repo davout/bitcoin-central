@@ -30,3 +30,5 @@ gem 'haml'
 
 gem 'transitions',
   :require => ["transitions", "active_record/transitions"]
+
+gem 'will_paginate'

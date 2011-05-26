@@ -4,6 +4,8 @@
 class Invoice < ActiveRecord::Base
   include ActiveRecord::Transitions
 
+  default_scope order("created_at DESC")
+
   belongs_to :user
   
   validates :user,

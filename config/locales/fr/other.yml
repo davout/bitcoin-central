@@ -1,4 +1,8 @@
 fr:
+  will_paginate:
+    next: Suivant
+    previous: Précédent
+
   password_forgotten: Mot de passe oublié ?
   didnt_receive_confirmation: "E-mail de confirmation non reçu ?"
   didnt_receive_unlock_instructions: "E-mail de déverrouillage non reçu ?"
@@ -110,7 +114,7 @@ fr:
       main: Achat/Vente
       your_orders: Ordres d'échange
       order_book: Offres en cours
-      trade_history: Historique
+      trade_history: Historique d'échanges
     admin:
       main: Administration
       transfers: Transferts

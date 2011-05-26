@@ -1,4 +1,8 @@
 en:
+  will_paginate:
+    next: Next
+    previous: Previous
+
   password_forgotten: Password forgotten?
   didnt_receive_confirmation: "Didn't receive confirmation instructions?"
   didnt_receive_unlock_instructions: "Didn't receive unlock instructions?"

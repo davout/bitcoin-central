@@ -8,7 +8,7 @@ class TradeOrdersController < ApplicationController
 
   def create
     @trade_order = TradeOrder.new(params[:trade_order])
-    @trade_order.user = @current_user
+    @trade_order.user = current_user
 
     if @trade_order.save
       result = @trade_order.execute!
@@ -33,11 +33,11 @@ class TradeOrdersController < ApplicationController
   end
 
   def index
-    @trade_orders = @current_user.trade_orders
+    @trade_orders = current_user.trade_orders.paginate(:page => params[:page], :per_page => 16)
   end
 
   def destroy
-    @current_user.trade_orders.find(params[:id]).destroy
+    current_user.trade_orders.find(params[:id]).destroy
 
     redirect_to account_trade_orders_path,
       :notice => (t :order_deleted)
@@ -45,12 +45,12 @@ class TradeOrdersController < ApplicationController
 
   def book
     @sales = TradeOrder.get_orders :sell,
-      :user => @current_user,
+      :user => current_user,
       :currency => params[:currency],
       :separated => params[:separated]
 
     @purchases = TradeOrder.get_orders :buy,
-      :user => @current_user,
+      :user => current_user,
       :currency => params[:currency],
       :separated => params[:separated]
 

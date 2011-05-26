@@ -8,7 +8,7 @@ class InvoicesController < ApplicationController
     :only => :create
 
   def index
-    @invoices = current_user.invoices
+    @invoices = current_user.invoices.all.paginate(:page => params[:page], :per_page => 16)
   end
 
   def new

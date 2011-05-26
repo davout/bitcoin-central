@@ -3,7 +3,10 @@ class TradesController < ApplicationController
     :only => [:all_trades, :ticker]
 
   def index
-    @trades = Trade.where("seller_id = ? OR buyer_id = ?", @current_user.id, @current_user.id).all
+    @trades = Trade.
+      involved(current_user).
+      all.
+      paginate(:page => params[:page], :per_page => 16)
   end
 
   def all_trades

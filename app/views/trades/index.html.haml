@@ -9,9 +9,9 @@
     %th= t("activerecord.attributes.trade.total")
     %th.auto-sized
 
-  - if @trades.size > 0
+  - unless @trades.blank?
     - @trades.each do |trade|
-      %tr
+      %tr{ :class => cycle('even', 'odd') }
         %td= l trade.created_at
         %td= type_for_trade(trade)
         %td.amount= number_to_bitcoins trade.traded_btc, :precision => 4
@@ -21,3 +21,5 @@
 
   - else
     = render :partial => "layouts/no_data"
+
+= will_paginate(@trades)

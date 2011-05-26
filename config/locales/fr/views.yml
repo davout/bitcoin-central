@@ -32,7 +32,6 @@ fr:
     index:
       title: Historique
 
-
   accounts:
     show:
       add_funds: Déposer des fonds

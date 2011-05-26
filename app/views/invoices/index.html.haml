@@ -1,6 +1,6 @@
-%h1= t("activerecord.models.invoice.other")
-
 = creation_link :invoice, t(".create")
+
+%h1= t("activerecord.models.invoice.other")
 
 %table.default
   %tr
@@ -10,9 +10,9 @@
     %th= t("activerecord.attributes.invoice.amount")
     %th.auto-sized
 
-  - if @invoices.size > 0
+  - unless @invoices.blank?
     - @invoices.each do |invoice|
-      %tr
+      %tr{ :class => cycle('even', 'odd') }
         %td= invoice.reference
         %td= invoice_state(invoice.state)
         %td= !invoice.pending? ? l(invoice.paid_at) : "N/A"
@@ -22,3 +22,5 @@
           = invoice_details(invoice)
   - else
     = render :partial => "layouts/no_data"
+
+= will_paginate(@invoices)

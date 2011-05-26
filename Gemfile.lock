@@ -113,6 +113,7 @@ GEM
     whenever (0.6.7)
       aaronh-chronic (>= 0.3.9)
       activesupport (>= 2.3.4)
+    will_paginate (3.0.pre2)
 
 PLATFORMS
   ruby
@@ -132,3 +133,4 @@ DEPENDENCIES
   recaptcha
   transitions
   whenever
+  will_paginate

@@ -1,6 +1,5 @@
 class Trade < ActiveRecord::Base
-  # TODO : Why is this commented out ?
-  # default_scope order("created_at DESC")
+  default_scope order("created_at DESC")
 
   after_create :execute
 
@@ -42,6 +41,10 @@ class Trade < ActiveRecord::Base
 
   scope :last_24h, lambda {
     where("created_at >= ?", DateTime.now.advance(:hours => -24))
+  }
+
+  scope :involved, lambda { |user|
+
   }
 
   # TODO : Dry up (duplicated in TradeOrder)

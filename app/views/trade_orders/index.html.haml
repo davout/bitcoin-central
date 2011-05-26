@@ -13,9 +13,9 @@
     %th.auto-sized
     %th.auto-sized
 
-  - if @trade_orders.size > 0
+  - if @trade_orders.blank?
     - @trade_orders.each do |to|
-      %tr{ :class => (to.active? ? "" : "inactive") }
+      %tr{ :class => [(to.active? ? "" : "inactive"), cycle('even', 'odd')] }
         %td= l to.created_at
         %td= t to.category
         %td.amount= number_to_bitcoins to.amount, :precision => 4
@@ -27,3 +27,5 @@
 
   - else
     = render :partial => "layouts/no_data"
+
+= will_paginate(@trade_orders)
