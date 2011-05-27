@@ -8,9 +8,9 @@
       %th.auto-sized
       %th.auto-sized
 
-    - if orders.size > 0
+    - unless orders.blank?
       - orders.each do |to|
-        %tr
+        %tr{ :class => cycle('even', 'odd') }
           %td.auto-sized= to[:orders]
           %td.amount= number_to_bitcoins to[:amount], :precision => 4
           %td.amount= format_amount(to[:price], to[:currency], 5)
