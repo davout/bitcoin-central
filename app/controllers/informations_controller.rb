@@ -18,7 +18,7 @@ class InformationsController < ApplicationController
     @options[:axes][:xaxis][:max] = @max_x.strftime("%Y-%m-%d %H:%M:%S")
 
     %w{LRUSD LREUR EUR}.each do |currency|
-      line = Trade.unscoped.with_currency(currency).order("created_at ASC").map do |trade|
+      line = Trade.plottable(currency).map do |trade|
         [trade.created_at.strftime("%Y-%m-%d %H:%M:%S"), trade.ppc.to_f]
       end
 

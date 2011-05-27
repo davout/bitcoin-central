@@ -52,6 +52,12 @@ class Trade < ActiveRecord::Base
     where("currency = ?", currency.to_s.upcase)
   }
 
+  def self.plottable(currency)
+    with_exclusive_scope do
+      with_currency(currency).order("created_at ASC")
+    end
+  end
+  
   def execute
     internal_transfer = InternalTransfer.new(
       :currency => currency,
