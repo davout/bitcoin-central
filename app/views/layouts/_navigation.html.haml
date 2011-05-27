@@ -1,0 +1,28 @@
+%ul#menu
+  = menu_item "navigation.account.main", nil, :logged_in => true do 
+    %ul
+      = menu_item "navigation.account.balance", account_path
+      = menu_item "navigation.account.history", account_transfers_path
+      = menu_item "navigation.account.transfer_money", new_account_transfer_path
+
+  = menu_item "navigation.trading.main", nil do
+    %ul
+      = menu_item "navigation.trading.your_orders", account_trade_orders_path, :logged_in => true
+      = menu_item "navigation.trading.trade_history", account_trades_path, :logged_in => true
+      = menu_item "navigation.trading.order_book", book_account_trade_orders_path
+
+  = menu_item "navigation.admin.main", nil, :admin => true do
+    %ul
+      = menu_item "activerecord.models.transfer.other", admin_transfers_path
+      = menu_item "activerecord.models.user.other", admin_users_path
+      = menu_item "navigation.admin.information", admin_informations_path
+
+  = menu_item "navigation.ecommerce.main", nil, :merchant => true do
+    %ul
+      = menu_item "activerecord.models.invoice.other", invoices_path
+
+  = menu_item "navigation.help.main", nil do
+    %ul
+      = menu_item "navigation.help.faq", faq_path
+      = menu_item "navigation.help.economy", economy_path
+      = menu_item "navigation.help.support", support_path

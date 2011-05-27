@@ -13,7 +13,7 @@
     %th.auto-sized
     %th.auto-sized
 
-  - if @trade_orders.blank?
+  - unless @trade_orders.blank?
     - @trade_orders.each do |to|
       %tr{ :class => [(to.active? ? "" : "inactive"), cycle('even', 'odd')] }
         %td= l to.created_at
