@@ -65,6 +65,7 @@ module LibertyReserve
 
           xml.History do
             xml.CurrencyId currency
+            xml.Direction 'incoming'
             xml.AccountId account_id
             xml.PageSize  "20"
           end
@@ -113,9 +114,9 @@ module LibertyReserve
     # Makes ugly transaction data easier to re-use and nukes any non SCI
     # transaction, which we don't care about for now
     def format_transaction(t)
-      if t["Transfer"]["Source"] == "SCI"
-        account = t["Transfer"]["Memo"].match(/BC\-[A-Z][0-9]+/) and t["Transfer"]["Memo"].match(/BC\-[A-Z][0-9]+/)[0]
+      account = t["Transfer"]["Memo"].match(/BC\-[A-Z][0-9]+/) and t["Transfer"]["Memo"].match(/BC\-[A-Z][0-9]+/)[0]
 
+      if account
         {
           :currency => t["Transfer"]["CurrencyId"],
           :lr_transaction_id => t["ReceiptId"],
