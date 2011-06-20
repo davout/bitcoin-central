@@ -1,6 +1,8 @@
 class RegistrationsController < Devise::RegistrationsController
   def create
     build_resource
+    
+    resource.email = params[:user][:email]
 
     verify_recaptcha and resource.captcha_checked!
 

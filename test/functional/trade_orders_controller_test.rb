@@ -2,33 +2,33 @@ require 'test_helper'
 
 class TradeOrdersControllerTest < ActionController::TestCase
   def setup
-    Transfer.create!(
-      :amount => 25.0,
-      :user => users(:trader1),
-      :currency => "LRUSD"
-    )
+    Transfer.create! do |t|
+      t.amount = 25.0
+      t.user = users(:trader1)
+      t.currency = "LRUSD"
+    end
 
-    Transfer.create(
-      :amount => 100.0,
-      :user => users(:trader1),
-      :currency => "BTC"
-    )
+    Transfer.create! do |t|
+      t.amount = 100.0
+      t.user = users(:trader1)
+      t.currency = "BTC"
+    end
 
-    TradeOrder.create!(
-      :amount => 1.0,
-      :ppc => 1.0,
-      :user => users(:trader1),
-      :currency => "LRUSD",
-      :category => "buy"
-    )
+    TradeOrder.create! do |t|
+      t.amount = 1.0
+      t.ppc = 1.0
+      t.user = users(:trader1)
+      t.currency = "LRUSD"
+      t.category = "buy"
+    end
 
-    TradeOrder.create!(
-      :amount => 1.0,
-      :ppc => 1.0,
-      :user => users(:trader1),
-      :currency => "LRUSD",
-      :category => "sell"
-    )
+    TradeOrder.create! do |t|
+      t.amount = 1.0
+      t.ppc = 1.0
+      t.user = users(:trader1)
+      t.currency = "LRUSD"
+      t.category = "sell"
+    end
   end
 
   test "should render index" do
