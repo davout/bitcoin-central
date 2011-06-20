@@ -36,7 +36,7 @@ class InvoicesControllerTest < ActionController::TestCase
       }
 
       assert_response :redirect
-      assert_redirected_to Invoice.last
+      assert_redirected_to assigns(:invoice)
     end
   end
   
@@ -50,8 +50,8 @@ class InvoicesControllerTest < ActionController::TestCase
         :callback_url => "http://domain.tld"
       }
       
-      assert !Invoice.last.payment_address.blank?
-      assert_not_equal Invoice.last.payment_address, address
+      assert !assigns(:invoice).payment_address.blank?
+      assert_not_equal assigns(:invoice).payment_address, address
     end
   end
 
