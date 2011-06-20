@@ -38,14 +38,12 @@ class BitcoinTransfer < Transfer
         # TODO : Fiddle with bitcoin accounts manually once the fix gets included
         update_attribute(:bt_tx_id, @bitcoin.send_to_address(address, amount.to_f.abs)) if perform_transfers?
       else
-        bitcoin_transfer = BitcoinTransfer.new(
-          :user_id => @destination_account.to_i,
-          :amount => amount.abs,
-          :currency => "BTC"
-        )
-
-        bitcoin_transfer.skip_min_amount = true
-        bitcoin_transfer.save!
+        BitcoinTransfer.create! do |bt|
+          bt.user_id = @destination_account.to_i
+          bt.amount = amount.abs
+          bt.currency = "BTC"
+          bt.skip_min_amount = true
+        end
 
         # TODO : Re-enable this when bitcoin is able to handle subcent moves
         # @bitcoin.move(user.id.to_s, @destination_account.to_s, amount.to_f.abs) if perform_transfers?

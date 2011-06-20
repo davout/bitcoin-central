@@ -10,8 +10,7 @@ class User < ActiveRecord::Base
     :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
-  attr_protected :admin, :skip_captcha, :account
+  attr_accessible :password, :password_confirmation, :remember_me, :time_zone, :merchant
 
   attr_accessor :captcha,
     :skip_captcha,

@@ -2,8 +2,7 @@ class TradeOrder < ActiveRecord::Base
   MIN_AMOUNT = 1.0
   MIN_DARK_POOL_AMOUNT = 3000.0
 
-  attr_protected :skip_min_amount
-  attr_accessor :skip_min_amount
+  attr_accessible :amount, :currency, :category, :ppc
 
   default_scope order('created_at DESC')
 
@@ -168,16 +167,16 @@ class TradeOrder < ActiveRecord::Base
           save!
 
           # Record the trade
-          trade = Trade.create!(
-            :traded_btc => traded_btc,
-            :traded_currency => traded_currency,
-            :currency => currency,
-            :ppc => p,
-            :seller_id => sale.user_id,
-            :buyer_id => purchase.user_id,
-            :purchase_order_id => purchase.id,
-            :sale_order_id => sale.id
-          )
+          trade = Trade.create! do |t|
+            t.traded_btc = traded_btc
+            t.traded_currency = traded_currency
+            t.currency = currency
+            t.ppc = p
+            t.seller_id = sale.user_id
+            t.buyer_id = purchase.user_id
+            t.purchase_order_id = purchase.id
+            t.sale_order_id = sale.id
+          end
 
           executed_trades << trade
 

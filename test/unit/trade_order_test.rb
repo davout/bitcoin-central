@@ -7,27 +7,27 @@ class TradeOrderTest < ActiveSupport::TestCase
   
   test "should correctly perform a simple trade order" do
     # We need an extra little something so we get to create the order
-    Transfer.create!(
-      :amount => 10.0,
-      :user => users(:trader1),
-      :currency => "LRUSD"
-    )
+    Transfer.create! do |t|
+      t.amount = 10.0
+      t.currency = "LRUSD"
+      t.user = users(:trader1)
+    end
+    
+    buy_order = TradeOrder.create! do |to|
+      to.amount = 100.0
+      to.category = "buy"
+      to.currency = "LRUSD"
+      to.ppc = 0.27
+      to.user = users(:trader1)
+    end
   
-    buy_order = TradeOrder.create!(
-      :user => users(:trader1),
-      :amount => 100.0,
-      :category => "buy",
-      :currency => "LRUSD",
-      :ppc => 0.27
-    )
-  
-    sell_order = TradeOrder.create!(
-      :user => users(:trader2),
-      :amount => 100.0,
-      :category => "sell",
-      :currency => "LRUSD",
-      :ppc => 0.25
-    )
+    sell_order = TradeOrder.create! do |to|
+      to.amount = 100.0
+      to.category = "sell"
+      to.currency = "LRUSD"
+      to.ppc = 0.25
+      to.user = users(:trader2)
+    end
   
     assert buy_order.active?, "Order should be active"
     assert sell_order.active?, "Order should be active"
@@ -46,27 +46,26 @@ class TradeOrderTest < ActiveSupport::TestCase
   end
   
   test "should correctly perform a trade order with a limiting order" do
-    buy_order = TradeOrder.new(
-      :user => users(:trader1),
-      :amount => 1000.0,
-      :category => "buy",
-      :currency => "LRUSD",
-      :ppc => 0.27
-    )
+    buy_order = TradeOrder.new do |to|
+      to.user = users(:trader1)
+      to.amount = 1000.0
+      to.category = "buy"
+      to.currency = "LRUSD"
+      to.ppc = 0.27
+    end
   
-    sell_order = TradeOrder.new(
-      :user => users(:trader2),
-      :amount => 100.0,
-      :category => "sell",
-      :currency => "LRUSD",
-      :ppc => 0.25
-    )
+    sell_order = TradeOrder.new do |to|
+      to.user = users(:trader2)
+      to.amount = 100.0
+      to.category = "sell"
+      to.currency = "LRUSD"
+      to.ppc = 0.25
+    end
   
-    # I'm too lazy too redesign this test, however it remains significant for
-    # the particular feature being tested
+    # We force validation skipping in order to record a trade order for a user
+    # that does not have a sufficient balance for it to be fully executed
     buy_order.save(:validate => false)
     sell_order.save(:validate => false)
-    # /lazyness
   
     assert_difference 'Trade.count' do
       TradeOrder.first.execute!
@@ -85,36 +84,36 @@ class TradeOrderTest < ActiveSupport::TestCase
   end
   
   test "should correctly perform a trade order with a limiting balance" do
-    Transfer.create(
-      :amount => 9900.0,
-      :user => users(:trader2),
-      :currency => "BTC"
-    )
+    Transfer.create! do |t|
+      t.amount = 9900.0
+      t.user = users(:trader2)
+      t.currency = "BTC"
+    end
   
-    Transfer.create!(
-      :amount => 75.0,
-      :user => users(:trader1),
-      :currency => "LRUSD"
-    )
+    Transfer.create! do |t|
+      t.amount = 75.0
+      t.user = users(:trader1)
+      t.currency = "LRUSD"
+    end
   
     assert_equal users(:trader2).balance(:btc), 10000.0
     assert_equal users(:trader1).balance(:lrusd), 100.0
   
-    buy_order = TradeOrder.new(
-      :user => users(:trader1),
-      :amount => 1000.0,
-      :category => "buy",
-      :currency => "LRUSD",
-      :ppc => 0.27
-    )
+    buy_order = TradeOrder.new do |t|
+      t.user = users(:trader1)
+      t.amount = 1000.0
+      t.category = "buy"
+      t.currency = "LRUSD"
+      t.ppc = 0.27
+    end
   
-    sell_order = TradeOrder.new(
-      :user => users(:trader2),
-      :amount => 1000.0,
-      :category => "sell",
-      :currency => "LRUSD",
-      :ppc => 0.25
-    )
+    sell_order = TradeOrder.new do |t|
+      t.user = users(:trader2)
+      t.amount = 1000.0
+      t.category = "sell"
+      t.currency = "LRUSD"
+      t.ppc = 0.25
+    end
   
     # Orders are invalid, we save them anyway because we want to make sure trade
     # amounts will be limited by users balances
@@ -136,21 +135,22 @@ class TradeOrderTest < ActiveSupport::TestCase
   end
   
   test "should correctly perform a trade order with 5 decimal places rounding" do
-    buy_order = TradeOrder.new(
-      :user => users(:trader1),
-      :amount => 100.0,
-      :category => "buy",
-      :currency => "LRUSD",
-      :ppc => 0.271
-    )
+    buy_order = TradeOrder.new do |t|
+      t.user = users(:trader1)
+      t.amount = 100.0
+      t.category = "buy"
+      t.currency = "LRUSD"
+      t.ppc = 0.271
+    end
   
-    sell_order = TradeOrder.new(
-      :user => users(:trader2),
-      :amount => 1000.0,
-      :category => "sell",
-      :currency => "LRUSD",
-      :ppc => 0.2519
-    )
+    sell_order = TradeOrder.new do |t|
+      t.user = users(:trader2)
+      t.amount = 1000.0
+      t.category = "sell"
+      t.currency = "LRUSD"
+      t.ppc = 0.2519
+    end  
+   
   
     # Orders are invalid, we save them anyway because we want to make sure trade
     # amounts will be limited by users balances and correctly rounded
@@ -174,13 +174,13 @@ class TradeOrderTest < ActiveSupport::TestCase
   test "should correctly handle trade activation when insufficient balance" do
     assert_equal 25.0, users(:trader1).balance(:lrusd)
   
-    t = TradeOrder.new(
-      :category => "buy",
-      :amount => 1.0,
-      :ppc => 25.0,
-      :user => users(:trader1),
-      :currency => "LRUSD"
-    )
+    t = TradeOrder.new do |to|
+      to.category = "buy"
+      to.amount = 1.0
+      to.ppc = 25.0
+      to.user = users(:trader1)
+      to.currency = "LRUSD"
+    end
   
     assert t.valid?, "Trade order should be valid at this point"
   
@@ -206,13 +206,13 @@ class TradeOrderTest < ActiveSupport::TestCase
     # and try to execute it against the first one we should end up with an unactivated order
     # with 0.1 remaining amount.
   
-    t2 = TradeOrder.new(
-      :category => "sell",
-      :amount => 50,
-      :ppc => 25.0,
-      :user => users(:trader2),
-      :currency => "LRUSD"
-    )
+    t2 = TradeOrder.new do |to|
+      to.category = "sell"
+      to.amount = 50
+      to.ppc = 25.0
+      to.user = users(:trader2)
+      to.currency = "LRUSD"
+    end
   
     assert t2.save, "Order should be valid and get properly saved"
   
@@ -244,13 +244,13 @@ class TradeOrderTest < ActiveSupport::TestCase
   test "should correctly handle trade activation when insufficient balance with execution triggered from other order" do
     assert_equal 25.0, users(:trader1).balance(:lrusd)
   
-    t = TradeOrder.new(
-      :category => "buy",
-      :amount => 1.0,
-      :ppc => 25.0,
-      :user => users(:trader1),
-      :currency => "LRUSD"
-    )
+    t = TradeOrder.new do |to|
+      to.category = "buy"
+      to.amount = 1.0
+      to.ppc = 25.0
+      to.user = users(:trader1)
+      to.currency = "LRUSD"
+    end
   
     assert t.valid?, "Trade order should be valid at this point"
   
@@ -276,14 +276,14 @@ class TradeOrderTest < ActiveSupport::TestCase
     # and try to execute it against the first one we should end up with an unactivated order
     # with 0.1 remaining amount.
   
-    t2 = TradeOrder.new(
-      :category => "sell",
-      :amount => 50,
-      :ppc => 25.0,
-      :user => users(:trader2),
-      :currency => "LRUSD"
-    )
-  
+    t2 = TradeOrder.new do |to|
+      to.category = "sell"
+      to.amount = 50
+      to.ppc = 25.0
+      to.user = users(:trader2)
+      to.currency = "LRUSD"
+    end
+    
     assert t2.save, "Order should be valid and get properly saved"
   
     assert_equal 25.0, users(:trader1).balance(:lrusd)
@@ -312,22 +312,22 @@ class TradeOrderTest < ActiveSupport::TestCase
   end
   
   test "should auto inactivate on funds withdrawal" do
-    t = TradeOrder.new(
-      :category => "buy",
-      :amount => 1.0,
-      :ppc => 25.0,
-      :user => users(:trader1),
-      :currency => "LRUSD"
-    )
+    t = TradeOrder.new do |to|
+      to.category = "buy"
+      to.amount = 1.0
+      to.ppc = 25.0
+      to.user = users(:trader1)
+      to.currency = "LRUSD"
+    end
   
     assert t.save, "Order is valid, should be saved smoothly"
     assert t.reload.active?, "Order should be active"
   
-    Transfer.create!(
-      :amount => -5.0,
-      :user => users(:trader1),
-      :currency => "LRUSD"
-    )
+    Transfer.create! do |to|
+      to.amount = -5.0
+      to.user = users(:trader1)
+      to.currency = "LRUSD"
+    end
   
     assert_equal 20.0, users(:trader1).balance(:lrusd)
     assert !t.reload.active?, "Order should have been auto-inactivated #{t.reload.active}"
@@ -337,121 +337,121 @@ class TradeOrderTest < ActiveSupport::TestCase
     assert_equal 25.0, users(:trader1).balance(:lrusd)
     assert_equal 100.0, users(:trader2).balance(:btc)
   
-    t = TradeOrder.new(
-      :category => "buy",
-      :amount => 200,
-      :ppc => 0.125,
-      :user => users(:trader1),
-      :currency => "LRUSD"
-    )
+    t = TradeOrder.new do |to|
+      to.category = "buy"
+      to.amount = 200
+      to.ppc = 0.125
+      to.user = users(:trader1)
+      to.currency = "LRUSD"
+    end
   
     assert t.save, "Order should get saved"
-  
-    t2 = TradeOrder.new(
-      :category => "sell",
-      :amount => 100,
-      :ppc => 0.125,
-      :user => users(:trader2),
-      :currency => "LRUSD"
-    )
+    
+    t2 = TradeOrder.new do |to|
+      to.category = "sell"
+      to.amount = 100
+      to.ppc = 0.125
+      to.user = users(:trader2)
+      to.currency = "LRUSD"
+    end
   
     assert t2.save, "Order should get saved"
   
     t.execute!
-  
+    
     assert t.reload.active?, "Order should remain active"
     assert_equal 100.0, t.amount
     assert_destroyed t2, "Order should have been destroyed since it got filled completely"
   end
-
+  
   test "should be able to re-activate order" do
     assert_equal 25.0, users(:trader1).balance(:lrusd)
-
+  
     t = nil
-
-    assert_no_difference "Transfer.count" do
-      t = TradeOrder.create!(
-        :category => "buy",
-        :amount => 1.0,
-        :ppc => 25.0,
-        :user => users(:trader1),
-        :currency => "LRUSD"
-      )
+  
+    assert_no_difference "Transfer.count" do     
+      t = TradeOrder.create! do |to|
+        to.category = "buy"
+        to.amount = 1.0
+        to.ppc = 25.0
+        to.user = users(:trader1)
+        to.currency = "LRUSD"
+      end
     end
-
+  
     assert t.active?
-
+  
     assert_raise RuntimeError do
       # Activating an already active order
       t.activate!
     end
-
-    Transfer.create!(
-      :user => users(:trader1),
-      :amount => -20,
-      :currency => "LRUSD"
-    )
-
+  
+    Transfer.create! do |tr|
+      tr.user = users(:trader1)
+      tr.amount = -20
+      tr.currency = "LRUSD"
+    end
+  
     assert !t.reload.active?, "Order should get inactivated by transfer"
-
+  
     assert_raise RuntimeError do   
       t.activate!
     end
-
-    Transfer.create!(
-      :user => users(:trader1),
-      :amount => 40,
-      :currency => "LRUSD"
-    )
-
+  
+    Transfer.create! do |tr|
+      tr.user = users(:trader1)
+      tr.amount = 40
+      tr.currency = "LRUSD"
+    end
+  
     assert !t.reload.active?, "Order should *not* get activated by transfer"
-
+  
     assert_nothing_raised do
       t.activate!
     end
   end
-
+  
   test "order activation should trigger execution" do
     assert_equal 25.0, users(:trader1).balance(:lrusd)
-
+  
     t = nil
-
-    assert_no_difference "Transfer.count" do
-      t = TradeOrder.create!(
-        :category => "buy",
-        :amount => 1.0,
-        :ppc => 25.0,
-        :user => users(:trader1),
-        :currency => "LRUSD"
-      )
+  
+    assert_no_difference "Transfer.count" do    
+      t = TradeOrder.create! do |to|
+        to.category = "buy"
+        to.amount = 1.0
+        to.ppc = 25.0
+        to.user = users(:trader1)
+        to.currency = "LRUSD"
+      end
     end
-
+  
     assert t.active?
-
-    Transfer.create!(
-      :user => users(:trader1),
-      :amount => -20,
-      :currency => "LRUSD"
-    )
-
-    assert !t.reload.active?, "Order should get inactivated by transfer"
-
-    assert_no_difference "Transfer.count" do
-      TradeOrder.create!(
-        :category => "sell",
-        :amount => 1.0,
-        :ppc => 20.0,
-        :user => users(:trader2),
-        :currency => "LRUSD"
-      )
+  
+    Transfer.create! do |tr|
+      tr.user = users(:trader1)
+      tr.amount = -20
+      tr.currency = "LRUSD"
     end
-
-    Transfer.create!(
-      :user => users(:trader1),
-      :amount => 20,
-      :currency => "LRUSD"
-    )
-
+  
+    assert !t.reload.active?, "Order should get inactivated by transfer"
+  
+    assert_no_difference "Transfer.count" do
+      TradeOrder.create! do |to|
+        to.category = "sell"
+        to.amount = 1.0
+        to.ppc = 20.0
+        to.user = users(:trader2)
+        to.currency = "LRUSD"
+      end
+    end
+  
+    Transfer.create! do |tr|
+      tr.user = users(:trader1)
+      tr.amount = 20
+      tr.currency = "LRUSD"
+    end
+  
     assert_difference "Transfer.count", 4 do
       t.activate!
       assert t.active?
