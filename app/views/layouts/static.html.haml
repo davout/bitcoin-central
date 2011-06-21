@@ -1,0 +1,19 @@
+!!! XML
+!!! 
+
+%html
+  %head
+    %title= t(:website_title)
+    %link{ :rel => 'stylesheet', :media => 'screen', :href => '/stylesheets/reset.css', type => 'text/css' }
+    %link{ :rel => 'stylesheet', :media => 'screen', :href => '/stylesheets/application.css', type => 'text/css' }
+
+  %body
+    #content
+      #right-content{ :style => "margin-top:4em; width:50%" }
+        %h1#main-title= link_to(content_tag(:span, t(:website_title)), "#")
+        = yield
+
+        / This is used to force the container to stretch
+        %div{ :style => "clear:both" }
+
+    = render :partial => 'layouts/footer'
