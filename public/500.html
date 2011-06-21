@@ -1,31 +1,23 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>We're sorry, but something went wrong (500)</title>
-  <style type="text/css">
-    body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
-    div.dialog {
-      width: 25em;
-      padding: 0 4em;
-      margin: 4em auto 0 auto;
-      border: 1px solid #ccc;
-      border-right-color: #999;
-      border-bottom-color: #999;
-    }
-    h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
-    img { margin-top: 3em; }
-    #the-game { position: absolute; bottom: 1px; right: 1px; color: #BBBBBB;}
-  </style>
-</head>
-
-<body>
-  <!-- This file lives in public/500.html -->
-  <div class="dialog">
-    <h1>Something went wrong... Problem server?</h1>
-    <p>We've been notified about this issue and we'll take a look at it shortly.</p>
-  </div>
-
-  <img src="/images/500.jpg" />
-  <div id="the-game">also the game</div>
-</body>
+  <head>
+    <title>Bitcoin Central</title>
+    <link ActionView::Base='text/css' href='/stylesheets/reset.css' media='screen' rel='stylesheet'>
+    <link ActionView::Base='text/css' href='/stylesheets/application.css' media='screen' rel='stylesheet'>
+  </head>
+  <body>
+    <div id='content'>
+      <div id='right-content' style='margin-top:4em; width:50%'>
+        <h1 id='main-title'><a href="/"><span>Bitcoin Central</span></a></h1>
+        <h1>HTTP 500 - Internal server error</h1>
+            <p>An error has occurred, we apologize for the inconvenience.</p>
+            <p>We have been notified and will take a look shortly.</p>
+        <!-- This is used to force the container to stretch -->
+        <div style='clear:both'></div>
+      </div>
+    </div>
+    <div id="footer">
+          Feel free to support this project by donating a few BTC to <span class="bitcoin-address">1FXWhKPChEcUnSEoFQ3DGzxKe44MDbatz</span>
+        </div>
+  </body>
 </html>
