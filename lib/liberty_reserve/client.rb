@@ -111,21 +111,23 @@ module LibertyReserve
       CGI::escape(request)
     end
 
-    # Makes ugly transaction data easier to re-use and nukes any non SCI
-    # transaction, which we don't care about for now
+    # Makes ugly transaction data easier to re-use
     def format_transaction(t)
-      account = t["Transfer"]["Memo"].match(/BC\-[A-Z][0-9]+/) and t["Transfer"]["Memo"].match(/BC\-[A-Z][0-9]+/)[0]
+      unless t.blank? or t["Transfer"].blank? or t["Transfer"]["Memo"].blank?
 
-      if account
-        {
-          :currency => t["Transfer"]["CurrencyId"],
-          :lr_transaction_id => t["ReceiptId"],
-          :lr_account_id => t["Transfer"]["Payer"],
-          :lr_merchant_fee => t["Fee"].to_f,
-          :lr_transferred_amount => t["Amount"].to_f,
-          :amount => t["Amount"].to_f - t["Fee"].to_f,
-          :user => account ? User.where(:account => account[0]).first : nil
-        }
+        account = t["Transfer"]["Memo"].match(/BC\-[A-Z][0-9]+/) and t["Transfer"]["Memo"].match(/BC\-[A-Z][0-9]+/)[0]
+
+        if account
+          {
+            :currency => t["Transfer"]["CurrencyId"],
+            :lr_transaction_id => t["ReceiptId"],
+            :lr_account_id => t["Transfer"]["Payer"],
+            :lr_merchant_fee => t["Fee"].to_f,
+            :lr_transferred_amount => t["Amount"].to_f,
+            :amount => t["Amount"].to_f - t["Fee"].to_f,
+            :user => account ? User.where(:account => account[0]).first : nil
+          }
+        end
       end
     end
   end

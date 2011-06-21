@@ -4,7 +4,7 @@
 %html
   %head
     %title= t(:website_title)
-
+    - raise request.inspect
     / TODO : Give correct locale for keywords, put a localized description
     %meta{ :name => "keywords", :lang => I18n.locale, :content => t(:website_keyword) }
     %meta{ :"http-equiv" => "content-type", :content => "text/html;charset=UTF-8" }
