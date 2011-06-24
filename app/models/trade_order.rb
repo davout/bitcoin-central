@@ -146,9 +146,10 @@ class TradeOrder < ActiveRecord::Base
           is_purchase = category == "buy"
           purchase, sale = (is_purchase ? self : mo), (is_purchase ? mo : self)
 
-          # We always take the the seller's PPC
-          p = sale.ppc
-
+          # We take the opposite order price (BigDecimal)
+          p = mo.ppc
+          
+          # All array elements are BigDecimal, result is BigDecimal
           btc_amount = [
             sale.amount,                              # Amount of BTC sold
             purchase.amount,                          # Amount of BTC bought
@@ -156,8 +157,8 @@ class TradeOrder < ActiveRecord::Base
             purchase.user.balance(currency) / p       # Buyer's BTC buying power @ p
           ].min
 
-          traded_btc = round_to(btc_amount, 5)
-          traded_currency = round_to(btc_amount * p, 5)
+          traded_btc = btc_amount.round(5)
+          traded_currency = (btc_amount * p).round(5)
 
           # Update orders
           mo.amount = mo.amount - traded_btc
@@ -215,10 +216,6 @@ class TradeOrder < ActiveRecord::Base
       r[:ppc] = r[:total_traded_currency] / r[:total_traded_btc]
       r
     end
-  end
-
-  def round_to(arg, precision)
-    (arg * (10 ** precision)).round.to_f / (10 ** precision).to_f
   end
 
   # This is used by the order book

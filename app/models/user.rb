@@ -69,6 +69,7 @@ class User < ActiveRecord::Base
     super or generate_new_address
   end
 
+  # BigDecimal returned here
   def balance(currency, options = {} )
     transfers.with_currency(currency).with_confirmations(options[:unconfirmed]).map(&:amount).sum
   end
