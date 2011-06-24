@@ -16,7 +16,7 @@ Linux and Windows setup work well, I found the easiest to be an Ubuntu install
 
 === Linux (Debian flavors)
 * Install required packages
- $ sudo apt-get install ruby ruby-dev libssl-dev irb rubygems mysql
+ $ sudo apt-get install ruby ruby-dev libssl-dev irb rubygems mysql libmysql++-dev build-essential
 
 * Add gem binaries to path and re-login
  # First line of /etc/environment should show something like this
