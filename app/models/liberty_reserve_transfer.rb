@@ -31,6 +31,7 @@ class LibertyReserveTransfer < Transfer
       amount =  transferred - merchant_fee
 
       # TODO : Add originating account ID ?
+      raise "Change syntax"
       create!(
         :user_id => confirmation[:account_id],
         :amount => amount,
