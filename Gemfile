@@ -32,3 +32,8 @@ gem 'transitions',
   :require => ["transitions", "active_record/transitions"]
 
 gem 'will_paginate'
+
+group :test do
+  gem 'mocha', :require => false
+  gem 'factory_girl_rails'
+end
