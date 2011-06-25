@@ -2,6 +2,8 @@ BitcoinBank::Application.routes.draw do
   resources :invoices, :only => [:index, :new, :create, :show, :destroy]
 
   resource :user, :only => [:edit, :update] do
+    get :otp_configuration
+    post :reset_otp_secret
     resources :addresses, :only => [:create]
   end
 

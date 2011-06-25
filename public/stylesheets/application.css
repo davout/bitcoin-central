@@ -248,9 +248,7 @@ div.recaptcha-field div.recaptcha-input {
   float: left;
 }
 
-div.form-field input.submit {
-  float:left;
-  margin-left: 180px;
+input.submit {
   border:1px solid rgba(0,0,0,0.4);
   background: silver;
   padding: .6em;
@@ -266,6 +264,12 @@ div.form-field input.submit {
   border-radius: 200px;
   -moz-box-shadow: 0px 0px 2px rgba(0,0,0,0.5);
   -webkit-box-shadow: 0px 0px 2px rgba(0,0,0,0.5);
+}
+
+div.form-field input.submit {
+  float:left;
+  margin-left: 180px;
+  width: inherit;
 }
 
 div.form-field input.submit:hover {
@@ -330,14 +334,6 @@ div.form-field div.explanation {
   width: 280px;
   text-align: left;
 }
-
-div.form-field div.explanation a {
-  color: inherit;
-}
-
-/*div#pecunix-sci-form{
-    display: none;
-}*/
 
 /* Rails errors */
 div#errors ul {
@@ -418,24 +414,24 @@ body.invoices-show div#content div#right-content {
   min-width: 50em;
 }
 
-table.invoice-details {
+table.details {
   border-top: 1px solid #6E0701;
   border-bottom: 1px solid #6E0701;
   margin: auto;
 }
 
-table.invoice-details tr {
+table.details tr {
   border: none;
 }
 
-table.invoice-details tr th {
+table.details tr th {
   text-align: right;
   padding-right: 1.5em;
   width: 15em;
   border-right: 1px solid #6E0701;
 }
 
-table.invoice-details tr td, table.invoice-details tr td.amount {
+table.details tr td, table.details tr td.amount {
   text-align: left;
   padding-left: 1.5em;
 }
@@ -657,4 +653,33 @@ ul#devise-actions li {
 /* Row cycling */
 tr.odd {
   background: #fffbfb;
+}
+
+/* QR codes */
+ table.qrcode {
+  border-width: 0;
+  border-style: none;
+  border-color: #0000ff;
+  border-collapse: collapse;
+  margin: 2em;
+ }
+
+ table.qrcode td {
+   border-width: 0;
+   border-style: none;
+   border-color: #0000ff;
+   border-collapse: collapse;
+   padding: 0;
+   margin: 0;
+   width: 5px;
+   height: 5px;
+   background-color: white;
+ }
+
+ table.qrcode td.black {
+   background-color: black;
+ }
+
+ div.form-field input.otp {
+   width: 6em;
 }

@@ -33,6 +33,10 @@ gem 'transitions',
 
 gem 'will_paginate'
 
+gem 'rotp', '~> 1.3.0'
+
+gem 'rqrcode'
+
 group :test do
   gem 'mocha', :require => false
   gem 'factory_girl_rails'

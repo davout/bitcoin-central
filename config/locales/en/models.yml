@@ -73,6 +73,8 @@ en:
         current_password: Current password
         new_password: New password
         merchant: Merchant API
+        require_otp: Require TOTP
+        otp: One-time password
       trade:
         type: Type
         amount: Amount

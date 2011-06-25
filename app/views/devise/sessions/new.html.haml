@@ -1,0 +1,25 @@
+%h1= t(:sign_in)
+
+= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+  .form-field
+    = f.label :account
+    = f.text_field :account
+    .explanation
+      = t(:account_description)
+
+  .form-field
+    = f.label :password
+    = f.password_field :password
+    .explanation
+      = link_to t(".password_explanation"), new_password_path(resource_name)
+
+  .form-field
+    = f.label :otp
+    = f.text_field :otp, :class => "otp"
+    .explanation
+      = t(".otp_explanation")
+  
+  .form-field
+    = f.submit t(:sign_in), :class => "submit"
+  
+= render :partial => "devise/shared/links"

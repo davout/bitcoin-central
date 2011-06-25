@@ -2,15 +2,17 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
   devise :database_authenticatable,
+    :otp_checkable,
     :registerable,
     :confirmable,
     :recoverable,
-    :rememberable,
     :trackable,
-    :validatable
+    :validatable,
+    :lockable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :password, :password_confirmation, :remember_me, :time_zone, :merchant
+  attr_accessible :password, :password_confirmation, :remember_me, :time_zone, 
+    :merchant, :require_otp
 
   attr_accessor :captcha,
     :skip_captcha,
@@ -74,10 +76,6 @@ class User < ActiveRecord::Base
     transfers.with_currency(currency).with_confirmations(options[:unconfirmed]).map(&:amount).sum
   end
 
-  def generate_account_id
-    self.account = "BC-U#{"%06d" % (rand * 10 ** 6).to_i}"
-  end
-
   def confirm!
     super
     UserMailer.registration_confirmation(self).deliver
@@ -93,5 +91,9 @@ class User < ActiveRecord::Base
     conditions = warden_conditions.dup
     account = conditions.delete(:account)
     where(conditions).where(["account = :value OR email = :value", { :value => account }]).first
+  end
+
+  def generate_account_id
+    self.account = "BC-U#{"%06d" % (rand * 10 ** 6).to_i}"
   end
 end

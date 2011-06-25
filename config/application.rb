@@ -8,8 +8,6 @@ module BitcoinBank
   class Application < Rails::Application
     I18n.const_set :Locales, {
       :en => "English",
-      # :de => "Deutsch",
-      # :it => "Italiano",
       :fr => "Français"
     }
 

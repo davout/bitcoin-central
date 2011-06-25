@@ -1,0 +1,13 @@
+%h2= t(".resend")
+
+= form_for(resource, :as => resource_name, :url => unlock_path(resource_name), :html => { :method => :post }) do |f|
+  = devise_error_messages!
+
+  .form-field
+    = f.label :email
+    = f.text_field :email
+
+  .form-field
+    = f.submit t(:submit), :class => "submit"
+
+= render :partial => "devise/shared/links"

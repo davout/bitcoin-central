@@ -139,4 +139,10 @@ Devise.setup do |config|
   #   end
   #   manager.default_strategies(:scope => :user).unshift :twitter_oauth
   # end
+
+  require 'devise/strategies/otp_checkable'
+
+  config.warden do |manager|
+    manager.default_strategies(:scope => :user).unshift :otp_checkable
+  end
 end

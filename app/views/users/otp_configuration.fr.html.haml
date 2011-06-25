@@ -1,0 +1,54 @@
+%h1 Configuration de l'authentification avec jeton TOTP
+%h2 Objectif
+%p
+  L'authentification avec jeton TOTP a pour but de rajouter une couche de sécurité
+  supplémentaire à l'authentification utilisant un idenfiant et un mot de passe.
+%p
+  Si vous activez l'option "Demander jeton TOTP" au niveau des paramètres de votre
+  compte vous devrez générer un code de connexion différent à chaque connexion. Vous
+  aurez besoin d'un téléphone Blackberry, Android ou iPhone pour la génération du
+  code de connexion.
+
+%h2 Ré-initialiser votre secret partagé
+%p
+  Si vous pensez que votre téléphone a été compromis, ou si vous pensez que quelqu'un
+  a pris connaissance de votre secret partagé vous <strong>devez</strong> le ré-initialiser.
+%p
+  Vous devrez mettre à jour la configuration de votre téléphone.
+%br
+%p
+  = form_tag reset_otp_secret_user_path, :method => :post do
+    = submit_tag "Ré-initialiser", :class => "submit"
+
+%h2 Configuration
+%p
+  %ul
+    %li Installez l'application #{link_to "Google Authenticator", "http://www.google.com/support/accounts/bin/answer.py?hl=en&answer=1066447", :target => "_blank"}
+    %li
+      Configurez le secret partagé qui permettra de générer des codes d'authentification, soit :
+      %ul
+        %li manuellement, soit
+        %li automatiquement en scannant le code QR ci-dessous.
+
+%h3 Configuration automatique
+
+%p Scannez le code QR afin de configurer automatiquement votre générateur de codes d'authentification.
+
+= render :partial => 'users/qrcode', :locals => { :qrcode => RQRCode::QRCode.new(current_user.provisioning_uri, :size => 6) }
+
+%h3 Configuration manuelle
+
+%p Utilisez les paramètres suivants pour configurer votre générateur de codes d'authentification
+%br
+%table.default.details
+  %tr
+    %th Compte
+    %td= current_user.account
+  %tr
+    %th Type de code
+    %td Temporel
+  %tr
+    %th Secret partagé
+    %td.fixed= current_user.otp_secret
+
+

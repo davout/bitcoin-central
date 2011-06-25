@@ -74,6 +74,8 @@ fr:
         current_password: Mot de passe actuel
         new_password: Nouveau mot de passe
         merchant: API E-commerce
+        require_otp: Demander jeton TOTP
+        otp: Code d'authentification
       trade:
         type: Type
         amount: Montant

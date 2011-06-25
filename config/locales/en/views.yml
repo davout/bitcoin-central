@@ -40,4 +40,17 @@ en:
     form:
       submit: Save user
       merchant_explanation: Activate merchant tools
-      
+      otp_explanation: Require one-time-password to authenticate
+      otp_config: Help and setup instructions
+    otp_configuration:
+      reset: The shared-secret has been correctly reset, you'll need to update your mobile device settings
+
+  devise:
+    sessions:
+      new:
+        otp_explanation: Required only if you enabled OTP authentication
+        password_explanation: Password forgotten ?
+
+    unlocks:
+      new:
+        resend: Send unlock instructions

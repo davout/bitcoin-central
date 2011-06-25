@@ -1,0 +1,55 @@
+%h1 Required steps for TOTP authentication
+%h2 Why use one-time-password authentication ?
+%p
+  TOTP authentication adds a security layer on top of the login/password authentication
+  mechanism. For your account to be compromised, an attacker must not only know your
+  password, but also know your shared-secret or compromise your mobile device.e.
+%p
+  If you activate the "Require TOTP" option in your account settings you won't be
+  able to sign in without providing a TOTP token. You can use the same token multiple
+  times, but the token is time based and is only valid for 30 seconds. You need a
+  Blackebbery, Android or iPhone for the token generation.
+
+%h2 Reset your shared-secret
+%p
+  If you think your mobile device has been compromised or if you think someone
+  got a hold of your shared-secret you <strong>must</strong> reset it.
+%p
+  You will need to update your mobile device configuration.
+%br
+%p
+  = form_tag reset_otp_secret_user_path, :method => :post do
+    = submit_tag "Reset shared-secret", :class => "submit"
+
+%h2 Configuration
+%p
+  %ul
+    %li Install the #{link_to "Google Authenticator", "http://www.google.com/support/accounts/bin/answer.py?hl=en&answer=1066447", :target => "_blank"} app on your mobile device
+    %li
+      Configure the shared secret, either:
+      %ul
+        %li manuelly, or
+        %li automatically by scanning the QR code below.
+
+%h3 Automatic configuration
+
+%p Scan the QR code to automatically configure your mobile device.
+
+= render :partial => 'users/qrcode', :locals => { :qrcode => RQRCode::QRCode.new(current_user.provisioning_uri, :size => 6) }
+
+%h3 Manual configuration
+
+%p Use these parameters to configure your device
+%br
+%table.default.details
+  %tr
+    %th Account
+    %td= current_user.account
+  %tr
+    %th Token type
+    %td Time-based
+  %tr
+    %th Shared secret
+    %td.fixed= current_user.otp_secret
+
+

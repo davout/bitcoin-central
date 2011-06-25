@@ -37,4 +37,11 @@ class UsersController < ApplicationController
       render :action => :edit
     end
   end
+
+  def reset_otp_secret
+    current_user.generate_otp_secret && current_user.save!
+
+    redirect_to otp_configuration_user_path,
+      :notice => t("users.otp_configuration.reset")
+  end
 end

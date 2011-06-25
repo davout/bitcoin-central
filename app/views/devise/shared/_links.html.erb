@@ -1,8 +1,4 @@
 <ul id="devise-actions">
-  <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
-    <li><%= link_to t(:password_forgotten), new_password_path(resource_name) %></li>
-  <% end -%>
-
   <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
     <li><%= link_to t(:didnt_receive_confirmation), new_confirmation_path(resource_name) %></li>
   <% end -%>

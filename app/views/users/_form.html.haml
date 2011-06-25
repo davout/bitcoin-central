@@ -22,11 +22,19 @@
     .explanation
       = t ".merchant_explanation"
 
+  - unless @user.new_record?
+    .form-field
+      = f.label :require_otp
+      = f.check_box :require_otp, :class => "checkbox"
+      .explanation
+        = link_to t(".otp_config"), otp_configuration_user_path
+
   - if @user.new_record?
     .recaptcha-field
       %label{ :for => "recaptcha_response_field" } t(".turing_test")
       = f.text_field :account, :disabled => true
       .recaptcha-input= recaptcha_tags :ssl => true
+
 
   .form-field
     = f.submit t(".submit"), :class => 'submit'

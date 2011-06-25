@@ -12,4 +12,12 @@ namespace :deployment do
       end
     end
   end
+
+  desc "Generates TOTP secrets for all users which don't have one already"
+  task :generate_missing_otp_secrets => :environment do
+    User.where("otp_secret IS NULL").all.each do |u|
+      u.send(:generate_otp_secret)
+      u.save(:validate => false)
+    end
+  end
 end

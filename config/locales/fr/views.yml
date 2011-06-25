@@ -40,3 +40,17 @@ fr:
     form:
       submit: Enregistrer
       merchant_explanation: Activer votre boutique en ligne
+      otp_explanation: Demander un jeton unique d'authentification en plus du mot de passe
+      otp_config: Aide et instructions de configuration
+    otp_configuration:
+      reset: Le secret partagé a été ré-initialisé, vous devez mettre à jour la configuration de votre téléphone
+
+  devise:
+    sessions:
+      new:
+        otp_explanation: Nécessaire uniquement si vous avez activé l'option correspondante
+        password_explanation: Mot de passe oublié ?
+
+    unlocks:
+      new:
+        resend: Envoyer les instructions de déverrouillage
