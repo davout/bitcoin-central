@@ -77,7 +77,7 @@ class BitcoinTransfer < Transfer
           t.bt_tx_confirmations = tx["confirmations"]
         else
           t = BitcoinTransfer.new do |bt|
-            bt.user_id = u.id,
+            bt.user_id = u.id
             bt.amount = tx["amount"]
             bt.bt_tx_id = tx["txid"]
             bt.bt_tx_confirmations = tx["confirmations"]
