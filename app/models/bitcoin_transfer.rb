@@ -20,6 +20,7 @@ class BitcoinTransfer < Transfer
     self[:address] = a.strip
   end
 
+  # TODO : This is really ugly, stub the client in test instead of this crap
   def perform_transfers?
     Rails.env == "production"
   end
@@ -36,7 +37,7 @@ class BitcoinTransfer < Transfer
         #update_attribute(:bt_tx_id, @bitcoin.send_from(user.id.to_s, address, amount.to_d.abs)) if perform_transfers?
 
         # TODO : Fiddle with bitcoin accounts manually once the fix gets included
-        update_attribute(:bt_tx_id, @bitcoin.send_to_address(address, amount.to_d.abs)) if perform_transfers?
+        update_attribute(:bt_tx_id, @bitcoin.send_to_address(address, amount.abs)) if perform_transfers?
       else
         BitcoinTransfer.create! do |bt|
           bt.user_id = @destination_account.to_i
