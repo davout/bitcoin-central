@@ -7,7 +7,7 @@ module Devise
         resource = mapping.to.find_for_database_authentication(authentication_hash)
         otp = params[scope][:otp]
 
-        if resource.require_otp? && !resource.valid_otp?(otp)
+        if resource && resource.require_otp? && !resource.valid_otp?(otp)
           fail!(:invalid_otp)
         end
       end
