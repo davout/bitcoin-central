@@ -1,0 +1,14 @@
+%h1 Total balances
+
+%table.default
+  %tr
+    %th Currency
+    %th User total balance
+    %th Third-party balance
+    %th Delta
+  - @currencies.each do |currency|
+    %tr{ :class => cycle('even', 'odd') }
+      %td= currency.to_s.upcase
+      %td.amount= @balances[currency][:user]
+      %td.amount= @balances[currency][:reported]
+      %td.amount= @balances[currency][:delta]

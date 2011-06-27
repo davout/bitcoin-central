@@ -36,6 +36,24 @@ module LibertyReserve
       format_transaction(r["HistoryResponse"]["Receipt"])
     end
 
+    def get_balance(currency)
+      account_id = BitcoinBank::LibertyReserve['account']
+
+      r = send_request("balance") do |xml|
+        xml.BalanceRequest :id => random_id do
+          authentication_block(xml)
+          
+          xml.Balance do
+            xml.CurrencyId currency.to_s.upcase
+            xml.AccountId account_id
+          end
+        end
+      end
+
+      r["BalanceResponse"]["Balance"]["Value"].to_d
+    end
+    
+    
     def transfer(account, amount, currency)
       payer = BitcoinBank::LibertyReserve['account']
 

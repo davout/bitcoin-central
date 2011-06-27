@@ -14,7 +14,8 @@ class Admin::UsersController < Admin::AdminController
       :last_sign_in_at,
       :last_sign_in_ip,
       :locked_at,
-      :remember_created_at
+      :remember_created_at,
+      :transfers
     ]
 
     config.list.columns = config.update.columns = [
@@ -22,5 +23,7 @@ class Admin::UsersController < Admin::AdminController
       :email,
       :admin
     ]
+    
+    config.nested.add_link :transfers
   end
 end
