@@ -1,8 +1,10 @@
-# We do not need an admin user, currently we don't even have an admin interface...
-#
-#User.create!(
-#  :new_password => "password",
-#  :new_password_confirmation => "password",
-#  :email => "admin@bitcoin-central.net",
-#  :skip_captcha => true
-#)
+User.create! do |user|
+  user.password = "password"
+  user.password_confirmation = "password"
+  user.email = "admin@localhost.local"
+  user.skip_captcha = true
+  user.admin = true
+  user.confirmed_at = DateTime.now
+end
+
+puts "Created \"admin@localhost.local\" user with password \"password\""
