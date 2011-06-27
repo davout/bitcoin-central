@@ -45,7 +45,6 @@ Linux and Windows setup work well, I found the easiest to be an Ubuntu install
 If you are installing a production machine you'll obviously need to pick different credentials. Update the `config/database.yml` file accordingly.
 
 * Run a couple of rake tasks (omit the `RAILS_ENV` option if you're setting up a development environment, Rails will grab the database configuration in the `config/database.yml` file under the right section (development, test, or production)
- $ rake db:create RAILS_ENV=production
  $ rake db:migrate RAILS_ENV=production
 
 * Edit config/bitcoin.yml to be able to connect your instance to a bitcoin client, the `config/bitcoin.yml` file contents are self-explanatory, just add a production section if you're deploying on a production server.
