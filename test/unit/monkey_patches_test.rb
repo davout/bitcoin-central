@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class MonkeyPatchesTest < ActiveSupport::TestCase
-
   test "should have SERIALIZABLE isolation level in transactions" do
     r = nil
 
@@ -13,5 +12,14 @@ class MonkeyPatchesTest < ActiveSupport::TestCase
     end
 
     assert_equal "SERIALIZABLE", r[1], "MySQL Transactions should run in SERIALIZABLE isolation level"
+  end
+
+  # IMO this should be fixed at Rails level
+  # https://github.com/rails/rails/blob/master/activesupport/lib/active_support/json/encoding.rb
+  # Oh yeah, also #as_json is buggy...
+  # http://ternarylabs.com/2010/09/07/migrating-to-rails-3-0-gotchas-as_json-bug/
+  test "BigDecimal should be serialized correctly in JSON" do
+    d = BigDecimal("10")
+    assert_equal "10.0", d.to_json
   end
 end
