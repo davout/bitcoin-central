@@ -19,7 +19,7 @@ class InformationsController < ApplicationController
 
     %w{LRUSD LREUR EUR}.each do |currency|
       line = Trade.plottable(currency).map do |trade|
-        [trade.created_at.strftime("%Y-%m-%d %H:%M:%S"), trade.ppc.to_d]
+        [trade.created_at.strftime("%Y-%m-%d %H:%M:%S"), trade.ppc]
       end
 
      unless line.blank?
