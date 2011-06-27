@@ -140,9 +140,9 @@ module LibertyReserve
             :currency => t["Transfer"]["CurrencyId"],
             :lr_transaction_id => t["ReceiptId"],
             :lr_account_id => t["Transfer"]["Payer"],
-            :lr_merchant_fee => t["Fee"].to_f,
-            :lr_transferred_amount => t["Amount"].to_f,
-            :amount => t["Amount"].to_f - t["Fee"].to_f,
+            :lr_merchant_fee => t["Fee"].to_d,
+            :lr_transferred_amount => t["Amount"].to_d,
+            :amount => t["Amount"].to_d - t["Fee"].to_d,
             :user => account ? User.where(:account => account[0]).first : nil
           }
         end

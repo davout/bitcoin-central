@@ -50,6 +50,7 @@ Your fresh instance should now be running on http://localhost:3000/ !
 
 == Contributions
 All are welcome, improvements, fixes and translations (the string extraction bounty has been paid).
+The use of the `Numeric#to_f` method is big no-no, every single numeric that passes through the code should be typed as `BigDecimal`
 
 == License
 AGPL License. Copyright 2010-2011 David FRANCOIS

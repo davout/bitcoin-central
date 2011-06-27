@@ -32,11 +32,11 @@ class BitcoinTransfer < Transfer
       @destination_account = payee_id || @bitcoin.get_account(address)
 
       if @destination_account.blank?
-        # to_f = WTF, doesn't work without it...
-        #update_attribute(:bt_tx_id, @bitcoin.send_from(user.id.to_s, address, amount.to_f.abs)) if perform_transfers?
+        # to_d = WTF, doesn't work without it...
+        #update_attribute(:bt_tx_id, @bitcoin.send_from(user.id.to_s, address, amount.to_d.abs)) if perform_transfers?
 
         # TODO : Fiddle with bitcoin accounts manually once the fix gets included
-        update_attribute(:bt_tx_id, @bitcoin.send_to_address(address, amount.to_f.abs)) if perform_transfers?
+        update_attribute(:bt_tx_id, @bitcoin.send_to_address(address, amount.to_d.abs)) if perform_transfers?
       else
         BitcoinTransfer.create! do |bt|
           bt.user_id = @destination_account.to_i
@@ -46,7 +46,7 @@ class BitcoinTransfer < Transfer
         end
 
         # TODO : Re-enable this when bitcoin is able to handle subcent moves
-        # @bitcoin.move(user.id.to_s, @destination_account.to_s, amount.to_f.abs) if perform_transfers?
+        # @bitcoin.move(user.id.to_s, @destination_account.to_s, amount.to_d.abs) if perform_transfers?
       end
     end
   end

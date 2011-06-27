@@ -69,8 +69,8 @@ class TradeOrdersController < ApplicationController
           v.each do |to|
             json[k] << {
               :timestamp => to[:created_at].to_i,
-              :price => to[:price].to_f,
-              :volume => to[:amount].to_f,
+              :price => to[:price].to_d,
+              :volume => to[:amount],
               :currency => to[:currency],
               :orders => to[:orders].to_i
             }

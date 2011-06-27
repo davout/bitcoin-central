@@ -11,7 +11,7 @@ class ThirdPartyCallbacksController < ApplicationController
     transfer = Transfer.create_from_lr_transaction_id(params[:lr_transfer])
 
     redirect_to account_transfers_path,
-      :notice => t(:lr_transfer_success, :amount => transfer.amount, :currency => params[:lr_currency], :fee => (transfer.lr_merchant_fee + params[:lr_fee_amnt].to_f))
+      :notice => t(:lr_transfer_success, :amount => transfer.amount, :currency => params[:lr_currency], :fee => (transfer.lr_merchant_fee + params[:lr_fee_amnt].to_d))
   end
 
   def lr_transfer_fail
@@ -70,10 +70,10 @@ class ThirdPartyCallbacksController < ApplicationController
       Transfer.create! do |t|
         t.user = User.find(params["PAYMENT_ID"])
         t.currency = "PGAU"
-        t.amount = (params["PAYMENT_GRAMS"].to_f - params["PAYMENT_FEE"].to_f)
+        t.amount = (params["PAYMENT_GRAMS"].to_d - params["PAYMENT_FEE"].to_d)
         t.px_tx_id = params["PAYMENT_REC_ID"]
         t.px_payer = params["PAYER_ACCOUNT"]
-        t.px_fee = params["PAYMENT_FEE"].to_f
+        t.px_fee = params["PAYMENT_FEE"].to_d
         t.skip_min_amount = true
       end
     end

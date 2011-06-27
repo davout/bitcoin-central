@@ -154,10 +154,10 @@ class TradeOrderTest < ActiveSupport::TestCase
       t.currency = "LRUSD"
     end
     
-    assert_equal 100.0, users(:trader1).balance(:btc).to_f
-    assert_equal 10000.0, users(:trader2).balance(:lrusd).to_f
-    assert_equal 0.0, users(:trader1).balance(:lrusd).to_f
-    assert_equal 0.0, users(:trader2).balance(:btc).to_f
+    assert_equal 100.0, users(:trader1).balance(:btc)
+    assert_equal 10000.0, users(:trader2).balance(:lrusd)
+    assert_equal 0.0, users(:trader1).balance(:lrusd)
+    assert_equal 0.0, users(:trader2).balance(:btc)
     
     bid_at_8 = TradeOrder.create! do |t|
       t.user = users(:trader1)
@@ -202,10 +202,10 @@ class TradeOrderTest < ActiveSupport::TestCase
       end
     end
     
-    assert_equal 0.0, users(:trader1).balance(:btc).to_f
-    assert_equal 8650.0, users(:trader2).balance(:lrusd).to_f
-    assert_equal 1350.0, users(:trader1).balance(:lrusd).to_f
-    assert_equal 100.0, users(:trader2).balance(:btc).to_f
+    assert_equal 0.0, users(:trader1).balance(:btc)
+    assert_equal 8650.0, users(:trader2).balance(:lrusd)
+    assert_equal 1350.0, users(:trader1).balance(:lrusd)
+    assert_equal 100.0, users(:trader2).balance(:btc)
   end
   
   test "should correctly perform a trade order with 5 decimal places rounding" do
@@ -235,7 +235,7 @@ class TradeOrderTest < ActiveSupport::TestCase
       TradeOrder.first.execute!
     end
     
-    assert_equal users(:trader1).balance(:btc).to_f, 99.24573
+    assert_equal users(:trader1).balance(:btc), 99.24573
     assert_equal users(:trader1).balance(:lrusd), 0.0
     assert_equal users(:trader2).balance(:btc), 0.75427
     assert_equal users(:trader2).balance(:lrusd), 25.0
