@@ -1,5 +1,7 @@
 module Bitcoin
   class Client
+    include Singleton
+    
     def initialize
       config_file = File.open(File.join(Rails.root, "config", "bitcoin.yml"))
       config = YAML::load(config_file)[Rails.env].symbolize_keys

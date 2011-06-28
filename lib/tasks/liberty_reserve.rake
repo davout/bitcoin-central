@@ -1,7 +1,7 @@
 namespace :liberty_reserve do
   desc "Fetches the last 20 transactions and check whether they've been mapped correctly to transfers"
   task :synchronize_transactions => :environment do
-    lr = LibertyReserve::Client.new
+    lr = LibertyReserve::Client.instance
 
     # For each currency fetch transactions,
     # for each fetched ID check existence and create if necessary

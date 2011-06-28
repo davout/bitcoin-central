@@ -30,9 +30,9 @@ class Admin::InformationsController < Admin::AdminController
     
     def reported_balance(currency)
       if currency == :btc
-        Bitcoin::Client.new.get_balance
+        Bitcoin::Client.instance.get_balance
       elsif [:lreur, :lrusd].include?(currency)
-        LibertyReserve::Client.new.get_balance(currency)
+        LibertyReserve::Client.instance.get_balance(currency)
       else
         "N/A"
       end

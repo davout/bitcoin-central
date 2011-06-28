@@ -87,7 +87,7 @@ class Transfer < ActiveRecord::Base
     # anything to be executed after creation
 
     unless Transfer.where(:lr_transaction_id => lr_tx_id).first
-      Transfer.create! LibertyReserve::Client.new.get_transaction(lr_tx_id)
+      Transfer.create! LibertyReserve::Client.instance.get_transaction(lr_tx_id)
     end
   end
 end

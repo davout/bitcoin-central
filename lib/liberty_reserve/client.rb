@@ -4,6 +4,8 @@ require 'net/https'
 
 module LibertyReserve
   class Client
+    include Singleton
+    
     def random_id
       (rand * 10 ** 9).to_i
     end

@@ -28,7 +28,7 @@ class BitcoinTransfer < Transfer
   def execute
     # TODO : Make transactional
     if amount < 0
-      @bitcoin = Bitcoin::Client.new
+      @bitcoin = Bitcoin::Client.instance
 
       @destination_account = payee_id || @bitcoin.get_account(address)
 
@@ -59,7 +59,7 @@ class BitcoinTransfer < Transfer
   def self.synchronize_transactions!
     # TODO : Handle weird edge case
     # http://www.bitcoin.org/smf/index.php?topic=2404.0
-    @bitcoin = Bitcoin::Client.new
+    @bitcoin = Bitcoin::Client.instance
 
     User.all.each do |u|
       transactions = @bitcoin.list_transactions(u.id.to_s)

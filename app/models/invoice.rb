@@ -120,7 +120,7 @@ class Invoice < ActiveRecord::Base
 
   # Generates a new bitcoin payment address
   def generate_payment_address
-    self.payment_address = Bitcoin::Client.new.get_new_address
+    self.payment_address = Bitcoin::Client.instance.get_new_address
   end
 
   # Updates the invoice state after polling the bitcoin client
@@ -135,7 +135,7 @@ class Invoice < ActiveRecord::Base
   # Returns the total amount sent to the payment address with optional
   # minimum confirmations
   def payments_received(confirmations = Transfer::MIN_BTC_CONFIRMATIONS)
-    bitcoin = Bitcoin::Client.new
+    bitcoin = Bitcoin::Client.instance
     bitcoin.get_received_by_address(payment_address, confirmations)
   end
 

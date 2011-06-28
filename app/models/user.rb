@@ -59,7 +59,7 @@ class User < ActiveRecord::Base
   end
 
   def generate_new_address
-    update_attribute(:last_address, Bitcoin::Client.new.get_new_address(id.to_s))
+    update_attribute(:last_address, Bitcoin::Client.instance.get_new_address(id.to_s))
     last_address
   end
 

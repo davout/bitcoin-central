@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
     :set_time_zone
 
   def get_bitcoin_client
-    @bitcoin = Bitcoin::Client.new
+    @bitcoin = Bitcoin::Client.instance
   end
 
   def set_time_zone

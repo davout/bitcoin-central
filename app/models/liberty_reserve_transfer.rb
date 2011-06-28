@@ -16,7 +16,7 @@ class LibertyReserveTransfer < Transfer
       # If amount is too precise we need to round it
       self.amount = ((amount * 100.0).to_i / 100.0)
 
-      result = LibertyReserve::Client.new.transfer(lr_account_id, amount.to_d.abs, currency)
+      result = LibertyReserve::Client.instance.transfer(lr_account_id, amount.to_d.abs, currency)
       self.lr_transaction_id = result['TransferResponse']['Receipt']['ReceiptId']
       save(false)
     end
@@ -24,7 +24,7 @@ class LibertyReserveTransfer < Transfer
 
   def self.create_from_lr_post!(confirmation)
     if valid_confirmation?(confirmation)
-      t = LibertyReserve::Client.new.get_transaction(confirmation[:lr_transfer])
+      t = LibertyReserve::Client.instance.get_transaction(confirmation[:lr_transfer])
 
       transferred = t['HistoryResponse']['Receipt']['Amount'].to_d
       merchant_fee = t['HistoryResponse']['Receipt']['Fee'].to_d
