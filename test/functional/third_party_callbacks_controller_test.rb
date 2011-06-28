@@ -35,4 +35,7 @@ class ThirdPartyCallbacksControllerTest < ActionController::TestCase
     assert Transfer.find_by_px_tx_id("123456")
     assert Transfer.find_by_px_payer("user@domain.com")
   end
+  
+  # LR transfer creation test is in an integration test, for some reason
+  # post :lr_create_from_sci picks the wrong action up :/
 end

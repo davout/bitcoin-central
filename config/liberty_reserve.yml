@@ -17,4 +17,5 @@ test:
   api_uri: https://api.libertyreserve.com/
   api_name: Bitcoin Central API
   secret_word: MySecWord123
+
   

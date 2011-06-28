@@ -9,6 +9,7 @@ BitcoinBank::Application.routes.draw do
 
   devise_for :users, :controllers => { :registrations => "registrations" }
 
+  # These routes need some loving :/
   resource :chart, :path => "charts", :only => [] do
     get :price
   end
@@ -35,38 +36,24 @@ BitcoinBank::Application.routes.draw do
     end
   end
 
-  resources :third_party_callbacks, :only => [] do
-    # Liberty Reserve
-    collection do
-      post :lr_create_from_sci
-      get :lr_transfer_success
-      get :lr_transfer_fail
-      get :px_cancel
-      get :px_payment
-      post :px_status
-    end
-  end
+  match '/third_party_callbacks/:action',
+    :controller => :third_party_callbacks
 
   namespace :admin do
     %w{transfers users}.each { |r| resources(r.to_sym) {as_routes} }
 
-    resource :informations,
-      :only => [:show],
-      :controller => "informations"
+    match '/balances', :to => 'admin/informations#balances', :as => :balances
   end
 
   match '/trades' => 'trades#all_trades'
 
   match '/ticker' => 'trades#ticker'
 
-  match '/frequently_asked_questions' => 'informations#faq',
-    :as => :faq
+  match '/frequently_asked_questions' => 'informations#faq', :as => :faq
 
-  match '/economy' => 'informations#economy',
-    :as => :economy
+  match '/economy' => 'informations#economy', :as => :economy
 
-  match '/support' => 'informations#support',
-    :as => :support
+  match '/support' => 'informations#support', :as => :support
 
   root :to => 'informations#welcome'
 end

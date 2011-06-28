@@ -86,8 +86,12 @@ class Transfer < ActiveRecord::Base
     # We create a plain Transfer since we don't want
     # anything to be executed after creation
 
-    unless Transfer.where(:lr_transaction_id => lr_tx_id).first
-      Transfer.create! LibertyReserve::Client.instance.get_transaction(lr_tx_id)
+    if Transfer.find_by_lr_transaction_id(lr_tx_id).blank?
+      tx = LibertyReserve::Client.instance.get_transaction(lr_tx_id)
+      
+      Transfer.create! do |t|
+        tx.keys.each { |key| t.send :"#{key}=", tx[key] }
+      end
     end
   end
 end

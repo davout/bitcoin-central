@@ -4,6 +4,11 @@ class ThirdPartyCallbacksController < ApplicationController
     :authenticate_user!,
     :set_time_zone
 
+  def lr_transfer_fail
+    flash[:error] = t(:lr_transfer_failure, :amount => params[:lr_amnt], :currency => params[:lr_currency])
+    redirect_to account_transfers_path
+  end
+
   # Liberty Reserve bounce URLs
   def lr_transfer_success
     # Following line costs an LR API call but won't explode if LR forgot to
@@ -12,11 +17,6 @@ class ThirdPartyCallbacksController < ApplicationController
 
     redirect_to account_transfers_path,
       :notice => t(:lr_transfer_success, :amount => transfer.amount, :currency => params[:lr_currency], :fee => (transfer.lr_merchant_fee + params[:lr_fee_amnt].to_d))
-  end
-
-  def lr_transfer_fail
-    flash[:error] = t(:lr_transfer_failure, :amount => params[:lr_amnt], :currency => params[:lr_currency])
-    redirect_to account_transfers_path
   end
 
   # Liberty Reserve callback

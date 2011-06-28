@@ -48,4 +48,21 @@ class TransferTest < ActiveSupport::TestCase
 
     assert t.valid?
   end
+
+  test "polling liberty reserve API should result in a transaction being properly created *once*" do
+    LibertyReserve::Client.instance.stubs(:get_transaction).returns({
+        :currency => "LRUSD",
+        :lr_transaction_id => "123456",
+        :lr_account_id => "UXXX",
+        :lr_merchant_fee => BigDecimal("0.01"),
+        :lr_transferred_amount => BigDecimal("1.0"),
+        :amount => BigDecimal("0.99"),
+        :user => User.find(:first)
+      }
+    )
+
+    assert_difference 'Transfer.count' do
+      Transfer.create_from_lr_transaction_id("foo")
+    end
+  end
 end
