@@ -22,4 +22,11 @@ class MonkeyPatchesTest < ActiveSupport::TestCase
     d = BigDecimal("10")
     assert_equal "10.0", d.to_json
   end
+  
+  # Apparently it's not enough to override BigDecimal#to_json to get correct
+  # hash serialization...
+  test "hash serialization should honor raw BigDecimal serialization override" do
+    data = { :amount => BigDecimal("10") }
+    assert_equal "{\"amount\":10.0}", data.to_json
+  end
 end
