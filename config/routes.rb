@@ -42,7 +42,7 @@ BitcoinBank::Application.routes.draw do
   namespace :admin do
     %w{transfers users}.each { |r| resources(r.to_sym) {as_routes} }
 
-    match '/balances', :to => 'admin/informations#balances', :as => :balances
+    match '/balances', :to => 'informations#balances', :as => :balances
   end
 
   match '/trades' => 'trades#all_trades'

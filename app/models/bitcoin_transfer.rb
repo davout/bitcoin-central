@@ -23,7 +23,7 @@ class BitcoinTransfer < Transfer
   def execute
     # TODO : Make transactional
     if amount < 0
-      @destination_account = payee_id || @bitcoin.get_account(address)
+      @destination_account = payee_id || Bitcoin::Client.instance.get_account(address)
 
       if @destination_account.blank?
         #update_attribute(:bt_tx_id, @bitcoin.send_from(user.id.to_s, address, amount.to_d.abs)) if perform_transfers?

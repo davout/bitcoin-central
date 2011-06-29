@@ -1,5 +1,5 @@
 class Admin::InformationsController < Admin::AdminController
-  def show
+  def balances
     @balances = [:lrusd, :lreur, :pgau, :eur, :btc].inject({}) do |balances, currency|
       balances[currency] = {}
       
