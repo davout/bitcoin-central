@@ -58,4 +58,8 @@ class TradeOrdersControllerTest < ActionController::TestCase
     get :book, :format => :xml
     assert_response :success
   end
+
+  test "should create trade order" do
+    flunk
+  end
 end
