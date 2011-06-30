@@ -84,7 +84,10 @@ en:
         types:
           buy: Buy
           sell: Sell
-
+      announcement:
+        content: Message
+        active: Active
+        
     models:
       invoice:
         one: Invoice
@@ -101,3 +104,6 @@ en:
       trade:
         one: Trade
         other: Trades
+      announcement:
+        one: Announcement
+        other: Announcements        

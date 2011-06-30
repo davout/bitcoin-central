@@ -60,6 +60,16 @@ class TradeOrdersControllerTest < ActionController::TestCase
   end
 
   test "should create trade order" do
-    flunk
+    login_with :trader1
+    
+    post :create, :trade_order => {
+      :category => "sell",
+      :amount => "1",
+      :ppc => "1",
+      :currency => "PGAU"
+    }
+
+    assert_response :redirect
+    assert_redirected_to account_trade_orders_path
   end
 end
