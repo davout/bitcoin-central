@@ -683,3 +683,36 @@ tr.odd {
  div.form-field input.otp {
    width: 6em;
 }
+
+/* Announcements */
+div.announcements {
+  width: 80%;
+  min-height: 2em;
+  font-size: 110%;
+  margin: auto;
+  /*background: -webkit-gradient(linear,0% 0%,0% 100%,from(rgba(255,255,255,1)),to(rgba(185,185,185,1)));
+  background: -moz-linear-gradient(top,rgba(255,255,255,1),rgba(185,185,185,1));*/
+  background: #FEE;
+
+  text-shadow: 1px 1px 1px rgba(255,255,255,0.5);
+  /*-moz-border-radius: 2px;
+  border-radius: 3px;*/
+  -moz-box-shadow: 0px 0px 4px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 0px 0px 4px rgba(0,0,0,0.5);
+  padding: 1em;
+}
+
+div.announcements ul {
+  padding:0;
+  margin:0;
+  padding-left: 3em;
+}
+
+div.announcements ul li {
+  font-size: 115%;
+  list-style-image: none;
+  margin-top: .3em;
+  margin-bottom: .5em;
+  color: #6E0701;
+}
+

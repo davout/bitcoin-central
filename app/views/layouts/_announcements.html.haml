@@ -1,0 +1,6 @@
+- unless @announcements.blank?
+  .announcements
+    %ul
+      - @announcements.each do |a|
+        %li= a.content.html_safe
+

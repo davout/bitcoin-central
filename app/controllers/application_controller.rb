@@ -7,7 +7,8 @@ class ApplicationController < ActionController::Base
     :get_bitcoin_client,
     :move_xml_params,
     :set_locale,
-    :set_time_zone
+    :set_time_zone,
+    :get_announcements
 
   def get_bitcoin_client
     @bitcoin = Bitcoin::Client.instance
@@ -43,5 +44,11 @@ class ApplicationController < ActionController::Base
   # Redirects users to their account page after sign-in
   def after_sign_in_path_for(resource)
     account_path
+  end
+
+  def get_announcements
+    if params[:action] == 'welcome' || (params[:controller] == "accounts" && params[:action] == "show")
+      @announcements = Announcement.active.all
+    end
   end
 end
