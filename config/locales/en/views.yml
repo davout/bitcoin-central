@@ -54,3 +54,7 @@ en:
     unlocks:
       new:
         resend: Send unlock instructions
+        
+  transfers:
+    index:
+      details: Transaction details        

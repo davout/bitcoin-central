@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110630161800) do
+ActiveRecord::Schema.define(:version => 20110701083833) do
 
   create_table "announcements", :force => true do |t|
     t.string   "title"
@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(:version => 20110630161800) do
     t.string   "px_tx_id"
     t.string   "px_payer"
     t.decimal  "px_fee",                :precision => 16, :scale => 8, :default => 0.0
+    t.string   "comment"
   end
 
   add_index "transfers", ["lr_transaction_id"], :name => "index_transfers_on_lr_transaction_id", :unique => true

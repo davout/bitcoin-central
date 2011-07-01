@@ -28,4 +28,8 @@ class TransfersController < ApplicationController
       end
     end
   end
+  
+  def show
+    @transfer = current_user.transfers.find(params[:id])
+  end
 end

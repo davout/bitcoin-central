@@ -31,6 +31,8 @@ fr:
         currency: Devise
         total: Total
       transfer:
+        id: ID
+        created_at: Date
         user: Utilisateur
         amount: Montant
         address: Adresse
@@ -43,6 +45,7 @@ fr:
         px_fee: Commission Pecunix
         px_payer: Expéditeur Pecunix
       user:
+        id: ID
         email: Adresse e-mail
         password: Mot de passe
         account: N° de compte

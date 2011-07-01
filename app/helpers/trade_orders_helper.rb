@@ -27,12 +27,6 @@ module TradeOrdersHelper
     end
   end
 
-  def currency_icon_for(currency)
-    image_tag "#{currency}.png", 
-      :alt => currency,
-      :title => currency
-  end
-
   def radio_for(currency, selected_currency)
     if currency == "all"
       "#{radio_button_tag 'currency', 'all', (selected_currency.blank? or (selected_currency == 'all')), :onclick => "$(this).parents('form').submit()"} #{label_tag("currency_all", t("currencies.all"))}".html_safe

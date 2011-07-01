@@ -52,4 +52,11 @@ module ApplicationHelper
         send("new_#{resource}_path")
     end
   end
+  
+  def currency_icon_for(currency)
+    image_tag "#{currency}.png", 
+      :alt => currency,
+      :title => currency,
+      :class => "currency-icon"
+  end
 end

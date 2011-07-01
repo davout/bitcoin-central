@@ -31,6 +31,8 @@ en:
         currency: Currency
         total: Total
       transfer:
+        id: ID
+        created_at: Created at
         user: User
         amount: Amount
         address: Address
@@ -43,6 +45,7 @@ en:
         px_fee: Pecunix fee
         px_payer: Pecunix payer
       user:
+        id: ID
         email: E-mail address
         password: Password
         account: Account ID

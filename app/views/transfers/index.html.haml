@@ -5,6 +5,7 @@
     %th Date
     %th= t :currency
     %th= t :amount
+    %th.auto-sized
 
   - unless @transfers.blank?
     - @transfers.each do |transfer|
@@ -14,6 +15,8 @@
         %td.amount
           %span{ :class => color_for(transfer), :title => confirmation_tooltip_for(transfer) }
             = "#{transfer.amount > 0 ? "+" : "-"} #{number_to_currency transfer.amount.abs, :unit => ""}"
+        %td.auto-sized
+          = transfer_details(transfer)  
 
   - else
     = render :partial => "layouts/no_data"

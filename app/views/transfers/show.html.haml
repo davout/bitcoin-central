@@ -1,0 +1,24 @@
+%table.default.details
+  %tr
+    %th= t("activerecord.attributes.transfer.id")
+    %td.fixed= @transfer.id
+
+  %tr
+    %th= t("activerecord.attributes.transfer.created_at")
+    %td= l(@transfer.created_at)
+
+  %tr
+    %th= t("activerecord.attributes.transfer.amount")
+    %td.fixed= number_to_currency(@transfer.amount, :unit => "", :precision => 6)
+
+  %tr
+    %th= t("activerecord.attributes.transfer.currency")
+    %td
+      = currency_icon_for(@transfer.currency)
+      = @transfer.currency
+
+  - unless @transfer.comment.blank?
+    %tr
+      %th= t("activerecord.attributes.transfer.comment")
+      %td
+        %pre= @transfer.comment

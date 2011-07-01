@@ -54,3 +54,7 @@ fr:
     unlocks:
       new:
         resend: Envoyer les instructions de déverrouillage
+        
+  transfers:
+    index:
+      details: Détails de la transaction
