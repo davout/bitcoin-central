@@ -59,9 +59,9 @@ class Admin::UsersController < Admin::AdminController
       :locked_at
     ]
     
-    [:merchant, :admin, :require_otp].each do |c|
-      config.columns[c].inplace_edit = true
-    end   
+    
+    config.columns[:merchant].inplace_edit = true
+    config.columns[:require_otp].inplace_edit = true
     
     config.search.columns << :id
     
