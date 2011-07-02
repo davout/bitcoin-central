@@ -40,4 +40,5 @@ gem 'rqrcode'
 group :test do
   gem 'mocha', :require => false
   gem 'factory_girl_rails'
+  gem 'turn'
 end
