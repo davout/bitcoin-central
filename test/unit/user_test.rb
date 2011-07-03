@@ -36,14 +36,14 @@ class UserTest < ActiveSupport::TestCase
 
     address1 = u.bitcoin_address
     u.generate_new_address
-    address2 = u.bitcoin_address
+    address2 = u.reload.bitcoin_address
 
     assert_equal address1, address2
 
     u.last_address_refresh = DateTime.now.advance(:days => -1)
 
     u.generate_new_address
-    address3 = u.bitcoin_address
+    address3 = u.reload.bitcoin_address
 
     assert_not_equal address2, address3
   end
