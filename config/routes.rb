@@ -4,7 +4,6 @@ BitcoinBank::Application.routes.draw do
   resource :user, :only => [:edit, :update] do
     get :otp_configuration
     post :reset_otp_secret
-    resources :addresses, :only => [:create]
   end
 
   devise_for :users, :controllers => { :registrations => "registrations" }

@@ -9,6 +9,8 @@ class BitcoinTransfer < Transfer
   validates :currency,
     :inclusion => { :in => ["BTC"] }
 
+  after_create :refresh_user_address
+
   # An address is only mandatory when money is withdrawn
   validate :address do
     if (amount and amount <= 0) and payee_id.nil? # Outgoing bitcoin transfer
@@ -82,4 +84,10 @@ class BitcoinTransfer < Transfer
       end
     end
   end
+
+  # Tells the associated user it should refresh the receiving address
+  def refresh_user_address
+    user.generate_new_address if amount > 0
+  end
 end
+

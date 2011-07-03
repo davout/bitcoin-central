@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110701083833) do
+ActiveRecord::Schema.define(:version => 20110702184056) do
 
   create_table "announcements", :force => true do |t|
     t.string   "title"
@@ -107,7 +107,7 @@ ActiveRecord::Schema.define(:version => 20110701083833) do
     t.string   "password"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "last_address"
+    t.string   "bitcoin_address"
     t.string   "salt"
     t.string   "time_zone"
     t.boolean  "admin",                :default => false
@@ -132,6 +132,7 @@ ActiveRecord::Schema.define(:version => 20110701083833) do
     t.boolean  "merchant",             :default => false
     t.string   "otp_secret"
     t.boolean  "require_otp",          :default => false
+    t.datetime "last_address_refresh"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

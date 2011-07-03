@@ -28,4 +28,24 @@ class UserTest < ActiveSupport::TestCase
     assert_equal "otpauth://totp/#{URI.encode(user.account)}?secret=#{user.otp_secret}",
       user.provisioning_uri
   end
+
+  test "should refresh addy only every hour" do
+    # TODO : stub address generation call
+    Bitcoin::Client.instance.stubs(:get_new_address).returns("foo", "bar")
+
+    u = users(:trader1)
+
+    address1 = u.bitcoin_address
+    u.generate_new_address
+    address2 = u.bitcoin_address
+
+    assert_equal address1, address2
+
+    u.last_address_refresh = DateTime.now.advance(:days => -1)
+
+    u.generate_new_address
+    address3 = u.bitcoin_address
+
+    assert_not_equal address2, address3
+  end
 end

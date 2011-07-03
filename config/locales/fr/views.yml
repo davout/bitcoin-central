@@ -1,4 +1,13 @@
 fr:
+  layouts:
+    user_informations:
+      signed_in_as: Connecté sous
+      address_tip: Une nouvelle adresse est générée à chaque paiement reçu, vos adresses précédentes restent valables
+      your_address: Votre adresse
+      logout: Déconnexion
+      sign_up: Créer un compte
+      sign_in: Connexion
+
   invoices:
     new:
       create_invoice: Créer une facture
