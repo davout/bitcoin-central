@@ -30,7 +30,6 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "should refresh addy only every hour" do
-    # TODO : stub address generation call
     Bitcoin::Client.instance.stubs(:get_new_address).returns("foo", "bar")
 
     u = users(:trader1)
