@@ -11,6 +11,8 @@ class BitcoinTransfer < Transfer
 
   after_create :refresh_user_address
 
+  attr_accessor :skip_address_refresh
+
   # An address is only mandatory when money is withdrawn
   validate :address do
     if (amount and amount <= 0) and payee_id.nil? # Outgoing bitcoin transfer
@@ -38,6 +40,7 @@ class BitcoinTransfer < Transfer
           bt.amount = amount.abs
           bt.currency = "BTC"
           bt.skip_min_amount = true
+          bt.skip_address_refresh = true
         end
 
         # TODO : Re-enable this when bitcoin is able to handle subcent moves
@@ -87,7 +90,9 @@ class BitcoinTransfer < Transfer
 
   # Tells the associated user it should refresh the receiving address
   def refresh_user_address
-    user.generate_new_address if amount > 0
+    unless (amount < 0) || skip_address_refresh
+      user.generate_new_address if amount > 0
+    end
   end
 end
 

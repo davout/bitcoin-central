@@ -59,4 +59,8 @@ module ApplicationHelper
       :title => currency,
       :class => "currency-icon"
   end
+
+  def bbe_link(type, id)
+    link_to(truncate(id, :length => 15, :omission => ""), "http://blockexplorer.com/#{type}/#{id}", :target => "_blank", :title => id)
+  end
 end

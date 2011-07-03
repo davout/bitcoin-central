@@ -58,8 +58,7 @@ class Admin::UsersController < Admin::AdminController
       :last_sign_in_ip,
       :locked_at
     ]
-    
-    
+       
     config.columns[:merchant].inplace_edit = true
     config.columns[:require_otp].inplace_edit = true
     
