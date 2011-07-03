@@ -1,3 +1,7 @@
+%h1
+  Transfer
+  %span.fixed= @transfer.id
+
 %table.default.details
   %tr
     %th= t("activerecord.attributes.transfer.id")
@@ -17,6 +21,26 @@
       = currency_icon_for(@transfer.currency)
       = @transfer.currency
 
+  - if @transfer.bt_tx_id
+    %tr
+      %th= t("activerecord.attributes.transfer.bt_tx_id")
+      %td.fixed= bbe_link(:tx, @transfer.bt_tx_id)
+
+  - if @transfer.bt_tx_confirmations and @transfer.bt_tx_confirmations > 0
+    %tr
+      %th= t("activerecord.attributes.transfer.bt_tx_confirmations")
+      %td.fixed= @transfer.bt_tx_confirmations
+
+  - if @transfer.lr_transaction_id
+    %tr
+      %th= t("activerecord.attributes.transfer.lr_transaction_id")
+      %td.fixed= @transfer.lr_transaction_id
+
+  - if @transfer.px_tx_id
+    %tr
+      %th= t("activerecord.attributes.transfer.px_tx_id")
+      %td.fixed= @transfer.px_tx_id
+      
   - unless @transfer.comment.blank?
     %tr
       %th= t("activerecord.attributes.transfer.comment")
