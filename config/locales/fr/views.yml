@@ -59,6 +59,7 @@ fr:
       new:
         otp_explanation: Nécessaire uniquement si vous avez activé l'option correspondante
         password_explanation: Mot de passe oublié ?
+        sign_in: Connexion
 
     unlocks:
       new:

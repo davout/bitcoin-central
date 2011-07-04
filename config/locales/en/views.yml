@@ -59,6 +59,7 @@ en:
       new:
         otp_explanation: Required only if you enabled OTP authentication
         password_explanation: Password forgotten ?
+        sign_in: Sign-in
 
     unlocks:
       new:
