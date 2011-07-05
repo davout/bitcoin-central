@@ -1,4 +1,4 @@
-%h1= t(:sign_in)
+%h1= t(".sign_in")
 
 = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
   .form-field
@@ -20,6 +20,6 @@
       = t(".otp_explanation")
   
   .form-field
-    = f.submit t(:sign_in), :class => "submit"
+    = f.submit t(".sign_in"), :class => "submit"
   
 = render :partial => "devise/shared/links"

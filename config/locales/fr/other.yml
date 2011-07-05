@@ -128,14 +128,6 @@ fr:
     ecommerce:
       main: E-commerce
 
-  # views/layouts/_user_informations.html
-  generate_new_address_legend: Générer une nouvelle addresse
-  your_last_address: Votre addresse
-  logout: Déconnexion
-  signed_in_as: Connecté sous
-  sign_up: Créer un compte
-  sign_in: Connexion
-
   # views/layouts/application.html
   website_title: Bitcoin Central
   website_keywords: bitcoin, bitcoin central, achat de bitcoins, vente de bitcoins

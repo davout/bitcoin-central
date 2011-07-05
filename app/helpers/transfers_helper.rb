@@ -8,4 +8,8 @@ module TransfersHelper
       t :confirmations_left, :count => (Transfer::MIN_BTC_CONFIRMATIONS - transfer.bt_tx_confirmations)
     end
   end
+  
+  def transfer_details(transfer)
+    link_to(image_tag("magnifier.png", :alt => t(".details"), :title => t(".details")), account_transfer_path(transfer))
+  end
 end

@@ -1,4 +1,13 @@
 en:
+  layouts:
+    user_informations:
+      signed_in_as: Signed-in as
+      address_tip: A new address is generated each time you receive a payment, your previous addresses will still work though
+      your_address: Your address
+      logout: Logout
+      sign_up: Sign-up
+      sign_in: Sign-in
+
   invoices:
     new:
       create_invoice: Create an invoice
@@ -50,7 +59,12 @@ en:
       new:
         otp_explanation: Required only if you enabled OTP authentication
         password_explanation: Password forgotten ?
+        sign_in: Sign-in
 
     unlocks:
       new:
         resend: Send unlock instructions
+        
+  transfers:
+    index:
+      details: Transaction details        

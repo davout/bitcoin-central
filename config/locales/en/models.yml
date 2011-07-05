@@ -31,18 +31,24 @@ en:
         currency: Currency
         total: Total
       transfer:
+        id: ID
+        created_at: Created at
         user: User
         amount: Amount
         address: Address
         currency: Currency
-        bt_tx_confirmations: Bitcoin confirmations
+        bt_tx_confirmations: Confirmations
         bt_tx_from: Senders Bitcoin address
+        bt_tx_id: Bitcoin transaction
         email: E-mail address
         lr_merchant_fee: Liberty Reserve merchant fee
         lr_transferred_amount: Liberty Reserve transferred amount
+        lr_transaction_id: Liberty Reserve ref.
+        px_tx_id: Pecunix ref.
         px_fee: Pecunix fee
         px_payer: Pecunix payer
       user:
+        id: ID
         email: E-mail address
         password: Password
         account: Account ID

@@ -407,7 +407,7 @@ table.default tr td.no-records {
   top:1px;
 }
 
-/* Invoice details table */
+/* Invoices and details table */
 
 body.invoices-show div#content div#right-content {
   width: 50%;
@@ -434,6 +434,11 @@ table.details tr th {
 table.details tr td, table.details tr td.amount {
   text-align: left;
   padding-left: 1.5em;
+}
+
+table.details img.currency-icon {
+    position: relative;
+    top: 3px;
 }
 
 div.payment-explanations {
@@ -534,6 +539,7 @@ div.flash {
   font-weight: bold;
   font-size: 110%;
   margin-bottom: 2em;
+  margin-top: 2em;
 }
 
 div.flash div.notice {
@@ -690,13 +696,10 @@ div.announcements {
   min-height: 2em;
   font-size: 110%;
   margin: auto;
-  /*background: -webkit-gradient(linear,0% 0%,0% 100%,from(rgba(255,255,255,1)),to(rgba(185,185,185,1)));
-  background: -moz-linear-gradient(top,rgba(255,255,255,1),rgba(185,185,185,1));*/
   background: #FEE;
-
-  text-shadow: 1px 1px 1px rgba(255,255,255,0.5);
-  /*-moz-border-radius: 2px;
-  border-radius: 3px;*/
+/*  text-shadow: 0px 0px 1px rgba(255,238,238,0.5);*/
+  -moz-border-radius: 3px;
+  border-radius: 3px;
   -moz-box-shadow: 0px 0px 4px rgba(0,0,0,0.5);
   -webkit-box-shadow: 0px 0px 4px rgba(0,0,0,0.5);
   padding: 1em;

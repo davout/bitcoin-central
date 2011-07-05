@@ -73,7 +73,7 @@ class Trade < ActiveRecord::Base
       it.skip_min_amount = true
     end
 
-    bitcoin_transfer = BitcoinTransfer.new do |bt|
+    bitcoin_transfer = InternalTransfer.new do |bt|
       bt.currency = "BTC"
       bt.amount = -traded_btc
       bt.user_id = sale_order.user_id

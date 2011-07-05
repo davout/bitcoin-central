@@ -2,6 +2,9 @@ require 'test_helper'
 
 class UrlValidatorTest < ActiveSupport::TestCase
   test "should consider an invoice invalid with an invalid url" do
+    Bitcoin::Util.stubs(:valid_bitcoin_address?).returns(true)
+    Bitcoin::Client.instance.stubs(:get_new_address).returns("foo")
+
     @invoice = Invoice.new({
         :user => User.first,
         :amount => 100,

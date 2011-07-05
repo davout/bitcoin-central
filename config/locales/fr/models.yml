@@ -31,18 +31,24 @@ fr:
         currency: Devise
         total: Total
       transfer:
+        id: ID
+        created_at: Date
         user: Utilisateur
         amount: Montant
         address: Adresse
         currency: Devise
-        bt_tx_confirmations: Confirmations Bitcoin
+        bt_tx_confirmations: Confirmations
         bt_tx_from: Adresse Bitcoin d'origine
+        bt_tx_id: Transaction Bitcoin
         email: Adresse e-mail
         lr_merchant_fee: Commission Liberty Reserve
         lr_transferred_amount: Montant Liberty Reserve transféré
+        lr_transaction_id: Réf. Liberty Reserve
+        px_tx_id: Réf. Pecunix
         px_fee: Commission Pecunix
         px_payer: Expéditeur Pecunix
       user:
+        id: ID
         email: Adresse e-mail
         password: Mot de passe
         account: N° de compte

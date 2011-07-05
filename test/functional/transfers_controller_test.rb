@@ -21,4 +21,14 @@ class TransfersControllerTest < ActionController::TestCase
     assert_equal 20.0, users(:trader1).balance(:lrusd)
     assert_equal 5.0, users(:trader2).balance(:lrusd)
   end
+  
+  test "should show account history page" do
+    get :index
+    assert_response :success
+  end
+  
+  test "should show transfer details" do
+    get :show, :id => users(:trader1).transfers.first.id
+    assert_response :success
+  end
 end

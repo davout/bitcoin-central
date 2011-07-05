@@ -2,6 +2,9 @@ require 'test_helper'
 
 class InvoiceTest < ActiveSupport::TestCase
   def setup
+    Bitcoin::Util.stubs(:valid_bitcoin_address?).returns(true)
+    Bitcoin::Client.instance.stubs(:get_new_address).returns("foo", "bar")
+
     @invoice = Invoice.create(
       :user => users(:trader1),
       :amount => 100,
