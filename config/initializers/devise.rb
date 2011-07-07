@@ -140,6 +140,8 @@ Devise.setup do |config|
   #   manager.default_strategies(:scope => :user).unshift :twitter_oauth
   # end
 
+  config.paranoid = true
+
   require 'devise/strategies/otp_checkable'
 
   config.warden do |manager|

@@ -1,9 +1,8 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.0'
+gem 'rails', '3.0.9'
 
-# Downgrade rake to avoid some bugs in 0.9.0
-gem 'rake', '~> 0.8.7'
+gem 'rake'
 
 gem 'mysql', '2.8.1'
 

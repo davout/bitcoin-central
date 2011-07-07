@@ -8,7 +8,8 @@ class User < ActiveRecord::Base
     :recoverable,
     :trackable,
     :validatable,
-    :lockable
+    :lockable,
+    :timeoutable
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :password, :password_confirmation, :remember_me, :time_zone, 
