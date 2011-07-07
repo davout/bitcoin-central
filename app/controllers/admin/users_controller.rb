@@ -20,7 +20,8 @@ class Admin::UsersController < Admin::AdminController
       :locked_at,
       :remember_created_at,
       :transfers,
-      :merchant
+      :merchant,
+      :yubikeys
     ]
     
     config.list.columns = [
@@ -65,5 +66,6 @@ class Admin::UsersController < Admin::AdminController
     config.search.columns << :id
     
     config.nested.add_link :transfers
+    config.nested.add_link :yubikeys
   end
 end

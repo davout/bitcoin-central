@@ -94,6 +94,10 @@ fr:
       announcement:
         content: Message
         active: Activé
+      yubikey:
+        otp: Jeton d'authentification
+        key_id: Identifiant de clé
+        active: Activée
 
     models:
       invoice:
@@ -114,3 +118,6 @@ fr:
       announcement:
         one: Annonce
         other: Annonces
+      yubikey:
+        one: Yubikey
+        other: Yubikeys

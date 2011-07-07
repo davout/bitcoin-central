@@ -93,7 +93,11 @@ en:
       announcement:
         content: Message
         active: Active
-        
+      yubikey:
+        otp: One-time password
+        key_id: Key ID
+        active: Active
+
     models:
       invoice:
         one: Invoice
@@ -113,3 +117,6 @@ en:
       announcement:
         one: Announcement
         other: Announcements        
+      yubikey:
+        one: Yubikey
+        other: Yubikeys

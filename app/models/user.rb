@@ -40,6 +40,9 @@ class User < ActiveRecord::Base
   has_many :invoices,
     :dependent => :destroy
 
+  has_many :yubikeys,
+    :dependent => :destroy
+
   validates :account,
     :uniqueness => true
 
