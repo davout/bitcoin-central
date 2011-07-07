@@ -1,0 +1,9 @@
+development:
+  api_url: https://api.yubico.com/wsapi/verify
+  api_id: foo
+  api_key: bar
+
+test:
+  api_url: https://api.yubico.com/wsapi/verify
+  api_id: foo
+  api_key: bar
