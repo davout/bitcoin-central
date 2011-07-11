@@ -124,7 +124,7 @@ GEM
     whenever (0.6.8)
       aaronh-chronic (>= 0.3.9)
       activesupport (>= 2.3.4)
-    will_paginate (2.3.15)
+    will_paginate (3.0.pre2)
 
 PLATFORMS
   ruby
@@ -149,4 +149,4 @@ DEPENDENCIES
   transitions
   turn
   whenever
-  will_paginate
+  will_paginate (~> 3.0.pre2)
