@@ -47,17 +47,32 @@ en:
 
   users:
     form:
-      submit: Save user
+      submit: Save account details
       merchant_explanation: Activate merchant tools
-      otp_explanation: Require one-time-password to authenticate
-      otp_config: Help and setup instructions
-    otp_configuration:
-      reset: The shared-secret has been correctly reset, you'll need to update your mobile device settings
+      ga_otp_explanation: Require Google Auth. OTP
+      ga_otp_config: Help and setup instructions
+      additional_authentication_requirements: Additional authentication requirements
+      api_tools: API & Tools
+      yk_otp_config: Associate keys to your account
+    ga_otp_configuration:
+      reset: The Google Authenticator shared-secret has been correctly reset, you should update your mobile device settings
+
+  yubikeys:
+    index:
+      create: Associate a Yubikey to your account
+      delete: Delete this Yubikey
+      confirm: Are you sure ?
+      associate: Associate a new Yubikey
+      otp_explanation: Simply generate an OTP here to associate your key
+      created: Yubikey associated, you'll need it for your next sign-in
+      destroyed: Yubikey removed
+      error: This key could not be associated to your account
 
   devise:
     sessions:
       new:
-        otp_explanation: Required only if you enabled OTP authentication
+        ga_otp_explanation: Required only if you enabled Google Authenticator
+        yk_otp_explanation: Required only if you enabled a Yubikey
         password_explanation: Password forgotten ?
         sign_in: Sign-in
 

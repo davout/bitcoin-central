@@ -17,7 +17,7 @@
   Vous devrez mettre à jour la configuration de votre téléphone.
 %br
 %p
-  = form_tag reset_otp_secret_user_path, :method => :post do
+  = form_tag reset_ga_otp_secret_user_path, :method => :post do
     = submit_tag "Ré-initialiser", :class => "submit"
 
 %h2 Configuration
@@ -34,7 +34,7 @@
 
 %p Scannez le code QR afin de configurer automatiquement votre générateur de codes d'authentification.
 
-= render :partial => 'users/qrcode', :locals => { :qrcode => RQRCode::QRCode.new(current_user.provisioning_uri, :size => 6) }
+= render :partial => 'users/qrcode', :locals => { :qrcode => RQRCode::QRCode.new(current_user.ga_provisioning_uri, :size => 6) }
 
 %h3 Configuration manuelle
 
@@ -49,6 +49,6 @@
     %td Temporel
   %tr
     %th Secret partagé
-    %td.fixed= current_user.otp_secret
+    %td.fixed= current_user.ga_otp_secret
 
 

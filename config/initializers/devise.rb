@@ -142,9 +142,11 @@ Devise.setup do |config|
 
   config.paranoid = true
 
-  require 'devise/strategies/otp_checkable'
+  require 'devise/strategies/ga_otp_authenticatable'
+  require 'devise/strategies/yk_otp_authenticatable'
 
   config.warden do |manager|
-    manager.default_strategies(:scope => :user).unshift :otp_checkable
+    manager.default_strategies(:scope => :user).unshift :ga_otp_authenticatable
+    manager.default_strategies(:scope => :user).unshift :yk_otp_authenticatable    
   end
 end

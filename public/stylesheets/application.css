@@ -220,6 +220,24 @@ ul#menu > li:hover > ul {
 }
 
 /* Forms */
+
+form fieldset {
+    margin-top: 2em;
+    margin-bottom: 1em;
+    border-top: 1px solid #6E0701;
+    padding-top: 1em;
+    padding-left: 1em;
+}
+
+form fieldset legend {
+  font-size: 130%;
+  font-weight: bold;
+  padding-left: .5em;
+  
+  padding-right: .5em;
+  color: #6E0701;
+}
+
 div.form-field {
   display: block;
   margin-bottom: .7em;
@@ -232,11 +250,28 @@ div.form-field label, div.recaptcha-field label {
   font-weight: bold;
   font-size: 110%;
   float:left;
+  height: 2em;
+  position: relative;
+  top: 5px;
 }
 
-div.form-field input {
+div.form-field input, div.form-field select {
   float: left;
   width: 220px;
+  border: 1px solid gray;
+  height: 24px;
+  padding-left: 6px;
+}
+
+div.form-field select {
+    width: inherit;
+    min-width: 220px;
+}
+
+div.form-field input:focus, div.form-field select:focus {
+  -moz-box-shadow: 0px 0px 3px rgba(255,0,0,0.5);
+  -webkit-box-shadow: 0px 0px 4px rgba(255,238,238,0.5);
+  border: 1px solid #FEE;
 }
 
 div.recaptcha-field {
@@ -248,7 +283,7 @@ div.recaptcha-field div.recaptcha-input {
   float: left;
 }
 
-input.submit {
+form input.submit {
   border:1px solid rgba(0,0,0,0.4);
   background: silver;
   padding: .6em;
@@ -256,6 +291,7 @@ input.submit {
   padding-right: 2em;
   font-weight: bold;
   width: inherit;
+  height: inherit;
   font-size: 110%;
   background: -webkit-gradient(linear,0% 0%,0% 100%,from(rgba(255,255,255,1)),to(rgba(185,185,185,1)));
   background: -moz-linear-gradient(top,rgba(255,255,255,1),rgba(185,185,185,1));
@@ -686,8 +722,16 @@ tr.odd {
    background-color: black;
  }
 
- div.form-field input.otp {
+ div.form-field input.ga-otp {
    width: 6em;
+}
+
+ div.form-field input.yk-otp {
+   width: 22em;
+   background: url("/images/yubico-icon.png");
+   background-repeat: no-repeat;
+   background-position: 6px center;
+   padding-left: 28px;
 }
 
 /* Announcements */

@@ -2,8 +2,10 @@ BitcoinBank::Application.routes.draw do
   resources :invoices, :only => [:index, :new, :create, :show, :destroy]
 
   resource :user, :only => [:edit, :update] do
-    get :otp_configuration
-    post :reset_otp_secret
+    get :ga_otp_configuration
+    post :reset_ga_otp_secret
+
+    resources :yubikeys, :only => [:index, :new, :create, :destroy]
   end
 
   devise_for :users, :controllers => { :registrations => "registrations" }

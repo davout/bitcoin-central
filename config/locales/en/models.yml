@@ -79,8 +79,10 @@ en:
         current_password: Current password
         new_password: New password
         merchant: Merchant API
-        require_otp: Require TOTP
-        otp: One-time password
+        require_ga_otp: Google Authenticator
+        require_yk_otp: Yubikey
+        ga_otp: Google Auth. OTP
+        yk_otp: Yubikey OTP
       trade:
         type: Type
         amount: Amount
@@ -94,7 +96,7 @@ en:
         content: Message
         active: Active
       yubikey:
-        otp: One-time password
+        otp: Yubikey OTP
         key_id: Key ID
         active: Active
 

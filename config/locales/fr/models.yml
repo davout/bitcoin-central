@@ -80,8 +80,10 @@ fr:
         current_password: Mot de passe actuel
         new_password: Nouveau mot de passe
         merchant: API E-commerce
-        require_otp: Demander jeton TOTP
-        otp: Code d'authentification
+        require_ga_otp: Google Authenticator
+        require_yk_otp: Yubikey
+        ga_otp: Code Google Auth.
+        yk_otp: Code Yubikey
       trade:
         type: Type
         amount: Montant
@@ -95,7 +97,7 @@ fr:
         content: Message
         active: Activé
       yubikey:
-        otp: Jeton d'authentification
+        otp: Code Yubikey
         key_id: Identifiant de clé
         active: Activée
 

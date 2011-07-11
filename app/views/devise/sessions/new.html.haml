@@ -4,20 +4,22 @@
   .form-field
     = f.label :account
     = f.text_field :account
-    .explanation
-      = t(:account_description)
+    .explanation= t(:account_description)
 
   .form-field
     = f.label :password
     = f.password_field :password
-    .explanation
-      = link_to t(".password_explanation"), new_password_path(resource_name)
+    .explanation= link_to t(".password_explanation"), new_password_path(resource_name)
 
   .form-field
-    = f.label :otp
-    = f.text_field :otp, :class => "otp"
-    .explanation
-      = t(".otp_explanation")
+    = f.label :ga_otp
+    = f.text_field :ga_otp, :class => "ga-otp"
+    .explanation= t(".ga_otp_explanation")
+
+  .form-field
+    = f.label :yk_otp
+    = f.text_field :yk_otp, :class => "yk-otp"
+    .explanation= t(".yk_otp_explanation")
   
   .form-field
     = f.submit t(".sign_in"), :class => "submit"

@@ -13,14 +13,15 @@ class Yubikey < ActiveRecord::Base
   validates :user,
     :presence => true
   
-  def valid_otp?
-    Yubico::Client.instance.verify_otp(otp)
+  def valid_otp?(yk_otp)
+    !yk_otp.blank? && (yk_otp[0, 12] == key_id) && Yubico::Client.instance.verify_otp(otp)
   end
 
   def to_label
     "Key : #{key_id}"
   end
 
+  
   protected
 
   def set_key_id

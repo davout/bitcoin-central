@@ -15,7 +15,7 @@ class UserTest < ActiveSupport::TestCase
       u.skip_captcha = true
     end
 
-    assert !user.otp_secret.blank?, "A random OTP secret should have been generated"
+    assert !user.ga_otp_secret.blank?, "A random OTP secret should have been generated"
   end
 
   test "should return correct provisioning URI" do
@@ -25,8 +25,8 @@ class UserTest < ActiveSupport::TestCase
       u.skip_captcha = true
     end
 
-    assert_equal "otpauth://totp/#{URI.encode(user.account)}?secret=#{user.otp_secret}",
-      user.provisioning_uri
+    assert_equal "otpauth://totp/#{URI.encode(user.account)}?secret=#{user.ga_otp_secret}",
+      user.ga_provisioning_uri
   end
 
   test "should refresh addy only every hour" do

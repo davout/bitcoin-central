@@ -7,19 +7,19 @@ DEFAULTS: &DEFAULTS
 trader1:
   account: BC-T000000
   email: trader1@bitcoin-central.net
-  otp_secret: uh3ixqdg4iwv55wd
+  ga_otp_secret: uh3ixqdg4iwv55wd
   <<: *DEFAULTS
 
 trader2:
   account: BC-T000001
   email: trader2@bitcoin-central.net
-  otp_secret: uh3ixq5dg4iwv5wd
+  ga_otp_secret: uh3ixq5dg4iwv5wd
   <<: *DEFAULTS
 
 admin:
   account: BC-A000000
   email: admin@bitcoin-central.net
-  otp_secret: uh3ixqd5g4wiv5wd
+  ga_otp_secret: uh3ixqd5g4wiv5wd
   admin: true
   <<: *DEFAULTS
 
@@ -27,6 +27,6 @@ merchant:
   account: BC-M000000
   email: merchant@bitcoin-central.net
   secret_token: selling-stuff-ftw
-  otp_secret: uh3ixqd5g4iwv5dw
+  ga_otp_secret: uh3ixqd5g4iwv5dw
   merchant: true
   <<: *DEFAULTS

@@ -13,28 +13,36 @@
   .form-field
     = f.label :time_zone
     = f.time_zone_select :time_zone, nil, :prompt => "--"
-    .explanation
-      = t :time_zone_explanation
+    .explanation= t :time_zone_explanation
 
-  .form-field
-    = f.label :merchant
-    = f.check_box :merchant, :class => "checkbox"
-    .explanation
-      = t ".merchant_explanation"
+  %div{ :style => "clear:both;" }
 
   - unless @user.new_record?
-    .form-field
-      = f.label :require_otp
-      = f.check_box :require_otp, :class => "checkbox"
-      .explanation
-        = link_to t(".otp_config"), otp_configuration_user_path
+    %fieldset
+      %legend= t(".additional_authentication_requirements")
+      .form-field
+        = f.label :require_ga_otp
+        = f.check_box :require_ga_otp, :class => "checkbox"
+        .explanation= link_to t(".ga_otp_config"), ga_otp_configuration_user_path
+
+      .form-field
+        = f.label :require_yk_otp
+        = f.check_box :require_yk_otp, :class => "checkbox"
+        .explanation= link_to t(".yk_otp_config"), user_yubikeys_path
+
+    %fieldset
+      %legend= t(".api_tools")
+      .form-field
+        = f.label :merchant
+        = f.check_box :merchant, :class => "checkbox"
+        .explanation= t(".merchant_explanation")
+
 
   - if @user.new_record?
     .recaptcha-field
       %label{ :for => "recaptcha_response_field" } t(".turing_test")
       = f.text_field :account, :disabled => true
       .recaptcha-input= recaptcha_tags :ssl => true
-
 
   .form-field
     = f.submit t(".submit"), :class => 'submit'

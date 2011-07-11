@@ -49,15 +49,30 @@ fr:
     form:
       submit: Enregistrer
       merchant_explanation: Activer votre boutique en ligne
-      otp_explanation: Demander un jeton unique d'authentification en plus du mot de passe
-      otp_config: Aide et instructions de configuration
-    otp_configuration:
+      ga_otp_explanation: Utiliser Google Authenticator en complément du mot de passe
+      ga_otp_config: Aide et instructions de configuration
+      additional_authentication_requirements: Options d'authentification
+      api_tools: Outils & API
+      yk_otp_config: Associer des Yubikey à votre compte
+    ga_otp_configuration:
       reset: Le secret partagé a été ré-initialisé, vous devez mettre à jour la configuration de votre téléphone
+
+  yubikeys:
+    index:
+      create: Associer une Yubikey à votre compte
+      delete: Supprimer cette Yubikey
+      confirm: Êtes-vous sûr(e) ?
+      associate: Associer une nouvelle Yubikey
+      otp_explanation: Générez simplement un mot de passe Yubikey ici
+      created: Yubikey associée, elle sera nécessaire pour votre prochaine authentification
+      destroyed: Yubikey supprimée
+      error: Cette Yubikey n'a pu être associée à votre compte
 
   devise:
     sessions:
       new:
-        otp_explanation: Nécessaire uniquement si vous avez activé l'option correspondante
+        ga_otp_explanation: Nécessaire uniquement si vous avez activé Google Authenticator
+        yk_otp_explanation: Nécessaire uniquement si vous avez activé une Yubikey
         password_explanation: Mot de passe oublié ?
         sign_in: Connexion
 

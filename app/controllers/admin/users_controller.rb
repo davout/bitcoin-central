@@ -7,7 +7,8 @@ class Admin::UsersController < Admin::AdminController
       :account,
       :email,
       :admin,
-      :require_otp,
+      :require_ga_otp,
+      :require_yk_otp,
       :time_zone,
       :last_address,
       :confirmation_sent_at,
@@ -28,16 +29,15 @@ class Admin::UsersController < Admin::AdminController
       :id,
       :account,
       :email,
-      :admin,
-      :require_otp,
-      :merchant
+      :admin
     ]
       
     config.update.columns = [
       :account,
       :email,
       :admin,
-      :require_otp,
+      :require_ga_otp,
+      :require_yk_otp,
       :merchant
     ]
     
@@ -46,7 +46,8 @@ class Admin::UsersController < Admin::AdminController
       :account,
       :email,
       :admin,
-      :require_otp,
+      :require_ga_otp,
+      :require_yk_otp,
       :merchant,
       :time_zone,
       :last_address,
@@ -61,7 +62,8 @@ class Admin::UsersController < Admin::AdminController
     ]
        
     config.columns[:merchant].inplace_edit = true
-    config.columns[:require_otp].inplace_edit = true
+    config.columns[:require_ga_otp].inplace_edit = true
+    config.columns[:require_yk_otp].inplace_edit = true
     
     config.search.columns << :id
     

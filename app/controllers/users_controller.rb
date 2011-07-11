@@ -38,10 +38,10 @@ class UsersController < ApplicationController
     end
   end
 
-  def reset_otp_secret
-    current_user.generate_otp_secret && current_user.save!
+  def reset_ga_otp_secret
+    current_user.generate_ga_otp_secret && current_user.save!
 
-    redirect_to otp_configuration_user_path,
-      :notice => t("users.otp_configuration.reset")
+    redirect_to ga_otp_configuration_user_path,
+      :notice => t("users.ga_otp_configuration.reset")
   end
 end

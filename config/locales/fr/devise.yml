@@ -14,7 +14,8 @@ fr:
       invalid_token: 'Invalid authentication token'
       timeout: 'Your session expired, please sign in again to continue'
       inactive: 'Your account was not activated yet'
-      invalid_otp: Code d'authentification invalide ou expiré
+      invalid_ga_otp: Code Google Authenticator invalide ou expiré
+      invalid_yk_otp: Code Yubikey invalide
     sessions:
       signed_in: 'Signed in successfully'
       signed_out: 'Signed out successfully'

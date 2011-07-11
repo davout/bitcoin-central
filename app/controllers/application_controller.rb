@@ -4,15 +4,10 @@ class ApplicationController < ActionController::Base
   helper :all
 
   before_filter :authenticate_user!,
-    :get_bitcoin_client,
     :move_xml_params,
     :set_locale,
     :set_time_zone,
     :get_announcements
-
-  def get_bitcoin_client
-    @bitcoin = Bitcoin::Client.instance
-  end
 
   def set_time_zone
     if current_user and !current_user.time_zone.blank?

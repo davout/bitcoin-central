@@ -1,0 +1,29 @@
+%h1= t(".associate")
+
+= form_for [current_user, @yubikey] do |f|
+  = errors_for @yubikey, :message => "yubikeys.index.error"
+
+  .form-field
+    = f.label :otp
+    = f.text_field :otp, :class => "yk-otp"
+    .explanation= t(".otp_explanation")
+
+%br
+
+%h1= t("activerecord.models.yubikey.other")
+
+%table.default
+  %tr
+    %th= t("activerecord.attributes.yubikey.key_id")
+    %th= t("activerecord.attributes.yubikey.created_at")
+    %th.auto-sized
+
+  - unless @yubikeys.blank?
+    - @yubikeys.each do |yubikey|
+      %tr{ :class => cycle('even', 'odd') }
+        %td.fixed= yubikey.key_id
+        %td= l(yubikey.created_at, :format => :short)
+        %td.auto-sized= yubikey_delete(yubikey)
+  - else
+    = render :partial => "layouts/no_data"
+

@@ -18,7 +18,7 @@
   You will need to update your mobile device configuration.
 %br
 %p
-  = form_tag reset_otp_secret_user_path, :method => :post do
+  = form_tag reset_ga_otp_secret_user_path, :method => :post do
     = submit_tag "Reset shared-secret", :class => "submit"
 
 %h2 Configuration
@@ -28,14 +28,14 @@
     %li
       Configure the shared secret, either:
       %ul
-        %li manuelly, or
+        %li manually, or
         %li automatically by scanning the QR code below.
 
 %h3 Automatic configuration
 
 %p Scan the QR code to automatically configure your mobile device.
 
-= render :partial => 'users/qrcode', :locals => { :qrcode => RQRCode::QRCode.new(current_user.provisioning_uri, :size => 6) }
+= render :partial => 'users/qrcode', :locals => { :qrcode => RQRCode::QRCode.new(current_user.ga_provisioning_uri, :size => 6) }
 
 %h3 Manual configuration
 
@@ -50,6 +50,6 @@
     %td Time-based
   %tr
     %th Shared secret
-    %td.fixed= current_user.otp_secret
+    %td.fixed= current_user.ga_otp_secret
 
 
