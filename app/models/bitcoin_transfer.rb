@@ -80,6 +80,7 @@ class BitcoinTransfer < Transfer
             bt.bt_tx_id = tx["txid"]
             bt.bt_tx_confirmations = tx["confirmations"]
             bt.currency = "BTC"
+            bt.skip_min_amount = true
           end
         end
 

@@ -40,7 +40,7 @@ class TransferTest < ActiveSupport::TestCase
 
   test "transfer should allow very small amount with skip_min_amount" do
     t = Transfer.new do |tr|
-      tr.amount = 0.0001
+      tr.amount = 0.00001
       tr.currency = "LREUR"
       tr.user = users(:trader1)
       tr.skip_min_amount = true
