@@ -10,7 +10,71 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110709144427) do
+ActiveRecord::Schema.define(:version => 20110713191630) do
+
+  create_table "account_operations", :force => true do |t|
+    t.string   "type"
+    t.integer  "user_id"
+    t.string   "address"
+    t.decimal  "amount",                :precision => 16, :scale => 8, :default => 0.0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "currency"
+    t.string   "lr_transaction_id"
+    t.decimal  "lr_transferred_amount", :precision => 16, :scale => 8, :default => 0.0
+    t.decimal  "lr_merchant_fee",       :precision => 16, :scale => 8, :default => 0.0
+    t.string   "bt_tx_id"
+    t.string   "bt_tx_from"
+    t.integer  "bt_tx_confirmations",                                  :default => 0
+    t.string   "lr_account_id"
+    t.integer  "payee_id"
+    t.string   "email"
+    t.string   "px_tx_id"
+    t.string   "px_payer"
+    t.decimal  "px_fee",                :precision => 16, :scale => 8, :default => 0.0
+    t.string   "comment"
+    t.integer  "operation_id",                                                          :null => false
+  end
+
+  add_index "account_operations", ["lr_transaction_id"], :name => "index_transfers_on_lr_transaction_id", :unique => true
+
+  create_table "accounts", :force => true do |t|
+    t.string   "label",                                   :null => false
+    t.string   "email"
+    t.string   "password"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "bitcoin_address"
+    t.string   "salt"
+    t.string   "time_zone"
+    t.boolean  "admin",                :default => false
+    t.string   "secret_token"
+    t.string   "encrypted_password",   :default => "",    :null => false
+    t.string   "password_salt",        :default => "",    :null => false
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "reset_password_token"
+    t.string   "remember_token"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",        :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.integer  "failed_attempts",      :default => 0
+    t.string   "unlock_token"
+    t.datetime "locked_at"
+    t.string   "authentication_token"
+    t.boolean  "merchant",             :default => false
+    t.string   "ga_otp_secret"
+    t.boolean  "require_ga_otp",       :default => false
+    t.datetime "last_address_refresh"
+    t.boolean  "require_yk_otp",       :default => false
+    t.integer  "parent_id"
+  end
+
+  add_index "accounts", ["email"], :name => "index_users_on_email", :unique => true
 
   create_table "announcements", :force => true do |t|
     t.string   "title"
@@ -39,6 +103,11 @@ ActiveRecord::Schema.define(:version => 20110709144427) do
   add_index "invoices", ["authentication_token"], :name => "index_invoices_on_authentication_token", :unique => true
   add_index "invoices", ["payment_address"], :name => "index_invoices_on_payment_address", :unique => true
   add_index "invoices", ["reference"], :name => "index_invoices_on_reference", :unique => true
+
+  create_table "operations", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
@@ -75,68 +144,6 @@ ActiveRecord::Schema.define(:version => 20110709144427) do
     t.integer  "seller_id"
     t.integer  "buyer_id"
   end
-
-  create_table "transfers", :force => true do |t|
-    t.string   "type"
-    t.integer  "user_id"
-    t.string   "address"
-    t.decimal  "amount",                :precision => 16, :scale => 8, :default => 0.0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "currency"
-    t.string   "lr_transaction_id"
-    t.decimal  "lr_transferred_amount", :precision => 16, :scale => 8, :default => 0.0
-    t.decimal  "lr_merchant_fee",       :precision => 16, :scale => 8, :default => 0.0
-    t.string   "bt_tx_id"
-    t.string   "bt_tx_from"
-    t.integer  "bt_tx_confirmations",                                  :default => 0
-    t.string   "lr_account_id"
-    t.integer  "payee_id"
-    t.string   "email"
-    t.string   "px_tx_id"
-    t.string   "px_payer"
-    t.decimal  "px_fee",                :precision => 16, :scale => 8, :default => 0.0
-    t.string   "comment"
-  end
-
-  add_index "transfers", ["lr_transaction_id"], :name => "index_transfers_on_lr_transaction_id", :unique => true
-
-  create_table "users", :force => true do |t|
-    t.string   "account",                                 :null => false
-    t.string   "email"
-    t.string   "password"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "bitcoin_address"
-    t.string   "salt"
-    t.string   "time_zone"
-    t.boolean  "admin",                :default => false
-    t.string   "secret_token"
-    t.string   "encrypted_password",   :default => "",    :null => false
-    t.string   "password_salt",        :default => "",    :null => false
-    t.string   "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string   "reset_password_token"
-    t.string   "remember_token"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",        :default => 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.integer  "failed_attempts",      :default => 0
-    t.string   "unlock_token"
-    t.datetime "locked_at"
-    t.string   "authentication_token"
-    t.boolean  "merchant",             :default => false
-    t.string   "ga_otp_secret"
-    t.boolean  "require_ga_otp",       :default => false
-    t.datetime "last_address_refresh"
-    t.boolean  "require_yk_otp",       :default => false
-  end
-
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
 
   create_table "yubikeys", :force => true do |t|
     t.integer  "user_id",                      :null => false

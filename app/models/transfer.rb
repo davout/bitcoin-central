@@ -40,7 +40,7 @@ class Transfer < AccountOperation
   end
 
   scope :with_currency, lambda { |currency|
-    where("transfers.currency = ?", currency.to_s.upcase)
+    where("account_operations.currency = ?", currency.to_s.upcase)
   }
 
   scope :with_confirmations, lambda { |unconfirmed|

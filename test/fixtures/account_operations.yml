@@ -3,9 +3,11 @@ transfer_1:
   amount: 25.0
   user: trader1
   currency: LRUSD
+  operation_id: 1
 
 transfer_2:
   type: Transfer
   amount: 100.0
   user: trader2
   currency: BTC
+  operation_id: 1

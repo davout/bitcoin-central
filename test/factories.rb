@@ -17,6 +17,10 @@ Factory.define :yubikey do |yubikey|
   yubikey.association    :user
 end
 
-Factory.define :operation
+Factory.define :operation do
 
-Factory.define :account_operation
+end
+
+Factory.define :account_operation do
+  
+end
