@@ -26,7 +26,7 @@ class Yubikey < ActiveRecord::Base
 
   def set_key_id
     unless key_id
-      if valid_otp?
+      if valid_otp?(otp)
         self.key_id = otp[0, 12]
       else
         errors[:base] << I18n.t("errors.messages.invalid_otp")
