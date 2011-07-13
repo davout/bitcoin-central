@@ -14,7 +14,7 @@ class Yubikey < ActiveRecord::Base
     :presence => true
   
   def valid_otp?(yk_otp)
-    !yk_otp.blank? && (key_id.blank? || (yk_otp[0, 12] == key_id)) && Yubico::Client.instance.verify_otp(otp)
+    !yk_otp.blank? && (key_id.blank? || (yk_otp[0, 12] == key_id)) && Yubico::Client.instance.verify_otp(yk_otp)
   end
 
   def to_label
@@ -24,7 +24,7 @@ class Yubikey < ActiveRecord::Base
   
   protected
 
-  def set_key_id
+  def set_key_id    
     unless key_id
       if valid_otp?(otp)
         self.key_id = otp[0, 12]
