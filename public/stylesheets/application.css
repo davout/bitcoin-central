@@ -763,3 +763,8 @@ div.announcements ul li {
   color: #6E0701;
 }
 
+
+/* Auto logout countdown */
+span#countdown {
+    display: none;
+}

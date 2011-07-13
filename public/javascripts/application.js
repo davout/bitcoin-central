@@ -93,7 +93,25 @@ function updateTransferPayeeExplanation() {
     }
 }
 
-
+$(document).ready(function() {
+    $("span#countdown").show()
+    
+    delay = $('#countdown').data("delay")
+    logoutPath = $('#countdown').data("logout-path")    
+    
+    var logout = new Date()
+    logout.setSeconds(logout.getSeconds() + delay)
+    
+    $('#countdown').countdown({
+        until: logout,
+        compact: true,
+        format: "%M:%S",
+        layout: "({mnn}:{snn})",
+        onExpiry: function() {
+            window.location = logoutPath
+        }
+    })
+})
 
 
 

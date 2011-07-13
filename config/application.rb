@@ -25,7 +25,7 @@ module BitcoinBank
 
     # Use jQuery instead of Prototype
     config.action_view.javascript_expansions[:defaults] = %w(jquery
-      jquery-ui rails jqplot jqplot.dateAxisRenderer jqplot.highlighter excanvas)
+      jquery-ui rails jqplot jqplot.dateAxisRenderer jqplot.highlighter excanvas jquery.countdown)
 
     config.autoload_paths << File.join(config.root, "lib")
     config.autoload_paths << File.join(config.root, "lib", "bitcoin")
