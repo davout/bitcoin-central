@@ -4,7 +4,7 @@ Factory.define :announcement do |a|
 end
 
 Factory.define :user do |user|
-  user.account                { |u| "BC-U#{(rand * 10 ** 6).to_i}" }
+  user.name                   { |u| "BC-U#{(rand * 10 ** 6).to_i}" }
   user.email                  { |u| "#{u.account}@domain.tld" }
   user.password               "password"
   user.password_confirmation  { |u| u.password }
@@ -18,9 +18,19 @@ Factory.define :yubikey do |yubikey|
 end
 
 Factory.define :operation do
-
 end
 
-Factory.define :account_operation do
-  
+Factory.define :account do |account|
+  account.sequence(:name) { |n| "account#{n}" }
+end
+
+Factory.define :account_operation do |account_operation|
+  account_operation.association :account
+end
+
+Factory.define :transfer do |transfer|
+  transfer.association :account
+end
+
+Factory.define :trade_order do |trade_order|
 end

@@ -9,6 +9,23 @@ class ActiveSupport::TestCase
     sign_in :user, users(user)
   end
 
+  def add_money(user, amount, currency)
+    o = Factory.build(:operation)
+
+    o.account_operations << Factory.build(:account_operation,
+      :amount => amount,
+      :account => accounts(user),
+      :currency => currency.to_s.upcase
+    )
+
+    o.account_operations << Factory.build(:account_operation,
+      :amount => -amount,
+      :currency => currency.to_s.upcase
+    )
+    
+    o.save!
+  end
+
   def assert_destroyed(instance, message = nil)
     assert instance.class.find(:all, :conditions => ["id = ?", instance.id]).blank?,
       message || "#{instance.class} with ID #{instance.id} should have been destroyed"

@@ -1,11 +1,11 @@
 class CreateOperations < ActiveRecord::Migration
   def self.up
-    create_table :operations do |t|     
-      t.timestamps
-    end
+    rename_table :trades, :operations
+    add_column :operations, :type, :string
   end
 
   def self.down
-    drop_table :operations
+    remove_column :operations, :type
+    rename_table :operations, :trades
   end
 end

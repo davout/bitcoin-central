@@ -135,9 +135,9 @@ module LibertyReserve
     def format_transaction(t)
       unless t.blank? or t["Transfer"].blank? or t["Transfer"]["Memo"].blank?
 
-        account = t["Transfer"]["Memo"].match(/BC\-[A-Z][0-9]+/) and t["Transfer"]["Memo"].match(/BC\-[A-Z][0-9]+/)[0]
+        name = t["Transfer"]["Memo"].match(/BC\-[A-Z][0-9]+/) and t["Transfer"]["Memo"].match(/BC\-[A-Z][0-9]+/)[0]
 
-        if account
+        if name
           {
             :currency => t["Transfer"]["CurrencyId"],
             :lr_transaction_id => t["ReceiptId"],
@@ -145,7 +145,7 @@ module LibertyReserve
             :lr_merchant_fee => t["Fee"].to_d,
             :lr_transferred_amount => t["Amount"].to_d,
             :amount => t["Amount"].to_d - t["Fee"].to_d,
-            :user => account ? User.where(:account => account[0]).first : nil
+            :account => account ? User.where(:name => name[0]).first : nil
           }
         end
       end

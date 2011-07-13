@@ -1,4 +1,5 @@
 trade_lreur:
+  type: Trade
   buyer: trader1
   seller: trader2
   traded_btc: 100.0
@@ -7,6 +8,7 @@ trade_lreur:
   currency: LREUR
 
 trade_lrusd:
+  type: Trade
   buyer: trader1
   seller: trader2
   traded_btc: 100.0

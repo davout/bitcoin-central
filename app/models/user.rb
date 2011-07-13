@@ -22,10 +22,7 @@ class User < Account
     :new_password_confirmation,
     :current_password
 
-  before_create :generate_account_id
-
-  has_many :transfers,
-    :dependent => :destroy
+  before_create :generate_name
 
   has_many :trade_orders,
     :dependent => :destroy
@@ -43,9 +40,6 @@ class User < Account
 
   has_many :yubikeys,
     :dependent => :destroy
-
-  validates :account,
-    :uniqueness => true
 
   validates :email,
     :uniqueness => true,
@@ -76,30 +70,30 @@ class User < Account
     super or (generate_new_address && super)
   end
 
-  # BigDecimal returned here
-  def balance(currency, options = {} )
-    transfers.with_currency(currency).with_confirmations(options[:unconfirmed]).map(&:amount).sum
-  end
-
   def confirm!
     super
     UserMailer.registration_confirmation(self).deliver
   end
 
-  def to_label
-    account
+  def account
+    puts " *** Deprecated getter"
+    name
   end
 
+  def account=(a)
+    puts " *** Deprecated setter"
+    self.name = a
+  end
 
   protected
 
     def self.find_for_database_authentication(warden_conditions)
       conditions = warden_conditions.dup
       account = conditions.delete(:account)
-      where(conditions).where(["account = :value OR email = :value", { :value => account }]).first
+      where(conditions).where(["name = :value OR email = :value", { :value => name }]).first
     end
 
-    def generate_account_id
-      self.account = "BC-U#{"%06d" % (rand * 10 ** 6).to_i}"
+    def generate_name
+      self.name = "BC-U#{"%06d" % (rand * 10 ** 6).to_i}"
     end
 end

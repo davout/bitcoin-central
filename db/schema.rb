@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(:version => 20110713191630) do
 
   create_table "account_operations", :force => true do |t|
     t.string   "type"
-    t.integer  "user_id"
+    t.integer  "account_id"
     t.string   "address"
     t.decimal  "amount",                :precision => 16, :scale => 8, :default => 0.0
     t.datetime "created_at"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20110713191630) do
   add_index "account_operations", ["lr_transaction_id"], :name => "index_transfers_on_lr_transaction_id", :unique => true
 
   create_table "accounts", :force => true do |t|
-    t.string   "label",                                   :null => false
+    t.string   "name",                                    :null => false
     t.string   "email"
     t.string   "password"
     t.datetime "created_at"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20110713191630) do
     t.datetime "last_address_refresh"
     t.boolean  "require_yk_otp",       :default => false
     t.integer  "parent_id"
+    t.string   "type"
   end
 
   add_index "accounts", ["email"], :name => "index_users_on_email", :unique => true
@@ -105,8 +106,17 @@ ActiveRecord::Schema.define(:version => 20110713191630) do
   add_index "invoices", ["reference"], :name => "index_invoices_on_reference", :unique => true
 
   create_table "operations", :force => true do |t|
+    t.integer  "purchase_order_id"
+    t.integer  "sale_order_id"
+    t.decimal  "traded_btc",        :precision => 16, :scale => 8, :default => 0.0
+    t.decimal  "traded_currency",   :precision => 16, :scale => 8, :default => 0.0
+    t.decimal  "ppc",               :precision => 16, :scale => 8, :default => 0.0
+    t.string   "currency"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "seller_id"
+    t.integer  "buyer_id"
+    t.string   "type"
   end
 
   create_table "sessions", :force => true do |t|
@@ -130,19 +140,6 @@ ActiveRecord::Schema.define(:version => 20110713191630) do
     t.boolean  "active",                                                   :default => true
     t.boolean  "dark_pool",                                                :default => false, :null => false
     t.boolean  "dark_pool_exclusive_match",                                :default => false, :null => false
-  end
-
-  create_table "trades", :force => true do |t|
-    t.integer  "purchase_order_id"
-    t.integer  "sale_order_id"
-    t.decimal  "traded_btc",        :precision => 16, :scale => 8, :default => 0.0
-    t.decimal  "traded_currency",   :precision => 16, :scale => 8, :default => 0.0
-    t.decimal  "ppc",               :precision => 16, :scale => 8, :default => 0.0
-    t.string   "currency"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "seller_id"
-    t.integer  "buyer_id"
   end
 
   create_table "yubikeys", :force => true do |t|

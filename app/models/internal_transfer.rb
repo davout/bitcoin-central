@@ -3,7 +3,7 @@ class InternalTransfer < Transfer
     :class_name => "User"
 
   validate :payee_id do
-    if payee_id == user_id
+    if payee_id == account_id
       errors[:payee] << (I18n.t "errors.not_yourself")
     end
 
@@ -13,8 +13,10 @@ class InternalTransfer < Transfer
   end
 
   def execute
+    puts " *** Deprecated call to InternalTransfer#execute"
+
     t = Transfer.create! do |t|
-      t.user_id = payee_id
+      t.account_id = payee_id
       t.amount = amount.abs
       t.currency = currency
       t.skip_min_amount = true

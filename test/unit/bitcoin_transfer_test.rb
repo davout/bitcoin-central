@@ -5,10 +5,10 @@ class BitcoinTransferTest < ActiveSupport::TestCase
     transfer = BitcoinTransfer.new do |t|
       t.amount = 10.0
       t.currency = "BTC"
-      t.user = users(:trader1)
+      t.account = accounts(:trader1)
     end
 
-    transfer.user.expects(:generate_new_address).at_least_once
+    transfer.account.expects(:generate_new_address).at_least_once
     assert transfer.save
   end
 
@@ -24,16 +24,16 @@ class BitcoinTransferTest < ActiveSupport::TestCase
       stubs(:list_transactions).
       returns([tx], [tx])
     
-    User.stubs(:all).returns(User.where("id = ?", users(:trader1).id))
+    User.stubs(:all).returns(User.where("id = ?", accounts(:trader1).id))
 
-    assert_difference 'users(:trader1).balance(:btc)', 0.00001.to_d do
+    assert_difference 'accounts(:trader1).balance(:btc)', 0.00001.to_d do
       assert_difference 'Transfer.count' do
         BitcoinTransfer.synchronize_transactions!
       end
     end
 
     # It should then not fail when updating the same transaction
-    assert_no_difference 'users(:trader1).balance(:btc)' do
+    assert_no_difference 'accounts(:trader1).balance(:btc)' do
       assert_no_difference 'Transfer.count' do
         BitcoinTransfer.synchronize_transactions!
       end

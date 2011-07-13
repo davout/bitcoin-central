@@ -1,30 +1,31 @@
 # Passwords are : password
 DEFAULTS: &DEFAULTS
+  type: User
   confirmed_at: <%= DateTime.now %>
   encrypted_password: $2a$10$nzApbnZzQU5TuHqMSYY0POxhd5JzhfvL11tismiLH5qViIPokAL66
   password_salt: $2a$10$nzApbnZzQU5TuHqMSYY0PO
 
 trader1:
-  account: BC-T000000
+  name: BC-T000000
   email: trader1@bitcoin-central.net
   ga_otp_secret: uh3ixqdg4iwv55wd
   <<: *DEFAULTS
 
 trader2:
-  account: BC-T000001
+  name: BC-T000001
   email: trader2@bitcoin-central.net
   ga_otp_secret: uh3ixq5dg4iwv5wd
   <<: *DEFAULTS
 
 admin:
-  account: BC-A000000
+  name: BC-A000000
   email: admin@bitcoin-central.net
   ga_otp_secret: uh3ixqd5g4wiv5wd
   admin: true
   <<: *DEFAULTS
 
 merchant:
-  account: BC-M000000
+  name: BC-M000000
   email: merchant@bitcoin-central.net
   secret_token: selling-stuff-ftw
   ga_otp_secret: uh3ixqd5g4iwv5dw

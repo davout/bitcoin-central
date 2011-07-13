@@ -4,6 +4,12 @@ class Account < ActiveRecord::Base
   belongs_to :parent,
     :class_name => 'Account'
 
-  validates :label,
-    :presence => true
+  validates :name,
+    :presence => true,
+    :uniqueness => true
+
+  # BigDecimal returned here
+  def balance(currency, options = {} )
+    account_operations.with_currency(currency).with_confirmations(options[:unconfirmed]).map(&:amount).sum
+  end
 end

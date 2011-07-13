@@ -1,6 +1,4 @@
 class Transfer < AccountOperation
-  MIN_BTC_CONFIRMATIONS = 5
-
   attr_accessor :skip_min_amount
   
   default_scope order('created_at DESC')
@@ -8,9 +6,9 @@ class Transfer < AccountOperation
   after_create :execute,
     :inactivate_orders
 
-  belongs_to :user
+  belongs_to :account
 
-  validates :user,
+  validates :account,
     :presence => true
 
   validates :amount,
@@ -36,18 +34,8 @@ class Transfer < AccountOperation
   end
 
   def inactivate_orders
-    user.reload.trade_orders.each { |t| t.inactivate_if_needed! }
+    account.reload.trade_orders.each { |t| t.inactivate_if_needed! }
   end
-
-  scope :with_currency, lambda { |currency|
-    where("account_operations.currency = ?", currency.to_s.upcase)
-  }
-
-  scope :with_confirmations, lambda { |unconfirmed|
-    unless unconfirmed
-      where("currency <> 'BTC' OR bt_tx_confirmations >= ? OR amount <= 0 OR bt_tx_id IS NULL", MIN_BTC_CONFIRMATIONS)
-    end
-  }
 
   # TODO : This looks pretty messy
   def self.from_params(payee, params)

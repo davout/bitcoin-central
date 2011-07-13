@@ -6,7 +6,7 @@ class InvoiceTest < ActiveSupport::TestCase
     Bitcoin::Client.instance.stubs(:get_new_address).returns("foo", "bar")
 
     @invoice = Invoice.create(
-      :user => users(:trader1),
+      :user => accounts(:trader1),
       :amount => 100,
       :payment_address => '1FXWhKPChEcUnSEoFQ3DGzxKe44MDbatz',
       :callback_url => "http://domain.tld"
@@ -24,7 +24,7 @@ class InvoiceTest < ActiveSupport::TestCase
 
   test "should credit user when invoice is paid" do
     assert_difference 'Transfer.count' do
-      assert_difference 'users(:trader1).balance(:btc)', 100 do
+      assert_difference 'accounts(:trader1).balance(:btc)', 100 do
         assert_difference "ActionMailer::Base.deliveries.size" do
           @invoice.pay!
         end
@@ -40,7 +40,7 @@ class InvoiceTest < ActiveSupport::TestCase
   
   test "should automatically generate a payment address" do
     invoice = Invoice.new({
-        :user => users(:trader1),
+        :user => accounts(:trader1),
         :amount => 100,
         :callback_url => "http://domain.tld"
       })
@@ -53,7 +53,7 @@ class InvoiceTest < ActiveSupport::TestCase
 
   test "should automatically generate an authentication token" do
     invoice = Invoice.new({
-        :user => users(:trader1),
+        :user => accounts(:trader1),
         :amount => 100,
         :callback_url => "http://domain.tld"
       })
@@ -66,7 +66,7 @@ class InvoiceTest < ActiveSupport::TestCase
 
   test "payment should get correctly timestamped even when ditching processing state" do
     invoice = Invoice.new({
-        :user => users(:trader1),
+        :user => accounts(:trader1),
         :amount => 100,
         :callback_url => "http://domain.tld"
       })
