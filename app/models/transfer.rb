@@ -1,8 +1,5 @@
-class Transfer < ActiveRecord::Base
+class Transfer < AccountOperation
   MIN_BTC_CONFIRMATIONS = 5
-  CURRENCIES = ["LRUSD", "LREUR", "EUR", "BTC", "PGAU"]
-
-  attr_accessible :amount, :currency
 
   attr_accessor :skip_min_amount
   
@@ -17,15 +14,10 @@ class Transfer < ActiveRecord::Base
     :presence => true
 
   validates :amount,
-    :presence => true,
     :numericality => true,
     :user_balance => true,
     :minimal_amount => true
-
-  validates :currency,
-    :presence => true,
-    :inclusion => { :in => CURRENCIES}
-
+  
   def type_name
     type.gsub(/Transfer/, "").underscore.gsub(/\_/, " ").titleize
   end
@@ -57,10 +49,7 @@ class Transfer < ActiveRecord::Base
     end
   }
 
-  def to_label
-    "#{I18n.t("activerecord.models.transfer.one")} n°#{id}"
-  end
-
+  # TODO : This looks pretty messy
   def self.from_params(payee, params)
     transfer = Transfer.new
 

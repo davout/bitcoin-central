@@ -165,7 +165,8 @@ en:
       odd: "must be odd"
       even: "must be even"
       invalid_otp: OTP is invalid
-
+      debit_not_equal_to_credit: Credit and debit amounts are not equal for %{currency} account operations
+      
   activerecord:
     errors:
       template:

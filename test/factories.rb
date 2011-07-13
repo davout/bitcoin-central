@@ -16,3 +16,7 @@ Factory.define :yubikey do |yubikey|
   yubikey.sequence(:otp) { |n| "#{n}somerandomprettylongotp" }
   yubikey.association    :user
 end
+
+Factory.define :operation
+
+Factory.define :account_operation
