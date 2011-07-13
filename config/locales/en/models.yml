@@ -99,6 +99,7 @@ en:
         otp: Yubikey OTP
         key_id: Key ID
         active: Active
+        created_at: Created at
 
     models:
       invoice:

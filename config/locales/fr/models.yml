@@ -100,6 +100,7 @@ fr:
         otp: Code Yubikey
         key_id: Identifiant de clé
         active: Activée
+        created_at: Création
 
     models:
       invoice:
