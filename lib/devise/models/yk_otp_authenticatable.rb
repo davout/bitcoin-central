@@ -1,7 +1,7 @@
 module Devise
   module Models
     module YkOtpAuthenticatable
-      include ActiveSupport::Concern
+      extend ActiveSupport::Concern
 
       included do
         attr_accessor :yk_otp
