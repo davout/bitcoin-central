@@ -18,6 +18,9 @@ class AccountOperation < ActiveRecord::Base
   validates :account,
     :presence => true
 
+  validates :operation,
+    :presence => true
+
   scope :with_currency, lambda { |currency|
     where("account_operations.currency = ?", currency.to_s.upcase)
   }

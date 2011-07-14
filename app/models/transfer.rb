@@ -6,8 +6,6 @@ class Transfer < AccountOperation
   after_create :execute,
     :inactivate_orders
 
-  belongs_to :account
-
   validates :account,
     :presence => true
 

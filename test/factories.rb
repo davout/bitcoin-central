@@ -29,7 +29,9 @@ Factory.define :account_operation do |account_operation|
 end
 
 Factory.define :transfer do |transfer|
-  transfer.association :account
+  transfer.association      :account
+  transfer.currency         "EUR"
+  transfer.skip_min_amount  :false
 end
 
 Factory.define :trade_order do |trade_order|
