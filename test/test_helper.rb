@@ -10,11 +10,11 @@ class ActiveSupport::TestCase
   end
 
   def add_money(user, amount, currency)
-    o = Factory.build(:operation)
+    o = Factory(:operation)
 
     o.account_operations << Factory.build(:account_operation,
       :amount => amount,
-      :account => accounts(user),
+      :account => user,
       :currency => currency.to_s.upcase
     )
 

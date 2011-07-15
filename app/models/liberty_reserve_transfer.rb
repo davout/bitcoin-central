@@ -4,6 +4,9 @@ class LibertyReserveTransfer < Transfer
   validates :currency,
     :inclusion => { :in => ["LRUSD", "LREUR"] }
 
+  before_validation :round_outgoing_amount,
+    :on => :create
+  
   # TODO : Should validate amount = transferred_amount - fee
 
   # An account ID is only mandatory when money is withdrawn
@@ -14,15 +17,10 @@ class LibertyReserveTransfer < Transfer
   end
 
   def execute
-    if amount < 0
-      # If amount is too precise we need to round it
-      self.amount = amount.round(2, BigDecimal::ROUND_DOWN)
-
-      if valid?
-        result = LibertyReserve::Client.instance.transfer(lr_account_id, amount.to_d.abs, currency)
-        self.lr_transaction_id = result['TransferResponse']['Receipt']['ReceiptId']
-        save
-      end
+    if amount < 0 && valid?
+      result = LibertyReserve::Client.instance.transfer(lr_account_id, amount.to_d.abs, currency)
+      self.lr_transaction_id = result['TransferResponse']['Receipt']['ReceiptId']
+      save
     end
   end
 
@@ -70,5 +68,15 @@ class LibertyReserveTransfer < Transfer
     fee = (amnt / BigDecimal("100")).round(2, BigDecimal::ROUND_UP)
     
     [[fee, max_fee].min, min_fee].max
+  end
+  
+  
+  protected
+  
+  # If amount is too precise we need to round it
+  def round_outgoing_amount
+    if amount < 0 && lr_account_id
+      self.amount = amount.round(2, BigDecimal::ROUND_DOWN)
+    end
   end
 end

@@ -57,14 +57,25 @@ class Transfer < AccountOperation
   def self.create_from_lr_transaction_id(lr_tx_id)
     # We create a plain Transfer since we don't want
     # anything to be executed after creation
-
     t = Transfer.find_by_lr_transaction_id(lr_tx_id) 
     
     if t.blank?
       tx = LibertyReserve::Client.instance.get_transaction(lr_tx_id)
       
-      t = Transfer.create! do |t|
-        tx.keys.each { |key| t.send :"#{key}=", tx[key] }
+      Transfer.transaction do 
+        o = Operation.create!
+        
+        o.account_operations << Transfer.new do |t|
+          tx.keys.each { |key| t.send :"#{key}=", tx[key] }
+        end
+      
+        o.account_operations << AccountOperation.new do |ao|
+          ao.amount = -tx[:amount]
+          ao.account = Account.storage_account_for(tx[:currency])
+          ao.currency = tx[:currency].to_s.upcase
+        end
+      
+        o.save!
       end
     end
     

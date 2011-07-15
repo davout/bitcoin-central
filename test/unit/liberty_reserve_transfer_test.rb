@@ -26,20 +26,28 @@ class LibertyReserveTransferTest < ActiveSupport::TestCase
   end
   
   test "rounding amounts on execution" do
+    u = Factory(:user)
+    
+    add_money(u, BigDecimal("25.0"), :lrusd)
     assert_equal BigDecimal("25.0"), accounts(:trader1).balance(:lrusd)
 
+    o = Factory(:operation)
+    
     LibertyReserve::Client.instance.stubs(:transfer).returns(
       { 'TransferResponse' => {  'Receipt' => { 'ReceiptId' => "foo" } } }
     )
 
-    LibertyReserveTransfer.create! do |t|
+    o.account_operations << LibertyReserveTransfer.new do |t|
       t.amount = BigDecimal("-1.118")
       t.currency = "LRUSD"
-      t.user = accounts(:trader1)
+      t.account = u
       t.lr_account_id = "bar"
     end
+    
+    o.account_operations << Factory.build(:account_operation, :amount => BigDecimal("1.11"), :currency => "LRUSD")
 
-    assert_equal BigDecimal("23.89"), accounts(:trader1).balance(:lrusd)
+    assert o.save    
+    assert_equal BigDecimal("23.89"), u.balance(:lrusd)
   end
 
   test "polling liberty reserve API should result in a transaction being properly created *once*" do
@@ -50,11 +58,11 @@ class LibertyReserveTransferTest < ActiveSupport::TestCase
         :lr_merchant_fee => BigDecimal("0.01"),
         :lr_transferred_amount => BigDecimal("1.0"),
         :amount => BigDecimal("0.99"),
-        :account => User.find(:first)
+        :account => Factory(:user)
       }
     )
-
-    assert_difference 'Transfer.count' do
+    
+    assert_difference 'AccountOperation.count', 2 do
       Transfer.create_from_lr_transaction_id("foo")
     end
   end
