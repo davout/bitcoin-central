@@ -48,7 +48,7 @@ class User < Account
   validate :captcha do
     if captcha.nil? and new_record?
       unless skip_captcha
-        errors[:captcha] << (I18n.t "errors.answer_incorrect")
+        errors[:captcha] << I18n.t("errors.answer_incorrect")
       end
     end
   end
@@ -74,22 +74,13 @@ class User < Account
     super
     UserMailer.registration_confirmation(self).deliver
   end
-
-  def account
-    puts " *** Deprecated getter"
-    name
-  end
-
-  def account=(a)
-    puts " *** Deprecated setter"
-    self.name = a
-  end
+  
 
   protected
 
     def self.find_for_database_authentication(warden_conditions)
       conditions = warden_conditions.dup
-      account = conditions.delete(:account)
+      name = conditions.delete(:name)
       where(conditions).where(["name = :value OR email = :value", { :value => name }]).first
     end
 

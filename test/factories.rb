@@ -5,7 +5,7 @@ end
 
 Factory.define :user do |user|
   user.name                   { |u| "BC-U#{(rand * 10 ** 6).to_i}" }
-  user.email                  { |u| "#{u.account}@domain.tld" }
+  user.email                  { |u| "#{u.name}@domain.tld" }
   user.password               "password"
   user.password_confirmation  { |u| u.password }
   user.skip_captcha           true
@@ -30,8 +30,9 @@ end
 
 Factory.define :transfer do |transfer|
   transfer.association      :account
+  transfer.association      :operation
   transfer.currency         "EUR"
-  transfer.skip_min_amount  :false
+  transfer.skip_min_amount  false
 end
 
 Factory.define :trade_order do |trade_order|
