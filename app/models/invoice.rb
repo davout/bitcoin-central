@@ -57,7 +57,7 @@ class Invoice < ActiveRecord::Base
       transitions :to => :processing,
         :from => :pending,
         :on_transition => lambda { |i|
-          i.paid_at = DateTime.now
+        i.paid_at = DateTime.now
       }
     end
 
@@ -65,10 +65,10 @@ class Invoice < ActiveRecord::Base
       transitions :to => :paid,
         :from => [:pending, :processing],
         :on_transition => lambda { |i|
-          i.paid_at ||= DateTime.now
-          i.credit_funds
-          i.post_to_callback
-          i.email_confirmation
+        i.paid_at ||= DateTime.now
+        i.credit_funds
+        i.post_to_callback
+        i.email_confirmation
       }
     end
   end
@@ -76,12 +76,21 @@ class Invoice < ActiveRecord::Base
   # Credits the funds to the merchant account after payment
   def credit_funds
     Invoice.transaction do
-      user.transfers.create!({
-          :amount => self.amount,
-          :currency => "BTC"
-        })
+      operation = Operation.create!
+      
+      operation.account_operations.build do |ao|
+        ao.account = user
+        ao.amount = amount
+        ao.currency = "BTC"
+      end
+      
+      operation.account_operations.build do |ao|
+        ao.account = Account.storage_account_for(:btc)
+        ao.amount = -amount
+        ao.currency = "BTC"
+      end
 
-      user.save
+      operation.save!
     end
   end
 

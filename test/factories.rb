@@ -37,3 +37,10 @@ end
 
 Factory.define :trade_order do |trade_order|
 end
+
+Factory.define :invoice do |invoice|
+  invoice.amount                      BigDecimal("100.0")
+  invoice.association                 :user
+#  invoice.sequence(:payment_address)  { |n| "1FXWhKPChEcUnSEoFQ3DGzxKe44MDbat#{n}" }
+  invoice.sequence(:callback_url)     { |n| "http://domain.tld/#{n}" }
+end

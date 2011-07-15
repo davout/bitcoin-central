@@ -4,13 +4,7 @@ class InvoiceTest < ActiveSupport::TestCase
   def setup
     Bitcoin::Util.stubs(:valid_bitcoin_address?).returns(true)
     Bitcoin::Client.instance.stubs(:get_new_address).returns("foo", "bar")
-
-    @invoice = Invoice.create(
-      :user => accounts(:trader1),
-      :amount => 100,
-      :payment_address => '1FXWhKPChEcUnSEoFQ3DGzxKe44MDbatz',
-      :callback_url => "http://domain.tld"
-    )
+    @invoice = Factory(:invoice)
   end
 
   test "should start in pending state" do
@@ -23,8 +17,8 @@ class InvoiceTest < ActiveSupport::TestCase
   end
 
   test "should credit user when invoice is paid" do
-    assert_difference 'Transfer.count' do
-      assert_difference 'accounts(:trader1).balance(:btc)', 100 do
+    assert_difference 'AccountOperation.count', 2 do
+      assert_difference '@invoice.user.reload.balance(:btc)', 100 do
         assert_difference "ActionMailer::Base.deliveries.size" do
           @invoice.pay!
         end
@@ -39,11 +33,7 @@ class InvoiceTest < ActiveSupport::TestCase
   end
   
   test "should automatically generate a payment address" do
-    invoice = Invoice.new({
-        :user => accounts(:trader1),
-        :amount => 100,
-        :callback_url => "http://domain.tld"
-      })
+    invoice = Factory.build(:invoice)
     
     assert_nil invoice.payment_address
     
@@ -52,11 +42,7 @@ class InvoiceTest < ActiveSupport::TestCase
   end
 
   test "should automatically generate an authentication token" do
-    invoice = Invoice.new({
-        :user => accounts(:trader1),
-        :amount => 100,
-        :callback_url => "http://domain.tld"
-      })
+    invoice = Factory.build(:invoice)
 
     assert_nil invoice.authentication_token
 
@@ -65,11 +51,7 @@ class InvoiceTest < ActiveSupport::TestCase
   end
 
   test "payment should get correctly timestamped even when ditching processing state" do
-    invoice = Invoice.new({
-        :user => accounts(:trader1),
-        :amount => 100,
-        :callback_url => "http://domain.tld"
-      })
+    invoice = Factory.build(:invoice)
 
     assert_nil invoice.paid_at
     assert invoice.save
@@ -78,6 +60,6 @@ class InvoiceTest < ActiveSupport::TestCase
   end
   
   test "json representation should include the public URL" do
-    assert !JSON.parse(invoices(:invoice1).to_json)["invoice"]["public_url"].blank?
+    assert !JSON.parse(Factory.build(:invoice).to_json)["invoice"]["public_url"].blank?
   end
 end
