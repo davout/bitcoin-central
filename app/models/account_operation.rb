@@ -5,7 +5,9 @@ class AccountOperation < ActiveRecord::Base
   belongs_to :operation
 
   belongs_to :account
-
+    
+  after_create :inactivate_orders
+  
   attr_accessible :amount, :currency
    
   validates :amount,
@@ -33,5 +35,11 @@ class AccountOperation < ActiveRecord::Base
 
   def to_label
     "#{I18n.t("activerecord.models.account_operation.one")} n°#{id}"
+  end
+  
+  def inactivate_orders
+    if account.is_a?(User)
+      account.reload.trade_orders.each { |t| t.inactivate_if_needed! }
+    end
   end
 end

@@ -3,8 +3,7 @@ class Transfer < AccountOperation
   
   default_scope order('created_at DESC')
 
-  after_create :execute,
-    :inactivate_orders
+  after_create :execute
 
   validates :amount,
     :numericality => true,
@@ -26,10 +25,6 @@ class Transfer < AccountOperation
   end
 
   def execute
-  end
-
-  def inactivate_orders
-    account.reload.trade_orders.each { |t| t.inactivate_if_needed! }
   end
 
   # TODO : This looks pretty messy
