@@ -2,37 +2,34 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   test "should correctly report user balance" do
-    assert_equal 0.0, accounts(:trader1).balance(:btc)
-    assert_equal 25.0, accounts(:trader1).balance(:lrusd)
-    assert_equal 100.0, accounts(:trader2).balance(:btc)
-    assert_equal 0.0, accounts(:trader2).balance(:lrusd)
+    u = Factory(:user)
+    
+    assert u.balance(:btc).zero?
+    
+    o = Factory(:operation)
+    o.account_operations << Factory.build(:account_operation, :currency => "BTC", :amount => BigDecimal("10.0"), :account => u)
+    o.account_operations << Factory.build(:account_operation, :currency => "BTC", :amount => BigDecimal("-10.0"))
+    
+    assert o.save    
+    assert_equal BigDecimal("10.0"), u.balance(:btc)
   end
 
   test "should generate otp secret on creation" do
-    user = Factory(:user) do |u|
-      u.email = "test@random.com"
-      u.password = "abc123456"
-      u.skip_captcha = true
-    end
-
+    user = Factory(:user)
     assert !user.ga_otp_secret.blank?, "A random OTP secret should have been generated"
   end
 
   test "should return correct provisioning URI" do
-    user = Factory(:user) do |u|
-      u.email = "test@random.com"
-      u.password = "abc123456"
-      u.skip_captcha = true
-    end
+    user = Factory.build(:user)
 
-    assert_equal "otpauth://totp/#{URI.encode(user.account)}?secret=#{user.ga_otp_secret}",
+    assert_equal "otpauth://totp/#{URI.encode(user.name)}?secret=#{user.ga_otp_secret}",
       user.ga_provisioning_uri
   end
 
   test "should refresh addy only every hour" do
     Bitcoin::Client.instance.stubs(:get_new_address).returns("foo", "bar")
 
-    u = accounts(:trader1)
+    u = Factory.build(:user)
 
     address1 = u.bitcoin_address
     u.generate_new_address
