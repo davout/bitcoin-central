@@ -17,7 +17,7 @@ module Devise
       end
 
       def valid_ga_otp?(ga_otp)
-        otp.match(/[0-9]{6}/) && ROTP::TOTP.new(ga_otp_secret).verify(ga_otp.to_i)
+        !ga_otp.blank? && ga_otp.match(/[0-9]{6}/) && ROTP::TOTP.new(ga_otp_secret).verify(ga_otp.to_i)
       end
     end
   end
