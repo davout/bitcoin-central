@@ -6,7 +6,7 @@ class YubikeyTest < ActiveSupport::TestCase
     
     Yubikey.create! do |y|
       y.otp = "cccccccnccfudvebtledcgvnikvbijhhgjutverdlurv"
-      y.user = User.first
+      y.user = Factory(:user)
     end
   end
 end

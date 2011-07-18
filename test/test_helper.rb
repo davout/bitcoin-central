@@ -1,12 +1,12 @@
 ENV["RAILS_ENV"] = "test"
+
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 
 class ActiveSupport::TestCase
-  fixtures :all
-
   def login_with(user)
-    sign_in :user, users(user)
+    sign_in(:user, user)
+    user
   end
 
   def add_money(user, amount, currency)

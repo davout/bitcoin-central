@@ -29,7 +29,7 @@ class LibertyReserveTransferTest < ActiveSupport::TestCase
     u = Factory(:user)
     
     add_money(u, BigDecimal("25.0"), :lrusd)
-    assert_equal BigDecimal("25.0"), accounts(:trader1).balance(:lrusd)
+    assert_equal BigDecimal("25.0"), u.balance(:lrusd)
 
     o = Factory(:operation)
     

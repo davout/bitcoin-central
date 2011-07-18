@@ -1,9 +1,0 @@
-invoice1:
-  amount: 10.0
-  callback_url: http://domain.tld/callback
-  item_url: http://domain.tld/item
-  reference: foo
-  state: pending
-  authentication_token: knock_knock
-  user: merchant
-  payment_address: 1FXWhKPChEcUnSEoFQ3DGzxKe44MDbatz

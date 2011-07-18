@@ -2,17 +2,31 @@ require 'test_helper'
 
 class BitcoinTransferTest < ActiveSupport::TestCase
   test "bitcoin transfer creation should refresh user addy" do
+    Bitcoin::Client.instance.stubs(:get_new_address).returns("foo")
+    
+    o = Factory(:operation)
+    
+    o.account_operations << Factory.build(:account_operation,
+      :currency => "BTC",
+      :amount => -BigDecimal("10.0")
+    )
+
     transfer = BitcoinTransfer.new do |t|
-      t.amount = 10.0
+      t.amount = BigDecimal("10.0")
       t.currency = "BTC"
-      t.account = accounts(:trader1)
-    end
+      t.account = Factory(:user)
+    end    
 
     transfer.account.expects(:generate_new_address).at_least_once
-    assert transfer.save
+
+    o.account_operations << transfer
+
+    assert o.save
   end
 
   test "transaction sync should handle small txes without problem" do
+    user = Factory(:user)
+
     tx = {
       "category" => "receive",
       "amount" => 0.00001,
@@ -24,17 +38,21 @@ class BitcoinTransferTest < ActiveSupport::TestCase
       stubs(:list_transactions).
       returns([tx], [tx])
     
-    User.stubs(:all).returns(User.where("id = ?", accounts(:trader1).id))
+    Account.stubs(:all).returns(User.where("id = ?", user.id))
 
-    assert_difference 'accounts(:trader1).balance(:btc)', 0.00001.to_d do
-      assert_difference 'Transfer.count' do
+    Bitcoin::Client.instance.
+      stubs(:get_new_address).
+      returns("foo")
+
+    assert_difference 'user.balance(:btc)', 0.00001.to_d do
+      assert_difference 'AccountOperation.count', 2 do
         BitcoinTransfer.synchronize_transactions!
       end
     end
 
     # It should then not fail when updating the same transaction
-    assert_no_difference 'accounts(:trader1).balance(:btc)' do
-      assert_no_difference 'Transfer.count' do
+    assert_no_difference 'user.balance(:btc)' do
+      assert_no_difference 'AccountOperation.count' do
         BitcoinTransfer.synchronize_transactions!
       end
     end

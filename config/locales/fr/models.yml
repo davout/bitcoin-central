@@ -51,7 +51,7 @@ fr:
         id: ID
         email: Adresse e-mail
         password: Mot de passe
-        account: N° de compte
+        name: Compte
         admin: Administration
         authentication_token: Jeton d'authentification
         confirmation_sent_at: Envoi du mail de confirmation

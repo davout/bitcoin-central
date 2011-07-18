@@ -51,7 +51,7 @@ en:
         id: ID
         email: E-mail address
         password: Password
-        account: Account ID
+        name: Account ID
         admin: Administrator
         authentication_token: Authentication token
         confirmation_sent_at: Confirmation e-mail sent at

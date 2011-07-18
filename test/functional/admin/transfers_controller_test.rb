@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Admin::TransfersControllerTest < ActionController::TestCase
   test "one doesn't just walk into admin interface" do
-    login_with :trader1
+    login_with Factory(:user)
     get :index
 
     assert_response :redirect
@@ -10,7 +10,7 @@ class Admin::TransfersControllerTest < ActionController::TestCase
   end
 
   test "admins get to rob you" do
-    login_with :admin
+    login_with Factory(:user, :admin => true)
     get :index
     
     assert_response :success

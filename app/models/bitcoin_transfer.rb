@@ -54,45 +54,51 @@ class BitcoinTransfer < Transfer
   end
 
   def self.synchronize_transactions!
-    # TODO : Handle weird edge case
-    # http://www.bitcoin.org/smf/index.php?topic=2404.0
-    @bitcoin = Bitcoin::Client.instance
-
-    User.all.each do |u|
-      transactions = @bitcoin.list_transactions(u.id.to_s)
+    Account.all.each do |a|
+      transactions = Bitcoin::Client.instance.list_transactions(a.id.to_s)
 
       transactions = transactions.select do |tx|
         ["receive", "generated"].include? tx["category"]
       end
 
-      transactions.each do |tx|
+      transactions.each do |tx|        
         t = BitcoinTransfer.find(
           :first,
-          :conditions => ['bt_tx_id = ? AND user_id = ?', tx["txid"], u.id]
+          :conditions => ['bt_tx_id = ? AND account_id = ?', tx["txid"], a.id]
         )
 
         if t
-          t.bt_tx_confirmations = tx["confirmations"]
+          t.update_attribute(:bt_tx_confirmations, tx["confirmations"])
         else
-          t = BitcoinTransfer.new do |bt|
-            bt.user_id = u.id
-            bt.amount = tx["amount"]
-            bt.bt_tx_id = tx["txid"]
-            bt.bt_tx_confirmations = tx["confirmations"]
-            bt.currency = "BTC"
-            bt.skip_min_amount = true
+          BitcoinTransfer.transaction do
+            o = Operation.create!
+
+            o.account_operations << BitcoinTransfer.new do |bt|
+              bt.account_id = a.id
+              bt.amount = tx["amount"]
+              bt.bt_tx_id = tx["txid"]
+              bt.bt_tx_confirmations = tx["confirmations"]
+              bt.currency = "BTC"
+              bt.skip_min_amount = true
+            end
+
+            o.account_operations << AccountOperation.new do |ao|
+              ao.account = Account.storage_account_for(:btc)
+              ao.amount = -tx["amount"]
+              ao.currency = "BTC"
+            end
+
+            o.save!
           end
         end
-
-        t.save!
       end
     end
   end
 
   # Tells the associated user it should refresh the receiving address
   def refresh_user_address
-    unless (amount < 0) || skip_address_refresh
-      user.generate_new_address if amount > 0
+    unless (amount < 0) || skip_address_refresh || !account.is_a?(User)
+      account.generate_new_address if amount > 0
     end
   end
 end

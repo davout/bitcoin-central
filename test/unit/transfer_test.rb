@@ -2,14 +2,14 @@ require 'test_helper'
 
 class TransferTest < ActiveSupport::TestCase
   test "transfer should update user balance immediately" do
-    assert_equal 0, accounts(:trader1).balance(:lreur)
+    user = Factory(:user)
 
     o = Factory(:operation)
 
     o.account_operations << Transfer.new do |t|
       t.amount = 10.0
       t.currency = "LREUR"
-      t.account = accounts(:trader1)
+      t.account = user
     end
 
     o.account_operations << Transfer.new do |t|
@@ -18,7 +18,7 @@ class TransferTest < ActiveSupport::TestCase
       t.account = Factory(:account)
     end
     
-    assert_equal BigDecimal("10.0"), accounts(:trader1).balance(:lreur)
+    assert_equal BigDecimal("10.0"), user.balance(:lreur)
   end
 
   test "transfer should fail with very small amount" do
