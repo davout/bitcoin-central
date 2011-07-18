@@ -19,15 +19,10 @@ class Transfer < AccountOperation
     self
   end
 
-  # Placeholder
-  def confirmed?
-    true
-  end
-
   def execute
   end
 
-  # TODO : This looks pretty messy
+  # TODO : This *is* pretty messy
   def self.from_params(payee, params)
     transfer = Transfer.new
 
@@ -36,7 +31,7 @@ class Transfer < AccountOperation
 
       if payee =~ /^BC-[A-Z][0-9]{6}$/
         transfer = InternalTransfer.new(params)
-        transfer.payee = User.find_by_account(payee)
+        transfer.payee = User.find_by_name(payee)
       elsif (params[:currency].downcase == "btc") or Bitcoin::Util.valid_bitcoin_address?(payee)
         transfer = BitcoinTransfer.new(params)
         transfer.address = payee

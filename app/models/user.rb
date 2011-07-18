@@ -22,7 +22,8 @@ class User < Account
     :new_password_confirmation,
     :current_password
 
-  before_create :generate_name
+  before_validation :generate_name,
+    :on => :create
 
   has_many :trade_orders,
     :dependent => :destroy

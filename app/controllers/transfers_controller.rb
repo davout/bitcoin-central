@@ -1,6 +1,6 @@
 class TransfersController < ApplicationController
   def index
-    @transfers = current_user.transfers.all.paginate(:page => params[:page], :per_page => 16)
+    @transfers = current_user.account_operations.all.paginate(:page => params[:page], :per_page => 16)
   end
 
   def new
@@ -17,9 +17,9 @@ class TransfersController < ApplicationController
   def create
     @transfer = Transfer.from_params(params[:payee], params[:transfer])
 
-    @transfer.user = current_user
+    @transfer.account = current_user
 
-    Transfer.transaction do
+    AccountOperation.transaction do
       if @transfer.save
         redirect_to account_transfers_path,
           :notice => t(:successful_transfer, :amount => @transfer.amount.abs, :currency => @transfer.currency)
@@ -30,6 +30,6 @@ class TransfersController < ApplicationController
   end
   
   def show
-    @transfer = current_user.transfers.find(params[:id])
+    @transfer = current_user.account_operations.find(params[:id])
   end
 end

@@ -66,15 +66,26 @@ class ThirdPartyCallbacksController < ApplicationController
 
     # We want to make sure it is the first time the callback is called for this
     # particular PGAU deposit (according to Pecunix docs, multiple calls are possible)
-    unless Transfer.find_by_px_tx_id(params["PAYMENT_REC_ID"])
-      Transfer.create! do |t|
-        t.user = User.find(params["PAYMENT_ID"])
-        t.currency = "PGAU"
-        t.amount = (params["PAYMENT_GRAMS"].to_d - params["PAYMENT_FEE"].to_d)
-        t.px_tx_id = params["PAYMENT_REC_ID"]
-        t.px_payer = params["PAYER_ACCOUNT"]
-        t.px_fee = params["PAYMENT_FEE"].to_d
-        t.skip_min_amount = true
+    unless AccountOperation.find_by_px_tx_id(params["PAYMENT_REC_ID"])
+      Operation.transaction do 
+        o = Operation.create!
+      
+        o.account_operations << AccountOperation.new do |ao|
+          ao.account = User.find(params["PAYMENT_ID"])
+          ao.currency = "PGAU"
+          ao.amount = (params["PAYMENT_GRAMS"].to_d - params["PAYMENT_FEE"].to_d)
+          ao.px_tx_id = params["PAYMENT_REC_ID"]
+          ao.px_payer = params["PAYER_ACCOUNT"]
+          ao.px_fee = params["PAYMENT_FEE"].to_d
+        end
+      
+        o.account_operations << AccountOperation.new do |ao|
+          ao.account = Account.storage_account_for(:pgau)
+          ao.currency = "PGAU"
+          ao.amount = -(params["PAYMENT_GRAMS"].to_d - params["PAYMENT_FEE"].to_d)
+        end
+      
+        o.save!
       end
     end
 

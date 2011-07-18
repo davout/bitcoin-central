@@ -74,10 +74,11 @@ class InvoicesControllerTest < ActionController::TestCase
 
   test "should redirect to root path with wrong authentication token" do
     sign_out :user
-    invoice = Factory(:invoice, :authentication_token => "knock knock")
-
+    invoice = Factory(:invoice)
+    wrong_token = "#{invoice.authentication_token}-foo"
+    
     get :show, :id => invoice.id,
-      :authentication_token => "boom boom"
+      :authentication_token => wrong_token
 
     assert_response :redirect
     assert_redirected_to root_path
@@ -88,7 +89,7 @@ class InvoicesControllerTest < ActionController::TestCase
     invoice = Factory(:invoice, :authentication_token => "knock_knock")
   
     get :show, :id => invoice.id,
-      :authentication_token => "knock_knock"
+      :authentication_token => invoice.authentication_token
 
     assert_response :success
     assert_equal invoice, assigns(:invoice)

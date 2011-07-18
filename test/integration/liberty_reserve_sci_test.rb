@@ -2,13 +2,12 @@ require 'test_helper'
 
 class LibertyReserveSciTest < ActionDispatch::IntegrationTest
   test "should create a liberty reserve deposit if nicely asked" do
-    user = User.create! do |u|
-      u.id = 1959
-      u.email = "lr_recipient@domain.tld"
-      u.password = "password"
-      u.password_confirmation = "password"
-      u.skip_captcha = true
-    end
+    user = Factory(:user,
+      :id => 1959,
+      :email => "lr_recipient@domain.tld",
+      :password => "password",
+      :password_confirmation => "password"
+    )
 
     params = {
       "lr_encrypted2" => "F10A0B287EBD1DDF3471DB1FBA6AE90D7D3B81D7C335E3E51E15B6F6F5360654",
@@ -27,13 +26,13 @@ class LibertyReserveSciTest < ActionDispatch::IntegrationTest
       "lr_paidby" => "U6509825"
     }
 
-    assert_difference "user.transfers.count" do
+    assert_difference "user.account_operations.count" do
       post '/third_party_callbacks/lr_create_from_sci', params
       assert_response :success
     end
 
     # Test that posting a second time doesn't create another transfer
-    assert_no_difference "user.transfers.count" do
+    assert_no_difference "user.account_operations.count" do
       post '/third_party_callbacks/lr_create_from_sci', params
       assert_response :success
     end

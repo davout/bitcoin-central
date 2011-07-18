@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
   def setup
-    login_with :trader1
+    @user = login_with(Factory(:user))
   end
 
   test "should render account edition form" do
@@ -11,13 +11,13 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should reset google auth otp" do
-    old_token = users(:trader1).ga_otp_secret
+    old_token = @user.ga_otp_secret
 
     post :reset_ga_otp_secret
     assert_response :redirect
     assert_redirected_to ga_otp_configuration_user_path
 
-    assert_not_equal old_token, users(:trader1).reload.ga_otp_secret
+    assert_not_equal old_token, @user.reload.ga_otp_secret
   end
 
   test "should show google auth otp configuration page" do

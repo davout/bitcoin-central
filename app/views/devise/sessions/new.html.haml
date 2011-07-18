@@ -2,8 +2,8 @@
 
 = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
   .form-field
-    = f.label :account
-    = f.text_field :account
+    = f.label :name
+    = f.text_field :name
     .explanation= t(:account_description)
 
   .form-field

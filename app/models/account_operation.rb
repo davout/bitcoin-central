@@ -42,4 +42,9 @@ class AccountOperation < ActiveRecord::Base
       account.reload.trade_orders.each { |t| t.inactivate_if_needed! }
     end
   end
+  
+  # Placeholder
+  def confirmed?
+    true
+  end
 end

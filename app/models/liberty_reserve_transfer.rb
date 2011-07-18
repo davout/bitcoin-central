@@ -30,14 +30,26 @@ class LibertyReserveTransfer < Transfer
       fee = LibertyReserveTransfer.fee_for(confirmation[:lr_amnt].to_d)
 
       # TODO : Add originating account ID ?
-      if Transfer.find_by_lr_transaction_id(confirmation[:lr_transfer]).blank?
-        create! do |lrt|
-          lrt.user_id = confirmation[:account_id]
-          lrt.amount = transferred - fee
-          lrt.currency = confirmation[:lr_currency]
-          lrt.lr_transaction_id = confirmation[:lr_transfer]
-          lrt.lr_transferred_amount = transferred
-          lrt.lr_merchant_fee = fee
+      if AccountOperation.find_by_lr_transaction_id(confirmation[:lr_transfer]).blank?
+        Operation.transaction do
+          operation = Operation.create!
+        
+          operation.account_operations << AccountOperation.new do |ao|
+            ao.account_id = confirmation[:account_id]
+            ao.amount = transferred - fee
+            ao.currency = confirmation[:lr_currency]
+            ao.lr_transaction_id = confirmation[:lr_transfer]
+            ao.lr_transferred_amount = transferred
+            ao.lr_merchant_fee = fee
+          end
+        
+          operation.account_operations << AccountOperation.new do |ao|
+            ao.account = Account.storage_account_for(confirmation[:lr_currency].downcase.to_sym)
+            ao.amount = fee - transferred
+            ao.currency = confirmation[:lr_currency]
+          end
+        
+          operation.save!
         end
       end
     else

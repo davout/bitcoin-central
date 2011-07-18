@@ -2,22 +2,15 @@ require 'test_helper'
 
 class TradeOrdersControllerTest < ActionController::TestCase
   def setup
-    Transfer.create! do |t|
-      t.amount = 25.0
-      t.user = users(:trader1)
-      t.currency = "LRUSD"
-    end
-
-    Transfer.create! do |t|
-      t.amount = 100.0
-      t.user = users(:trader1)
-      t.currency = "BTC"
-    end
-
+    @user = Factory(:user)
+    
+    add_money(@user, 25.0, :lrusd)
+    add_money(@user, 100.0, :btc)
+    
     TradeOrder.create! do |t|
       t.amount = 1.0
       t.ppc = 1.0
-      t.user = users(:trader1)
+      t.user = @user
       t.currency = "LRUSD"
       t.category = "buy"
     end
@@ -25,42 +18,44 @@ class TradeOrdersControllerTest < ActionController::TestCase
     TradeOrder.create! do |t|
       t.amount = 1.0
       t.ppc = 1.0
-      t.user = users(:trader1)
+      t.user = @user
       t.currency = "LRUSD"
       t.category = "sell"
     end
   end
 
   test "should render index" do
-    login_with :trader1
+    login_with(@user)
     get :index
     assert_response :success
   end
 
   test "should render order book" do
-    login_with :trader1
+    login_with(@user)
     get :book
     assert_response :success
   end
 
   test "should render book when not logged" do
-    assert session[:current_user_id].nil?, "we don't want to be logged-in here"
+    sign_out(:user)
     get :book
     assert_response :success
   end
 
   test "should get order book in json format" do
+    sign_out(:user)
     get :book, :format => :json
     assert_response :success
   end
 
   test "should get order book in XML format" do
+    sign_out(:user)
     get :book, :format => :xml
     assert_response :success
   end
 
   test "should create trade order" do
-    login_with :trader1
+    login_with(@user)
     
     post :create, :trade_order => {
       :category => "sell",

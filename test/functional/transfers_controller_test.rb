@@ -2,24 +2,26 @@ require 'test_helper'
 
 class TransfersControllerTest < ActionController::TestCase
   def setup
-    login_with :trader1
+    @user = login_with(Factory(:user))
+    @other_user = Factory(:user)
+    add_money(@user, 25.0, :lrusd)    
   end
 
   test "should transfer money to another account" do
-    assert_equal 25.0, users(:trader1).balance(:lrusd)
+    assert_equal 25.0, @user.balance(:lrusd)
 
     assert_difference "Transfer.count", 2 do
-      post :create, :payee => "BC-T000001", :transfer => {
+      post :create, :payee => @other_user.name, :transfer => {
         :currency => "LRUSD",
-        :amount => 5
+        :amount => 5.0
       }
-
+      
       assert_response :redirect
       assert_redirected_to account_transfers_path
     end
 
-    assert_equal 20.0, users(:trader1).balance(:lrusd)
-    assert_equal 5.0, users(:trader2).balance(:lrusd)
+    assert_equal 20.0, @user.balance(:lrusd)
+    assert_equal 5.0, @other_user.balance(:lrusd)
   end
   
   test "should show account history page" do
@@ -28,7 +30,7 @@ class TransfersControllerTest < ActionController::TestCase
   end
   
   test "should show transfer details" do
-    get :show, :id => users(:trader1).transfers.first.id
+    get :show, :id => @user.account_operations.first.id
     assert_response :success
   end
 end

@@ -33,7 +33,11 @@ class InvoiceTest < ActiveSupport::TestCase
   end
   
   test "should automatically generate a payment address" do
-    invoice = Factory.build(:invoice)
+    invoice = Invoice.new do |i|
+      i.amount = BigDecimal("100.0")
+      i.user = Factory(:user)
+      i.callback_url = "http://domain.tld/some_url"
+    end
     
     assert_nil invoice.payment_address
     
@@ -42,8 +46,12 @@ class InvoiceTest < ActiveSupport::TestCase
   end
 
   test "should automatically generate an authentication token" do
-    invoice = Factory.build(:invoice)
-
+    invoice = Invoice.new do |i|
+      i.amount = BigDecimal("100.0")
+      i.user = Factory(:user)
+      i.callback_url = "http://domain.tld/some_url"
+    end
+    
     assert_nil invoice.authentication_token
 
     assert invoice.save

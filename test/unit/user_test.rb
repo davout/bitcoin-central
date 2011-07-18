@@ -1,6 +1,15 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
+  test "should create user" do
+    User.create! do |u|
+      u.email = "email@domain.tld"
+      u.password = "123456"
+      u.password_confirmation = "123456"
+      u.skip_captcha = true
+    end
+  end
+  
   test "should correctly report user balance" do
     u = Factory(:user)
     
@@ -29,7 +38,7 @@ class UserTest < ActiveSupport::TestCase
   test "should refresh addy only every hour" do
     Bitcoin::Client.instance.stubs(:get_new_address).returns("foo", "bar")
 
-    u = Factory.build(:user)
+    u = Factory.build(:user, :bitcoin_address => nil)
 
     address1 = u.bitcoin_address
     u.generate_new_address
