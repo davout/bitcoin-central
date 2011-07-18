@@ -9,7 +9,7 @@ class GoogleAuthenticatorTest < ActionDispatch::IntegrationTest
 
     # Authenticating without OTP will fail
     post user_session_path, :user => {
-      :account => u.account,
+      :name => u.name,
       :password => u.password
     }
 
@@ -17,7 +17,7 @@ class GoogleAuthenticatorTest < ActionDispatch::IntegrationTest
 
     # Wrong OTP should fail too
     post user_session_path, :user => {
-      :account => u.account,
+      :name => u.name,
       :password => u.password,
       :ga_otp => "424242"
     }
@@ -26,7 +26,7 @@ class GoogleAuthenticatorTest < ActionDispatch::IntegrationTest
 
     # Correct OTP should work
     post user_session_path, :user => {
-      :account => u.account,
+      :name => u.name,
       :password => u.password,
       :ga_otp => ROTP::TOTP.new(u.ga_otp_secret).now
     }
