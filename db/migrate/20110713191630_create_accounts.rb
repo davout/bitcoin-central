@@ -5,6 +5,8 @@ class CreateAccounts < ActiveRecord::Migration
     add_column :accounts, :type, :string
     rename_column :accounts, :account, :name
     rename_column :account_operations, :user_id, :account_id
+
+    execute "UPDATE `accounts` SET `type`='User'"
   end
 
   def self.down
