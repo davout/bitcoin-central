@@ -58,15 +58,6 @@ class User < Account
     self.captcha = true
   end
 
-  # Generates a new receiving address if it hasn't already been refreshed during the last hour
-  def generate_new_address
-    unless last_address_refresh && last_address_refresh > DateTime.now.advance(:hours => -1)
-      self.last_address_refresh = DateTime.now
-      self.bitcoin_address = Bitcoin::Client.instance.get_new_address(id.to_s)
-      save
-    end
-  end
-
   def bitcoin_address
     super or (generate_new_address && super)
   end
@@ -75,17 +66,16 @@ class User < Account
     super
     UserMailer.registration_confirmation(self).deliver
   end
-  
 
   protected
 
-    def self.find_for_database_authentication(warden_conditions)
-      conditions = warden_conditions.dup
-      name = conditions.delete(:name)
-      where(conditions).where(["name = :value OR email = :value", { :value => name }]).first
-    end
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    name = conditions.delete(:name)
+    where(conditions).where(["name = :value OR email = :value", { :value => name }]).first
+  end
 
-    def generate_name
-      self.name = "BC-U#{"%06d" % (rand * 10 ** 6).to_i}"
-    end
+  def generate_name
+    self.name = "BC-U#{"%06d" % (rand * 10 ** 6).to_i}"
+  end
 end

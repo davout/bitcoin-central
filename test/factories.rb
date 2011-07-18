@@ -35,7 +35,7 @@ Factory.define :transfer do |transfer|
   transfer.association      :account
   transfer.association      :operation
   transfer.currency         "EUR"
-  transfer.skip_min_amount  false
+  transfer.bt_tx_id         nil
 end
 
 Factory.define :trade_order do |trade_order|

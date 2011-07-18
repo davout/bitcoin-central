@@ -408,11 +408,7 @@ class TradeOrderTest < ActiveSupport::TestCase
     assert t.save, "Order is valid, should be saved smoothly"
     assert t.reload.active?, "Order should be active"
 
-    Factory(:transfer,
-      :amount => -5.0,
-      :account => trader1,
-      :currency => "LRUSD"
-    )
+    add_money(trader1, -5.0, :lrusd)
 
     assert_equal BigDecimal("20.0"), trader1.balance(:lrusd)
     assert !t.reload.active?, "Order should have been auto-inactivated"
@@ -522,11 +518,7 @@ class TradeOrderTest < ActiveSupport::TestCase
 
     assert t.active?
 
-    Factory(:transfer,
-      :account => trader1,
-      :amount => -20,
-      :currency => "LRUSD"
-    )
+    add_money(trader1, -20.0, :lrusd)
 
     assert !t.reload.active?, "Order should get inactivated by transfer"
 
