@@ -42,7 +42,10 @@ class TransfersControllerTest < ActionController::TestCase
       assert_difference "user.balance(:eur)", BigDecimal("-500") do
         post :create, :transfer => {
           :currency => "EUR",
-          :amount => "500"
+          :amount => "500",
+          :iban => "321654",
+          :bic => "FOO",
+          :full_name_and_address => "Dave"
         }
       end
     end

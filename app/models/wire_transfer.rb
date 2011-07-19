@@ -1,4 +1,6 @@
 class WireTransfer < Transfer
+  attr_accessible :bic, :iban, :full_name_and_address
+
   validates :full_name_and_address,
     :presence => true
   
