@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110713191630) do
+ActiveRecord::Schema.define(:version => 20110719172103) do
 
   create_table "account_operations", :force => true do |t|
     t.string   "type"
@@ -34,6 +34,9 @@ ActiveRecord::Schema.define(:version => 20110713191630) do
     t.decimal  "px_fee",                :precision => 16, :scale => 8, :default => 0.0
     t.string   "comment"
     t.integer  "operation_id",                                                          :null => false
+    t.string   "bic"
+    t.string   "iban"
+    t.text     "full_name_and_address"
   end
 
   add_index "account_operations", ["lr_transaction_id"], :name => "index_transfers_on_lr_transaction_id", :unique => true

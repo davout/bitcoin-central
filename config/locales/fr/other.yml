@@ -102,32 +102,6 @@ fr:
   # views/layouts/_footer.html
   footer_html: "Vous pouvez supporter ce projet en donnant à l'adresse : <span class=\"bitcoin-address\">%{adress}</span>"
 
-  # views/layouts/_navigation.html
-  navigation:
-    account:
-      main: Compte
-      balance: Soldes
-      history: Historique
-      transfer_money: Transfert de fonds
-      deposit_money: Dépôt de fonds
-    trading:
-      main: Achat/Vente
-      your_orders: Ordres d'échange
-      order_book: Offres en cours
-      trade_history: Historique d'échanges
-    admin:
-      main: Administration
-      transfers: Transferts
-      users: Utilisateurs
-      information: Informations
-    help:
-      main: Aide
-      faq: Foire aux questions
-      economy: Économie
-      support: Contact
-    ecommerce:
-      main: E-commerce
-
   # views/layouts/application.html
   website_title: Bitcoin Central
   website_keywords: bitcoin, bitcoin central, achat de bitcoins, vente de bitcoins
@@ -189,28 +163,6 @@ fr:
   # views/trades/index.html
   trade_history_title: Historique
   no_trades_found: Aucune transaction trouvée
-
-  # views/transfers/_lr_sci_form.html
-  click_for_lr_html: Cliquez <a href="#" onclick="%{action}">ici</a> pour détailler le transfert sur l'interface Liberty Reserve.
-
-  # views/transfers/deposit.html
-  support_email: support@bitcoin-central.net
-  deposit_bitcoins_title: Dépôt de Bitcoins
-  deposit_bitcoins_body_html:
-    <p>Envoyez les fonds vers votre addresse bitcoin affichée en haut de l'écran, le transfert sera visible après quelques minutes.</p>
-    <p>Veuillez-noter que les fonds transférés ne seront utilisables qu'après confirmation du transfert par le réseau bitcoin (environ %{estimation} minutes).</p>
-  deposit_eur_title: Dépôt de fonds en Euros
-  deposit_eur_body_html:
-    <p>Merci d'envoyer un e-mail à l'adresse du support &colon; <a href="mailto:%{support_email}">%{support_email}</a>.</p>
-  deposit_lr_title: Dépôt de Liberty Reserve
-  deposit_pgau_title: "Dépôt d'or Pecunix"
-  deposit_pgau_body_html:
-    <p>
-    Indiquez la quantité d&#146;or à transférer, vous serez redirigé vers l&#146;interface Pecunix pour confirmer le transfert.
-    L&#146;or sera immédiatement porté au crédit de votre compte une fois le transfert confirmé.
-    </p>
-  amount_pgau: Montant (PGAU)
-  deposit_pgau: Continuer
 
   # views/transfers/index.html
   account_history_title: Historique

@@ -1,7 +1,7 @@
 class Transfer < AccountOperation
   before_validation :round_amount,
-    :on => :create
-
+    :on => :create  
+  
   after_create :execute
 
   validates :amount,

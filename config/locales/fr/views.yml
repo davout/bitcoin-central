@@ -7,7 +7,31 @@ fr:
       logout: Déconnexion
       sign_up: Créer un compte
       sign_in: Connexion
-
+    navigation:
+      account:
+        main: Compte
+        balance: Soldes
+        history: Historique
+        withdraw: Retirer des fonds
+        deposit: Déposer des fonds
+      trading:
+        main: Achat/Vente
+        your_orders: Ordres d'échange
+        order_book: Offres en cours
+        trade_history: Historique d'échanges
+      admin:
+        main: Administration
+        transfers: Transferts
+        users: Utilisateurs
+        information: Informations
+      help:
+        main: Aide
+        faq: Foire aux questions
+        economy: Économie
+        support: Contact
+      ecommerce:
+        main: E-commerce
+        
   invoices:
     new:
       create_invoice: Créer une facture
@@ -44,6 +68,41 @@ fr:
   accounts:
     show:
       add_funds: Déposer des fonds
+    deposit:
+      deposit_bitcoins_title: Ajouter des Bitcoins
+      deposit_bitcoins_body_html:
+        <p>Envoyez simplement les Bitcoins à l'adresse affichée en haut à droite de l'écran, ils apparaîtront au crédit de votre compte après quelques minutes.
+        Vous pourrez utiliser ces fonds une fois la transaction confirmée (environ %{estimation} minutes).</p>
+      deposit_eur_title: Ajouter des fonds par virement
+      deposit_eur_body_html: "
+        <p>
+          Nous ne facturons pas de frais pour l'approvisionnement par virement SEPA en euros.
+          <ul>
+            <li>Vous devez impérativement renseigner le champ <strong>\"Commentaire\"</strong> avec votre numéro de compte,</li>
+            <li>Nous pouvons recevoir des virements dans une grande variété de devises,</li>
+            <li>Des frais peuvent s'appliquer pour les virements non SEPA, n'hésitez-pas à nous contacter</li>
+          </ul>
+        </p> 
+        <p>
+          Veuillez utiliser les informations suivantes pour vos virements :
+          <div id=\"bank-info\"><strong>Titulaire  </strong>    : Tivoli HK Ltd
+          \n<strong>BIC</strong>            : SOGEFRPP
+          \n<strong>IBAN</strong>           : LV76 7632 9873 2344 8976
+          \n<strong>Commentaire</strong>    : %{account}
+          </div>
+        </p>
+        "
+      deposit_lr_title: Ajouter du Liberty Reserve
+      deposit_pgau_title: Ajouter de l'or Pecunix
+      deposit_pgau_body_html:
+        <p>
+          Précisez la quantité d'or à ajouter en grammes, vous serez redirigé vers l'interface Pecunix afin de valider la transaction.
+        </p>
+      pgau_amount: Montant (PGAU)
+      deposit_pgau: Ajouter de l'or Pecunix
+      other_options: Autres options
+    lr_sci_form:
+      click_for_lr_html: <a href="#lr" onclick="%{action}">Cliquez ici</a> pour payer avec directement avec votre compte Liberty Reserve (LREUR et LRUSD).
 
   users:
     form:
@@ -83,3 +142,21 @@ fr:
   transfers:
     index:
       details: Détails de la transaction
+    new:
+      title: Retirer des fonds
+      body_html: "
+        <p>Les méthodes suivantes sont actuellement disponibles :
+          <ul>
+            <li>Envoi de Bitcoins,</li>
+            <li>Virement SEPA,</li>
+            <li>Transfert automatique de Liberty Reserve,</li>
+            <li>Paiement Pecunix manuel</li>
+          </ul>
+        </p>
+        "
+      error_transferring_funds:
+        one: "Une erreur empêche l'envoi de vos fonds :"
+        other: "%{count} erreurs empêchent l'envoi de vos fonds :"
+      max_amount: Montant maximum
+      submit: Valider
+

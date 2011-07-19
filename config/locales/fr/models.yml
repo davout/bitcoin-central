@@ -44,9 +44,13 @@ fr:
         lr_merchant_fee: Commission Liberty Reserve
         lr_transferred_amount: Montant Liberty Reserve transféré
         lr_transaction_id: Réf. Liberty Reserve
+        lr_account_id: Compte Liberty Reserve
         px_tx_id: Réf. Pecunix
         px_fee: Commission Pecunix
         px_payer: Expéditeur Pecunix
+        bic: BIC
+        iban: IBAN
+        full_name_and_address: Nom et adresse
       user:
         id: ID
         email: Adresse e-mail

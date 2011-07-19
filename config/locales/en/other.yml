@@ -102,32 +102,6 @@ en:
   # views/layouts/_footer.html
   footer_html: 'Feel free to support this project by donating a few BTC to <span class="bitcoin-address">%{adress}</span>'
 
-  # views/layouts/_navigation.html
-  navigation:
-    account:
-      main: Account
-      balance: Balance
-      history: History
-      transfer_money: Transfer money
-      deposit_money: Deposit money
-    trading:
-      main: Trading
-      your_orders: Trade orders
-      order_book: Order book
-      trade_history: Trade history
-    admin:
-      main: Admin
-      transfers: Transfers
-      users: Users
-      information: Informations
-    help:
-      main: Help
-      faq: FAQ
-      economy: Economy
-      support: Support
-    ecommerce:
-      main: E-commerce
-
   # views/layouts/application.html
   website_title: Bitcoin Central
   website_keywords: bitcoin, bitcoin central, buy bitcoins, sell bitcoins
@@ -189,76 +163,11 @@ en:
 
   # views/trades/index.html
   trade_history_title: Trade history
-  no_trades_found: No trades were found
-
-  # views/transfers/_lr_sci_form.html
-  click_for_lr_html: <a href="#" onclick="%{action}">Click here</a> to be taken to the Liberty Reserve interface, you'll be able to specify the details of your deposit.
-
-  # views/transfers/deposit.html
-  support_email: "support@bitcoin-central.net"
-  deposit_bitcoins_title: Deposit Bitcoins
-  deposit_bitcoins_body_html:
-    <p>Simply transfer funds to any of your addresses and they'll show up in your account after a couple of minutes.</p>
-    <p>Please note that you will only be able to use these funds after the bitcoin network has confirmed the transfer (approx. %{estimation} minutes).</p>
-  deposit_eur_title: Deposit EUR
-  deposit_eur_body_html:
-    <p>Please send an e-mail to <a href="mailto:%{support_email}">%{support_email}</a> using PGP encryption <a href="%{pgp_link}">(public key)</a>.</p>
-  deposit_lr_title: Deposit Liberty Reserve
-  deposit_pgau_title: Deposit Pecunix gold
-  deposit_pgau_body_html:
-    <p>
-    Use this form to specify the amount of gold grams to deposit, upon submission
-    you'll be taken to the Pecunix interface to confirm the transfer. Once the transfer
-    is completed, the gold will appear in your balance.
-    </p>
-  amount_pgau: Amount (PGAU)
-  deposit_pgau: Deposit Pecunix
+  no_trades_found: No trades were found  
 
   # views/transfers/index.html
   account_history_title: Account history
   currency: Currency
-
-  # views/transfers/new.html
-  transfer_funds_title: Transfer funds
-  transfer_funds_body_html: "
-    <p>You can send funds to :
-      <ul>
-        <li>a <strong>bitcoin</strong> address (BTC only),</li>
-        <li>an <strong>e-mail</strong> address (all currencies),</li>
-        <li>a <strong>bitcoin central</strong> account (all currencies), or</li>
-        <li>a <strong>Liberty Reserve</strong> account (LREUR and LRUSD only)</li>
-      </ul>
-    </p>
-    "
-  how_does_it_work_title: How does it work ?
-  how_does_it_work_body_html:
-    <p>
-      Transferring bitcoins is possible to a bitcoin central account or to a bitcoin address,
-      funds will be sent either through the bitcoin network or inside bitcoin central
-      depending on whether the address is owned by a bitcoin central user, transfers
-      to accounts will always happen inside bitcoin central.
-    </p>
-    <p>
-      Transferring any currency to a bitcoin central account is free.
-    </p>
-    <p>
-      Transferring funds to e-mail addresses will simply deduct the funds from your account
-      and notify the payee that they are waiting for him on bitcoin central. If the payee
-      does not collect the funds after a certain amount of time they will be returned to you.
-      <strong>This functionality is not active yet.</strong>
-    </p>
-  error_transferring_funds:
-    one: "1 error prevented your funds from being transferred :"
-    other: "%{count} errors prevented your funds from being transferred :"
-  payee: Payee
-  payee_id_eur: Bitcoin Central account or e-mail address
-  payee_id_lrusd: Bitcoin Central, Liberty Reserve account or e-mail address
-  payee_id_lreur: Bitcoin Central, Liberty Reserve account or e-mail address
-  payee_id_btc: Bitcoin Central account, e-mail or bitcoin address
-  payee_id_none: Payee identification
-  confirmed_balance: Your confirmed balance
-  transfer_amount: The amount you want to transfer
-  transfer_button: Transfer
 
   # views/user_mailer/registration_confirmation.html
   # views/user_mailer/registration_confirmation.text

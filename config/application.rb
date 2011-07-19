@@ -30,5 +30,7 @@ module BitcoinBank
     config.autoload_paths << File.join(config.root, "lib")
     config.autoload_paths << File.join(config.root, "lib", "bitcoin")
     config.autoload_paths << File.join(config.root, "lib", "validators")
+    
+    Haml::Template.options[:ugly] = true
   end
 end

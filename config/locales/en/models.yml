@@ -44,9 +44,13 @@ en:
         lr_merchant_fee: Liberty Reserve merchant fee
         lr_transferred_amount: Liberty Reserve transferred amount
         lr_transaction_id: Liberty Reserve ref.
+        lr_account_id: Liberty Reserve account
         px_tx_id: Pecunix ref.
         px_fee: Pecunix fee
         px_payer: Pecunix payer
+        bic: BIC
+        iban: IBAN
+        full_name_and_address: Full name and address
       user:
         id: ID
         email: E-mail address

@@ -9,19 +9,27 @@ $(document).ready(function() {
     // Triggered by a currency or category selection on
     // the trade order creation form
     $("body.trade_orders input.trigger-total-update").click(updateTradeOrderForm);
-
-
-    /* Transfer creation form */
-    $("body.transfers input.trigger-balance-update").click(
-        function() {
-            setBalance(getSelectedCurrency());
-            updateTransferPayeeExplanation();
+    
+    $("body.transfers-new #transfer_currency").change(updateWithdrawForm)
+    
+    /* Logout count-down */
+    $("span#countdown").show()
+    
+    delay = $('#countdown').data("delay")
+    logoutPath = $('#countdown').data("logout-path")    
+    
+    var logout = new Date()
+    logout.setSeconds(logout.getSeconds() + delay)
+    
+    $('#countdown').countdown({
+        until: logout,
+        compact: true,
+        format: "%M:%S",
+        layout: "({mnn}:{snn})",
+        onExpiry: function() {
+            window.location = logoutPath
         }
-    );
-
-    if ($("body.transfers div#payee-explanation").length) {
-        updateTransferPayeeExplanation();
-    }
+    })
 });
 
 function updateTradeOrderForm() {
@@ -80,38 +88,11 @@ function updateTotal() {
     $("#total").val(total);
 }
 
+function updateWithdrawForm(evt) {
+   currency = evt.target.options[evt.target.selectedIndex].value 
+   window.location = "/account/transfers/new?currency=" + currency
+}
+
 function roundTo(value, precision) {
     return((Math.round(value * Math.pow(10, precision))) / Math.pow(10, precision));
 }
-
-function updateTransferPayeeExplanation() {
-    if (transferExplanations[getSelectedCurrency()]) {
-        $("#payee-explanation").html(transferExplanations[getSelectedCurrency()]);
-    }
-    else {
-        $("#payee-explanation").html(transferExplanations["none"]);
-    }
-}
-
-$(document).ready(function() {
-    $("span#countdown").show()
-    
-    delay = $('#countdown').data("delay")
-    logoutPath = $('#countdown').data("logout-path")    
-    
-    var logout = new Date()
-    logout.setSeconds(logout.getSeconds() + delay)
-    
-    $('#countdown').countdown({
-        until: logout,
-        compact: true,
-        format: "%M:%S",
-        layout: "({mnn}:{snn})",
-        onExpiry: function() {
-            window.location = logoutPath
-        }
-    })
-})
-
-
-

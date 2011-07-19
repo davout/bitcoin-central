@@ -17,13 +17,10 @@ BitcoinBank::Application.routes.draw do
 
   resource :account, :only => [:show] do
     get :balance
-
-    resources :transfers, :only => [:index, :new, :create, :show] do
-      collection do
-        get :deposit
-        get :pecunix_deposit_form
-      end
-    end
+    get :deposit
+    get :pecunix_deposit_form
+    
+    resources :transfers, :only => [:index, :new, :create, :show] 
     
     resources :trades, 
       :only => [:index]

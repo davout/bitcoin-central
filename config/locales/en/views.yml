@@ -7,6 +7,30 @@ en:
       logout: Logout
       sign_up: Sign-up
       sign_in: Sign-in
+    navigation:
+      account:
+        main: Account
+        balance: Balance
+        history: History
+        withdraw: Withdraw
+        deposit: Deposit
+      trading:
+        main: Trading
+        your_orders: Trade orders
+        order_book: Order book
+        trade_history: Trade history
+      admin:
+        main: Admin
+        transfers: Transfers
+        users: Users
+        information: Informations
+      help:
+        main: Help
+        faq: FAQ
+        economy: Economy
+        support: Support
+      ecommerce:
+        main: E-commerce
 
   invoices:
     new:
@@ -44,7 +68,44 @@ en:
   accounts:
     show:
       add_funds: Deposit funds
-
+    deposit:
+      deposit_bitcoins_title: Deposit Bitcoins
+      deposit_bitcoins_body_html:
+        <p>Simply transfer funds to your address and they'll show up in your account after a couple of minutes. Your address is located in the upper right corner of the screen.
+        You will be able to use these funds after the transaction is confirmed (approximately %{estimation} minutes).</p>
+      deposit_eur_title: Deposit with bank wire
+      deposit_eur_body_html: "
+        <p>
+          Funding your EUR account with a SEPA wire is free.
+          <ul>
+            <li>You <strong>must</strong> include your account ID in the <strong>\"Comments\"</strong> field</li>
+            <li>You can wire most currencies, it will get converted to EUR before funding your account</li>
+            <li>Fees may apply for non-SEPA transfers, contact us for more details</li>
+          </ul>
+        </p> 
+        <p>
+          Please use the following information for your wire :
+          <div id=\"bank-info\"><strong>Account holder</strong> : Tivoli HK Ltd
+          \n<strong>BIC</strong>            : SOGEFRPP
+          \n<strong>IBAN</strong>           : LV76 7632 9873 2344 8976
+          \n<strong>Comment</strong>        : %{account}
+          </div>
+        </p>
+        "
+      deposit_lr_title: Deposit Liberty Reserve
+      deposit_pgau_title: Deposit Pecunix gold
+      deposit_pgau_body_html:
+        <p>
+          Use this form to specify the amount of gold grams to deposit, upon submission
+          you'll be taken to the Pecunix interface to confirm the transfer. Once the transfer
+          is completed, the gold will appear in your balance.
+        </p>
+      pgau_amount: Amount (PGAU)
+      deposit_pgau: Deposit Pecunix
+      other_options: Other options
+    lr_sci_form:
+      click_for_lr_html: <a href="#lr" onclick="%{action}">Click here</a> to pay with your Liberty Reserve account (LREUR and LRUSD).
+      
   users:
     form:
       submit: Save account details
@@ -82,4 +143,21 @@ en:
         
   transfers:
     index:
-      details: Transaction details        
+      details: Transaction details
+    new:
+      title: Withdraw funds
+      body_html: "
+        <p>You can currently withdraw using the following methods :
+          <ul>
+            <li>Bitcoins,</li>
+            <li>EUR bank wire,</li>
+            <li>Liberty Reserve automated transfer,</li>
+            <li>Pecunix manual transfer</li>
+          </ul>
+        </p>
+        "
+      error_transferring_funds:
+        one: "An error prevented your funds from being withdrawn :"
+        other: "%{count} errors prevented your funds from being withdrawn :"
+      max_amount: Maximum amount
+      submit: Transfer

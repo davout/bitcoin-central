@@ -4,16 +4,13 @@ class TransfersController < ApplicationController
   end
 
   def new
-    @transfer = Transfer.new
+    @transfer = Transfer.new(:currency => params[:currency] || "LRUSD")
   end
-
-  def pecunix_deposit_form
-    @amount = params[:amount]
-    @payment_id = current_user.id
-    @config = YAML::load(File.read(File.join(Rails.root, "config", "pecunix.yml")))[Rails.env]
-    @hash = Digest::SHA1.hexdigest("#{@config['account']}:#{@amount}:GAU:#{@payment_id}:PAYEE:#{@config['secret']}").upcase
+  
+  def show
+    @transfer = current_user.account_operations.find(params[:id])
   end
-
+  
   def create
     @transfer = Transfer.from_params(params[:transfer])
     @transfer.account = current_user
@@ -35,9 +32,5 @@ class TransfersController < ApplicationController
     else
       render :action => :new
     end
-  end
-  
-  def show
-    @transfer = current_user.account_operations.find(params[:id])
   end
 end
