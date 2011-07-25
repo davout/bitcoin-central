@@ -79,9 +79,21 @@ You'll just need to issue a `cap deploy` locally for any subsequent deployment.
 
 # Contributions
 All are welcome, improvements, fixes and translations (the string extraction bounty has been paid).
+
  * The use of the `Numeric#to_f` method is big no-no, every single numeric that passes through the code should be typed as `BigDecimal`,
  * Bugfixes should include a failing test,
  * Pull requests should apply cleanly on top of `master`, rebase if necessary
+
+# Music
+Bitcoin-Central was, and is currently being developed with the following musical background :
+
+ * [Ali Farka Touré - In The Heart Of The Moon](http://www.amazon.fr/Heart-Farka-Tour%C3%A9-Toumani-Diabat%C3%A9/dp/B0009NDLJA)
+ * [Latchès](http://www.amazon.fr/Latches/dp/B001CISIGC/ref=sr_1_1?s=music&ie=UTF8&qid=1311581988&sr=1-1)
+ * Tons of [Django Reinhardt](http://www.amazon.fr/s/ref=nb_sb_ss_i_0_16?__mk_fr_FR=%C5M%C5Z%D5%D1&url=search-alias%3Dpopular&field-keywords=django+reinhardt&x=0&y=0&sprefix=django+reinhardt)
+ * [Biréli Lagrène - Blue Eyes](http://www.amazon.fr/Blue-Eyes-Bireli-Lagrene/dp/B000007N92/ref=sr_1_1?s=music&ie=UTF8&qid=1311582073&sr=1-1)
+ * Lots of [Gary Potter](http://www.amazon.fr/s/ref=nb_sb_noss?__mk_fr_FR=%C5M%C5Z%D5%D1&url=search-alias%3Dpopular&field-keywords=gary+potter&x=0&y=0)
+ * [Tchavolo Schmitt](http://www.amazon.fr/s/ref=nb_sb_ss_i_0_16?__mk_fr_FR=%C5M%C5Z%D5%D1&url=search-alias%3Dpopular&field-keywords=tchavolo+schmitt&x=0&y=0&sprefix=tchavolo+schmitt), [Romane](http://www.amazon.fr/s/ref=nb_sb_ss_i_0_16?__mk_fr_FR=%C5M%C5Z%D5%D1&url=search-alias%3Dpopular&field-keywords=tchavolo+schmitt&x=0&y=0&sprefix=tchavolo+schmitt#/ref=nb_sb_noss?__mk_fr_FR=%C3%85M%C3%85Z%C3%95%C3%91&url=search-alias%3Dpopular&field-keywords=romane&rh=n%3A301062%2Ck%3Aromane), [Angelo Debarre](http://www.amazon.fr/s/ref=nb_sb_ss_i_0_16?__mk_fr_FR=%C5M%C5Z%D5%D1&url=search-alias%3Dpopular&field-keywords=tchavolo+schmitt&x=0&y=0&sprefix=tchavolo+schmitt#/ref=nb_sb_noss?__mk_fr_FR=%C3%85M%C3%85Z%C3%95%C3%91&url=search-alias%3Dpopular&field-keywords=angelo+debarre&rh=n%3A301062%2Ck%3Aangelo+debarre)
+ * ....
 
 # License
 AGPL License. Copyright 2010-2011 David FRANCOIS
