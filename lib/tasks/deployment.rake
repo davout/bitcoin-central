@@ -112,7 +112,19 @@ namespace :deployment do
     end
     
     puts "\n\n ** Processing trades ...\n"
-    
+
+    # A couple of hardcoded changes
+    o = Operation.find(97)
+    o.created_at = o.created_at.advance(:seconds => -3)
+    o.save(:validate => false)
+
+    o = Operation.find(701)
+    o.created_at = o.created_at.advance(:seconds => -1)
+    o.save(:validate => false)
+
+    ActiveRecord::Base.connection.execute('DELETE FROM account_operations WHERE amount = 0')
+    ActiveRecord::Base.connection.execute('DELETE FROM operations WHERE traded_btc=0 AND currency IS NOT NULL')
+
     # Account for all the trades
     failed = []
     
@@ -128,8 +140,8 @@ namespace :deployment do
         where("operation_id IS NULL").
         where("amount < ?", -o.traded_btc * BigDecimal("0.99")).
         where("amount > ?", -o.traded_btc * BigDecimal("1.01")).
-        where("created_at >= ?", o.created_at.utc.advance(:seconds => -1)).
-        where("created_at <= ?", o.created_at.utc.advance(:seconds => 1)).
+        where("created_at >= ?", o.created_at.utc.advance(:seconds => -2)).
+        where("created_at <= ?", o.created_at.utc.advance(:seconds => 2)).
         first
      
       txes << buyer.account_operations.
@@ -137,8 +149,8 @@ namespace :deployment do
         where("operation_id IS NULL").
         where("amount > ?", o.traded_btc * BigDecimal("0.99")).
         where("amount < ?", o.traded_btc * BigDecimal("1.01")).
-        where("created_at >= ?", o.created_at.utc.advance(:seconds => -1)).
-        where("created_at <= ?", o.created_at.utc.advance(:seconds => 1)).
+        where("created_at >= ?", o.created_at.utc.advance(:seconds => -2)).
+        where("created_at <= ?", o.created_at.utc.advance(:seconds => 2)).
         first
   
       # Currency transfers
@@ -147,8 +159,8 @@ namespace :deployment do
         where("operation_id IS NULL").
         where("amount > ?", o.traded_currency * BigDecimal("0.99")).
         where("amount < ?", o.traded_currency * BigDecimal("1.01")).
-        where("created_at >= ?", o.created_at.utc.advance(:seconds => -1)).
-        where("created_at <= ?", o.created_at.utc.advance(:seconds => 1)).
+        where("created_at >= ?", o.created_at.utc.advance(:seconds => -2)).
+        where("created_at <= ?", o.created_at.utc.advance(:seconds => 2)).
         first
      
       txes << buyer.account_operations.
@@ -156,8 +168,8 @@ namespace :deployment do
         where("operation_id IS NULL").
         where("amount < ?", -o.traded_currency * BigDecimal("0.99")).
         where("amount > ?", -o.traded_currency * BigDecimal("1.01")).
-        where("created_at >= ?", o.created_at.utc.advance(:seconds => -1)).
-        where("created_at <= ?", o.created_at.utc.advance(:seconds => 1)).
+        where("created_at >= ?", o.created_at.utc.advance(:seconds => -2)).
+        where("created_at <= ?", o.created_at.utc.advance(:seconds => 2)).
         first
         
       unless txes.compact!
@@ -173,5 +185,8 @@ namespace :deployment do
     puts "\n\n /!\\ #{AccountOperation.where("amount >= 0 AND `type` IS NOT NULL").count} transfers have a positive amount !\n\n"
     
     puts "\n\n /!\\ Failed operations accounting : #{failed.join(", ")}"
+
+    # TODO : Check that only actual transfers are typed as such
+    # TODO : Check that trades are typed as such
   end
 end
