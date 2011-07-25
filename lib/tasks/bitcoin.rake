@@ -7,7 +7,7 @@ namespace :bitcoin do
   end
 
   desc "Backs the wallet up and sends it through e-mail"
-  task :backup => :environment do
+  task :backup_wallet => :environment do
     Lockfile.lock(:backup_wallet) do
       recipient = YAML::load(File.open(File.join(Rails.root, "config", "backup.yml")))["recipient"]
 
@@ -19,6 +19,46 @@ namespace :bitcoin do
         BackupMailer.wallet_backup(recipient, "#{temp_file}.gpg").deliver
         system("rm -f #{temp_file}*")
       end
+    end
+  end
+  
+  desc "Backs the DB up and uploads it through FTP"
+  task :backup_db => :environment do
+    Lockfile.lock(:backup_db) do
+      require 'net/ftp'
+      require 'net/http'
+      require 'uri'
+      require 'yaml'
+
+      servers = YAML::load(File.open(File.join(Rails.root, "config", "backup.yml")))["ftp_servers"]
+      
+      unless !servers.blank?
+        backup_filename = "#{DateTime.now.strftime("%Y_%m_%d_%H_%M")}_bc_#{RAILS_ENV}.sql"
+        backup_file = File.join(Rails.root, "tmp", backup_filename)
+        compressed_file = backup_file + ".tar.bz2"
+
+        db_settings = YAML::load_file(File.join(Rails.root, "config/database.yml"))[Rails.env]
+
+        mysql_user = db_settings['username']
+        mysql_password = db_settings['password']
+        mysql_database = db_settings['database']
+
+        system("mysqldump --user=#{mysql_user} --password=#{mysql_password} --database #{mysql_database} --add-drop-database > #{backup_file}")
+        system("cd #{File.dirname(backup_file)} && tar -cj #{backup_filename} > #{backup_filename}.tar.bz2")
+
+        servers.each do |server|
+          begin
+            Net::FTP.open(server["host"]) do |ftp|
+              ftp.login(server["username"], server["password"])
+              ftp.put(compressed_file)
+            end
+          rescue Exception => e
+            puts("\n** Error while uploading backup to #{server["host"]}\n** Error was : #{e.message}\n")
+          end
+        end
+        system("rm -f #{backup_file}")
+        system("rm -f #{compressed_file}")
+      end    
     end
   end
   

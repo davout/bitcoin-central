@@ -13,7 +13,11 @@ every 10.minutes do
 end
 
 every 30.minutes do
-  rake "bitcoin:backup"
+  rake "bitcoin:backup_wallet"
+end
+
+every 1.day, :at => '5:30 am' do
+  rake "bitcoin:backup_db"
 end
 
 every 1.day do
