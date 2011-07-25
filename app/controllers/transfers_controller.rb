@@ -15,6 +15,7 @@ class TransfersController < ApplicationController
     @transfer = Transfer.from_params(params[:transfer])
     @transfer.account = current_user
 
+
     Operation.transaction do
       o = Operation.create!
       o.account_operations << @transfer
@@ -23,7 +24,7 @@ class TransfersController < ApplicationController
         ao.currency = @transfer.currency
         ao.account = Account.storage_account_for(@transfer.currency)
       end
-      o.save!
+      o.save
     end
 
     unless @transfer.new_record?

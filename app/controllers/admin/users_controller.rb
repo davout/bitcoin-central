@@ -4,7 +4,7 @@ class Admin::UsersController < Admin::AdminController
     
     config.columns = [
       :id,
-      :account,
+      :name,
       :email,
       :admin,
       :require_ga_otp,
@@ -20,20 +20,20 @@ class Admin::UsersController < Admin::AdminController
       :last_sign_in_ip,
       :locked_at,
       :remember_created_at,
-      :transfers,
+      :account_operations,
       :merchant,
       :yubikeys
     ]
     
     config.list.columns = [
       :id,
-      :account,
+      :name,
       :email,
       :admin
     ]
       
     config.update.columns = [
-      :account,
+      :name,
       :email,
       :admin,
       :require_ga_otp,
@@ -43,7 +43,7 @@ class Admin::UsersController < Admin::AdminController
     
     config.show.columns = [
       :id,
-      :account,
+      :name,
       :email,
       :admin,
       :require_ga_otp,
@@ -67,7 +67,7 @@ class Admin::UsersController < Admin::AdminController
     
     config.search.columns << :id
     
-    config.nested.add_link :transfers
+    config.nested.add_link :account_operations
     config.nested.add_link :yubikeys
   end
 end

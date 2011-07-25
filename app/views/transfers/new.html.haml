@@ -35,7 +35,7 @@
 
   .form-field
     = label_tag :max_amount, t(".max_amount")
-    = text_field_tag :max_amount, @transfer.currency && amount_field_value(current_user.max_withdraw_for(@transfer.currency)), :class => "amount", :disabled => true
+    = text_field_tag :max_amount, amount_field_value(current_user.max_withdraw_for(@transfer.currency)), :class => "amount", :disabled => true
 
   .form-field
     = f.label :amount
