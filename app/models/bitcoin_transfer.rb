@@ -12,7 +12,9 @@ class BitcoinTransfer < Transfer
 
   def execute
     # TODO : Re-implement instant internal transfer
-    update_attribute(:bt_tx_id, Bitcoin::Client.instance.send_to_address(address, amount.abs))
+    if bt_tx_id.blank?
+      update_attribute(:bt_tx_id, Bitcoin::Client.instance.send_to_address(address, amount.abs))
+    end
   end
 end
 

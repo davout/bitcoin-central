@@ -8,7 +8,9 @@ class LibertyReserveTransfer < Transfer
     :presence => true
 
   def execute
-    result = LibertyReserve::Client.instance.transfer(lr_account_id, amount.to_d.abs, currency)
-    update_attribute(:lr_transaction_id, result['TransferResponse']['Receipt']['ReceiptId'])
+    if lr_transaction_id.blank?
+      result = LibertyReserve::Client.instance.transfer(lr_account_id, amount.to_d.abs, currency)
+      update_attribute(:lr_transaction_id, result['TransferResponse']['Receipt']['ReceiptId'])
+    end
   end
 end
