@@ -66,4 +66,65 @@ class TransfersControllerTest < ActionController::TestCase
     get :show, :id => user.account_operations.first.id
     assert_response :success
   end
+  
+  test "transaction should get rolled back if transfer is not valid" do
+    user = login_with(Factory(:user))
+    
+    assert_no_difference 'Operation.count' do
+      post :create, :transfer => {
+        :amount => "500",
+        :iban => "321654",
+        :bic => "FOO",
+        :full_name_and_address => "Dave"
+      }
+    end
+  end
+  
+  test "should inform about processed transfer status" do
+    user = login_with(Factory(:user))
+    add_money(user, 100, :btc)
+    
+    Bitcoin::Util.expects(:valid_bitcoin_address?).returns(true)
+    Bitcoin::Client.instance.expects("send_to_address").returns("foo")
+    Bitcoin::Client.instance.expects("get_balance").returns(BigDecimal("1000"))
+    
+    assert_difference 'Operation.count' do
+      assert_difference 'Account0peration.count', 2 do
+        assert_difference 'BitcoinTransfer.count' do
+          post :create, :transfer => {
+            :currency => "BTC",
+            :amount => "50",
+            :address => "foo"
+          }
+    
+          assert_match /Your successfully withdrew/, response.body
+          assert assigns(:transfer).processed?
+        end
+      end
+    end
+  end
+  
+  test "should inform about pending transfer status" do
+    user = login_with(Factory(:user))
+    add_money(user, 100, :btc)
+    
+    Bitcoin::Util.expects(:valid_bitcoin_address?).returns(true)
+    Bitcoin::Client.instance.expects("send_to_address").returns("foo")
+    Bitcoin::Client.instance.expects("get_balance").returns(BigDecimal("10"))
+    
+    assert_difference 'Operation.count' do
+      assert_difference 'Account0peration.count', 2 do
+        assert_difference 'BitcoinTransfer.count' do
+          post :create, :transfer => {
+            :currency => "BTC",
+            :amount => "50",
+            :address => "foo"
+          }
+    
+          assert_match /Your withdrawal request was successful and will be processed shortly/, response.body
+          assert assigns(:transfer).pending?
+        end
+      end
+    end
+  end  
 end

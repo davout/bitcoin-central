@@ -24,12 +24,13 @@ class TransfersController < ApplicationController
         ao.currency = @transfer.currency
         ao.account = Account.storage_account_for(@transfer.currency)
       end
-      o.save
+      
+      raise(ActiveRecord::Rollback) unless o.save
     end
 
-    unless @transfer.new_record?
+    unless @transfer.new_record?     
       redirect_to account_transfers_path,
-        :notice => t(:successful_transfer, :amount => @transfer.amount.abs, :currency => @transfer.currency)
+        :notice => I18n.t("transfers.index.successful.#{@transfer.status}", :amount => @transfer.amount.abs, :currency => @transfer.currency)
     else
       render :action => :new
     end

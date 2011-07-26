@@ -2,9 +2,9 @@
   = menu_item ".account.main", nil, :logged_in => true do 
     %ul
       = menu_item ".account.balance", account_path
+      = menu_item ".account.history", account_transfers_path
       = menu_item ".account.deposit", deposit_account_path
       = menu_item ".account.withdraw", new_account_transfer_path
-      = menu_item ".account.history", account_transfers_path
 
   = menu_item ".trading.main", nil do
     %ul

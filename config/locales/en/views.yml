@@ -144,6 +144,10 @@ en:
   transfers:
     index:
       details: Transaction details
+      successful:
+        processed: Your successfully withdrew %{amount} %{currency}
+        pending: Your withdrawal request was successful and will be processed shortly
+      successful: 
     new:
       title: Withdraw funds
       body_html: "

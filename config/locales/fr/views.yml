@@ -142,6 +142,9 @@ fr:
   transfers:
     index:
       details: Détails de la transaction
+      successful:
+        processed: Vous avez transféré %{amount} %{currency} avec succès
+        pending: Votre demande de transfert a été correctement enregistrée, elle sera traitée très prochainement
     new:
       title: Retirer des fonds
       body_html: "
