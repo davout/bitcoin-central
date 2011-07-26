@@ -112,21 +112,22 @@ namespace :deployment do
     end
     
     puts "\n\n ** Processing trades ...\n"
-
+    
     # A couple of hardcoded changes
     o = Operation.find(97)
     o.created_at = o.created_at.advance(:seconds => -3)
     o.save(:validate => false)
-
+    
     o = Operation.find(701)
     o.created_at = o.created_at.advance(:seconds => -1)
     o.save(:validate => false)
-
+    
     ActiveRecord::Base.connection.execute('DELETE FROM account_operations WHERE amount = 0')
     ActiveRecord::Base.connection.execute('DELETE FROM operations WHERE traded_btc=0 AND currency IS NOT NULL')
-
+    
     # Account for all the trades
     failed = []
+    allowed_delta = BigDecimal("0")
     
     Operation.where("currency IS NOT NULL").each do |o|      
       seller = Account.find(o.seller_id)
@@ -138,55 +139,109 @@ namespace :deployment do
       txes << seller.account_operations.
         where("currency = 'BTC'").
         where("operation_id IS NULL").
-        where("amount < ?", -o.traded_btc * BigDecimal("0.99")).
-        where("amount > ?", -o.traded_btc * BigDecimal("1.01")).
+        where("amount <= ?", -o.traded_btc * (BigDecimal("1") - allowed_delta)).
+        where("amount >= ?", -o.traded_btc * (BigDecimal("1") + allowed_delta)).
         where("created_at >= ?", o.created_at.utc.advance(:seconds => -2)).
         where("created_at <= ?", o.created_at.utc.advance(:seconds => 2)).
         first
-     
+      
       txes << buyer.account_operations.
         where("currency = 'BTC'").
         where("operation_id IS NULL").
-        where("amount > ?", o.traded_btc * BigDecimal("0.99")).
-        where("amount < ?", o.traded_btc * BigDecimal("1.01")).
+        where("amount >= ?", o.traded_btc * (BigDecimal("1") - allowed_delta)).
+        where("amount <= ?", o.traded_btc * (BigDecimal("1") + allowed_delta)).
         where("created_at >= ?", o.created_at.utc.advance(:seconds => -2)).
         where("created_at <= ?", o.created_at.utc.advance(:seconds => 2)).
         first
-  
+      
       # Currency transfers
       txes << seller.account_operations.
         where("currency = '#{o.currency}'").
         where("operation_id IS NULL").
-        where("amount > ?", o.traded_currency * BigDecimal("0.99")).
-        where("amount < ?", o.traded_currency * BigDecimal("1.01")).
+        where("amount >= ?", o.traded_currency * (BigDecimal("1") - allowed_delta)).
+        where("amount <= ?", o.traded_currency * (BigDecimal("1") + allowed_delta)).
         where("created_at >= ?", o.created_at.utc.advance(:seconds => -2)).
         where("created_at <= ?", o.created_at.utc.advance(:seconds => 2)).
         first
-     
+      
       txes << buyer.account_operations.
         where("currency = '#{o.currency}'").
         where("operation_id IS NULL").
-        where("amount < ?", -o.traded_currency * BigDecimal("0.99")).
-        where("amount > ?", -o.traded_currency * BigDecimal("1.01")).
+        where("amount <= ?", -o.traded_currency * (BigDecimal("1") - allowed_delta)).
+        where("amount >= ?", -o.traded_currency * (BigDecimal("1") + allowed_delta)).
         where("created_at >= ?", o.created_at.utc.advance(:seconds => -2)).
         where("created_at <= ?", o.created_at.utc.advance(:seconds => 2)).
         first
-        
+      
       unless txes.compact!
         txes.map!(&:id)
-        ActiveRecord::Base.connection.execute("UPDATE account_operations SET operation_id = #{o.id} WHERE id IN (#{txes.map{ |i| "'#{i}'" }.join(",")})")
+        ActiveRecord::Base.connection.execute("UPDATE account_operations SET operation_id = #{o.id}, `type`=NULL WHERE id IN (#{txes.map{ |i| "'#{i}'" }.join(",")})")
         print "."
       else
         failed << o.id
         print "!"
       end
+    end    
+    
+    puts "\n\n ** Processing inter-account transfers ...\n"    
+    
+    # Account for all the inter-account transfers
+    AccountOperation.where("operation_id IS NULL").each do |t|
+      matching_tx = AccountOperation.
+        with_currency(t.currency).
+        where("amount = -#{t.amount}").
+        where("account_id <> #{t.account_id}").
+        where("created_at >= ?", t.created_at.utc.advance(:seconds => -2)).
+        where("created_at <= ?", t.created_at.utc.advance(:seconds => 2)).
+        first
+      
+      if matching_tx
+        o = Operation.create!
+        ActiveRecord::Base.connection.execute("UPDATE account_operations SET operation_id=#{o.id}, type=NULL WHERE id IN (#{t.id}, #{matching_tx.id})")
+        print "."
+      end
     end
     
-    puts "\n\n /!\\ #{AccountOperation.where("amount >= 0 AND `type` IS NOT NULL").count} transfers have a positive amount !\n\n"
     
-    puts "\n\n /!\\ Failed operations accounting : #{failed.join(", ")}"
-
-    # TODO : Check that only actual transfers are typed as such
-    # TODO : Check that trades are typed as such
+    puts "\n\n ** Processing manual balance modifications ...\n"    
+    
+    failed = []
+    forced_orphans = [4027]
+    
+    # Account for all the inter-account transfers
+    AccountOperation.where("operation_id IS NULL").each do |t|
+      possible_match = AccountOperation.
+        with_currency(t.currency).
+        where("amount = -#{t.amount}").
+        where("account_id <> #{t.account_id}").
+        where("created_at >= ?", t.created_at.utc.advance(:hours => -1)).
+        where("created_at <= ?", t.created_at.utc.advance(:hours => 1)).
+        first
+      
+      if possible_match.blank? || forced_orphans.include?(t.id)
+        o = Operation.create!
+        ActiveRecord::Base.connection.execute("UPDATE account_operations SET operation_id=#{o.id}, `type`=NULL WHERE id = #{t.id}")
+        AccountOperation.create! do |ao|
+          ao.currency = t.currency
+          ao.amount = -t.amount
+          ao.account = Account.storage_account_for(t.currency)
+          ao.operation = o
+        end
+        print "."
+      else
+        print "!"
+        if possible_match
+          failed << [t.id, possible_match.id]
+        end
+      end
+    end
+    
+    failed.each do |i|
+      puts "\n\n /!\\ AccountOperation #{i[0]} possibly matches #{i[1]}.\n\n"
+    end
+    
+    puts "\n\n /!\\ #{AccountOperation.where("amount >= 0 AND `type` IS NOT NULL").count} transfers have a positive amount.\n\n"
+    
+    puts "\n\n /!\\ #{"%.2f" % (AccountOperation.where("operation_id IS NULL").count.to_f / AccountOperation.count.to_f)}% orphan account operations remaining.\n\n"
   end
 end

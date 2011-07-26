@@ -42,7 +42,7 @@ class Trade < Operation
     :presence => true
 
   validates :currency,
-    :inclusion => { :in => Transfer::CURRENCIES },
+    :inclusion => { :in => AccountOperation::CURRENCIES },
     :presence => true
 
   scope :last_24h, lambda {
