@@ -33,9 +33,11 @@ class LibertyReserveTransferTest < ActiveSupport::TestCase
 
     o = Factory(:operation)
     
-    LibertyReserve::Client.instance.stubs(:transfer).returns(
+    LibertyReserve::Client.instance.expects(:transfer).returns(
       { 'TransferResponse' => {  'Receipt' => { 'ReceiptId' => "foo" } } }
     )
+
+    LibertyReserve::Client.instance.expects(:get_balance).returns(BigDecimal("1000"))
 
     o.account_operations << LibertyReserveTransfer.new do |t|
       t.amount = BigDecimal("-1.118")

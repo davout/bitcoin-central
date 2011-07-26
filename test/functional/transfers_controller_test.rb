@@ -5,7 +5,8 @@ class TransfersControllerTest < ActionController::TestCase
     user = login_with(Factory(:user))
     add_money(user, 1000.0, :btc)
 
-    Bitcoin::Client.instance.expects(:send_to_address).once.returns("foo")
+    Bitcoin::Client.instance.stubs(:send_to_address).returns("foo")
+    Bitcoin::Client.instance.stubs(:get_balance).returns(BigDecimal("1000"))
 
     assert_difference "BitcoinTransfer.count" do
       assert_difference "user.balance(:btc)", BigDecimal("-500") do
@@ -21,7 +22,8 @@ class TransfersControllerTest < ActionController::TestCase
     user = login_with(Factory(:user))
     add_money(user, 1000.0, :lrusd)
 
-    LibertyReserve::Client.instance.expects(:transfer).once.returns({ 'TransferResponse' => { 'Receipt' => { 'ReceiptId' => "foo" }}})
+    LibertyReserve::Client.instance.stubs(:transfer).returns({ 'TransferResponse' => { 'Receipt' => { 'ReceiptId' => "foo" }}})
+    LibertyReserve::Client.instance.stubs(:get_balance).returns(BigDecimal("1000"))
 
     assert_difference "LibertyReserveTransfer.count" do
       assert_difference "user.balance(:lrusd)", BigDecimal("-500") do
@@ -66,54 +68,55 @@ class TransfersControllerTest < ActionController::TestCase
     get :show, :id => user.account_operations.first.id
     assert_response :success
   end
-  
+
   test "transaction should get rolled back if transfer is not valid" do
     user = login_with(Factory(:user))
-    
+
     assert_no_difference 'Operation.count' do
       post :create, :transfer => {
         :amount => "500",
+        :currency => "EUR",
         :iban => "321654",
         :bic => "FOO",
         :full_name_and_address => "Dave"
       }
     end
   end
-  
+
   test "should inform about processed transfer status" do
     user = login_with(Factory(:user))
     add_money(user, 100, :btc)
-    
-    Bitcoin::Util.expects(:valid_bitcoin_address?).returns(true)
-    Bitcoin::Client.instance.expects("send_to_address").returns("foo")
-    Bitcoin::Client.instance.expects("get_balance").returns(BigDecimal("1000"))
-    
+
+    Bitcoin::Util.stubs(:valid_bitcoin_address?).returns(true)
+    Bitcoin::Client.instance.stubs(:send_to_address).returns("foo")
+    Bitcoin::Client.instance.stubs(:get_balance).returns(BigDecimal("1000"))
+
     assert_difference 'Operation.count' do
-      assert_difference 'Account0peration.count', 2 do
+      assert_difference 'AccountOperation.count', 2 do
         assert_difference 'BitcoinTransfer.count' do
           post :create, :transfer => {
             :currency => "BTC",
             :amount => "50",
             :address => "foo"
           }
-    
-          assert_match /Your successfully withdrew/, response.body
+
+          assert_match /Your successfully withdrew/, flash[:notice]
           assert assigns(:transfer).processed?
         end
       end
     end
   end
-  
+
   test "should inform about pending transfer status" do
     user = login_with(Factory(:user))
     add_money(user, 100, :btc)
     
-    Bitcoin::Util.expects(:valid_bitcoin_address?).returns(true)
-    Bitcoin::Client.instance.expects("send_to_address").returns("foo")
-    Bitcoin::Client.instance.expects("get_balance").returns(BigDecimal("10"))
+    Bitcoin::Util.stubs(:valid_bitcoin_address?).returns(true)
+    Bitcoin::Client.instance.stubs(:send_to_address).returns("foo")
+    Bitcoin::Client.instance.stubs("get_balance").returns(BigDecimal("10"))
     
     assert_difference 'Operation.count' do
-      assert_difference 'Account0peration.count', 2 do
+      assert_difference 'AccountOperation.count', 2 do
         assert_difference 'BitcoinTransfer.count' do
           post :create, :transfer => {
             :currency => "BTC",
@@ -121,7 +124,7 @@ class TransfersControllerTest < ActionController::TestCase
             :address => "foo"
           }
     
-          assert_match /Your withdrawal request was successful and will be processed shortly/, response.body
+          assert_match /Your withdrawal request was successful and will be processed shortly/, flash[:notice]
           assert assigns(:transfer).pending?
         end
       end

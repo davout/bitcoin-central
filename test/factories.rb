@@ -65,3 +65,13 @@ Factory.define :invoice, :default_strategy => :create_without_addy_generation do
   invoice.sequence(:payment_address)  { |n| "1FXWhKPChEcUnSEoFQ3DGzxKe44MDbat#{n}" }
   invoice.sequence(:callback_url)     { |n| "http://domain.tld/#{n}" }
 end
+
+Factory.define(:wire_transfer) do |wire_transfer|
+  wire_transfer.association           :account
+  wire_transfer.association           :operation
+  wire_transfer.amount                -100.0
+  wire_transfer.bic                   "foo"
+  wire_transfer.iban                  "bar"
+  wire_transfer.currency              "EUR"
+  wire_transfer.full_name_and_address "foobar"
+end

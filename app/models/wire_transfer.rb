@@ -9,7 +9,10 @@ class WireTransfer < Transfer
   
   validates :iban,
     :presence => true
-  
+
+  validates :currency,
+    :inclusion => { :in => ["EUR"] }
+
   def execute
     # Placeholder for now
   end

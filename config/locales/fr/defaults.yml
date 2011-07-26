@@ -166,6 +166,8 @@ fr:
       even: "doit être pair"
       invalid_otp: Jeton d'authentification invalide
       debit_not_equal_to_credit: Le débit est différent du crédit pour la devise %{currency}
+      should_be_negative: doit être négatif
+      max_amount: ne peut pas être supérieur à votre limite (%{maximum} %{currency})
       
     template: &errors_template
       header:

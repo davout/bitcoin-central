@@ -30,7 +30,7 @@ class TransfersController < ApplicationController
 
     unless @transfer.new_record?     
       redirect_to account_transfers_path,
-        :notice => I18n.t("transfers.index.successful.#{@transfer.status}", :amount => @transfer.amount.abs, :currency => @transfer.currency)
+        :notice => I18n.t("transfers.index.successful.#{@transfer.state}", :amount => @transfer.amount.abs, :currency => @transfer.currency)
     else
       render :action => :new
     end

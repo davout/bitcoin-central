@@ -12,8 +12,9 @@ class BitcoinTransfer < Transfer
 
   def execute
     # TODO : Re-implement instant internal transfer
-    if bt_tx_id.blank?
+    if bt_tx_id.blank? && pending? && (Bitcoin::Client.instance.get_balance >= amount.abs)
       update_attribute(:bt_tx_id, Bitcoin::Client.instance.send_to_address(address, amount.abs))
+      process!
     end
   end
 end

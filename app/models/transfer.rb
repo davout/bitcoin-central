@@ -1,4 +1,6 @@
 class Transfer < AccountOperation
+  include ActiveRecord::Transitions
+
   before_validation :round_amount,
     :on => :create  
   
@@ -16,6 +18,16 @@ class Transfer < AccountOperation
 
   def type_name
     type.gsub(/Transfer/, "").underscore.gsub(/\_/, " ").titleize
+  end
+
+  state_machine do
+    state :pending
+    state :processed
+
+    event :process do
+      transitions :to => :processed,
+        :from => :pending
+    end
   end
 
   def self.from_params(params)
