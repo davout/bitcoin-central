@@ -1,5 +1,5 @@
 %h1
-  Transfer
+  Transaction n°
   %span.fixed= @transfer.id
 
 %table.default.details
@@ -10,6 +10,11 @@
   %tr
     %th= t("activerecord.attributes.transfer.created_at")
     %td= l(@transfer.created_at)
+
+  - if @transfer.is_a?(Transfer)
+    %tr
+      %th= t("activerecord.attributes.transfer.state")
+      %td= transfer_state(@transfer.state, :message => t(".state.#{@transfer.state}").html_safe, :icon => true)
 
   %tr
     %th= t("activerecord.attributes.transfer.amount")

@@ -51,6 +51,7 @@ fr:
         bic: BIC
         iban: IBAN
         full_name_and_address: Nom et adresse
+        state: État
       user:
         id: ID
         email: Adresse e-mail

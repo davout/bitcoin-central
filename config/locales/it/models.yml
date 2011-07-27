@@ -1,8 +1,0 @@
-it:
-activerecord:
-    attributes:
-      trade_order:
-        ppc: Prezzo
-        category: Tipo
-      liberty_reserve_transfer:
-        lr_account_id: Account ID

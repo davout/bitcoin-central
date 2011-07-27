@@ -82,16 +82,12 @@ en:
             <li>You can wire most currencies, it will get converted to EUR before funding your account</li>
             <li>Fees may apply for non-SEPA transfers, contact us for more details</li>
           </ul>
-        </p> 
-        <p>
-          Please use the following information for your wire :
-          <div id=\"bank-info\"><strong>Account holder</strong> : Tivoli HK Ltd
-          \n<strong>BIC</strong>            : SOGEFRPP
-          \n<strong>IBAN</strong>           : LV76 7632 9873 2344 8976
-          \n<strong>Comment</strong>        : %{account}
-          </div>
         </p>
         "
+      bic: BIC
+      account_holder: Account holder
+      iban: IBAN
+      comment: Comment
       deposit_lr_title: Deposit Liberty Reserve
       deposit_pgau_title: Deposit Pecunix gold
       deposit_pgau_body_html:
@@ -147,6 +143,10 @@ en:
       successful:
         processed: Your successfully withdrew %{amount} %{currency}
         pending: Your withdrawal request was successful and will be processed shortly
+    show:
+      state:
+        processed: Processed
+        pending: Pending        
     new:
       title: Withdraw funds
       body_html: "

@@ -167,7 +167,7 @@ class Invoice < ActiveRecord::Base
 
   # Processes all pending invoices
   def self.process_pending
-    where("state <> ?", "paid").each &:check_payment
+    where("state <> ?", "paid").each(&:check_payment)
   end
   
   # Returns the URL under which this invoice is publicly accessible

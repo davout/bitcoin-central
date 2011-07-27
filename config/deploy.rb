@@ -40,7 +40,7 @@ namespace :deploy do
 end
 
 task :copy_production_configurations do
-  %w{database bitcoin recaptcha liberty_reserve google_analytics pecunix yubico}.each do |c|
+  %w{database bitcoin recaptcha liberty_reserve google_analytics pecunix yubico banks}.each do |c|
     run "cp #{shared_path}/config/#{c}.yml #{release_path}/config/#{c}.yml"
   end
 end

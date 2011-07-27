@@ -67,6 +67,17 @@ class TransfersControllerTest < ActionController::TestCase
 
     get :show, :id => user.account_operations.first.id
     assert_response :success
+    assert_nil response.body =~ /Status/
+  end
+  
+  test "should show transfer details with status field if relevant" do
+    user = login_with(Factory(:user))
+    add_money(user, 1000.0, :eur)
+    w = Factory(:wire_transfer, :account => user)
+
+    get :show, :id => w.id
+    assert_response :success
+    assert_match  /Status/, response.body
   end
 
   test "transaction should get rolled back if transfer is not valid" do

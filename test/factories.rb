@@ -75,3 +75,12 @@ Factory.define(:wire_transfer) do |wire_transfer|
   wire_transfer.currency              "EUR"
   wire_transfer.full_name_and_address "foobar"
 end
+
+Factory.define :bitcoin_transfer do |transfer|
+  transfer.association        :account
+  transfer.association        :operation
+  transfer.amount             BigDecimal("-20")
+  transfer.sequence(:address)  { |n| "1FXWhKPChEcUnSEoFQ3DGzxKe44MDbat#{n}" }  
+  transfer.currency           "BTC"
+  transfer.bt_tx_id           nil
+end

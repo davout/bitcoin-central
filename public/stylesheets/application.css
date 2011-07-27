@@ -774,11 +774,29 @@ div#bank-info {
     margin-left: 1em;
     margin-right: 1em;
     background: #DDD;
-    padding: 1em;
+    padding: .3em;
     padding-left: 2em;
     white-space: pre-wrap;
-    font-family: monospace;
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
     border-radius: 6px;
+}
+
+div#bank-info table tr th, div#bank-info table tr td {
+    padding: 3px;
+}
+
+div#bank-info table tr td {
+    font-family: monospace;
+}
+
+div#bank-info table tr th {
+    font-weight: bold;
+    min-width: 11em;
+    height: 1.5em;
+    vertical-align: top;
+}
+
+.transfer-state {
+    font-weight: bold;
 }
