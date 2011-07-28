@@ -18,6 +18,8 @@
       = menu_item "activerecord.models.user.other", admin_users_path
       = menu_item ".admin.information", admin_balances_path
       = menu_item "activerecord.models.announcement.other", admin_announcements_path
+      = menu_item "activerecord.models.static_page.other", admin_static_pages_path
+
 
   = menu_item ".ecommerce.main", nil, :merchant => true do
     %ul
@@ -25,6 +27,6 @@
 
   = menu_item ".help.main", nil do
     %ul
-      = menu_item ".help.faq", faq_path
+      = menu_item ".help.faq", static_path(:faq)
       = menu_item ".help.economy", economy_path
       = menu_item ".help.support", support_path

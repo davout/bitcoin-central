@@ -34,11 +34,13 @@ BitcoinBank::Application.routes.draw do
     end
   end
 
+  match "/s/:name" => "static_pages#show", :as => :static
+  
   match '/third_party_callbacks/:action',
     :controller => :third_party_callbacks
 
   namespace :admin do
-    %w{transfers users announcements yubikeys}.each { |r| resources(r.to_sym) {as_routes} }
+    %w{transfers users announcements yubikeys static_pages}.each { |r| resources(r.to_sym) {as_routes} }
 
     match '/balances', :to => 'informations#balances', :as => :balances
   end
@@ -46,8 +48,6 @@ BitcoinBank::Application.routes.draw do
   match '/trades' => 'trades#all_trades'
 
   match '/ticker' => 'trades#ticker'
-
-  match '/frequently_asked_questions' => 'informations#faq', :as => :faq
 
   match '/economy' => 'informations#economy', :as => :economy
 

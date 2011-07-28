@@ -106,6 +106,12 @@ fr:
         key_id: Identifiant de clé
         active: Activée
         created_at: Création
+      static_pages:
+        title: Titre
+        locale: Locale
+        contents: Contenu
+        created_at: Date de création
+        updated_at: Date de dernière mise à jour
 
     models:
       invoice:
@@ -129,3 +135,6 @@ fr:
       yubikey:
         one: Yubikey
         other: Yubikeys
+      static_page:
+        one: Page statique
+        other: Pages statiques

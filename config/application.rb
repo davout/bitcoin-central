@@ -13,7 +13,6 @@ module BitcoinBank
 
     config.i18n.default_locale = :en
 
-    # See config/initializers/locales.rb
     config.i18n.available_locales = I18n::Locales.keys
 
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml')]

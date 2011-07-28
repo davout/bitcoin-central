@@ -105,6 +105,12 @@ en:
         key_id: Key ID
         active: Active
         created_at: Created at
+      static_page:
+        title: Title
+        locale: Locale
+        contents: Contents
+        created_at: Created at
+        updated_at: Last updated at
 
     models:
       invoice:
@@ -128,3 +134,6 @@ en:
       yubikey:
         one: Yubikey
         other: Yubikeys
+      static_page:
+        one: Static page
+        other: Static pages
