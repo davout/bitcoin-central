@@ -1,8 +1,10 @@
 class WireTransfer < Transfer
-  attr_accessible :bank_account_id
+  attr_accessible :bank_account_id, :bank_account_attributes
 
   belongs_to :bank_account
 
+  accepts_nested_attributes_for :bank_account
+  
   before_validation :check_bank_account_id
 
   validates :bank_account,

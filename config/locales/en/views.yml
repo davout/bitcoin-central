@@ -113,6 +113,12 @@ en:
       additional_authentication_requirements: Additional authentication requirements
       api_tools: API & Tools
       yk_otp_config: Associate keys to your account
+      time_zone_explanation: Used to display localized dates and times
+      manage_bank_accounts: Manage your bank accounts
+      registered_bank_accounts:
+        zero: You haven't registered any bank account yet.
+        one: You have registered a bank account
+        other: You have registered %{count} bank accounts
     ga_otp_configuration:
       reset: The Google Authenticator shared-secret has been correctly reset, you should update your mobile device settings
 
@@ -161,11 +167,10 @@ en:
           </ul>
         </p>
         "
-      error_transferring_funds:
-        one: "An error prevented your funds from being withdrawn :"
-        other: "%{count} errors prevented your funds from being withdrawn :"
+      error: "Some errors prevent your funds from being withdrawn :"
       max_amount: Maximum amount
       submit: Transfer
+      manage_bank_accounts: Manage your bank accounts
 
   bank_accounts:
     index:
@@ -173,7 +178,8 @@ en:
       submit: Submit
       created: Bank account successfully registered
       error: Your bank account could not be registered
-      delete: Delete
-      confirm: Are you sure you want to delete this bank account?
       destroyed: Bank account deleted
       not_destroyed: You cannot delete a bank account that has been verified or wired to
+    list:
+      delete: Delete
+      confirm: Are you sure you want to delete this bank account?

@@ -168,8 +168,11 @@ fr:
       debit_not_equal_to_credit: Le débit est différent du crédit pour la devise %{currency}
       should_be_negative: doit être négatif
       max_amount: ne peut pas être supérieur à votre limite (%{maximum} %{currency})
-      unknown_country_code: code pays invalide
-      bad_check_digits: clé de contrôle invalide
+      unknown_country_code: a un code pays invalide
+      bad_check_digits: a une clef de contrôle invalide
+      bad_format: a un format incorrect
+      bad_length: a une longueur incorrecte
+      bad_chars: comprend des caractères invalides
       
     template: &errors_template
       header:

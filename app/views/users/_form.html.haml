@@ -13,7 +13,7 @@
   .form-field
     = f.label :time_zone
     = f.time_zone_select :time_zone, nil, :prompt => "--"
-    .explanation= t :time_zone_explanation
+    .explanation= t(".time_zone_explanation")
 
   %div{ :style => "clear:both;" }
 
@@ -29,6 +29,12 @@
         = f.label :require_yk_otp
         = f.check_box :require_yk_otp, :class => "checkbox"
         .explanation= link_to t(".yk_otp_config"), user_yubikeys_path
+
+    %fieldset
+      %legend= t("activerecord.models.bank_account.other")
+      %p= t(".registered_bank_accounts", :count => current_user.bank_accounts.count)
+      %p= link_to t(".manage_bank_accounts"), user_bank_accounts_path
+        
 
     %fieldset
       %legend= t(".api_tools")
@@ -47,4 +53,3 @@
   .form-field
     = f.submit t(".submit"), :class => 'submit'
 
-- raise "manage bank accounts"

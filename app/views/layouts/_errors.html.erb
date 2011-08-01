@@ -1,7 +1,11 @@
 <% if model.errors.any? %>
   <div id="errors">
     <h2>
-      <%= t message, :count => model.errors.count %>
+      <% if translated_message %>
+        <%= translated_message %>
+      <% else %>
+        <%= t message, :count => model.errors.count %>
+      <% end  %>
     </h2>
 
     <ul>

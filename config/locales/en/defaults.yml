@@ -168,9 +168,11 @@ en:
       debit_not_equal_to_credit: Credit and debit amounts are not equal for %{currency} account operations
       should_be_negative: must be negative
       max_amount: can't be greater than your limit (%{maximum} %{currency})
-      unknown_country_code: country code is invalid
+      unknown_country_code: has a wrong country code
       bad_check_digits: has wrong check digits
-      
+      bad_format: has wrong format
+      bad_length: has wrong length
+      bad_chars: has bad characters
   activerecord:
     errors:
       template:

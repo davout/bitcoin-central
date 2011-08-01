@@ -32,13 +32,16 @@ class Transfer < AccountOperation
 
   def self.from_params(params)
     transfer = class_for_transfer(params[:currency]).new(params)
-    transfer.amount = -transfer.amount.abs
-
+   
+    if transfer.amount
+      transfer.amount = -transfer.amount.abs 
+    end
+    
     transfer
   end
 
   def round_amount
-    unless amount.zero?
+    unless amount.nil? || amount.zero?
       self.amount = self.class.round_amount(amount, currency)
     end
   end

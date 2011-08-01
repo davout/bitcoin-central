@@ -1,0 +1,18 @@
+%table.default
+  %tr
+    %th= t("activerecord.attributes.bank_account.created_at")
+    %th= t("activerecord.attributes.bank_account.bic")
+    %th= t("activerecord.attributes.bank_account.iban")
+    %th= t("activerecord.attributes.bank_account.state")
+    %th.auto-sized
+
+  - unless bank_accounts.blank?
+    - bank_accounts.each do |bank_account|
+      %tr{ :class => cycle('even', 'odd') }
+        %td= l(bank_account.created_at, :format => :short)
+        %td.fixed= bank_account.bic
+        %td.fixed= bank_account.iban
+        %td{ :class => bank_account.state }= t("activerecord.attributes.bank_account.states.#{bank_account.state}")
+        %td.auto-sized= bank_account_delete(bank_account)
+  - else
+    = render :partial => "layouts/no_data"

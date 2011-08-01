@@ -69,18 +69,23 @@ end
 Factory.define(:wire_transfer) do |wire_transfer|
   wire_transfer.association           :account
   wire_transfer.association           :operation
+  wire_transfer.association           :bank_account
   wire_transfer.amount                -100.0
-  wire_transfer.bic                   "foo"
-  wire_transfer.iban                  "bar"
   wire_transfer.currency              "EUR"
-  wire_transfer.full_name_and_address "foobar"
 end
 
 Factory.define :bitcoin_transfer do |transfer|
-  transfer.association        :account
-  transfer.association        :operation
-  transfer.amount             BigDecimal("-20")
-  transfer.sequence(:address)  { |n| "1FXWhKPChEcUnSEoFQ3DGzxKe44MDbat#{n}" }  
-  transfer.currency           "BTC"
-  transfer.bt_tx_id           nil
+  transfer.association          :account
+  transfer.association          :operation
+  transfer.amount               BigDecimal("-20")
+  transfer.sequence(:address)   { |n| "1FXWhKPChEcUnSEoFQ3DGzxKe44MDbat#{n}" }  
+  transfer.currency             "BTC"
+  transfer.bt_tx_id             nil
+end
+
+Factory.define(:bank_account) do |bank_account|
+  bank_account.association    :user
+  bank_account.bic            "SOGEFRPP"
+  bank_account.iban           "FR1420041010050500013M02606"
+  bank_account.account_holder "foo"
 end

@@ -4,7 +4,7 @@
 %br
 
 = form_for @transfer, :as => :transfer, :url => account_transfers_path do |f|
-  = errors_for(@transfer, :message => "error_transferring_funds")
+  = errors_for(@transfer, :translated_message => t(".error"), :include_nested => :bank_account)
 
   .form-field
     = f.label :currency
@@ -21,12 +21,15 @@
       = f.text_field :lr_account_id
 
   - if @transfer.currency == "EUR"
-    .form-field
-      = f.label :bank_account_id
-      = f.select :bank_account_id, @bank_accounts, {}, { :disabled => @bank_accounts.blank?, :prompt => (@bank_accounts.blank? ? t(".add_an_account") : "--")}
-      .explanation= link_to t(".manage_bank_accounts"), user_bank_accounts_path
+    - if @bank_accounts.blank? && @transfer.bank_account_id.blank?
+      = f.fields_for :bank_account do |bank_account|
+        = render :partial => 'bank_accounts/fields', :locals => { :form_builder => bank_account }
+    - else
+      .form-field
+        = f.label :bank_account_id
+        = f.select :bank_account_id, @bank_accounts, {}, { :prompt => "--" }
+        .explanation= link_to t(".manage_bank_accounts"), user_bank_accounts_path
         
-
   .form-field
     = label_tag :max_amount, t(".max_amount")
     = text_field_tag :max_amount, amount_field_value(current_user.max_withdraw_for(@transfer.currency)), :class => "amount", :disabled => true

@@ -42,7 +42,8 @@ module ApplicationHelper
   def errors_for(model, options = {})
     render :partial => 'layouts/errors', :locals => {
       :model => model,
-      :message => options[:message]
+      :message => options[:message],
+      :translated_message => options[:translated_message]
     }
   end
 

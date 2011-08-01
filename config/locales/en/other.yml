@@ -184,7 +184,6 @@ en:
   new_password_confirmation_explanation: New password confirmation
   current_password_explanation: This is required to protect your account
   time_zone: Time zone
-  time_zone_explanation: Select your time-zone to get data display
 
   # views/users/edit.html
   account_details_title: Account details

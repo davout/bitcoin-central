@@ -45,10 +45,15 @@ class TransfersControllerTest < ActionController::TestCase
         post :create, :transfer => {
           :currency => "EUR",
           :amount => "500",
-          :iban => "321654",
-          :bic => "FOO",
-          :full_name_and_address => "Dave"
+          :bank_account_attributes => {
+            :iban => "FR1420041010050500013M02606",
+            :bic => "SOGEFRPP",
+            :account_holder => "Dave"
+          }
         }
+
+        assert_response :redirect
+        assert_redirected_to account_transfers_path
       end
     end
   end
@@ -73,7 +78,7 @@ class TransfersControllerTest < ActionController::TestCase
   test "should show transfer details with status field if relevant" do
     user = login_with(Factory(:user))
     add_money(user, 1000.0, :eur)
-    w = Factory(:wire_transfer, :account => user)
+    w = Factory(:wire_transfer, :account => user, :bank_account => Factory(:bank_account, :user => user))
 
     get :show, :id => w.id
     assert_response :success

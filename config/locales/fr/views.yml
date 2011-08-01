@@ -111,6 +111,12 @@ fr:
       additional_authentication_requirements: Options d'authentification
       api_tools: Outils & API
       yk_otp_config: Associer des Yubikey à votre compte
+      time_zone_explanation: Utilisé pour afficher les dates et heures locales
+      manage_bank_accounts: Gérez vos comptes bancaires
+      registered_bank_accounts:
+        zero: Vous n'avez enregistré aucun compte bancaire pour l'instant.
+        one: Vous avez enregistré un compte bancaire.
+        other: Vous avez enregistré %{count} comptes bancaires.
     ga_otp_configuration:
       reset: Le secret partagé a été ré-initialisé, vous devez mettre à jour la configuration de votre téléphone
 
@@ -159,11 +165,10 @@ fr:
           </ul>
         </p>
         "
-      error_transferring_funds:
-        one: "Une erreur empêche l'envoi de vos fonds :"
-        other: "%{count} erreurs empêchent l'envoi de vos fonds :"
+      error: "Des erreurs empêchent l'envoi de vos fonds :"
       max_amount: Montant maximum
       submit: Valider
+      manage_bank_accounts: Gérer vos comptes bancaires
 
   bank_accounts:
     index:
@@ -171,7 +176,8 @@ fr:
       submit: Enregistrer
       created: Compte bancaire enregistré avec succès
       error: Votre compte bancaire n'a pas pu être enregistré
-      delete: Supprimer
-      confirm: Êtes-vous certain(e) de vouloir supprimer ce compte?
       destroyed: Compte bancaire supprimé
       not_destroyed: Vous ne pouvez pas supprimer un compte bancaire vérifié ou déjà utilisé
+    list:
+      delete: Supprimer
+      confirm: Êtes-vous certain(e) de vouloir supprimer ce compte?

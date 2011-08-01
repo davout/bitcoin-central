@@ -196,9 +196,6 @@ fr:
       disponibles sur Bitcoin Central. Si les fonds ne sont pas récupérés par leur destinataire ils sont
       re-crédités sur le compte de l&#146;expéditeur après un certain temps. <strong>Cette fonctionnalité n&#146;est pas encore disponible.</strong>
     </p>
-  error_transferring_funds:
-    one: "Une erreur a empêché votre transfert d'être effectué :"
-    other: "%{count} erreurs ont empêché votre transfert d'être effectué :"
   payee: Destinataire
   payee_id_eur: N° de compte Bitcoin Central ou adresse e-mail
   payee_id_lrusd: N° de compte Bitcoin Central, Liberty Reserve, ou adresse e-mail
@@ -223,8 +220,6 @@ fr:
   new_password_confirmation: Confirmation
   new_password_confirmation_explanation: Confirmation du nouveau mot de passe
   current_password_explanation: Nécessaire pour protéger votre compte
-  time_zone: Fuseau horaire
-  time_zone_explanation: Nécessaire pour afficher correctement les dates
 
   # views/users/edit.html
   account_details_title: Détails de votre compte
