@@ -45,7 +45,12 @@
     %tr
       %th= t("activerecord.attributes.transfer.px_tx_id")
       %td.fixed= @transfer.px_tx_id
-      
+
+  - if @transfer.respond_to? :bank_account
+    %tr
+      %th= t("activerecord.models.bank_account.one")
+      %td.fixed= @transfer.bank_account.iban
+
   - unless @transfer.comment.blank?
     %tr
       %th= t("activerecord.attributes.transfer.comment")

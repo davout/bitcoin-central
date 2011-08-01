@@ -5,7 +5,8 @@ BitcoinBank::Application.routes.draw do
     get :ga_otp_configuration
     post :reset_ga_otp_secret
 
-    resources :yubikeys, :only => [:index, :new, :create, :destroy]
+    resources :yubikeys, :only => [:index, :create, :destroy]
+    resources :bank_accounts, :only => [:index, :create, :destroy]
   end
 
   devise_for :users, :controllers => { :registrations => "registrations" }

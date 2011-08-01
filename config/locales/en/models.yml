@@ -48,9 +48,6 @@ en:
         px_tx_id: Pecunix ref.
         px_fee: Pecunix fee
         px_payer: Pecunix payer
-        bic: BIC
-        iban: IBAN
-        full_name_and_address: Full name and address
         state: Status
       user:
         id: ID
@@ -88,6 +85,7 @@ en:
         require_yk_otp: Yubikey
         ga_otp: Google Auth. OTP
         yk_otp: Yubikey OTP
+        bank_account_id: Bank account
       trade:
         type: Type
         amount: Amount
@@ -111,6 +109,15 @@ en:
         contents: Contents
         created_at: Created at
         updated_at: Last updated at
+      bank_account:
+        bic: BIC
+        iban: IBAN
+        account_holder: Full name and address
+        created_at: Registered on
+        state: Status
+        states:
+          unverified: Unverified
+          verified: Verified
 
     models:
       invoice:
@@ -137,3 +144,6 @@ en:
       static_page:
         one: Static page
         other: Static pages
+      bank_account:
+        one: Bank account
+        other: Bank accounts

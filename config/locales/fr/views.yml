@@ -69,6 +69,7 @@ fr:
     show:
       add_funds: Déposer des fonds
     deposit:
+      not_available: Le dépôt par virement SEPA n'est pas disponible actuellement
       deposit_bitcoins_title: Ajouter des Bitcoins
       deposit_bitcoins_body_html:
         <p>Envoyez simplement les Bitcoins à l'adresse affichée en haut à droite de l'écran, ils apparaîtront au crédit de votre compte après quelques minutes.
@@ -97,6 +98,7 @@ fr:
       pgau_amount: Montant (PGAU)
       deposit_pgau: Ajouter de l'or Pecunix
       other_options: Autres options
+      add_bank_account: Ajouter un compte bancaire
     lr_sci_form:
       click_for_lr_html: <a href="#lr" onclick="%{action}">Cliquez ici</a> pour payer avec directement avec votre compte Liberty Reserve (LREUR et LRUSD).
 
@@ -162,3 +164,14 @@ fr:
         other: "%{count} erreurs empêchent l'envoi de vos fonds :"
       max_amount: Montant maximum
       submit: Valider
+
+  bank_accounts:
+    index:
+      title: Ajoutez un compte bancaire
+      submit: Enregistrer
+      created: Compte bancaire enregistré avec succès
+      error: Votre compte bancaire n'a pas pu être enregistré
+      delete: Supprimer
+      confirm: Êtes-vous certain(e) de vouloir supprimer ce compte?
+      destroyed: Compte bancaire supprimé
+      not_destroyed: Vous ne pouvez pas supprimer un compte bancaire vérifié ou déjà utilisé

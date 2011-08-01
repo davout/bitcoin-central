@@ -8,7 +8,7 @@
 
   .form-field
     = f.label :currency
-    = f.select :currency, [ ["Bitcoins", "BTC"], ["EUR", "EUR"], ["Liberty Reserve USD", "LRUSD"], ["Liberty Reserve EUR", "LREUR"]]
+    = f.select :currency, [["Bitcoins", "BTC"], ["EUR", "EUR"], ["Liberty Reserve USD", "LRUSD"], ["Liberty Reserve EUR", "LREUR"]]
   
   - if @transfer.currency == "BTC"
     .form-field
@@ -22,16 +22,10 @@
 
   - if @transfer.currency == "EUR"
     .form-field
-      = f.label :bic
-      = f.text_field :bic
-
-    .form-field
-      = f.label :iban
-      = f.text_field :iban
-
-    .form-field
-      = f.label :full_name_and_address
-      = f.text_area :full_name_and_address, :rows => 5
+      = f.label :bank_account_id
+      = f.select :bank_account_id, @bank_accounts, {}, { :disabled => @bank_accounts.blank?, :prompt => (@bank_accounts.blank? ? t(".add_an_account") : "--")}
+      .explanation= link_to t(".manage_bank_accounts"), user_bank_accounts_path
+        
 
   .form-field
     = label_tag :max_amount, t(".max_amount")

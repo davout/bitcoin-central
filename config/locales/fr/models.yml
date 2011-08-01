@@ -48,9 +48,6 @@ fr:
         px_tx_id: Réf. Pecunix
         px_fee: Commission Pecunix
         px_payer: Expéditeur Pecunix
-        bic: BIC
-        iban: IBAN
-        full_name_and_address: Nom et adresse
         state: État
       user:
         id: ID
@@ -89,6 +86,7 @@ fr:
         require_yk_otp: Yubikey
         ga_otp: Code Google Auth.
         yk_otp: Code Yubikey
+        bank_account_id: Compte bancaire
       trade:
         type: Type
         amount: Montant
@@ -112,6 +110,15 @@ fr:
         contents: Contenu
         created_at: Date de création
         updated_at: Date de dernière mise à jour
+      bank_account:
+        bic: BIC
+        iban: IBAN
+        account_holder: Nom et adresse
+        created_at: Enregistré le
+        state: État
+        states:
+          unverified: Non vérifié
+          verified: Vérifié
 
     models:
       invoice:
@@ -138,3 +145,6 @@ fr:
       static_page:
         one: Page statique
         other: Pages statiques
+      bank_account:
+        one: Compte bancaire
+        other: Comptes bancaires

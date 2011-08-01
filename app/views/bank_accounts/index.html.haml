@@ -1,0 +1,45 @@
+%h1= t(".title")
+
+= form_for [current_user, @bank_account] do |f|
+  = errors_for @bank_account, :message => "bank_accounts.index.error"
+
+  .form-field
+    = f.label :bic
+    = f.text_field :bic
+
+  .form-field
+    = f.label :iban
+    = f.text_field :iban
+
+  .form-field
+    = f.label :account_holder
+    = f.text_area :account_holder, :rows => 5
+
+  .form-field
+    = f.submit t(".submit"), :class => 'submit'
+
+%br
+
+%h1= t("activerecord.models.bank_account.other")
+
+%table.default
+  %tr
+    %th= t("activerecord.attributes.bank_account.created_at")
+    %th= t("activerecord.attributes.bank_account.bic")
+    %th= t("activerecord.attributes.bank_account.iban")
+    %th= t("activerecord.attributes.bank_account.state")
+    %th.auto-sized
+
+  - unless @bank_accounts.blank?
+    - @bank_accounts.each do |bank_account|
+      %tr{ :class => cycle('even', 'odd') }
+        %td= l(bank_account.created_at, :format => :short)
+        %td.fixed= bank_account.bic
+        %td.fixed= bank_account.iban
+        %td{ :class => bank_account.state }= t("activerecord.attributes.bank_account.states.#{bank_account.state}")
+        %td.auto-sized= bank_account_delete(bank_account)
+  - else
+    = render :partial => "layouts/no_data"
+
+
+

@@ -1,10 +1,10 @@
-development:
-  bic: XXXX
-  iban: XX99 XXXX 0000 0000 0000 0
-  account_holder: MyCompany LLC
-  
-test:
-  bic: XXXX
-  iban: XX99 XXXX 0000 0000 0000 0
-  account_holder: MyCompany LLC
-  
+#development:
+#  bic: XXXX
+#  iban: XX99 XXXX 0000 0000 0000 0
+#  account_holder: MyCompany LLC
+#
+#test:
+#  bic: XXXX
+#  iban: XX99 XXXX 0000 0000 0000 0
+#  account_holder: MyCompany LLC
+#

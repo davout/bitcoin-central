@@ -220,7 +220,6 @@ ul#menu > li:hover > ul {
 }
 
 /* Forms */
-
 form fieldset {
     margin-top: 2em;
     margin-bottom: 1em;
@@ -369,6 +368,11 @@ div.form-field div.explanation {
   /* width: 220px; */
   width: 280px;
   text-align: left;
+}
+
+div.form-field textarea {
+  padding: .3em;
+  padding-left: 6px;
 }
 
 /* Rails errors */
@@ -797,6 +801,21 @@ div#bank-info table tr th {
     vertical-align: top;
 }
 
+div#bank-info p#unavailable {
+    margin-bottom: 0;
+    font-style: italic;
+}
+
 .transfer-state {
     font-weight: bold;
+}
+
+td.verified {
+  font-weight: bold;
+  color: green;
+}
+
+td.unverified {
+  font-weight: bold;
+  color: orange;
 }

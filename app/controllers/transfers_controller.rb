@@ -5,6 +5,7 @@ class TransfersController < ApplicationController
 
   def new
     @transfer = Transfer.new(:currency => params[:currency] || "LRUSD")
+    @bank_accounts = current_user.bank_accounts.map { |ba| [ba.iban, ba.id] }
   end
   
   def show
@@ -14,7 +15,6 @@ class TransfersController < ApplicationController
   def create
     @transfer = Transfer.from_params(params[:transfer])
     @transfer.account = current_user
-
 
     Operation.transaction do
       o = Operation.create!

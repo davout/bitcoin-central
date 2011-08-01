@@ -64,6 +64,7 @@ GEM
     haml (3.1.2)
     highline (1.6.2)
     i18n (0.5.0)
+    iban-tools (0.0.6)
     json (1.5.3)
     mail (2.2.19)
       activesupport (>= 2.3.6)
@@ -138,6 +139,7 @@ DEPENDENCIES
   exception_notification!
   factory_girl_rails
   haml
+  iban-tools
   json
   mocha
   mysql (= 2.8.1)

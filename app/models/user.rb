@@ -42,6 +42,9 @@ class User < Account
   has_many :yubikeys,
     :dependent => :destroy
 
+  has_many :bank_accounts,
+    :dependent => :destroy
+
   validates :email,
     :uniqueness => true,
     :presence => true

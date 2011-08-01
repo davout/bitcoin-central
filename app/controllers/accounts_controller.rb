@@ -4,11 +4,14 @@ class AccountsController < ApplicationController
   end
   
   def deposit
-    bank_account = YAML::load(File.open(File.join(Rails.root, "config", "banks.yml")))[Rails.env]
+    bank_account = YAML::load(File.open(File.join(Rails.root, "config", "banks.yml")))
     
-    @bic = bank_account["bic"]
-    @iban = bank_account["iban"]
-    @account_holder = bank_account["account_holder"]
+    if bank_account
+      bank_account = bank_account[Rails.env]
+      @bic = bank_account["bic"]
+      @iban = bank_account["iban"]
+      @account_holder = bank_account["account_holder"]
+    end
   end
   
   def pecunix_deposit_form

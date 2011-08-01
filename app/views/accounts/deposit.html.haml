@@ -3,20 +3,24 @@
 
 %h1= t(".deposit_eur_title")
 %p= t(".deposit_eur_body_html")
+
 %div#bank-info
-  %table
-    %tr
-      %th= t(".bic")
-      %td= @bic      
-    %tr
-      %th= t(".iban")
-      %td= @iban
-    %tr
-      %th= t(".comment")
-      %td= current_user.name
-    %tr
-      %th= t(".account_holder")
-      %td= @account_holder
+  - if (@bic && @iban && @account_holder)
+    %table
+      %tr
+        %th= t(".bic")
+        %td= @bic
+      %tr
+        %th= t(".iban")
+        %td= @iban
+      %tr
+        %th= t(".comment")
+        %td= current_user.name
+      %tr
+        %th= t(".account_holder")
+        %td= @account_holder
+  - else
+    %p#unavailable= t(".not_available")
 
 %h1= t(".other_options")
 

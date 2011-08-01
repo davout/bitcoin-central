@@ -9,13 +9,13 @@ class StaticPage < ActiveRecord::Base
   
   validates :locale,
     :presence => true,
-    :inclusion => { :in => nil }
+    :inclusion => { :in => I18n.available_locales }
   
   validates :contents,
     :presence => true
   
   def self.get_page(name, locale)
-    with_name(name).with_locale(locale).first or with_name(name).with_locale(I18n.default_locale)
+    with_name(name).with_locale(locale).first or with_name(name).with_locale(I18n.default_locale).first
   end
   
   
@@ -26,6 +26,6 @@ class StaticPage < ActiveRecord::Base
     end
 
     def self.with_locale(locale)
-      where("locale = #{locale}")
+      where("locale = ?", locale)
     end
 end

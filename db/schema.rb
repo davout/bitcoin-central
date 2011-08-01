@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110719172103) do
+ActiveRecord::Schema.define(:version => 20110729211904) do
 
   create_table "account_operations", :force => true do |t|
     t.string   "type"
@@ -33,10 +33,9 @@ ActiveRecord::Schema.define(:version => 20110719172103) do
     t.string   "px_payer"
     t.decimal  "px_fee",                :precision => 16, :scale => 8, :default => 0.0
     t.string   "comment"
-    t.integer  "operation_id",                                                          :null => false
-    t.string   "bic"
-    t.string   "iban"
-    t.text     "full_name_and_address"
+    t.integer  "operation_id"
+    t.string   "state"
+    t.integer  "bank_account_id"
   end
 
   add_index "account_operations", ["lr_transaction_id"], :name => "index_transfers_on_lr_transaction_id", :unique => true
@@ -88,6 +87,16 @@ ActiveRecord::Schema.define(:version => 20110719172103) do
     t.datetime "updated_at"
   end
 
+  create_table "bank_accounts", :force => true do |t|
+    t.integer  "user_id",        :null => false
+    t.string   "bic",            :null => false
+    t.string   "iban",           :null => false
+    t.text     "account_holder"
+    t.string   "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "invoices", :force => true do |t|
     t.string   "state",                                                                :null => false
     t.integer  "user_id",                                                              :null => false
@@ -131,6 +140,15 @@ ActiveRecord::Schema.define(:version => 20110719172103) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
+  create_table "static_pages", :force => true do |t|
+    t.string   "name"
+    t.string   "title"
+    t.string   "locale"
+    t.text     "contents"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "trade_orders", :force => true do |t|
     t.integer  "user_id",                                                                     :null => false

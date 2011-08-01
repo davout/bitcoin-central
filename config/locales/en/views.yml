@@ -69,6 +69,7 @@ en:
     show:
       add_funds: Deposit funds
     deposit:
+      not_available: SEPA wire deposits are currently unavailable
       deposit_bitcoins_title: Deposit Bitcoins
       deposit_bitcoins_body_html:
         <p>Simply transfer funds to your address and they'll show up in your account after a couple of minutes. Your address is located in the upper right corner of the screen.
@@ -99,6 +100,7 @@ en:
       pgau_amount: Amount (PGAU)
       deposit_pgau: Deposit Pecunix
       other_options: Other options
+      add_bank_account: Add a bank account
     lr_sci_form:
       click_for_lr_html: <a href="#lr" onclick="%{action}">Click here</a> to pay with your Liberty Reserve account (LREUR and LRUSD).
       
@@ -164,3 +166,14 @@ en:
         other: "%{count} errors prevented your funds from being withdrawn :"
       max_amount: Maximum amount
       submit: Transfer
+
+  bank_accounts:
+    index:
+      title: Add a bank account
+      submit: Submit
+      created: Bank account successfully registered
+      error: Your bank account could not be registered
+      delete: Delete
+      confirm: Are you sure you want to delete this bank account?
+      destroyed: Bank account deleted
+      not_destroyed: You cannot delete a bank account that has been verified or wired to
