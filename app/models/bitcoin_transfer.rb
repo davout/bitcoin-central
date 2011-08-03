@@ -1,4 +1,6 @@
 class BitcoinTransfer < Transfer
+  attr_accessible :address
+
   validates :address,
     :bitcoin_address => true,
     :not_mine => true
