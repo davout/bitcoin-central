@@ -104,6 +104,7 @@ class TransfersControllerTest < ActionController::TestCase
     add_money(user, 100, :btc)
 
     Bitcoin::Util.stubs(:valid_bitcoin_address?).returns(true)
+    Bitcoin::Util.stubs(:my_bitcoin_address?).returns(false)
     Bitcoin::Client.instance.stubs(:send_to_address).returns("foo")
     Bitcoin::Client.instance.stubs(:get_balance).returns(BigDecimal("1000"))
 
@@ -128,6 +129,7 @@ class TransfersControllerTest < ActionController::TestCase
     add_money(user, 100, :btc)
     
     Bitcoin::Util.stubs(:valid_bitcoin_address?).returns(true)
+    Bitcoin::Util.stubs(:my_bitcoin_address?).returns(false)
     Bitcoin::Client.instance.stubs(:send_to_address).returns("foo")
     Bitcoin::Client.instance.stubs("get_balance").returns(BigDecimal("10"))
     
