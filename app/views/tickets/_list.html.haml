@@ -1,0 +1,9 @@
+%table.default
+  %tr
+    %th= t(".title")
+    %th.auto-size
+
+  - tickets.each do |ticket|
+    %tr
+      %td= ticket.title
+      %td

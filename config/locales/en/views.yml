@@ -183,3 +183,20 @@ en:
     list:
       delete: Delete
       confirm: Are you sure you want to delete this bank account?
+
+  informations:
+    support:
+      contact: Contact us
+      contact_description_html: "You can reach us at <a href=\"mailto:%{email}\">%{email}</a>"
+      please_sign_in: Please sign-in to open a support request
+      your_tickets:
+        zero: You don't have any pending support tickets.
+        one: You have a pending support ticket.
+        other: You have %{count} pending support tickets.
+      open_a_ticket: Open a support ticket
+      view_tickets: View pending support tickets
+
+  tickets:
+    new:
+      title: Open a support request
+      submit: Submit request

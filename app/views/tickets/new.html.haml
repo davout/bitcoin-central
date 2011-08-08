@@ -1,0 +1,14 @@
+%h1= t(".title")
+
+= form_for @ticket do |f|
+  .form-field
+    = f.label :title
+    = f.text_field :title
+
+  .form-field
+    = f.label :description
+    = f.text_area :description, :rows => 6
+
+  .form-field
+    = f.submit t(".submit"), :class => 'submit'
+

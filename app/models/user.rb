@@ -45,6 +45,9 @@ class User < Account
   has_many :bank_accounts,
     :dependent => :destroy
 
+  has_many :tickets,
+    :dependent => :destroy
+
   validates :email,
     :uniqueness => true,
     :presence => true
