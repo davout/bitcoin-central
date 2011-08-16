@@ -39,7 +39,7 @@
     <%= f.label :time_zone %>
     <%= f.time_zone_select :time_zone, nil, :prompt => "--" %>
     <div class="explanation">
-      <%= t :time_zone_explanation %>
+      <%= t("users.form.time_zone_explanation") %>
     </div>
   </div>
 
@@ -55,8 +55,6 @@
   <div class="form-field">
     <%= f.submit :class => 'submit' %>
   </div>
-
-
 
 
 <% end %>
