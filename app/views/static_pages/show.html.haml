@@ -1,1 +1,3 @@
-= @static_page.contents
+= @static_page.contents.html_safe
+%br
+.last-update= t(".last_modification_at", :updated_at => l(@static_page.updated_at))

@@ -9,7 +9,7 @@ class StaticPage < ActiveRecord::Base
   
   validates :locale,
     :presence => true,
-    :inclusion => { :in => I18n.available_locales }
+    :inclusion => { :in => I18n.available_locales.map(&:to_s) }
   
   validates :contents,
     :presence => true

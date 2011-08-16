@@ -29,6 +29,7 @@ fr:
         faq: Foire aux questions
         economy: Économie
         support: Contact
+        fees: Nos tarifs
       ecommerce:
         main: E-commerce
         
@@ -181,3 +182,7 @@ fr:
     list:
       delete: Supprimer
       confirm: Êtes-vous certain(e) de vouloir supprimer ce compte?
+      
+  static_pages:
+    show:
+      last_modification_at: "Date de dernière modification : %{updated_at}"      

@@ -467,7 +467,7 @@ table.details tr {
 table.details tr th {
   text-align: right;
   padding-right: 1.5em;
-  width: 15em;
+  min-width: 15em;
   border-right: 1px solid #6E0701;
 }
 
@@ -818,4 +818,12 @@ td.verified {
 td.unverified {
   font-weight: bold;
   color: orange;
+}
+
+div.last-update {
+  text-align: right;
+  color: gray;
+  font-style: italic;
+  font-size: 90%;
+  margin-top: 3em;
 }
