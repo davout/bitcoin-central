@@ -4,7 +4,7 @@ class AccountOperation < ActiveRecord::Base
   CURRENCIES = ["LRUSD", "LREUR", "EUR", "BTC", "PGAU"]
   MIN_BTC_CONFIRMATIONS = 5
 
-  default_scope order('created_at DESC')
+  default_scope order('`account_operations`.`created_at` DESC')
 
   belongs_to :operation
 
