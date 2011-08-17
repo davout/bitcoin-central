@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110729211904) do
+ActiveRecord::Schema.define(:version => 20110806153411) do
 
   create_table "account_operations", :force => true do |t|
     t.string   "type"
@@ -146,6 +146,15 @@ ActiveRecord::Schema.define(:version => 20110729211904) do
     t.string   "title"
     t.string   "locale"
     t.text     "contents"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tickets", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "user_id"
+    t.string   "state"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

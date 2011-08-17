@@ -69,4 +69,10 @@ class InformationsController < ApplicationController
       ]
     }
   end
+
+  def support
+    if current_user
+      @tickets = current_user.tickets
+    end
+  end
 end

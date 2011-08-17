@@ -147,3 +147,6 @@ en:
       bank_account:
         one: Bank account
         other: Bank accounts
+      ticket:
+        one: Support ticket
+        other: Support tickets

@@ -1,4 +1,6 @@
 BitcoinBank::Application.routes.draw do
+  resources :tickets
+
   resources :invoices, :only => [:index, :new, :create, :show, :destroy]
 
   resource :user, :only => [:edit, :update] do
@@ -7,6 +9,7 @@ BitcoinBank::Application.routes.draw do
 
     resources :yubikeys, :only => [:index, :create, :destroy]
     resources :bank_accounts, :only => [:index, :create, :destroy]
+    resources :tickets
   end
 
   devise_for :users, :controllers => { :registrations => "registrations" }
