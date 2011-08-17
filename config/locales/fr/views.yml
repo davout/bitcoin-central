@@ -188,3 +188,20 @@ fr:
   static_pages:
     show:
       last_modification_at: "Date de dernière modification : %{updated_at}"      
+      
+  informations:
+    support:
+      contact: Contactez-nous
+      contact_description_html: "Vous pouvez nous contacter à l'adresse <a href=\"mailto:%{email}\">%{email}</a>"
+      please_sign_in: Vous devez vous identifier pour ouvir un ticket de support
+      your_tickets:
+        zero: Vous n'avez aucun ticket en cours.
+        one: Vous avez un ticket en cours.
+        other: Vous avez %{count} tickets en cours.
+      open_a_ticket: Ouvrir un ticket de support
+      view_tickets: Voir les tickets de support
+
+  tickets:
+    new:
+      title: Ouvrez un ticket
+      submit: Enregistrer
