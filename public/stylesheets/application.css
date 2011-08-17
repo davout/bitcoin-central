@@ -827,3 +827,12 @@ div.last-update {
   font-size: 90%;
   margin-top: 3em;
 }
+
+td.bank-address, td.account-holder-address {
+    font-size: 90%;
+    font-style: italic;
+}
+
+td.bank, td.account-holder {
+    font-weight: bold;
+}

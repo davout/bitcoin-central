@@ -89,7 +89,9 @@ en:
       bic: BIC
       account_holder: Account holder
       iban: IBAN
+      bank: Bank
       comment: Comment
+      account_holder_address: Account holder address
       deposit_lr_title: Deposit Liberty Reserve
       deposit_pgau_title: Deposit Pecunix gold
       deposit_pgau_body_html:

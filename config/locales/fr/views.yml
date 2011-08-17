@@ -89,7 +89,9 @@ fr:
       bic: BIC
       account_holder: Titulaire du compte
       iban: IBAN
+      bank: Banque
       comment: Commentaire
+      account_holder_address: Addresse du titulaire
       deposit_lr_title: Ajouter du Liberty Reserve
       deposit_pgau_title: Ajouter de l'or Pecunix
       deposit_pgau_body_html:

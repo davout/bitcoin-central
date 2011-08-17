@@ -1,10 +1,16 @@
-#development:
-#  bic: XXXX
-#  iban: XX99 XXXX 0000 0000 0000 0
-#  account_holder: MyCompany LLC
-#
-#test:
-#  bic: XXXX
-#  iban: XX99 XXXX 0000 0000 0000 0
-#  account_holder: MyCompany LLC
-#
+development:
+  bic: XXXX
+  iban: XX99 XXXX 0000 0000 0000 0
+  account_holder: MyCompany LLC
+  account_holder_address: "Some street\nSome country"
+  bank_address: "Some other street\nSome other country"
+  bank: Some bank
+
+test:
+  bic: XXXX
+  iban: XX99 XXXX 0000 0000 0000 0
+  account_holder: MyCompany LLC
+  account_holder_address: "Some street\nSome country"
+  bank_address: "Some other street\nSome other country"
+  bank: Some bank
+  

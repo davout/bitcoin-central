@@ -8,17 +8,31 @@
   - if (@bic && @iban && @account_holder)
     %table
       %tr
+        %th= t(".comment")
+        %td= current_user.name
+      %tr
+        %th= t(".account_holder")
+        %td.account-holder= @account_holder
+      %tr
+        %th
+        %td.account-holder-address= @account_holder_address
+      
+      %tr
+        %td{ :colspan => 2 } &nbsp;
+
+      %tr
         %th= t(".bic")
         %td= @bic
       %tr
         %th= t(".iban")
         %td= @iban
       %tr
-        %th= t(".comment")
-        %td= current_user.name
+        %th= t(".bank")
+        %td.bank= @bank
       %tr
-        %th= t(".account_holder")
-        %td= @account_holder
+        %th
+        %td.bank-address= @bank_address
+
   - else
     %p#unavailable= t(".not_available")
 
