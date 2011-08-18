@@ -29,6 +29,7 @@ fr:
         faq: Foire aux questions
         economy: Économie
         support: Contact
+        fees: Nos tarifs
       ecommerce:
         main: E-commerce
         
@@ -88,7 +89,9 @@ fr:
       bic: BIC
       account_holder: Titulaire du compte
       iban: IBAN
+      bank: Banque
       comment: Commentaire
+      account_holder_address: Addresse du titulaire
       deposit_lr_title: Ajouter du Liberty Reserve
       deposit_pgau_title: Ajouter de l'or Pecunix
       deposit_pgau_body_html:
@@ -181,3 +184,12 @@ fr:
     list:
       delete: Supprimer
       confirm: Êtes-vous certain(e) de vouloir supprimer ce compte?
+      
+  static_pages:
+    show:
+      last_modification_at: "Date de dernière modification : %{updated_at}"
+      
+  informations:
+    welcome:
+      download: Télécharger Bitcoin 0.3.24
+      source: Code source

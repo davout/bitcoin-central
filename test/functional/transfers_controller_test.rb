@@ -42,18 +42,20 @@ class TransfersControllerTest < ActionController::TestCase
 
     assert_difference "WireTransfer.count" do
       assert_difference "user.balance(:eur)", BigDecimal("-500") do
-        post :create, :transfer => {
-          :currency => "EUR",
-          :amount => "500",
-          :bank_account_attributes => {
-            :iban => "FR1420041010050500013M02606",
-            :bic => "SOGEFRPP",
-            :account_holder => "Dave"
+        assert_difference "user.bank_accounts.count" do
+          post :create, :transfer => {
+            :currency => "EUR",
+            :amount => "500",
+            :bank_account_attributes => {
+              :iban => "FR1420041010050500013M02606",
+              :bic => "SOGEFRPP",
+              :account_holder => "Dave"
+            }
           }
-        }
 
-        assert_response :redirect
-        assert_redirected_to account_transfers_path
+          assert_response :redirect
+          assert_redirected_to account_transfers_path
+        end
       end
     end
   end

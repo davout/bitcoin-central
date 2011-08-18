@@ -3,9 +3,11 @@ class Admin::InformationsController < Admin::AdminController
     @balances = [:lrusd, :lreur, :pgau, :eur, :btc].inject({}) do |balances, currency|
       balances[currency] = {}
       
-      balances[currency][:user] = Transfer.
+      balances[currency][:user] = AccountOperation.
+        joins(:account).
+        where("`accounts`.`type` = 'User'").
         with_currency(currency).
-        select("SUM(amount) AS amount").
+        select("SUM(`amount`) AS `amount`").
         first.
         amount
      

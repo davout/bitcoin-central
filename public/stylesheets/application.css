@@ -467,7 +467,7 @@ table.details tr {
 table.details tr th {
   text-align: right;
   padding-right: 1.5em;
-  width: 15em;
+  min-width: 15em;
   border-right: 1px solid #6E0701;
 }
 
@@ -818,4 +818,34 @@ td.verified {
 td.unverified {
   font-weight: bold;
   color: orange;
+}
+
+div.last-update {
+  text-align: right;
+  color: gray;
+  font-style: italic;
+  font-size: 90%;
+  margin-top: 3em;
+}
+
+td.bank-address, td.account-holder-address {
+    font-size: 90%;
+    font-style: italic;
+}
+
+td.bank, td.account-holder {
+    font-weight: bold;
+}
+
+/* Downloads */
+ul#downloads li {
+    list-style-type: none;
+    list-style-image: none;
+    font-weight: bold;
+}
+
+ul#downloads li img {
+    margin-right: .7em;
+    position: relative;
+    top: 3px;
 }

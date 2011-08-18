@@ -22,7 +22,7 @@ class TransfersController < ApplicationController
     @transfer.account = current_user
     
     if @transfer.is_a?(WireTransfer) && @transfer.bank_account
-      @transfer.bank_account.user_id = current_user
+      @transfer.bank_account.user_id = current_user.id
     end
     
     Operation.transaction do
