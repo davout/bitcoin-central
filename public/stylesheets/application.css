@@ -467,7 +467,7 @@ table.details tr {
 table.details tr th {
   text-align: right;
   padding-right: 1.5em;
-  min-width: 15em;
+  width: 15em;
   border-right: 1px solid #6E0701;
 }
 
