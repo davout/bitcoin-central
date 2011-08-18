@@ -187,4 +187,9 @@ fr:
       
   static_pages:
     show:
-      last_modification_at: "Date de dernière modification : %{updated_at}"      
+      last_modification_at: "Date de dernière modification : %{updated_at}"
+      
+  informations:
+    welcome:
+      download: Télécharger Bitcoin 0.3.24
+      source: Code source

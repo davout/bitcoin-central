@@ -190,3 +190,9 @@ en:
   static_pages:
     show:
       last_modification_at: "This page was last updated at %{updated_at}"
+      
+  informations:
+    welcome:
+      download: Download Bitcoin 0.3.24
+      source: Source code
+      
