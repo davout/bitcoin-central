@@ -45,6 +45,10 @@ task :copy_production_configurations do
   end
 end
 
+task :symlink_bitcoin_bin_dir do
+  run "ln -s #{shared_path}/bin #{release_path}/public/bin"
+end
+
 task :remove_config_ru do
   run "rm -f #{release_path}/config.ru"
 end
@@ -52,3 +56,4 @@ end
 after "deploy:update_code", :copy_production_configurations
 after :copy_production_configurations, :remove_config_ru
 after :remove_config_ru, "deploy:update_crontab"
+after "deploy:update_crontab", :symlink_bitcoin_bin_dir

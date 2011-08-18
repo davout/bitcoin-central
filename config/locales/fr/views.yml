@@ -187,9 +187,17 @@ fr:
       
   static_pages:
     show:
-      last_modification_at: "Date de dernière modification : %{updated_at}"      
-      
+      last_modification_at: "Date de dernière modification : %{updated_at}"
+
+  tickets:
+    new:
+      title: Ouvrez un ticket
+      submit: Enregistrer
+
   informations:
+    welcome:
+      download: Télécharger Bitcoin 0.3.24
+      source: Code source
     support:
       contact: Contactez-nous
       contact_description_html: "Vous pouvez nous contacter à l'adresse <a href=\"mailto:%{email}\">%{email}</a>"
@@ -201,7 +209,3 @@ fr:
       open_a_ticket: Ouvrir un ticket de support
       view_tickets: Voir les tickets de support
 
-  tickets:
-    new:
-      title: Ouvrez un ticket
-      submit: Enregistrer

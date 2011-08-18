@@ -836,3 +836,16 @@ td.bank-address, td.account-holder-address {
 td.bank, td.account-holder {
     font-weight: bold;
 }
+
+/* Downloads */
+ul#downloads li {
+    list-style-type: none;
+    list-style-image: none;
+    font-weight: bold;
+}
+
+ul#downloads li img {
+    margin-right: .7em;
+    position: relative;
+    top: 3px;
+}

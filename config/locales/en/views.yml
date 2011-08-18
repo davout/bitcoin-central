@@ -191,7 +191,15 @@ en:
     show:
       last_modification_at: "This page was last updated at %{updated_at}"
 
+  tickets:
+    new:
+      title: Open a support request
+      submit: Submit request
+
   informations:
+    welcome:
+      download: Download Bitcoin 0.3.24
+      source: Source code
     support:
       contact: Contact us
       contact_description_html: "You can reach us at <a href=\"mailto:%{email}\">%{email}</a>"
@@ -203,7 +211,3 @@ en:
       open_a_ticket: Open a support ticket
       view_tickets: View pending support tickets
 
-  tickets:
-    new:
-      title: Open a support request
-      submit: Submit request
