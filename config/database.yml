@@ -6,7 +6,6 @@ development:
   pool: 5
   username: rails
   password: rails
-  socket: /var/run/mysqld/mysqld.sock
 
 test:
   adapter: mysql
@@ -16,4 +15,3 @@ test:
   pool: 5
   username: rails
   password: rails
-  socket: /var/run/mysqld/mysqld.sock
