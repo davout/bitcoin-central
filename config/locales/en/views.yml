@@ -186,7 +186,7 @@ en:
     list:
       delete: Delete
       confirm: Are you sure you want to delete this bank account?
-  
+
   static_pages:
     show:
       last_modification_at: "This page was last updated at %{updated_at}"
