@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110820164434) do
+ActiveRecord::Schema.define(:version => 20110821132029) do
 
   create_table "account_operations", :force => true do |t|
     t.string   "type"
@@ -49,7 +49,6 @@ ActiveRecord::Schema.define(:version => 20110820164434) do
     t.string   "bitcoin_address"
     t.string   "salt"
     t.string   "time_zone"
-    t.boolean  "admin",                :default => false
     t.string   "secret_token"
     t.string   "encrypted_password",   :default => "",    :null => false
     t.string   "password_salt",        :default => "",    :null => false
@@ -176,6 +175,17 @@ ActiveRecord::Schema.define(:version => 20110820164434) do
     t.boolean  "active",                                                   :default => true
     t.boolean  "dark_pool",                                                :default => false, :null => false
     t.boolean  "dark_pool_exclusive_match",                                :default => false, :null => false
+  end
+
+  create_table "used_currencies", :force => true do |t|
+    t.integer  "account_id",                                                      :null => false
+    t.integer  "currency_id",                                                     :null => false
+    t.boolean  "active",                                       :default => true
+    t.decimal  "daily_limit",   :precision => 16, :scale => 8, :default => 0.0
+    t.decimal  "monthly_limit", :precision => 16, :scale => 8, :default => 0.0
+    t.boolean  "management",                                   :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "yubikeys", :force => true do |t|

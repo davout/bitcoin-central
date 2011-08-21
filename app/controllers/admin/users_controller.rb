@@ -6,7 +6,6 @@ class Admin::UsersController < Admin::AdminController
       :id,
       :name,
       :email,
-      :admin,
       :require_ga_otp,
       :require_yk_otp,
       :time_zone,
@@ -28,14 +27,12 @@ class Admin::UsersController < Admin::AdminController
     config.list.columns = [
       :id,
       :name,
-      :email,
-      :admin
+      :email
     ]
       
     config.update.columns = [
       :name,
       :email,
-      :admin,
       :require_ga_otp,
       :require_yk_otp,
       :merchant
@@ -45,7 +42,6 @@ class Admin::UsersController < Admin::AdminController
       :id,
       :name,
       :email,
-      :admin,
       :require_ga_otp,
       :require_yk_otp,
       :merchant,

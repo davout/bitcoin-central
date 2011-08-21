@@ -44,7 +44,7 @@ BitcoinBank::Application.routes.draw do
     :controller => :third_party_callbacks
 
   namespace :admin do
-    %w{transfers users announcements yubikeys static_pages}.each { |r| resources(r.to_sym) {as_routes} }
+    %w{transfers users announcements yubikeys static_pages currencies}.each { |r| resources(r.to_sym) {as_routes} }
 
     match '/balances', :to => 'informations#balances', :as => :balances
   end

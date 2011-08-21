@@ -119,6 +119,19 @@ fr:
         states:
           unverified: Non vérifié
           verified: Vérifié
+      currency:
+        code: Code
+        created_at: Création
+        updated_at: Mise à jour
+        codes:
+          eur: Euro
+          usd: Dollar US
+          cad: Dollar Canadien
+          inr: Roupie Indienne
+          lrusd: Dollar Liberty Reserve
+          lreur: Euro Liberty Reserve
+          pgau: Or Pecunix
+          btc: Bitcoin
 
     models:
       invoice:
@@ -148,3 +161,6 @@ fr:
       bank_account:
         one: Compte bancaire
         other: Comptes bancaires
+      currency:
+        one: Devise
+        other: Devises

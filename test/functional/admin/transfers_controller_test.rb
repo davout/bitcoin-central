@@ -10,7 +10,7 @@ class Admin::TransfersControllerTest < ActionController::TestCase
   end
 
   test "admins get to rob you" do
-    login_with Factory(:user, :admin => true)
+    login_with Factory(:admin)
     get :index
     
     assert_response :success

@@ -10,10 +10,32 @@ Factory.define :user do |user|
   user.password_confirmation  { |u| u.password }
   user.skip_captcha           true
   user.confirmed_at           DateTime.now
-  user.admin                  false
   user.merchant               false
   user.sequence(:bitcoin_address)     { |n| "1FXWhKPChEcUnSEoFQ3DGzxKe44MDbat#{n}" }
 end
+
+Factory.define :manager do |user|
+  user.name                   { |u| "BC-U#{(rand * 10 ** 6).to_i}" }
+  user.email                  { |u| "#{u.name}@domain.tld" }
+  user.password               "password"
+  user.password_confirmation  { |u| u.password }
+  user.skip_captcha           true
+  user.confirmed_at           DateTime.now
+  user.merchant               false
+  user.sequence(:bitcoin_address)     { |n| "1FXWhKPChEcUnSEoFQ3DGzxKe44MDbat#{n}" }
+end
+
+Factory.define :admin do |user|
+  user.name                   { |u| "BC-U#{(rand * 10 ** 6).to_i}" }
+  user.email                  { |u| "#{u.name}@domain.tld" }
+  user.password               "password"
+  user.password_confirmation  { |u| u.password }
+  user.skip_captcha           true
+  user.confirmed_at           DateTime.now
+  user.merchant               false
+  user.sequence(:bitcoin_address)     { |n| "1FXWhKPChEcUnSEoFQ3DGzxKe44MDbat#{n}" }
+end
+
 
 Factory.define :yubikey do |yubikey|
   yubikey.sequence(:otp) { |n| "#{n}somerandomprettylongotp" }

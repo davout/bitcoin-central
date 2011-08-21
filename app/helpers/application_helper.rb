@@ -16,7 +16,7 @@ module ApplicationHelper
   
   # Checks whether the option should be displayed to the currently logged-in user
   def display_menu?(user, options)
-    options.blank? || (user && (user.admin? || (user.merchant? && options[:merchant]) || (user && options[:logged_in])))
+    options.blank? || (user && (user.is_a?(Admin) || (user.is_a?(Manager) && options[:manager]) || (user.merchant? && options[:merchant]) || (user && options[:logged_in])))
   end
 
   def number_to_bitcoins(amount, options = {})

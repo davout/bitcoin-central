@@ -118,7 +118,20 @@ en:
         states:
           unverified: Unverified
           verified: Verified
-
+      currency:
+        code: Code
+        created_at: Creation
+        updated_at: Update
+        codes:
+          eur: Euro
+          usd: US Dollar
+          cad: Canadian Dollar
+          inr: Indian Rupee
+          lrusd: Liberty Reserve Dollar
+          lreur: Liberty Reserve Euro
+          pgau: Pecunix Gold
+          btc: Bitcoin
+                    
     models:
       invoice:
         one: Invoice
@@ -150,3 +163,6 @@ en:
       ticket:
         one: Support ticket
         other: Support tickets
+      currency:
+        one: Currency
+        other: Currencies
