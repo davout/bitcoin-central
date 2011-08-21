@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110806153411) do
+ActiveRecord::Schema.define(:version => 20110820164434) do
 
   create_table "account_operations", :force => true do |t|
     t.string   "type"
@@ -93,6 +93,12 @@ ActiveRecord::Schema.define(:version => 20110806153411) do
     t.string   "iban",           :null => false
     t.text     "account_holder"
     t.string   "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "currencies", :force => true do |t|
+    t.string   "code",       :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

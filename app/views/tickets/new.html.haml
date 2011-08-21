@@ -8,6 +8,7 @@
   .form-field
     = f.label :description
     = f.text_area :description, :rows => 6
+    .explanation= t(".description_explanation")
 
   .form-field
     = f.submit t(".submit"), :class => 'submit'

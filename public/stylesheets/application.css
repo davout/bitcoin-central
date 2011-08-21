@@ -849,3 +849,9 @@ ul#downloads li img {
     position: relative;
     top: 3px;
 }
+
+/* Support tickets */
+textarea#ticket_description {
+    width: 45em;
+    height: 10em;
+}

@@ -191,8 +191,9 @@ fr:
 
   tickets:
     new:
-      title: Ouvrez un ticket
+      title: Ouvrez un ticket de support
       submit: Enregistrer
+      description_explanation: Décrivez précisément votre demande et n'hésitez-pas à inclure tous les détails nécessaires
 
   informations:
     welcome:

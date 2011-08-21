@@ -195,6 +195,7 @@ en:
     new:
       title: Open a support request
       submit: Submit request
+      description_explanation: Please be as accurate as possible when describing your request and provide all the relevant details.
 
   informations:
     welcome:
