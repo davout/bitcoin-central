@@ -4,6 +4,8 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 
 class ActiveSupport::TestCase
+  fixtures :all
+  
   def login_with(user)
     sign_in(:user, user)
     user
@@ -21,9 +23,7 @@ class ActiveSupport::TestCase
     o.account_operations << Factory.build(:account_operation,
       :amount => -amount,
       :currency => currency.to_s.upcase
-    )
-    
-    o.save!
+    )    
   end
 
   def assert_destroyed(instance, message = nil)

@@ -1,7 +1,7 @@
 require 'digest'
 
 class AccountOperation < ActiveRecord::Base
-  CURRENCIES = Currency.all.map(&:code)
+  CURRENCIES = %w{EUR USD LREUR LRUSD BTC PGAU INR CAD}
   MIN_BTC_CONFIRMATIONS = 5
 
   default_scope order('`account_operations`.`created_at` DESC')
