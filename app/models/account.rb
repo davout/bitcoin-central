@@ -1,6 +1,9 @@
 class Account < ActiveRecord::Base
   has_many :account_operations
 
+  has_many :used_currencies,
+    :dependent => :destroy
+  
   belongs_to :parent,
     :class_name => 'Account'
 

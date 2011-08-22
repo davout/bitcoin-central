@@ -52,11 +52,8 @@ class Admin::UsersController < Admin::AdminController
     config.columns[:require_ga_otp].inplace_edit = true
     config.columns[:require_yk_otp].inplace_edit = true
     
-    config.columns[:account_operations].association.reverse = :account
-    
     config.search.columns << :id
 
-    config.action_links.add(:account_operations)
-    config.nested.add_link :yubikeys
+    config.nested.add_link(:yubikeys)
   end
 end

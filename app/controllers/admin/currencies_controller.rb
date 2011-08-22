@@ -1,5 +1,5 @@
 class Admin::CurrenciesController < Admin::AdminController
-  active_scaffold :currency do |config|
-    
-  end
+  before_filter :enforce_admin_rights
+  
+  active_scaffold :currency
 end

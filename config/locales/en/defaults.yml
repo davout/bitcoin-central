@@ -173,6 +173,7 @@ en:
       bad_format: has wrong format
       bad_length: has wrong length
       bad_chars: has bad characters
+      insufficient_privileges: Insufficient privileges
   activerecord:
     errors:
       template:

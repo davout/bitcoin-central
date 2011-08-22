@@ -1,4 +1,6 @@
 class Admin::InformationsController < Admin::AdminController
+  before_filter :enforce_admin_rights
+  
   def balances
     @balances = [:lrusd, :lreur, :pgau, :eur, :btc].inject({}) do |balances, currency|
       balances[currency] = {}

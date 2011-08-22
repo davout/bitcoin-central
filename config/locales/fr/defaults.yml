@@ -173,6 +173,7 @@ fr:
       bad_format: a un format incorrect
       bad_length: a une longueur incorrecte
       bad_chars: comprend des caractères invalides
+      insufficient_privileges: Privilèges insuffisants
       
     template: &errors_template
       header:
