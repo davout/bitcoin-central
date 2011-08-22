@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Admin::TransfersControllerTest < ActionController::TestCase
+class Admin::AccountOperationsControllerTest < ActionController::TestCase
   test "one doesn't just walk into admin interface" do
     login_with Factory(:user)
     get :index

@@ -1,6 +1,5 @@
 class Admin::YubikeysController < Admin::AdminController
   active_scaffold :yubikey do |config|
-
     config.columns = [:user, :key_id, :active, :otp]
 
     config.list.columns = config.show.columns = [:user, :key_id, :active]

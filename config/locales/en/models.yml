@@ -142,6 +142,9 @@ en:
       trade_order:
         one: Trade order
         other: Trade orders
+      account_operation:
+        one: Operation
+        other: Operations        
       transfer:
         one: Transfer
         other: Transfers

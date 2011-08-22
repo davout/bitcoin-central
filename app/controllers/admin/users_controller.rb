@@ -1,6 +1,6 @@
 class Admin::UsersController < Admin::AdminController
   active_scaffold :user do |config|
-    config.actions.exclude :create
+    config.actions.exclude :create, :update, :delete
     
     config.columns = [
       :id,
@@ -9,7 +9,7 @@ class Admin::UsersController < Admin::AdminController
       :require_ga_otp,
       :require_yk_otp,
       :time_zone,
-      :last_address,
+      :bitcoin_address,
       :confirmation_sent_at,
       :confirmed_at,
       :current_sign_in_at,
@@ -19,7 +19,6 @@ class Admin::UsersController < Admin::AdminController
       :last_sign_in_ip,
       :locked_at,
       :remember_created_at,
-      :account_operations,
       :merchant,
       :yubikeys
     ]
@@ -29,15 +28,7 @@ class Admin::UsersController < Admin::AdminController
       :name,
       :email
     ]
-      
-    config.update.columns = [
-      :name,
-      :email,
-      :require_ga_otp,
-      :require_yk_otp,
-      :merchant
-    ]
-    
+   
     config.show.columns = [
       :id,
       :name,
@@ -46,7 +37,7 @@ class Admin::UsersController < Admin::AdminController
       :require_yk_otp,
       :merchant,
       :time_zone,
-      :last_address,
+      :bitcoin_address,
       :confirmation_sent_at,
       :confirmed_at,
       :current_sign_in_at,
@@ -61,9 +52,11 @@ class Admin::UsersController < Admin::AdminController
     config.columns[:require_ga_otp].inplace_edit = true
     config.columns[:require_yk_otp].inplace_edit = true
     
-    config.search.columns << :id
+    config.columns[:account_operations].association.reverse = :account
     
-    config.nested.add_link :account_operations
+    config.search.columns << :id
+
+    config.action_links.add(:account_operations)
     config.nested.add_link :yubikeys
   end
 end

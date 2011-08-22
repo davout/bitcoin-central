@@ -143,6 +143,9 @@ fr:
       trade_order:
         one: Ordre
         other: Ordres
+      account_operation:
+        one: Opération
+        other: Opérations
       transfer:
         one: Transaction
         other: Transactions
