@@ -1,15 +1,15 @@
-%h1= t(:order_book_title)
+= form_tag book_account_trade_orders_path, :method => :get do
+  .form-field
+    = label_tag :currency, t("activerecord.attributes.trade_order.currency")
+    = select_tag(:currency, currency_as_options(@currency), :id => "currency-select" )
+  .form-field#order-book-filter-submit
+    = submit_tag 'Filter', :class => "submit", :class => "submit"
+  %script{ :type => "text/javascript" }
+    $('#order-book-filter-submit').hide()
+    $('#currency-select').change(function(e) { $(e.target).parents('form').submit() })
 
-#order-book-filter-wrapper.form-field
-  #order-book-filter.radios
-    = form_tag book_account_trade_orders_path, :method => :get do 
-      - %w{all lrusd lreur eur pgau}.each do |currency|
-        = radio_for(currency, @selected_currency)
-
-      = submit_tag 'Filter', :class => "submit", :id => "order-book-filter-submit"
-      %script{ :type => "text/javascript" }
-        $('#order-book-filter-submit').hide();
-
+%div{ :style => "clear:both" }
+        
 = render :partial => "list", :locals => { :type => "purchase", :title => :buying, :orders => @purchases }
 
 = render :partial => "list", :locals => { :type => "sale", :title => :selling, :orders => @sales }

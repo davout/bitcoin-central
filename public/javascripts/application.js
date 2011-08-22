@@ -8,7 +8,7 @@ $(document).ready(function() {
 
     // Triggered by a currency or category selection on
     // the trade order creation form
-    $("body.trade_orders input.trigger-total-update").click(updateTradeOrderForm);
+    $("body.trade_orders select.trigger-total-update").change(updateTradeOrderForm);
     
     $("body.transfers-new #transfer_currency").change(updateWithdrawForm)
     
@@ -54,7 +54,7 @@ function updateTradeOrderForm() {
 }
 
 function getSelectedCurrency() {
-    return($("input:radio.currency-select:checked").val());
+    return($("select.currency-select").val());
 }
 
 function setBalance(currency) {

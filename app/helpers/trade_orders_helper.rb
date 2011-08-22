@@ -26,12 +26,16 @@ module TradeOrdersHelper
         :title => t(:dark_pool_order)
     end
   end
-
-  def radio_for(currency, selected_currency)
-    if currency == "all"
-      "#{radio_button_tag 'currency', 'all', (selected_currency.blank? or (selected_currency == 'all')), :onclick => "$(this).parents('form').submit()"} #{label_tag("currency_all", t("currencies.all"))}".html_safe
-    else
-      "#{radio_button_tag('currency', currency, (selected_currency == currency), :onclick => "$(this).parents('form').submit()")} #{label_tag("currency_#{currency}", t("currencies.#{currency}"))}".html_safe
+  
+  def currency_as_options(c)
+    result = ""
+    
+    Currency.all.each do |currency|
+      result << content_tag(:option, :value => currency.code, :selected => (c == currency.code)) do
+        "#{t("activerecord.attributes.currency.codes.#{currency.code.downcase}")} (#{currency.code})"
+      end
     end
+    
+    result.html_safe
   end
 end

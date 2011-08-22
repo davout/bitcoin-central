@@ -48,3 +48,27 @@
     %td.account-balance{ :title => exact_balance(current_user, :pgau) }
       %div{ :class => color_for_balance(current_user, :pgau) }
         #{sign_for_balance(current_user, :pgau)} #{number_to_currency current_user.balance(:pgau), :unit => ""}
+
+  - unless current_user.balance(:inr).zero?
+    %tr
+      %td= link_to image_tag("inr-bill.png"), "http://www.rbi.org.in/", :target => "_blank", :title => t("currencies.inr_legend")
+      %td= t("currencies.inr")
+      %td.account-balance{ :title => exact_balance(current_user, :inr) }
+        %div{ :class => color_for_balance(current_user, :inr) }
+          #{sign_for_balance(current_user, :inr)} #{number_to_currency current_user.balance(:inr), :unit => ""}
+
+  - unless current_user.balance(:usd).zero?
+    %tr
+      %td= link_to image_tag("usd-bill.png"), "http://www.federalreserve.gov/", :target => "_blank", :title => t("currencies.usd_legend")
+      %td= t("currencies.usd")
+      %td.account-balance{ :title => exact_balance(current_user, :usd) }
+        %div{ :class => color_for_balance(current_user, :usd) }
+          #{sign_for_balance(current_user, :usd)} #{number_to_currency current_user.balance(:usd), :unit => ""}
+
+  - unless current_user.balance(:cad).zero?
+    %tr
+      %td= link_to image_tag("cad-bill.png"), "http://www.bankofcanada.ca/", :target => "_blank", :title => t("currencies.cad_legend")
+      %td= t("currencies.cad")
+      %td.account-balance{ :title => exact_balance(current_user, :cad) }
+        %div{ :class => color_for_balance(current_user, :cad) }
+          #{sign_for_balance(current_user, :cad)} #{number_to_currency current_user.balance(:cad), :unit => ""}

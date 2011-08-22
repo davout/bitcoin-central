@@ -5,12 +5,7 @@
 
   <div class="form-field">
     <%= f.label :currency %>
-    <div class="radios">
-      <%= f.radio_button :currency, "LRUSD", :class => "currency-select trigger-total-update" %> <%= f.label :currency_lrusd, (t "currencies.lrusd") %>
-      <%= f.radio_button :currency, "LREUR", :class => "currency-select trigger-total-update" %> <%= f.label :currency_lreur, (t "currencies.lreur") %>
-      <%= f.radio_button :currency, "EUR", :class => "currency-select trigger-total-update" %> <%= f.label :currency_eur, (t "currencies.eur") %>
-      <%= f.radio_button :currency, "PGAU", :class => "currency-select trigger-total-update" %> <%= f.label :currency_pgau, (t "currencies.pgau") %>
-    </div>
+    <%= f.select :currency, Currency.all.map { |c| ["#{t("activerecord.attributes.currency.codes.#{c.code.downcase}")} (#{c.code})", c.code] unless c.code == "BTC" }.compact, { :prompt => "--" }, { :class => "currency-select trigger-total-update" } %>
     <div class="explanation">
       <%= t :currency_to_trade %>
     </div>

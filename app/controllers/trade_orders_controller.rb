@@ -44,17 +44,17 @@ class TradeOrdersController < ApplicationController
   end
 
   def book
+    @currency = params[:currency] || "EUR"
+    
     @sales = TradeOrder.get_orders :sell,
       :user => current_user,
-      :currency => params[:currency],
+      :currency => @currency,
       :separated => params[:separated]
 
     @purchases = TradeOrder.get_orders :buy,
       :user => current_user,
-      :currency => params[:currency],
+      :currency => @currency,
       :separated => params[:separated]
-
-    @selected_currency = params[:currency]
 
     respond_to do |format|
       format.html

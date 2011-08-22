@@ -635,7 +635,7 @@ div#sale-orders {
   width: 45%;
   float: right;
 }
-
+/*
 div.order-book h2 {
   margin-top: .5em;
 }
@@ -653,12 +653,13 @@ div#order-book-filter label {
   top: -3px;
 }
 
+
 div#order-book-filter input.submit {
   margin-left: inherit;
   position: relative;
   top:-7px;
 }
-
+*/
 table.default td.amount, .amount {
   font-family: Lucidatypewriter, monospace;
   text-align: right;

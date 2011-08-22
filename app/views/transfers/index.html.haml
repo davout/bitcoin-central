@@ -11,7 +11,9 @@
     - @transfers.each do |transfer|
       %tr{ :class => cycle('even', 'odd') }
         %td= l transfer.created_at
-        %td= transfer.currency
+        %td
+          = image_tag("#{transfer.currency}.png")
+          = transfer.currency
         %td.amount
           %span{ :class => color_for(transfer), :title => confirmation_tooltip_for(transfer) }
             = "#{transfer.amount > 0 ? "+" : "-"} #{number_to_currency transfer.amount.abs, :unit => ""}"
