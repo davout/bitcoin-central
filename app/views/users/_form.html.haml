@@ -1,4 +1,4 @@
-= form_for @user do |f|
+= form_for @user, :as => :user, :url => user_path do |f|
   = errors_for @user, :message => "error_updating_account"
 
   - unless @user.new_record?

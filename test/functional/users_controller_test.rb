@@ -24,4 +24,16 @@ class UsersControllerTest < ActionController::TestCase
     get :ga_otp_configuration
     assert_response :success
   end
+  
+  test "should render account edition form for manager" do
+    sign_out(:user)
+    get :edit
+    assert_response :redirect
+    
+    manager = Factory(:manager)
+    sign_in(:user, manager)
+    
+    get :edit
+    assert_response :success
+  end
 end
