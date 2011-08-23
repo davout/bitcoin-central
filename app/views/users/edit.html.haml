@@ -2,5 +2,7 @@
 
 = render 'form'
 
-%ul#devise-actions
-  %li= link_to t(:change_password), edit_password_path(@user)
+%br
+
+= form_for @user, :as => :user, :url => update_password_user_path do |f|
+  = render :partial => 'password_change_form', :locals => { :f => f }

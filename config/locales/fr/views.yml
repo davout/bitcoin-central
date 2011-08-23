@@ -122,7 +122,11 @@ fr:
         other: Vous avez enregistré %{count} comptes bancaires.
     ga_otp_configuration:
       reset: Le secret partagé a été ré-initialisé, vous devez mettre à jour la configuration de votre téléphone
-
+    password_change_form:
+      change_password: Changement de mot de passe
+      submit: Enregistrer
+      password_updated: Votre mot de passe a été changé avec succès
+      
   yubikeys:
     index:
       create: Associer une Yubikey à votre compte

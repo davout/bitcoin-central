@@ -182,8 +182,11 @@ en:
 
   # views/users/_form.html
   error_updating_account:
-    one: "1 error prevented your account details from being updated :"
+    one: "An error prevented your account details from being updated :"
     other: "%{count} errors prevented your account details from being updated :"
+  error_updating_password:
+    one: "An error prevented your password from being updated :"
+    other: "%{count} errors prevented your password from being updated :"
   email: Email
   new_password_explanation: Use this field only if you want to change your password
   new_password_confirmation: Confirmation

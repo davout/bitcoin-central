@@ -26,10 +26,6 @@ class UsersController < ApplicationController
   def update
     @user = current_user
 
-    # White list acceptable input instead of blacklisting dangerous params
-    params[:user].delete(:account)
-    params[:user].delete(:admin)
-
     if @user.update_attributes(params[:user])
       redirect_to edit_user_path,
         :notice => (t :account_updated)
@@ -43,5 +39,17 @@ class UsersController < ApplicationController
 
     redirect_to ga_otp_configuration_user_path,
       :notice => t("users.ga_otp_configuration.reset")
+  end
+  
+  def update_password
+    @user = current_user
+
+    if @user.update_with_password(params[:user])
+      sign_in(@user, :bypass => true)
+      
+      redirect_to edit_user_path, :notice => t("users.password_change_form.password_updated")
+    else
+      render :edit_password
+    end
   end
 end

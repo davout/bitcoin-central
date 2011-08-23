@@ -6,6 +6,8 @@ BitcoinBank::Application.routes.draw do
   resource :user, :only => [:edit, :update] do
     get :ga_otp_configuration
     post :reset_ga_otp_secret
+    put :update_password
+    get :edit_password
 
     resources :yubikeys, :only => [:index, :create, :destroy]
     resources :bank_accounts, :only => [:index, :create, :destroy]

@@ -221,6 +221,9 @@ fr:
   error_updating_account:
     one: "Une erreur a empêché vos informations d'être enregistrées :"
     other: "%{count} erreurs ont empêché vos informations d'être enregistrées :"
+  error_updating_password:
+    one: "Une erreur a empêché votre mot de passe d'être changé :"
+    other: "%{count} erreurs ont empêché votre mot de passe d'être changé :"
   email: Adresse e-mail
   new_password_explanation: Remplissez ce champ pour changer votre mot de passe
   new_password_confirmation: Confirmation

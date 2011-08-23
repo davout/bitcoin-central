@@ -109,7 +109,7 @@ en:
       
   users:
     form:
-      submit: Save account details
+      submit: Submit
       merchant_explanation: Activate merchant tools
       ga_otp_explanation: Require Google Auth. OTP
       ga_otp_config: Help and setup instructions
@@ -124,6 +124,11 @@ en:
         other: You have registered %{count} bank accounts
     ga_otp_configuration:
       reset: The Google Authenticator shared-secret has been correctly reset, you should update your mobile device settings
+    password_change_form:
+      change_password: Change your password
+      submit: Submit
+      password_updated: Your password has been updated successfully
+      
 
   yubikeys:
     index:
