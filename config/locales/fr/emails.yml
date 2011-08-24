@@ -3,3 +3,7 @@ fr:
     invoice_payment_notification:
       subject: Vous avez reçu un paiement bitcoin!
       body: "Vous avez reçu un paiement de %{amount} BTC en paiement de la facture %{reference}"
+      
+    withdrawal_processed_notification:
+      subject: Votre demande de paiement a été traitée
+      body: "Votre demande de paiement a été traitée, vous devriez recevoir un virement sous peu."

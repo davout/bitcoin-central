@@ -1,6 +1,6 @@
 %h1= t(".title")
 
-= form_for [current_user, @bank_account] do |f|
+= form_for [current_user, @bank_account], :url => user_bank_accounts_path do |f|
   = errors_for @bank_account, :message => "bank_accounts.index.error"
   = render :partial => 'bank_accounts/fields', :locals => { :form_builder => f }
   .form-field
@@ -10,5 +10,3 @@
 
 %h1= t("activerecord.models.bank_account.other")
 = render :partial => 'bank_accounts/list', :locals => { :bank_accounts => @bank_accounts }
-
-

@@ -24,6 +24,7 @@ fr:
         transfers: Transferts
         users: Utilisateurs
         information: Informations
+        pending_transfers: Opérations en attente
       help:
         main: Aide
         faq: Foire aux questions

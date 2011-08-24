@@ -1,0 +1,7 @@
+= t("emails.withdrawal_processed_notification.body")
+
+= "#{t("activerecord.models.bank_account.one")} : "  
+= @withdrawal.bank_account.iban
+
+= "#{t("activerecord.attributes.account_operation.amount")} : "   
+= "#{@withdrawal.amount} #{@withdrawal.currency}"

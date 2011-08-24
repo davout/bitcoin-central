@@ -3,3 +3,7 @@ en:
     invoice_payment_notification:
       subject: You have received a bitcoin payment
       body: "You have received a %{amount} BTC payment (invoice reference : %{reference})"
+      
+    withdrawal_processed_notification:
+      subject: Your payment request has been processed
+      body: "Your payment request has been processed, you will receive the funds shortly."

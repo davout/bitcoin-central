@@ -13,7 +13,8 @@ class Admin::PendingTransfersController < ApplicationController
     config.action_links.add 'process_tx', 
       :label => 'Mark processed', 
       :type => :member, 
-      :method => :post
+      :method => :post,
+      :position => false
   end
   
   def conditions_for_collection
@@ -23,11 +24,13 @@ class Admin::PendingTransfersController < ApplicationController
   def process_tx
     Transfer;WireTransfer;LibertyReserveTransfer;BitcoinTransfer
     
-    @transfer = Transfer.where("currency IN (#{current_user.allowed_currencies.map { |c| "'#{c.to_s.upcase}'" }.join(",")})").
+    @record = Transfer.where("currency IN (#{current_user.allowed_currencies.map { |c| "'#{c.to_s.upcase}'" }.join(",")})").
       find(params[:id])
     
-    @transfer.process!
+    @record.process!
     
-    redirect_to :action => :index
+    UserMailer.withdrawal_processed_notification(@record).deliver
+    
+    render :template => 'admin/pending_transfers/process_tx'
   end
 end

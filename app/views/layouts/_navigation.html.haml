@@ -15,6 +15,7 @@
   = menu_item ".admin.main", nil, :manager => true do
     %ul
       = menu_item "activerecord.models.user.other", admin_users_path
+      = menu_item ".admin.pending_transfers", admin_pending_transfers_path
       = menu_item ".admin.information", admin_balances_path, :admin => true
       = menu_item "activerecord.models.announcement.other", admin_announcements_path
       = menu_item "activerecord.models.static_page.other", admin_static_pages_path

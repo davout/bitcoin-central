@@ -1,0 +1,9 @@
+%p= t("emails.withdrawal_processed_notification.body")
+
+%table.details
+  %tr
+    %th= "#{t("activerecord.models.bank_account.one")} : "  
+    %td= @withdrawal.bank_account.iban
+  %tr
+    %th= "#{t("activerecord.attributes.account_operation.amount")} : "   
+    %td= "#{@withdrawal.amount} #{@withdrawal.currency}"
