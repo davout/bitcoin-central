@@ -856,3 +856,8 @@ textarea#ticket_description {
     width: 45em;
     height: 10em;
 }
+
+/* Static page headers */
+a.anchor {
+    color: inherit;
+}
