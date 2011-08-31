@@ -48,6 +48,10 @@ class Trade < Operation
   scope :last_24h, lambda {
     where("created_at >= ?", DateTime.now.advance(:hours => -24))
   }
+  
+  scope :last_week, lambda {
+    where("created_at >= ?", DateTime.now.advance(:days => -7))
+  }
 
   scope :involved, lambda { |user|
     where("seller_id = ? OR buyer_id = ?", user.id, user.id)

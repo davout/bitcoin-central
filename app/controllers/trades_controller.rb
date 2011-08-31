@@ -14,25 +14,19 @@ class TradesController < ApplicationController
   end
 
   def ticker
-    @ticker = {}
-
-    @ticker[:at] = DateTime.now.to_i
-    @ticker[:pairs] = {}
-
-    Transfer::CURRENCIES.each do |currency|
-      if Trade.with_currency(currency).count > 0
-        @ticker[:pairs][currency.downcase] = {
-          :high => Trade.with_currency(currency).last_24h.maximum(:ppc),
-          :low => Trade.with_currency(currency).last_24h.minimum(:ppc),
-          :volume => Trade.with_currency(currency).last_24h.sum(:traded_btc),
-          :buy => TradeOrder.with_currency(currency).with_category(:buy).active.maximum(:ppc),
-          :sell => TradeOrder.with_currency(currency).with_category(:sell).active.minimum(:ppc),
-          :last_trade => {
-            :at => Trade.with_currency(currency).last.created_at.to_i,
-            :price => Trade.with_currency(currency).last.ppc
-          }
-        }
-      end
-    end
+    currency = (params[:currency] || "eur").downcase.to_sym
+    
+    @ticker = {
+      :at => DateTime.now.to_i,
+      :high => Trade.with_currency(currency).last_24h.maximum(:ppc),
+      :low => Trade.with_currency(currency).last_24h.minimum(:ppc),
+      :volume => (Trade.with_currency(currency).last_24h.sum(:traded_btc) || 0),
+      :buy => TradeOrder.with_currency(currency).with_category(:buy).active.maximum(:ppc),
+      :sell => TradeOrder.with_currency(currency).with_category(:sell).active.minimum(:ppc),
+      :last_trade => Trade.with_currency(currency).count.zero? ? nil : {
+        :at => Trade.with_currency(currency).last.created_at.to_i,
+        :price => Trade.with_currency(currency).last.ppc
+      }
+    }
   end
 end

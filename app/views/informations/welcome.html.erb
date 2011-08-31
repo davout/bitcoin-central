@@ -1,6 +1,14 @@
 <div id="price-chart-container" class="chart-container">
   <h3><%= t :trading_data_title %></h3>
   <div id="price-chart" class="chart" style="margin:auto;margin-top:2em;width:400px;height:300px"></div>
+  <br />
+  <% form_tag root_path, :method => :get do %>
+    <select name="currency" onchange="$(this).parents('form').submit()" style="float:right">
+      <% Currency.all.map(&:code).reject{ |c| c == "BTC" }.sort.each do |c| %>
+        <option<%= ((params[:currency].blank? && c == "EUR") || params[:currency] == c) ? " selected=\"selected\"".html_safe : "" %> value="<%= c %>"><%= t("activerecord.attributes.currency.codes.#{c.downcase}") %> (<%= c.upcase %>)</option>
+      <% end %>
+    </select>
+  <% end %>
 </div>
 
 <h1><%= t :welcome %></h1>
@@ -23,7 +31,7 @@
   options.axes.xaxis.renderer = $.jqplot.DateAxisRenderer;
 
   $.jqplot('price-chart',
-    <%= @series.to_json.html_safe %>,
-    options
-  )
+<%= @series.to_json.html_safe %>,
+  options
+)
 </script>
