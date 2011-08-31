@@ -199,6 +199,8 @@ fr:
       title: Ouvrez un ticket de support
       submit: Enregistrer
       description_explanation: Décrivez précisément votre demande et n'hésitez-pas à inclure tous les détails nécessaires
+    index:
+      successfully_created: Votre demande a été enregistrée, elle sera traitée dès que possible 
 
   informations:
     welcome:

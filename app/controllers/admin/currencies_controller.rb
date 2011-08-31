@@ -3,6 +3,6 @@ class Admin::CurrenciesController < Admin::AdminController
   
   active_scaffold :currency do |config|
     config.columns = [:code, :created_at]
-    config.actions.exclude :update, :delete, :show
+    config.actions.exclude :update, :delete
   end
 end

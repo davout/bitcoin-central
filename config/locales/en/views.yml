@@ -202,6 +202,8 @@ en:
       title: Open a support request
       submit: Submit request
       description_explanation: Please be as accurate as possible when describing your request and provide all the relevant details.
+    index:
+      successfully_created: Your request was saved successfully, it will be processed as soon as possible
 
   informations:
     welcome:
