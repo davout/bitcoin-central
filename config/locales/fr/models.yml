@@ -132,7 +132,12 @@ fr:
           lreur: Euro Liberty Reserve
           pgau: Or Pecunix
           btc: Bitcoin
-
+      ticket:
+        title: Titre
+        description: Description
+        created_at: Ouvert
+        updated_at: Mis à jour
+        
     models:
       invoice:
         one: Facture

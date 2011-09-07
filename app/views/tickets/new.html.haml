@@ -1,6 +1,8 @@
 %h1= t(".title")
 
 = form_for @ticket do |f|
+  = errors_for @ticket, :message => "tickets.new.error"
+
   .form-field
     = f.label :title
     = f.text_field :title

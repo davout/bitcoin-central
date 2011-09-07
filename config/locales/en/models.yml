@@ -131,6 +131,11 @@ en:
           lreur: Liberty Reserve Euro
           pgau: Pecunix Gold
           btc: Bitcoin
+      ticket:
+        title: Title
+        description: Description
+        created_at: Opened at
+        updated_at: Updated at
                     
     models:
       invoice:

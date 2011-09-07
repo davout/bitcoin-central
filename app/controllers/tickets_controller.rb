@@ -12,7 +12,7 @@ class TicketsController < ApplicationController
     
     if @ticket.save
       redirect_to user_tickets_path,
-        :notice => t("views.tickets.index.successfully_created")
+        :notice => t("tickets.index.successfully_created")
     else
       render :action => :new
     end

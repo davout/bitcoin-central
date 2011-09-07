@@ -63,7 +63,14 @@ fr:
   trade_orders:
     index:
       create: Passer un ordre
-
+    book:
+      bids: Achat
+      asks: Vente
+    list:
+      price: Prix
+      amount: Montant
+      total: Total
+      
   trades:
     index:
       title: Historique
@@ -200,6 +207,7 @@ fr:
       title: Ouvrez un ticket de support
       submit: Enregistrer
       description_explanation: Décrivez précisément votre demande et n'hésitez-pas à inclure tous les détails nécessaires
+      error: Impossible de soumettre la demande
     index:
       successfully_created: Votre demande a été enregistrée, elle sera traitée dès que possible 
 
@@ -218,11 +226,3 @@ fr:
       open_a_ticket: Ouvrir un ticket de support
       view_tickets: Voir les tickets de support
     
-  trade_orders:
-    book:
-      bids: Achat
-      asks: Vente
-    list:
-      price: Prix
-      amount: Montant
-      total: Total

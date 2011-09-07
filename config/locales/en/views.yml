@@ -63,6 +63,13 @@ en:
   trade_orders:
     index:
       create: Create an order
+    book:
+      bids: Bids
+      asks: Asks
+    list:
+      price: Price
+      amount: Amount
+      total: Total  
       
   trades:
     index:
@@ -203,6 +210,7 @@ en:
       title: Open a support request
       submit: Submit request
       description_explanation: Please be as accurate as possible when describing your request and provide all the relevant details.
+      error: Unable to submit your support request
     index:
       successfully_created: Your request was saved successfully, it will be processed as soon as possible
 
@@ -220,12 +228,4 @@ en:
         other: You have %{count} pending support tickets.
       open_a_ticket: Open a support ticket
       view_tickets: View pending support tickets    
-    
-  trade_orders:
-    book:
-      bids: Bids
-      asks: Asks
-    list:
-      price: Price
-      amount: Amount
-      total: Total      
+   
