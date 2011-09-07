@@ -218,5 +218,13 @@ en:
         one: You have a pending support ticket.
         other: You have %{count} pending support tickets.
       open_a_ticket: Open a support ticket
-      view_tickets: View pending support tickets
-
+      view_tickets: View pending support tickets    
+    
+  trade_orders:
+    book:
+      bids: Bids
+      asks: Asks
+    list:
+      price: Price
+      amount: Amount
+      total: Total      

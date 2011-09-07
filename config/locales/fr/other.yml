@@ -132,8 +132,6 @@ fr:
     usd_legend: Dollar US
     cad_legend: Dollar Canadien
     inr_legend: Roupie Indienne  
-  buying: Achat
-  selling: Vente
   amount: Montant
   price: Prix
   no_buying_orders_found: "Aucun ordre d'achat n'a été trouvé"

@@ -27,10 +27,13 @@ module TradeOrdersHelper
     end
   end
   
-  def currency_as_options(c)
+  def currency_as_options(c, options = {})
     result = ""
     
-    Currency.all.each do |currency|
+    exclusions = options[:exclude] || ''
+    exclusions = [exclusions].flatten
+    
+    Currency.where("code NOT IN (#{exclusions.map{ |c| "'#{c.to_s.upcase}'" }.join(",")})").all.each do |currency|
       result << content_tag(:option, :value => currency.code, :selected => (c == currency.code)) do
         "#{t("activerecord.attributes.currency.codes.#{currency.code.downcase}")} (#{currency.code})"
       end

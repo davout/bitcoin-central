@@ -1,20 +1,18 @@
 %div{ :id => "#{type}-orders", :class => "order-book" }
-  %h2= t(title)
+  %h2= t(".#{title}")
   %table.default
     %tr
-      %th.auto-sized #
-      %th= t(:amount)
-      %th= t(:price)
-      %th.auto-sized
+      %th= t(".price")
+      %th= t(".amount")
+      %th= t(".total")
       %th.auto-sized
 
     - unless orders.blank?
       - orders.each do |to|
         %tr{ :class => cycle('even', 'odd') }
-          %td.auto-sized= to[:orders]
-          %td.amount= number_to_bitcoins to[:amount], :precision => 4
-          %td.amount= format_amount(to[:price], to[:currency], 5)
-          %td.auto-sized= image_tag("dark-pool.png", :alt => dark_pool_message(to[:orders]), :title => dark_pool_message(to[:orders])) if to.dark_pool?
+          %td.amount= format_amount(to[:price], to[:currency], 4)
+          %td.amount= number_to_bitcoins to[:amount], :precision => 3
+          %td.amount= format_amount(to[:ppc]*to[:amount], to[:currency], 3)
           %td.auto-sized= currency_icon_for(to.currency)
     - else
       = render :partial => "layouts/no_data"

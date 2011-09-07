@@ -216,4 +216,12 @@ fr:
         other: Vous avez %{count} tickets en cours.
       open_a_ticket: Ouvrir un ticket de support
       view_tickets: Voir les tickets de support
-
+    
+  trade_orders:
+    book:
+      bids: Achat
+      asks: Vente
+    list:
+      price: Prix
+      amount: Montant
+      total: Total

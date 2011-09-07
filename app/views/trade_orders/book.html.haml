@@ -1,7 +1,7 @@
 = form_tag book_account_trade_orders_path, :method => :get do
   .form-field
     = label_tag :currency, t("activerecord.attributes.trade_order.currency")
-    = select_tag(:currency, currency_as_options(@currency), :id => "currency-select" )
+    = select_tag(:currency, currency_as_options(@currency, :exclude => :btc), :id => "currency-select" )
   .form-field#order-book-filter-submit
     = submit_tag 'Filter', :class => "submit", :class => "submit"
   %script{ :type => "text/javascript" }
@@ -10,6 +10,6 @@
 
 %div{ :style => "clear:both" }
         
-= render :partial => "list", :locals => { :type => "purchase", :title => :buying, :orders => @purchases }
+= render :partial => "list", :locals => { :type => "purchase", :title => :bids, :orders => @purchases }
 
-= render :partial => "list", :locals => { :type => "sale", :title => :selling, :orders => @sales }
+= render :partial => "list", :locals => { :type => "sale", :title => :asks, :orders => @sales }

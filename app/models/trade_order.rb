@@ -226,6 +226,7 @@ class TradeOrder < ActiveRecord::Base
       TradeOrder.active_with_category(category).
         select("COUNT(*) AS orders").
         select("ppc AS price").
+        select("ppc").
         select("SUM(amount) AS amount").
         select("MAX(created_at) AS created_at").
         select("currency").

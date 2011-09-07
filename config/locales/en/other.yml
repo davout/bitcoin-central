@@ -132,8 +132,6 @@ en:
     usd_legend: US Dollar
     cad_legend: Canadian Dollar
     inr_legend: Indian Rupee    
-  buying: Buying
-  selling: Selling
   amount: Amount
   price: Price
   no_buying_orders_found: No buying orders have been found.
