@@ -2,8 +2,7 @@ development:
   adapter: mysql
   encoding: utf8
   reconnect: false
-  database: bitcoin-bank_prod
-  pool: 5
+  database: bitcoin-bank_development
   username: rails
   password: rails
 
