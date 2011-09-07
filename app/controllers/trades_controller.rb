@@ -24,8 +24,8 @@ class TradesController < ApplicationController
       :buy => TradeOrder.with_currency(currency).with_category(:buy).active.maximum(:ppc),
       :sell => TradeOrder.with_currency(currency).with_category(:sell).active.minimum(:ppc),
       :last_trade => Trade.with_currency(currency).count.zero? ? nil : {
-        :at => Trade.with_currency(currency).last.created_at.to_i,
-        :price => Trade.with_currency(currency).last.ppc
+        :at => Trade.with_currency(currency).plottable(currency).last.created_at.to_i,
+        :price => Trade.with_currency(currency).plottable(currency).last.ppc
       }
     }
   end

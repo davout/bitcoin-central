@@ -1,18 +1,13 @@
 xml.instruct!
 
 xml.ticker :at => DateTime.now.to_i do
-  %w{lrusd lreur eur pgau}.each do |k|
-    v = @ticker[:pairs][k]
-    xml.tag! k do
-      xml.high v[:high]
-      xml.low v[:low]
-      xml.buy v[:buy]
-      xml.sell v[:sell]
-      xml.volume v[:volume]
-      if v[:last_trade]
-        xml.tag! "last-trade", :at => v[:last_trade][:at],
-          :price => v[:last_trade][:price]
-      end
-    end if v
+  xml.high @ticker[:high]
+  xml.low @ticker[:low]
+  xml.buy @ticker[:buy]
+  xml.sell @ticker[:sell]
+  xml.volume @ticker[:volume]
+  if @ticker[:last_trade]
+    xml.tag! "last-trade", :at => @ticker[:last_trade][:at],
+      :price => @ticker[:last_trade][:price]
   end
 end
