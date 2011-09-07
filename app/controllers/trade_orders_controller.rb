@@ -70,9 +70,8 @@ class TradeOrdersController < ApplicationController
             json[k] << {
               :timestamp => to[:created_at].to_i,
               :price => to[:price].to_d,
-              :volume => to[:amount],
-              :currency => to[:currency],
-              :orders => to[:orders].to_i
+              :amount => to[:amount],
+              :currency => to[:currency]
             }
           end
         end

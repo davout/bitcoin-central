@@ -33,11 +33,7 @@ BitcoinBank::Application.routes.draw do
     
     resources :invoices
 
-    resources :trade_orders, :only => [:index, :new, :create, :destroy] do
-      collection do
-        get :book
-      end
-    end
+    resources :trade_orders, :only => [:index, :new, :create, :destroy]
   end
 
   match "/s/:name" => "static_pages#show", :as => :static
@@ -66,6 +62,8 @@ BitcoinBank::Application.routes.draw do
     
     match '/balances', :to => 'informations#balances', :as => :balances
   end
+  
+  match '/order_book' => 'trade_orders#book'
 
   match '/trades' => 'trades#all_trades'
 

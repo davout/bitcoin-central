@@ -1,4 +1,4 @@
-= form_tag book_account_trade_orders_path, :method => :get do
+= form_tag order_book_path, :method => :get do
   .form-field
     = label_tag :currency, t("activerecord.attributes.trade_order.currency")
     = select_tag(:currency, currency_as_options(@currency, :exclude => :btc), :id => "currency-select" )

@@ -224,7 +224,6 @@ class TradeOrder < ActiveRecord::Base
   def self.get_orders(category, options = {})
     with_exclusive_scope do
       TradeOrder.active_with_category(category).
-        select("COUNT(*) AS orders").
         select("ppc AS price").
         select("ppc").
         select("SUM(amount) AS amount").

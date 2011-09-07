@@ -29,11 +29,11 @@ module TradeOrdersHelper
   
   def currency_as_options(c, options = {})
     result = ""
-    
+
     exclusions = options[:exclude] || ''
-    exclusions = [exclusions].flatten
+    exclusions = [exclusions].flatten.map(&:to_s).map(&:upcase)
     
-    Currency.where("code NOT IN (#{exclusions.map{ |c| "'#{c.to_s.upcase}'" }.join(",")})").all.each do |currency|
+    Currency.where("code NOT IN (#{exclusions.map{ |excluded| "'#{excluded}'" }.join(",")})").all.each do |currency|
       result << content_tag(:option, :value => currency.code, :selected => (c == currency.code)) do
         "#{t("activerecord.attributes.currency.codes.#{currency.code.downcase}")} (#{currency.code})"
       end
