@@ -1,4 +1,4 @@
-class Admin::PendingTransfersController < ApplicationController
+class Admin::PendingTransfersController < Admin::AdminController
   active_scaffold :account_operation do |config|
     config.actions = [:list, :show]
     
