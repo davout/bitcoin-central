@@ -30,7 +30,8 @@ fr:
         faq: Foire aux questions
         economy: Économie
         support: Contact
-        fees: Nos tarifs
+        fees: Nos Tarifs
+        api_docs: API
       ecommerce:
         main: E-commerce
         

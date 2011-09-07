@@ -30,7 +30,8 @@ en:
         faq: FAQ
         economy: Economy
         support: Support
-        fees: Our fees        
+        fees: Our Fees
+        api_docs: API
       ecommerce:
         main: E-commerce
 
