@@ -857,6 +857,41 @@ textarea#ticket_description {
     height: 10em;
 }
 
+div.ticket {
+    
+}
+
+div.ticket div.ticket-comment {
+    width: 75%;
+    margin-top: 1em;
+    margin-left: 1em;
+    font-style: italic;
+}
+
+div.ticket div.ticket-comment div {
+    white-space: pre-wrap;
+    font-family: Lucidatypewriter, monospace;
+    font-style: normal;
+    padding: 1em;
+    margin-top: .5em;
+    background: #ddd;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -moz-box-shadow: 0px 0px 4px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0px 0px 4px rgba(0,0,0,0.5);
+}
+
+div.ticket textarea {
+    margin-left: 1em;
+    width: 70%;
+}
+
+div.ticket input.submit {
+    margin-left: 1em;
+}
+
+
+
 /* Static page headers */
 a.anchor {
     color: inherit;

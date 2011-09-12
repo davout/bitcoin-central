@@ -209,7 +209,12 @@ fr:
       description_explanation: Décrivez précisément votre demande et n'hésitez-pas à inclure tous les détails nécessaires
       error: Impossible de soumettre la demande
     index:
-      successfully_created: Votre demande a été enregistrée, elle sera traitée dès que possible 
+      successfully_created: Votre demande a été enregistrée, elle sera traitée dès que possible
+      your_tickets: Vos tickets de support
+    ticket:
+      add_comment: Ajouter un commentaire
+      someone_wrote: %{who} avez écrit, il y a %{when}
+      you: Vous
 
   informations:
     welcome:
@@ -223,6 +228,6 @@ fr:
         zero: Vous n'avez aucun ticket en cours.
         one: Vous avez un ticket en cours.
         other: Vous avez %{count} tickets en cours.
-      open_a_ticket: Ouvrir un ticket de support
-      view_tickets: Voir les tickets de support
+      open_a_ticket: Ouvrir un nouveau ticket
+      view_tickets: Voir tous les tickets
     

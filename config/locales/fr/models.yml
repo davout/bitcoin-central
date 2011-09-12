@@ -133,9 +133,15 @@ fr:
           pgau: Or Pecunix
           btc: Bitcoin
       ticket:
+        id: Réf.
         title: Titre
+        state: Statut
+        states:
+          pending: En cours
+          solved: Résolu
+          closed: Fermé
         description: Description
-        created_at: Ouvert
+        created_at: Ouvert le
         updated_at: Mis à jour
         
     models:

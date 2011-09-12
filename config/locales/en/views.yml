@@ -213,7 +213,12 @@ en:
       error: Unable to submit your support request
     index:
       successfully_created: Your request was saved successfully, it will be processed as soon as possible
-
+      your_tickets: Your support requests
+    ticket:
+      add_comment: Add a comment
+      someone_wrote: %{who} wrote, %{when} ago
+      you: You
+    
   informations:
     welcome:
       download: Download Bitcoin 0.3.24
@@ -226,6 +231,6 @@ en:
         zero: You don't have any pending support tickets.
         one: You have a pending support ticket.
         other: You have %{count} pending support tickets.
-      open_a_ticket: Open a support ticket
-      view_tickets: View pending support tickets    
+      open_a_ticket: Open a new support ticket
+      view_tickets: View all requests    
    

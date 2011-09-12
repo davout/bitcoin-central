@@ -1,0 +1,25 @@
+.ticket
+  %h2= ticket.title
+  %div
+    %strong= "#{t("activerecord.attributes.ticket.state")} : "
+    = t("activerecord.attributes.ticket.states.#{ticket.state}")
+  .ticket-comment
+    = t(".someone_wrote", :who => (ticket.user == current_user ? t(".you") : ticket.user.name), :when => distance_of_time_in_words_to_now(l(ticket.created_at)))
+    %div= ticket.description
+
+  - ticket.comments.each do |comment|
+    .ticket-comment
+      = t(".someone_wrote", :who => (comment.user == current_user ? t(".you") : comment.user.name), :when => distance_of_time_in_words_to_now(l(comment.created_at)))
+      
+      /Ugly anchor
+      %a{ :name => "comment-#{comment.id}"}
+      %div= comment.contents
+
+  %br
+
+  = form_for ticket.comments.new, :url => user_ticket_comments_path(ticket) do |f|
+    .form-field
+      = f.text_area :contents, :rows => 5
+
+    .form-field
+      = f.submit t(".add_comment"), :class => 'submit'

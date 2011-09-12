@@ -132,7 +132,13 @@ en:
           pgau: Pecunix Gold
           btc: Bitcoin
       ticket:
+        id: ID
         title: Title
+        state: Status
+        states:
+          pending: Pending
+          solved: Solved
+          closed: Closed
         description: Description
         created_at: Opened at
         updated_at: Updated at

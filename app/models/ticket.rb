@@ -5,6 +5,9 @@ class Ticket < ActiveRecord::Base
   
   belongs_to :user
   
+  has_many :comments,
+    :dependent => :destroy
+  
   validates :title,
     :presence => true
   
@@ -13,6 +16,7 @@ class Ticket < ActiveRecord::Base
 
   state_machine do
     state :pending
+    state :solved
     state :closed
   end
 

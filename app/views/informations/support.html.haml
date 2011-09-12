@@ -2,12 +2,15 @@
 %p= t(".contact_description_html", :email => "support@bitcoin-central.net")
 
 %h1= t("activerecord.models.ticket.other")
+
 - if current_user
   %p
     = t(".your_tickets", :count => @tickets.pending.count)
-    - unless @tickets.blank?
-      = link_to t(".view_tickets"), user_tickets_path
   %p
     = link_to t(".open_a_ticket"), new_user_ticket_path
+    - unless @tickets.blank?
+      = " | "
+      = link_to t(".view_tickets"), user_tickets_path
+
 - else
   = t(".please_sign_in")

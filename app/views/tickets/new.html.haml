@@ -1,6 +1,6 @@
 %h1= t(".title")
 
-= form_for @ticket do |f|
+= form_for @ticket, :url => user_tickets_path do |f|
   = errors_for @ticket, :message => "tickets.new.error"
 
   .form-field
