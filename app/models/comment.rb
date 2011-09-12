@@ -3,6 +3,8 @@ class Comment < ActiveRecord::Base
   
   attr_accessible :contents
   
+  after_create :notify_comment!
+  
   belongs_to :user
   belongs_to :ticket
   
@@ -11,4 +13,8 @@ class Comment < ActiveRecord::Base
   
   validates :contents,
     :presence => true
+  
+  def notify_comment!
+    TicketMailer.comment_notification(self).deliver
+  end
 end
