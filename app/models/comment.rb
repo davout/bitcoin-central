@@ -15,6 +15,6 @@ class Comment < ActiveRecord::Base
     :presence => true
   
   def notify_comment!
-    TicketMailer.comment_notification(self).deliver
+    TicketMailer.comment_notification(self.ticket).deliver
   end
 end
