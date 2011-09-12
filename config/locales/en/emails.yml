@@ -7,3 +7,14 @@ en:
     withdrawal_processed_notification:
       subject: Your payment request has been processed
       body: "Your payment request has been processed, you will receive the funds shortly."
+      
+    tickets:
+      view_details_of: "View details of ticket \"%{title}\""
+      reopen_notification:
+        subject: Your support ticket has been reopened
+      create_notification:
+        subject: A new support ticket has been opened
+      close_notification:
+        subject: Your support ticket has been closed
+      comment_notification:
+        subject: Your support ticket has been commented

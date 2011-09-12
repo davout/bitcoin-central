@@ -211,10 +211,13 @@ fr:
     index:
       successfully_created: Votre demande a été enregistrée, elle sera traitée dès que possible
       your_tickets: Vos tickets de support
+      no_tickets_found: Vous n'avez ouvert aucun ticket de support
     ticket:
       add_comment: Ajouter un commentaire
       someone_wrote: %{who} avez écrit, il y a %{when}
       you: Vous
+      reopen : Rouvrir le ticket
+      close: Fermer le ticket      
 
   informations:
     welcome:

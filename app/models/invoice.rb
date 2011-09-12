@@ -57,19 +57,19 @@ class Invoice < ActiveRecord::Base
       transitions :to => :processing,
         :from => :pending,
         :on_transition => lambda { |i|
-        i.paid_at = DateTime.now
-      }
+          i.paid_at = DateTime.now
+        }
     end
 
     event :pay do
       transitions :to => :paid,
         :from => [:pending, :processing],
         :on_transition => lambda { |i|
-        i.paid_at ||= DateTime.now
-        i.credit_funds
-        i.post_to_callback
-        i.email_confirmation
-      }
+          i.paid_at ||= DateTime.now
+          i.credit_funds
+          i.post_to_callback
+          i.email_confirmation
+        }
     end
   end
 

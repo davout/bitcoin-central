@@ -1,3 +1,6 @@
 %h1= t(".your_tickets")
 
-= render :partial => 'ticket', :collection => @tickets
+- if @tickets.blank?
+  = t(".no_tickets_found")
+- else
+  = render :partial => 'ticket', :collection => @tickets

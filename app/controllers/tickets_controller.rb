@@ -11,10 +11,28 @@ class TicketsController < ApplicationController
     @ticket = current_user.tickets.new(params[:ticket])
     
     if @ticket.save
-      redirect_to user_tickets_path,
+      redirect_to user_ticket_path(@ticket),
         :notice => t("tickets.index.successfully_created")
     else
       render :action => :new
     end
+  end
+  
+  def show
+    @ticket = Ticket.find(params[:id])
+  end
+
+  def reopen
+    @ticket = Ticket.find(params[:id])
+    @ticket.reopen!
+    
+    redirect_to user_ticket_path(@ticket)
+  end
+  
+  def close
+    @ticket = Ticket.find(params[:id])
+    @ticket.close!
+    
+    redirect_to user_ticket_path(@ticket)
   end
 end

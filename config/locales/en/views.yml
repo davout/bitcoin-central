@@ -214,10 +214,13 @@ en:
     index:
       successfully_created: Your request was saved successfully, it will be processed as soon as possible
       your_tickets: Your support requests
+      no_tickets_found: You have no support requests to display
     ticket:
       add_comment: Add a comment
       someone_wrote: %{who} wrote, %{when} ago
       you: You
+      reopen : Re-open ticket
+      close: Close ticket
     
   informations:
     welcome:
