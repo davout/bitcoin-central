@@ -1,5 +1,5 @@
 module Admin::TicketsHelper
-  def id_column(record)
-    link_to(record.id, user_ticket_path(record))
+  def title_column(record)
+    link_to(record.title, user_ticket_path(record))
   end
 end

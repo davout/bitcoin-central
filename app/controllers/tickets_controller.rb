@@ -1,4 +1,7 @@
 class TicketsController < ApplicationController
+  before_filter :check_permissions, 
+    :only => [:show, :close, :reopen]
+  
   def new
     @ticket = current_user.tickets.new
   end
@@ -19,20 +22,26 @@ class TicketsController < ApplicationController
   end
   
   def show
-    @ticket = Ticket.find(params[:id])
   end
 
-  def reopen
-    @ticket = Ticket.find(params[:id])
-    @ticket.reopen!
-    
+  def reopen    
+    @ticket.reopen!    
     redirect_to user_ticket_path(@ticket)
   end
   
   def close
-    @ticket = Ticket.find(params[:id])
-    @ticket.close!
-    
+    @ticket.close!    
     redirect_to user_ticket_path(@ticket)
+  end
+  
+  def check_permissions
+    @ticket = Ticket.find(params[:id])
+    
+    unless (@ticket.user == current_user) || current_user.is_a?(Manager)
+      render :nothing => true,
+        :status => :forbidden
+      
+      return(false)
+    end
   end
 end
