@@ -87,6 +87,8 @@ fr:
         ga_otp: Code Google Auth.
         yk_otp: Code Yubikey
         bank_account_id: Compte bancaire
+        full_name: Votre nom
+        address: Votre addresse
       trade:
         type: Type
         amount: Montant

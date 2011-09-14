@@ -26,6 +26,9 @@ class UsersController < ApplicationController
   def update
     @user = current_user
 
+    params[:user].delete(:full_name) unless @user.full_name.blank?
+    params[:user].delete(:address) unless @user.address.blank?
+    
     if @user.update_attributes(params[:user])
       redirect_to edit_user_path,
         :notice => (t :account_updated)

@@ -14,7 +14,7 @@ class User < Account
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :password, :password_confirmation, :remember_me, :time_zone, 
-    :merchant, :require_ga_otp, :require_yk_otp
+    :merchant, :require_ga_otp, :require_yk_otp, :full_name, :address
 
   attr_accessor :captcha,
     :skip_captcha,

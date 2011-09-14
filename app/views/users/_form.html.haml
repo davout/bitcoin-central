@@ -11,6 +11,14 @@
     = f.text_field :email, :disabled => true
 
   .form-field
+    = f.label :full_name
+    = f.text_field :full_name, :disabled => !@user.full_name.blank?
+
+  .form-field
+    = f.label :address
+    = f.text_area :address, :disabled => !@user.address.blank?, :rows => 4
+
+  .form-field
     = f.label :time_zone
     = f.time_zone_select :time_zone, nil, :prompt => "--"
     .explanation= t(".time_zone_explanation")
