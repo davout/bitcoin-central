@@ -16,8 +16,6 @@
         %span#last-bitcoin-address.bitcoin-address
           = @current_user.bitcoin_address
       
-
-
     - else
       = link_to t(".sign_up"), new_registration_path(:user)
       = "|"
