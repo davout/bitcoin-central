@@ -1,5 +1,7 @@
 class Admin::UsersController < Admin::AdminController  
   def conditions_for_collection
+    raise "Currency not recognized" unless params[:currency] =~/^[A-Za-z]+$/
+    
     unless params[:currency].blank?
       @conditions = "((SELECT SUM(amount) FROM account_operations WHERE account_operations.account_id = accounts.id AND account_operations.currency = '#{params[:currency]}') > 0)"
     end
