@@ -1,15 +1,15 @@
-The following trade orders have been executed :
+<%= t("emails.trade_notification.subject") %>
 
 <% unless @sales.blank? %>
-  You sold :
+  <%=  t("emails.trade_notification.sold") %>
   <% @sales.each do |s| %>
-     - <%= s.traded_btc %> BTC at <%= s.ppc %> <%= s.currency %> per BTC for a total of <%= s.traded_currency %> <%= s.currency %>
+     - <%= t("emails.trade_notification.traded", :traded_btc => s.traded_btc, :ppc => s.ppc, :currency => s.currency, :traded_currency => s.traded_currency)  %>
   <% end %>
 <% end %>
 
 <% unless @purchases.blank? %>
-  You bought :
+  <%=  t("emails.trade_notification.bought") %>
   <% @purchases.each do |p| %>
-     - <%= p.traded_btc %> BTC at <%= p.ppc %> <%= p.currency %> per BTC for a total of <%= p.traded_currency %> <%= p.currency %>
+     - <%= t("emails.trade_notification.traded", :traded_btc => p.traded_btc, :ppc => p.ppc, :currency => p.currency, :traded_currency => p.traded_currency) %>
   <% end %>
 <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110821132029) do
+ActiveRecord::Schema.define(:version => 20110914131115) do
 
   create_table "account_operations", :force => true do |t|
     t.string   "type"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(:version => 20110821132029) do
   add_index "account_operations", ["lr_transaction_id"], :name => "index_transfers_on_lr_transaction_id", :unique => true
 
   create_table "accounts", :force => true do |t|
-    t.string   "name",                                    :null => false
+    t.string   "name",                                      :null => false
     t.string   "email"
     t.string   "password"
     t.datetime "created_at"
@@ -50,30 +50,34 @@ ActiveRecord::Schema.define(:version => 20110821132029) do
     t.string   "salt"
     t.string   "time_zone"
     t.string   "secret_token"
-    t.string   "encrypted_password",   :default => "",    :null => false
-    t.string   "password_salt",        :default => "",    :null => false
+    t.string   "encrypted_password",     :default => "",    :null => false
+    t.string   "password_salt",          :default => "",    :null => false
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "reset_password_token"
     t.string   "remember_token"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",        :default => 0
+    t.integer  "sign_in_count",          :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.integer  "failed_attempts",      :default => 0
+    t.integer  "failed_attempts",        :default => 0
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.string   "authentication_token"
-    t.boolean  "merchant",             :default => false
+    t.boolean  "merchant",               :default => false
     t.string   "ga_otp_secret"
-    t.boolean  "require_ga_otp",       :default => false
+    t.boolean  "require_ga_otp",         :default => false
     t.datetime "last_address_refresh"
-    t.boolean  "require_yk_otp",       :default => false
+    t.boolean  "require_yk_otp",         :default => false
     t.integer  "parent_id"
     t.string   "type"
+    t.string   "full_name"
+    t.text     "address"
+    t.boolean  "notify_on_trade",        :default => true
+    t.integer  "last_notified_trade_id", :default => 0,     :null => false
   end
 
   add_index "accounts", ["email"], :name => "index_users_on_email", :unique => true
@@ -92,6 +96,14 @@ ActiveRecord::Schema.define(:version => 20110821132029) do
     t.string   "iban",           :null => false
     t.text     "account_holder"
     t.string   "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "comments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "ticket_id"
+    t.text     "contents"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
