@@ -129,6 +129,8 @@ fr:
         zero: Vous n'avez enregistré aucun compte bancaire pour l'instant.
         one: Vous avez enregistré un compte bancaire.
         other: Vous avez enregistré %{count} comptes bancaires.
+      notifications: Notifications e-mail
+      notify_on_trade_explanation: Recevoir une notification quand un échange est enregistré
     ga_otp_configuration:
       reset: Le secret partagé a été ré-initialisé, vous devez mettre à jour la configuration de votre téléphone
     password_change_form:

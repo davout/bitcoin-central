@@ -88,6 +88,7 @@ en:
         bank_account_id: Bank account
         full_name: Your name
         address: Your address
+        notify_on_trade: Successful trade
       trade:
         type: Type
         amount: Amount

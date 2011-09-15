@@ -21,4 +21,12 @@ class UserMailer < BitcoinCentralMailer
     mail :to => @user.email,
       :subject => I18n.t("emails.withdrawal_processed_notification.subject")
   end
+  
+  def trade_notification(user, sales, purchases)
+    @sales = sales
+    @purchases = purchases
+    
+    mail :to => user.email,
+      :subject => I18n.t("emails.trade_notification.subject")
+  end
 end

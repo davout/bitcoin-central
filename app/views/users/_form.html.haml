@@ -42,7 +42,13 @@
       %legend= t("activerecord.models.bank_account.other")
       %p= t(".registered_bank_accounts", :count => current_user.bank_accounts.count)
       %p= link_to t(".manage_bank_accounts"), user_bank_accounts_path
-        
+
+    %fieldset
+      %legend= t(".notifications")
+      .form-field
+        = f.label :notify_on_trade
+        = f.check_box :notify_on_trade, :class => "checkbox"
+        .explanation= t(".notify_on_trade_explanation")        
 
     %fieldset
       %legend= t(".api_tools")

@@ -2,7 +2,7 @@
   <h3><%= t :trading_data_title %></h3>
   <div id="price-chart" class="chart" style="margin:auto;margin-top:2em;width:400px;height:300px"></div>
   <br />
-  <% form_tag root_path, :method => :get do %>
+  <%= form_tag root_path, :method => :get do %>
     <select name="currency" onchange="$(this).parents('form').submit()" style="float:right">
       <% Currency.all.map(&:code).reject{ |c| c == "BTC" }.sort.each do |c| %>
         <option<%= ((params[:currency].blank? && c == "EUR") || params[:currency] == c) ? " selected=\"selected\"".html_safe : "" %> value="<%= c %>"><%= t("activerecord.attributes.currency.codes.#{c.downcase}") %> (<%= c.upcase %>)</option>

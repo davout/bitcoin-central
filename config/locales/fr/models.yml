@@ -89,6 +89,7 @@ fr:
         bank_account_id: Compte bancaire
         full_name: Votre nom
         address: Votre addresse
+        notify_on_trade: Exécution d'ordre
       trade:
         type: Type
         amount: Montant

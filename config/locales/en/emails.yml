@@ -18,3 +18,5 @@ en:
         subject: Your support ticket has been closed
       comment_notification:
         subject: Your support ticket has been commented
+      trade_notification:
+        subject: Trade orders have been executed

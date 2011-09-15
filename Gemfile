@@ -38,6 +38,9 @@ gem 'rqrcode'
 
 gem 'iban-tools'
 
+# TODO : Add me
+# gem 'delayed_job'
+
 group :test do
   gem 'mocha', :require => false
   gem 'factory_girl_rails'

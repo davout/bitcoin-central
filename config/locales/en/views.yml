@@ -131,6 +131,8 @@ en:
         zero: You haven't registered any bank account yet.
         one: You have registered a bank account
         other: You have registered %{count} bank accounts
+      notifications: E-mail notifications
+      notify_on_trade_explanation: Receive a notification when one of your trade orders gets matched
     ga_otp_configuration:
       reset: The Google Authenticator shared-secret has been correctly reset, you should update your mobile device settings
     password_change_form:

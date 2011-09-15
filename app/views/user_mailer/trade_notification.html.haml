@@ -1,0 +1,11 @@
+The following trade orders have been executed :
+
+- unless @sales.blank?
+  %h3 You sold :
+  - @sales.each do |s|
+    = "- #{s.traded_btc} BTC at #{s.ppc} #{s.currency} per BTC for a total of #{s.traded_currency} #{s.currency}"
+
+- unless @purchases.blank?
+  %h3 You bought :
+  - @purchases.each do |p|
+    = "- #{p.traded_btc} BTC at #{p.ppc} #{p.currency} per BTC for a total of #{p.traded_currency} #{p.currency}"

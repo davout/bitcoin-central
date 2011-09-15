@@ -18,3 +18,5 @@ fr:
         subject: Votre ticket a été clôturé
       comment_notification:
         subject: Un commentaire a été ajouté sur votre ticket
+      trade_notification:
+        subject: Vos ordres d'échange ont été exécutés

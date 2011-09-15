@@ -1,6 +1,6 @@
 job_type :rake, "cd :path && RAILS_ENV=:environment bundle exec rake :task :output"
 
-every 3.minutes do
+every 2.minutes do
   rake "bitcoin:synchronize_transactions"
 end
 
@@ -10,6 +10,7 @@ end
 
 every 10.minutes do
   rake "liberty_reserve:synchronize_transactions"
+  rake "notifications:trades"
 end
 
 every 30.minutes do
