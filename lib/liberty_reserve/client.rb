@@ -145,7 +145,7 @@ module LibertyReserve
             :lr_merchant_fee => t["Fee"].to_d,
             :lr_transferred_amount => t["Amount"].to_d,
             :amount => t["Amount"].to_d - t["Fee"].to_d,
-            :account => account ? User.where(:name => name[0]).first : nil
+            :account => name ? User.where(:name => name[0]).first : nil
           }
         end
       end
