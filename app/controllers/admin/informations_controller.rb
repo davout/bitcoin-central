@@ -1,13 +1,11 @@
 class Admin::InformationsController < Admin::AdminController
-  before_filter :enforce_admin_rights
-  
   def balances
-    @balances = [:lrusd, :lreur, :pgau, :eur, :btc].inject({}) do |balances, currency|
+    @balances = [:lrusd, :lreur, :pgau, :eur, :btc, :cad, :inr].inject({}) do |balances, currency|
       balances[currency] = {}
       
       balances[currency][:user] = AccountOperation.
         joins(:account).
-        where("`accounts`.`type` = 'User'").
+        where("`accounts`.`type` IN ('User', 'Manager', 'Admin')").
         with_currency(currency).
         select("SUM(`amount`) AS `amount`").
         first.
