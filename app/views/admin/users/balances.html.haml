@@ -1,0 +1,7 @@
+%h1= "Balances for #{@user.name} (#{@user.email})"
+
+%table.default.details
+  - @balances.each do |c, b|
+    %tr{ :class => cycle('even', 'odd') }
+      %th= c
+      %td.amount= b

@@ -11,7 +11,6 @@ BitcoinBank::Application.routes.draw do
     resources :bank_accounts, :only => [:index, :create, :destroy]
     resources :tickets do
       resources :comments, :only => :create
-      
       member do
         post :close
         post :reopen
@@ -60,6 +59,10 @@ BitcoinBank::Application.routes.draw do
     
     resources :users do
       as_routes
+      
+      member do
+        get :balances
+      end
       
       resources :account_operations do
         as_routes

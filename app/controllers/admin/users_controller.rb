@@ -1,4 +1,20 @@
-class Admin::UsersController < Admin::AdminController
+class Admin::UsersController < Admin::AdminController  
+  def conditions_for_collection
+    unless params[:currency].blank?
+      @conditions = "((SELECT SUM(amount) FROM account_operations WHERE account_operations.account_id = accounts.id AND account_operations.currency = '#{params[:currency]}') > 0)"
+    end
+  end
+  
+  
+  def balances
+    @balances = {}
+    @user = User.find(params[:id])
+      
+    Currency.all.map(&:code).each do |c|
+      @balances[c] = @user.balance(c)
+    end
+  end
+  
   active_scaffold :user do |config|
     config.actions.exclude :create, :update, :delete
     
@@ -20,7 +36,9 @@ class Admin::UsersController < Admin::AdminController
       :locked_at,
       :remember_created_at,
       :merchant,
-      :yubikeys
+      :yubikeys,
+      :full_name,
+      :address
     ]
     
     config.list.columns = [
@@ -32,7 +50,9 @@ class Admin::UsersController < Admin::AdminController
     config.show.columns = [
       :id,
       :name,
+      :full_name,
       :email,
+      :address,
       :require_ga_otp,
       :require_yk_otp,
       :merchant,
@@ -55,5 +75,12 @@ class Admin::UsersController < Admin::AdminController
     config.search.columns << :id
 
     config.nested.add_link(:yubikeys)
+    
+    config.action_links.add :balances, 
+      :type => :member, 
+      :label => "Balances", 
+      :action => "balances", 
+      :controller => "admin/users", 
+      :page => true
   end
 end
