@@ -1,10 +1,10 @@
 class TradeOrder < ActiveRecord::Base
   MIN_AMOUNT = 1.0
-  MIN_DARK_POOL_AMOUNT = 3000.0
+  MIN_DARK_POOL_AMOUNT = 400.0
 
   attr_accessor :skip_min_amount
 
-  attr_accessible :amount, :currency, :category, :ppc
+  attr_accessible :amount, :currency, :category, :ppc, :dark_pool
 
   default_scope order('created_at DESC')
 
