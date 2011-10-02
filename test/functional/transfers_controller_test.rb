@@ -5,6 +5,8 @@ class TransfersControllerTest < ActionController::TestCase
     user = login_with(Factory(:user))
     add_money(user, 1000.0, :btc)
 
+    Bitcoin::Util.stubs(:valid_bitcoin_address?).returns(true)
+    Bitcoin::Util.stubs(:my_bitcoin_address?).returns(false)    
     Bitcoin::Client.instance.stubs(:send_to_address).returns("foo")
     Bitcoin::Client.instance.stubs(:get_balance).returns(BigDecimal("1000"))
 
@@ -12,7 +14,8 @@ class TransfersControllerTest < ActionController::TestCase
       assert_difference "user.balance(:btc)", BigDecimal("-500") do
         post :create, :transfer => {
           :currency => "BTC",
-          :amount => "500"
+          :amount => "500",
+          :address => "bar"
         }
       end
     end

@@ -3,7 +3,8 @@ class BitcoinTransfer < Transfer
 
   validates :address,
     :bitcoin_address => true,
-    :not_mine => true
+    :not_mine => true,
+    :presence => true
 
   validates :currency,
     :inclusion => { :in => ["BTC"] }
