@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class TradeOrderTest < ActiveSupport::TestCase
+
   test "should correctly perform a simple trade order" do
     trader1 = Factory(:user)
     trader2 = Factory(:user)
@@ -538,5 +539,72 @@ class TradeOrderTest < ActiveSupport::TestCase
       t.activate!
       assert t.active?
     end
+  end
+
+  test "execution should use ppc order only" do
+    trader1 = Factory(:user)
+    trader2 = Factory(:user)
+
+    add_money(trader1, 5000.0, :btc)
+    add_money(trader2, 1000000.0, :lrusd)
+
+    assert_equal BigDecimal("1000000.0"), trader2.balance(:lrusd)
+
+    Factory(:trade_order,
+            :category => "sell",
+            :amount   => 1000,
+            :ppc      => 3.4,
+            :user     => trader1,
+            :currency => "LRUSD",
+            :created_at => 10.seconds.ago
+            )
+
+    Factory(:trade_order,
+            :category => "sell",
+            :amount   => 1000,
+            :ppc      => 3.3,
+            :user     => trader1,
+            :currency => "LRUSD",
+            :created_at => 11.seconds.ago
+            )
+
+    Factory(:trade_order,
+            :category => "sell",
+            :amount   => 1000,
+            :ppc      => 3.5,
+            :user     => trader1,
+            :currency => "LRUSD",
+            :created_at => 12.seconds.ago
+            )
+
+    Factory(:trade_order,
+            :category => "sell",
+            :amount   => 1000,
+            :ppc      => 3.2,
+            :user     => trader1,
+            :currency => "LRUSD",
+            :created_at => 13.seconds.ago
+            )
+
+    Factory(:trade_order,
+            :category => "sell",
+            :amount   => 1000,
+            :ppc      => 3.0,
+            :user     => trader1,
+            :currency => "LRUSD",
+            :created_at => 14.seconds.ago
+            )
+
+    t = Factory(:trade_order,
+                :category => "buy",
+                :amount   => 250,
+                :ppc      => 4.0,
+                :user     => trader2,
+                :currency => "LRUSD"
+                )
+
+    t.execute!
+    assert_equal BigDecimal("999250.0"), trader2.balance(:lrusd), "Delta #{trader2.balance(:lrusd) - BigDecimal("999250.0")}"
+
   end
 end

@@ -80,7 +80,7 @@ class TradeOrder < ActiveRecord::Base
     where("category = ?", category.to_s)
   }
 
-  scope :matching_orders, lambda { |order|
+  def self.matching_orders(order)
     with_exclusive_scope do
       active.
         with_currency(order.currency).
@@ -89,7 +89,8 @@ class TradeOrder < ActiveRecord::Base
         where("user_id <> ?", order.user_id).
         order("ppc #{order.buying? ? 'ASC' : 'DESC'}")
     end
-  }
+  end
+
 
   scope :active_with_category, lambda { |cat|
     with_exclusive_scope do
