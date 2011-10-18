@@ -58,9 +58,9 @@ class Trade < Operation
   }
 
   # TODO : Dry up (duplicated in TradeOrder)
-  scope :with_currency, lambda { |currency|
+  def self.with_currency(currency)
     where("currency = ?", currency.to_s.upcase)
-  }
+  end
 
   def self.plottable(currency)
     with_exclusive_scope do
