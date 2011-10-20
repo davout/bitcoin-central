@@ -71,6 +71,7 @@ fr:
       price: Prix
       amount: Montant
       total: Total
+      market_order: Prix du marché
       
   trades:
     index:
