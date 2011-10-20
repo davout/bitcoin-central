@@ -60,8 +60,12 @@ Factory.define :transfer do |transfer|
   transfer.bt_tx_id         nil
 end
 
-Factory.define :trade_order do |trade_order|
+Factory.define :market_order do |market_order|
 end
+
+Factory.define :limit_order do |limit_order|
+end
+
 
 # This is necessary to prevent the address generation machinery to
 # be triggered each time an invoice is saved using its factory

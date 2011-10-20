@@ -63,6 +63,7 @@ fr:
   trade_orders:
     index:
       create: Passer un ordre
+      market_order: Prix du marché
     book:
       bids: Achat
       asks: Vente

@@ -9,7 +9,7 @@ class TradeOrderTest < ActiveSupport::TestCase
     add_money(trader1, 35.0, :lrusd)
     add_money(trader2, 100.0, :btc)
 
-    buy_order = Factory(:trade_order,
+    buy_order = Factory(:limit_order,
       :amount => 100.0,
       :category => "buy",
       :currency => "LRUSD",
@@ -17,7 +17,7 @@ class TradeOrderTest < ActiveSupport::TestCase
       :user => trader1
     )
 
-    sell_order = Factory(:trade_order,
+    sell_order = Factory(:limit_order,
       :amount => 100.0,
       :category => "sell",
       :currency => "LRUSD",
@@ -40,15 +40,15 @@ class TradeOrderTest < ActiveSupport::TestCase
     assert_destroyed sell_order
     assert_destroyed buy_order
   end
-  
+
   test "should correctly perform a trade order with a limiting order" do
     trader1 = Factory(:user)
     trader2 = Factory(:user)
-    
+
     add_money(trader1, 25.0, :lrusd)
     add_money(trader2, 100.0, :btc)
-    
-    buy_order = Factory.build(:trade_order,
+
+    buy_order = Factory.build(:limit_order,
       :user => trader1,
       :amount => 1000.0,
       :category => "buy",
@@ -56,7 +56,7 @@ class TradeOrderTest < ActiveSupport::TestCase
       :ppc => 0.27
     )
 
-    sell_order = Factory.build(:trade_order,
+    sell_order = Factory.build(:limit_order,
       :user => trader2,
       :amount => 100.0,
       :category => "sell",
@@ -81,9 +81,9 @@ class TradeOrderTest < ActiveSupport::TestCase
     assert_destroyed sell_order
     assert_not_destroyed buy_order
 
-    assert !buy_order.reload.active?, 
+    assert !buy_order.reload.active?,
       "Purchase should not be active anymore, for the buyer has insufficient balance"
-    
+
     assert_equal buy_order.reload.amount, BigDecimal("900.0")
   end
 
@@ -97,7 +97,7 @@ class TradeOrderTest < ActiveSupport::TestCase
     assert_equal trader2.balance(:btc), BigDecimal("10000.0")
     assert_equal trader1.balance(:lrusd), BigDecimal("100.0")
 
-    buy_order = Factory.build(:trade_order,
+    buy_order = Factory.build(:limit_order,
       :user => trader1,
       :amount => 1000.0,
       :category => "buy",
@@ -105,7 +105,7 @@ class TradeOrderTest < ActiveSupport::TestCase
       :ppc => 0.27
     )
 
-    sell_order = Factory.build(:trade_order,
+    sell_order = Factory.build(:limit_order,
       :user => trader2,
       :amount => 1000.0,
       :category => "sell",
@@ -148,7 +148,7 @@ class TradeOrderTest < ActiveSupport::TestCase
     assert_equal 0.0, trader1.balance(:lrusd)
     assert_equal 0.0, trader2.balance(:btc)
 
-    bid_at_8 = Factory(:trade_order,
+    bid_at_8 = Factory(:limit_order,
       :user => trader1,
       :amount => 100.0,
       :category => "sell",
@@ -156,7 +156,7 @@ class TradeOrderTest < ActiveSupport::TestCase
       :ppc => 8.0
     )
 
-    ask_at_14 = Factory(:trade_order,
+    ask_at_14 = Factory(:limit_order,
       :user => trader2,
       :amount => 75.0,
       :category => "buy",
@@ -164,7 +164,7 @@ class TradeOrderTest < ActiveSupport::TestCase
       :ppc => 14.0
     )
 
-    ask_at_12 = Factory(:trade_order,
+    ask_at_12 = Factory(:limit_order,
       :user => trader2,
       :amount => 75.0,
       :category => "buy",
@@ -172,7 +172,7 @@ class TradeOrderTest < ActiveSupport::TestCase
       :ppc => 12.0
     )
 
-    ask_at_10 = Factory(:trade_order,
+    ask_at_10 = Factory(:limit_order,
       :user => trader2,
       :amount => 75.0,
       :category => "buy",
@@ -181,7 +181,7 @@ class TradeOrderTest < ActiveSupport::TestCase
     )
 
     # Check matched orders, and their correct sorting
-    assert_equal [ask_at_14, ask_at_12, ask_at_10].map(&:id), TradeOrder.matching_orders(bid_at_8).map(&:id)
+    assert_equal [ask_at_14, ask_at_12, ask_at_10].map(&:id), bid_at_8.matching_orders.map(&:id)
 
     assert_difference 'TradeOrder.count', -2 do
       assert_difference 'Trade.count', 2 do
@@ -204,7 +204,7 @@ class TradeOrderTest < ActiveSupport::TestCase
     add_money(trader1, 25.0, :lrusd)
     add_money(trader2, 100.0, :btc)
 
-    buy_order = Factory.build(:trade_order,
+    buy_order = Factory.build(:limit_order,
       :user => trader1,
       :amount => 100.0,
       :category => "buy",
@@ -212,7 +212,7 @@ class TradeOrderTest < ActiveSupport::TestCase
       :ppc => 0.271
     )
 
-    sell_order = Factory.build(:trade_order,
+    sell_order = Factory.build(:limit_order,
       :user => trader2,
       :amount => 1000.0,
       :category => "sell",
@@ -248,7 +248,7 @@ class TradeOrderTest < ActiveSupport::TestCase
 
     assert_equal 25.0, trader1.balance(:lrusd)
 
-    t = Factory.build(:trade_order,
+    t = Factory.build(:limit_order,
       :category => "buy",
       :amount => 1.0,
       :ppc => 25.0,
@@ -280,7 +280,7 @@ class TradeOrderTest < ActiveSupport::TestCase
     # and try to execute it against the first one we should end up with an unactivated order
     # with 0.1 remaining amount.
 
-    t2 = TradeOrder.new do |to|
+    t2 = LimitOrder.new do |to|
       to.category = "sell"
       to.amount = 50
       to.ppc = 25.0
@@ -293,8 +293,8 @@ class TradeOrderTest < ActiveSupport::TestCase
     assert_equal BigDecimal("25.0"), trader1.balance(:lrusd)
     assert_equal BigDecimal("100.0"), trader2.balance(:btc)
 
-    assert TradeOrder.matching_orders(t).include?(t2), "Orders should be matched"
-    assert TradeOrder.matching_orders(t2).include?(t), "Orders should be matched"
+    assert t.matching_orders.include?(t2), "Orders should be matched"
+    assert t2.matching_orders.include?(t), "Orders should be matched"
 
     assert_difference "TradeOrder.count", -1 do
       assert_difference "Trade.count" do
@@ -324,7 +324,7 @@ class TradeOrderTest < ActiveSupport::TestCase
 
     assert_equal 25.0, trader1.balance(:lrusd)
 
-    t = Factory.build(:trade_order,
+    t = Factory.build(:limit_order,
       :category => "buy",
       :amount => 1.0,
       :ppc => 25.0,
@@ -356,7 +356,7 @@ class TradeOrderTest < ActiveSupport::TestCase
     # and try to execute it against the first one we should end up with an unactivated order
     # with 0.1 remaining amount.
 
-    t2 = TradeOrder.new do |to|
+    t2 = LimitOrder.new do |to|
       to.category = "sell"
       to.amount = 50
       to.ppc = 25.0
@@ -369,8 +369,8 @@ class TradeOrderTest < ActiveSupport::TestCase
     assert_equal 25.0, trader1.balance(:lrusd)
     assert_equal 100.0, trader2.balance(:btc)
 
-    assert TradeOrder.matching_orders(t).include?(t2), "Orders should be matched"
-    assert TradeOrder.matching_orders(t2).include?(t), "Orders should be matched"
+    assert t.matching_orders.include?(t2), "Orders should be matched"
+    assert t2.matching_orders.include?(t), "Orders should be matched"
 
     assert_no_difference "TradeOrder.count" do
       assert_difference "Trade.count" do
@@ -398,7 +398,7 @@ class TradeOrderTest < ActiveSupport::TestCase
 
     add_money(trader1, 25.0, :lrusd)
 
-    t = Factory.build(:trade_order,
+    t = Factory.build(:limit_order,
       :category => "buy",
       :amount => 1.0,
       :ppc => 25.0,
@@ -425,7 +425,7 @@ class TradeOrderTest < ActiveSupport::TestCase
     assert_equal 25.0, trader1.balance(:lrusd)
     assert_equal 100.0, trader2.balance(:btc)
 
-    t = Factory.build(:trade_order,
+    t = Factory.build(:limit_order,
       :category => "buy",
       :amount => 200,
       :ppc => 0.125,
@@ -435,7 +435,7 @@ class TradeOrderTest < ActiveSupport::TestCase
 
     assert t.save, "Order should get saved"
 
-    t2 = Factory.build(:trade_order,
+    t2 = Factory.build(:limit_order,
       :category => "sell",
       :amount => 100,
       :ppc => 0.125,
@@ -463,7 +463,7 @@ class TradeOrderTest < ActiveSupport::TestCase
     t = nil
 
     assert_no_difference "Transfer.count" do
-      t = Factory(:trade_order,
+      t = Factory(:limit_order,
         :category => "buy",
         :amount => 1.0,
         :ppc => 25.0,
@@ -508,7 +508,7 @@ class TradeOrderTest < ActiveSupport::TestCase
     t = nil
 
     assert_no_difference "Transfer.count" do
-      t = Factory(:trade_order,
+      t = Factory(:limit_order,
         :category => "buy",
         :amount => 1.0,
         :ppc => 25.0,
@@ -524,7 +524,7 @@ class TradeOrderTest < ActiveSupport::TestCase
     assert !t.reload.active?, "Order should get inactivated by transfer"
 
     assert_no_difference "AccountOperation.count" do
-      Factory(:trade_order,
+      Factory(:limit_order,
         :category => "sell",
         :amount => 1.0,
         :ppc => 20.0,
@@ -550,7 +550,7 @@ class TradeOrderTest < ActiveSupport::TestCase
 
     assert_equal BigDecimal("1000000.0"), trader2.balance(:lrusd)
 
-    Factory(:trade_order,
+    Factory(:limit_order,
             :category => "sell",
             :amount   => 1000,
             :ppc      => 3.4,
@@ -559,7 +559,7 @@ class TradeOrderTest < ActiveSupport::TestCase
             :created_at => 10.seconds.ago
             )
 
-    Factory(:trade_order,
+    Factory(:limit_order,
             :category => "sell",
             :amount   => 1000,
             :ppc      => 3.3,
@@ -568,7 +568,7 @@ class TradeOrderTest < ActiveSupport::TestCase
             :created_at => 11.seconds.ago
             )
 
-    Factory(:trade_order,
+    Factory(:limit_order,
             :category => "sell",
             :amount   => 1000,
             :ppc      => 3.5,
@@ -577,7 +577,7 @@ class TradeOrderTest < ActiveSupport::TestCase
             :created_at => 12.seconds.ago
             )
 
-    Factory(:trade_order,
+    Factory(:limit_order,
             :category => "sell",
             :amount   => 1000,
             :ppc      => 3.2,
@@ -586,7 +586,7 @@ class TradeOrderTest < ActiveSupport::TestCase
             :created_at => 13.seconds.ago
             )
 
-    Factory(:trade_order,
+    Factory(:limit_order,
             :category => "sell",
             :amount   => 1000,
             :ppc      => 3.0,
@@ -595,7 +595,7 @@ class TradeOrderTest < ActiveSupport::TestCase
             :created_at => 14.seconds.ago
             )
 
-    t = Factory(:trade_order,
+    t = Factory(:limit_order,
                 :category => "buy",
                 :amount   => 250,
                 :ppc      => 4.0,
@@ -605,6 +605,35 @@ class TradeOrderTest < ActiveSupport::TestCase
 
     t.execute!
     assert_equal BigDecimal("999250.0"), trader2.balance(:lrusd), "Delta #{trader2.balance(:lrusd) - BigDecimal("999250.0")}"
-
   end
+
+  test "market order" do
+    t1 = Factory(:user)
+    t2 = Factory(:user)
+
+    add_money(t1, BigDecimal("1000.0"), :btc)
+    add_money(t2, BigDecimal("1000.0"), :eur)
+
+    assert_equal BigDecimal("1000.0"), t2.balance(:eur)
+
+    Factory(:market_order,
+                :category => "buy",
+                :amount   => 250,
+                :ppc      => 0.0,
+                :user     => t2,
+                :currency => "EUR"
+                )
+
+    t = Factory(:limit_order,
+                :category => "sell",
+                :amount   => 250,
+                :ppc      => 0.1,
+                :user     => t1,
+                :currency => "EUR"
+               )
+
+    t.execute!
+    assert_equal BigDecimal("975.0"), t2.balance(:eur), "#{t2.balance(:eur)}"
+  end
+
 end

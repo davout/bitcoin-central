@@ -2,9 +2,11 @@ class TradeOrder < ActiveRecord::Base
   MIN_AMOUNT = 1.0
   MIN_DARK_POOL_AMOUNT = 400.0
 
+  TYPES = [:limit_order, :market_order]
+
   attr_accessor :skip_min_amount
 
-  attr_accessible :amount, :currency, :category, :ppc, :dark_pool
+  attr_accessible :amount, :currency, :category, :dark_pool
 
   default_scope order('created_at DESC')
 
@@ -38,7 +40,7 @@ class TradeOrder < ActiveRecord::Base
         errors[:amount] << (I18n.t "errors.greater_than_balance", :balance=>("%.4f" % user.balance(:btc)), :currency=>"BTC")
       end
 
-      unless currency.blank?
+      unless currency.blank? or type == "MarketOrder"
         if amount and ppc and ((user.balance(currency) / ppc) < amount ) and buying?
           errors[:amount] << (I18n.t "errors.greater_than_capacity", :capacity=>("%.4f" % (user.balance(currency) / ppc)), :ppc=>ppc, :currency=>currency)
         end
@@ -58,10 +60,6 @@ class TradeOrder < ActiveRecord::Base
     :presence => true,
     :inclusion => { :in => ["buy", "sell"] }
 
-  validates :ppc,
-    :minimal_order_ppc => true,
-    :numericality => true
-
   def buying?
     category == "buy"
   end
@@ -80,17 +78,16 @@ class TradeOrder < ActiveRecord::Base
     where("category = ?", category.to_s)
   }
 
-  def self.matching_orders(order)
-    with_exclusive_scope do
-      active.
-        with_currency(order.currency).
-        with_category(order.buying? ? 'sell' : 'buy').
-        where("ppc #{order.buying? ? '<=' : '>='} ? ", order.ppc).
-        where("user_id <> ?", order.user_id).
-        order("ppc #{order.buying? ? 'ASC' : 'DESC'}")
-    end
-  end
-
+  # def self.matching_orders(order)
+  #   with_exclusive_scope do
+  #     active.
+  #       with_currency(order.currency).
+  #       with_category(order.buying? ? 'sell' : 'buy').
+  #       where("ppc #{order.buying? ? '<=' : '>='} ? ", order.ppc).
+  #       where("user_id <> ?", order.user_id).
+  #       order("ppc #{order.buying? ? 'ASC' : 'DESC'}")
+  #   end
+  # end
 
   scope :active_with_category, lambda { |cat|
     with_exclusive_scope do
@@ -109,6 +106,16 @@ class TradeOrder < ActiveRecord::Base
       where(:dark_pool => false)
     end
   }
+
+  def self.base_matching_order(order)
+    with_exclusive_scope do
+      active.
+        with_currency(order.currency).
+        with_category(order.buying? ? 'sell' : 'buy').
+        where("user_id <> ?", order.user_id).
+        order("ppc #{order.buying? ? 'ASC' : 'DESC'}")
+    end
+  end
 
   def inactivate_if_needed!
     if category == "sell"
@@ -136,91 +143,6 @@ class TradeOrder < ActiveRecord::Base
     save! and execute!
   end
 
-  def execute!
-    executed_trades = []
-
-    TradeOrder.transaction do
-      begin
-        mos = TradeOrder.matching_orders(self)
-        mos.reverse!
-        mo = mos.pop
-
-        while !mo.blank? and active? and !destroyed?
-          is_purchase = category == "buy"
-          purchase, sale = (is_purchase ? self : mo), (is_purchase ? mo : self)
-
-          # We take the opposite order price (BigDecimal)
-          p = mo.ppc
-          
-          # All array elements are BigDecimal, result is BigDecimal
-          btc_amount = [
-            sale.amount,                              # Amount of BTC sold
-            purchase.amount,                          # Amount of BTC bought
-            sale.user.balance(:btc),                  # Seller's BTC balance
-            purchase.user.balance(currency) / p       # Buyer's BTC buying power @ p
-          ].min
-
-          traded_btc = btc_amount.round(5)
-          traded_currency = (btc_amount * p).round(5)
-
-          # Update orders
-          mo.amount = mo.amount - traded_btc
-          self.amount = amount - traded_btc
-
-          mo.save!
-          save!
-
-          # Record the trade
-          trade = Trade.create! do |t|
-            t.traded_btc = traded_btc
-            t.traded_currency = traded_currency
-            t.currency = currency
-            t.ppc = p
-            t.seller_id = sale.user_id
-            t.buyer_id = purchase.user_id
-            t.purchase_order_id = purchase.id
-            t.sale_order_id = sale.id
-          end
-
-          executed_trades << trade
-
-          # TODO : Split orders if an user has enough funds to partially honor an order ?
-          # Destroy or save them according to the remaining balance
-          [self, mo].each do |o|
-            if o.amount.zero?
-              o.destroy
-            else
-              o.save!
-            end
-          end
-
-          mo = mos.pop
-        end
-      rescue
-        @exception = $!
-        executed_trades = []
-        raise ActiveRecord::Rollback
-      ensure
-        raise @exception if @exception
-      end
-    end
-
-    result = {
-      :trades => 0,
-      :total_traded_btc => 0,
-      :total_traded_currency => 0,
-      :currency => currency
-    }
-
-    executed_trades.inject(result) do |r, t|
-      r[:trades] += 1
-      r[:total_traded_btc] += t.traded_btc
-      r[:total_traded_currency] += t.traded_currency
-      r[:ppc] = r[:total_traded_currency] / r[:total_traded_btc]
-      r
-    end
-  end
-
   # This is used by the order book
   def self.get_orders(category, options = {})
     with_exclusive_scope do
@@ -240,4 +162,6 @@ class TradeOrder < ActiveRecord::Base
         all
     end
   end
+
+
 end

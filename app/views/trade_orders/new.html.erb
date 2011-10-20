@@ -12,6 +12,11 @@
   </div>
 
   <div class="form-field">
+    <%= f.label :type %>
+    <%= f.select :type, TradeOrder::TYPES.map { |t| [t.to_s.camelcase.chomp("Order"), t] } %>
+  </div>
+
+  <div class="form-field">
     <%= f.label :category %>
     <div class="radios">
       <%= f.radio_button :category, "buy", :class => "category-select trigger-total-update" %> <%= f.label :category_buy, (t :buy) %>

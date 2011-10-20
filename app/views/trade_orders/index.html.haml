@@ -19,8 +19,12 @@
         %td= l to.created_at
         %td= t to.category
         %td.amount= number_to_bitcoins to.amount, :precision => 4
-        %td.amount= format_amount(to.ppc, to[:currency], 5)
-        %td.amount= format_amount(to.ppc * to.amount, to[:currency], 4)
+        - if to.type == "LimitOrder"
+          %td.amount= format_amount(to.ppc, to[:currency], 5)
+          %td.amount= format_amount(to.ppc * to.amount, to[:currency], 4)
+        - else
+          %td= t(".market_order")
+          %td= t(".market_order")
         %td.auto-sized= dark_pool_icon_for(to)
         %td.auto-sized= currency_icon_for(to[:currency])
         %td.auto-sized= delete_link_for(to)
