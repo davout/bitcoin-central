@@ -10,7 +10,13 @@ class TradesController < ApplicationController
   end
 
   def all_trades
-    @trades = Trade.all
+    predicate = Trade
+
+    if params[:currency]
+      predicate = predicate.with_currency(params[:currency])
+    end
+
+    @trades = predicate.all
   end
 
   def ticker
