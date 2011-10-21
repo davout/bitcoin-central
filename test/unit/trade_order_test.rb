@@ -551,57 +551,57 @@ class TradeOrderTest < ActiveSupport::TestCase
     assert_equal BigDecimal("1000000.0"), trader2.balance(:lrusd)
 
     Factory(:trade_order,
-            :category => "sell",
-            :amount   => 1000,
-            :ppc      => 3.4,
-            :user     => trader1,
-            :currency => "LRUSD",
-            :created_at => 10.seconds.ago
-            )
+      :category => "sell",
+      :amount   => 1000,
+      :ppc      => 3.4,
+      :user     => trader1,
+      :currency => "LRUSD",
+      :created_at => 10.seconds.ago
+    )
 
     Factory(:trade_order,
-            :category => "sell",
-            :amount   => 1000,
-            :ppc      => 3.3,
-            :user     => trader1,
-            :currency => "LRUSD",
-            :created_at => 11.seconds.ago
-            )
+      :category => "sell",
+      :amount   => 1000,
+      :ppc      => 3.3,
+      :user     => trader1,
+      :currency => "LRUSD",
+      :created_at => 11.seconds.ago
+    )
 
     Factory(:trade_order,
-            :category => "sell",
-            :amount   => 1000,
-            :ppc      => 3.5,
-            :user     => trader1,
-            :currency => "LRUSD",
-            :created_at => 12.seconds.ago
-            )
+      :category => "sell",
+      :amount   => 1000,
+      :ppc      => 3.5,
+      :user     => trader1,
+      :currency => "LRUSD",
+      :created_at => 12.seconds.ago
+    )
 
     Factory(:trade_order,
-            :category => "sell",
-            :amount   => 1000,
-            :ppc      => 3.2,
-            :user     => trader1,
-            :currency => "LRUSD",
-            :created_at => 13.seconds.ago
-            )
+      :category => "sell",
+      :amount   => 1000,
+      :ppc      => 3.2,
+      :user     => trader1,
+      :currency => "LRUSD",
+      :created_at => 13.seconds.ago
+    )
 
     Factory(:trade_order,
-            :category => "sell",
-            :amount   => 1000,
-            :ppc      => 3.0,
-            :user     => trader1,
-            :currency => "LRUSD",
-            :created_at => 14.seconds.ago
-            )
+      :category => "sell",
+      :amount   => 1000,
+      :ppc      => 3.0,
+      :user     => trader1,
+      :currency => "LRUSD",
+      :created_at => 14.seconds.ago
+    )
 
     t = Factory(:trade_order,
-                :category => "buy",
-                :amount   => 250,
-                :ppc      => 4.0,
-                :user     => trader2,
-                :currency => "LRUSD"
-                )
+      :category => "buy",
+      :amount   => 250,
+      :ppc      => 4.0,
+      :user     => trader2,
+      :currency => "LRUSD"
+    )
 
     t.execute!
     assert_equal BigDecimal("999250.0"), trader2.balance(:lrusd), "Delta #{trader2.balance(:lrusd) - BigDecimal("999250.0")}"
