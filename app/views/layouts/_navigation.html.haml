@@ -30,6 +30,7 @@
   = menu_item ".help.main", nil do
     %ul
       = menu_item ".help.faq", static_path(:faq)
+      = menu_item ".help.tos", static_path(:tos), :logged_in => true
       = menu_item ".help.fees", static_path(:fees)
       = menu_item ".help.support", support_path
       = menu_item ".help.api_docs", static_path(:api_docs)
