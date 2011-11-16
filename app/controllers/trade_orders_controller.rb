@@ -7,15 +7,7 @@ class TradeOrdersController < ApplicationController
   end
 
   def create
-
-    trade_type = params[:trade_order][:type]
-
-    @trade_order = "#{trade_type}".camelize.constantize.new(params[:trade_order])
-
-    if !TradeOrder::TYPES.include?(trade_type.to_sym)
-      raise "No match found for #{trade_type}"
-    end
-
+    @trade_order = TradeOrder.build_with_params(params[:trade_order])
     @trade_order.user = current_user
 
     if @trade_order.save

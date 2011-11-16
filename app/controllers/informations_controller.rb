@@ -24,7 +24,7 @@ class InformationsController < ApplicationController
     @options[:axes][:xaxis][:min] = @min_x.strftime("%Y-%m-%d %H:%M:%S")
     @options[:axes][:xaxis][:max] = @max_x.strftime("%Y-%m-%d %H:%M:%S")
 
-    line = Trade.with_currency(currency).plottable(currency).map do |trade|
+    line = Trade.plottable(currency).map do |trade|
       [trade.created_at.strftime("%Y-%m-%d %H:%M:%S"), trade.ppc]
     end
 

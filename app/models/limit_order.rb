@@ -8,7 +8,7 @@ class LimitOrder < TradeOrder
 
   def matching_orders
     TradeOrder.base_matching_order(self).
-      where("ppc = 0 or ppc #{buying? ? '<=' : '>='} ? ", ppc)
+      where("ppc IS NULL or ppc #{buying? ? '<=' : '>='} ? ", ppc)
   end
 
   def execute!
@@ -99,6 +99,4 @@ class LimitOrder < TradeOrder
       r
     end
   end
-
-
 end

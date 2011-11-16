@@ -1,6 +1,6 @@
 class TransfersController < ApplicationController
   def index
-    @transfers = current_user.account_operations.all.paginate(:page => params[:page], :per_page => 16)
+    @transfers = current_user.account_operations.paginate(:page => params[:page], :per_page => 16)
   end
 
   def new

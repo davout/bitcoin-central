@@ -40,7 +40,7 @@ class TradeOrder < ActiveRecord::Base
         errors[:amount] << (I18n.t "errors.greater_than_balance", :balance=>("%.4f" % user.balance(:btc)), :currency=>"BTC")
       end
 
-      unless currency.blank? or type == "MarketOrder"
+      unless currency.blank? or self.is_a?(MarketOrder)
         if amount and ppc and ((user.balance(currency) / ppc) < amount ) and buying?
           errors[:amount] << (I18n.t "errors.greater_than_capacity", :capacity=>("%.4f" % (user.balance(currency) / ppc)), :ppc=>ppc, :currency=>currency)
         end
@@ -68,15 +68,15 @@ class TradeOrder < ActiveRecord::Base
     !buying?
   end
 
-  scope :with_currency, lambda { |currency|
+  def self.with_currency(currency)
     unless currency.to_s.upcase == 'ALL'
       where("currency = ?", currency.to_s.upcase)
     end
-  }
+  end
 
-  scope :with_category, lambda { |category|
+  def self.with_category(category)
     where("category = ?", category.to_s)
-  }
+  end
 
   # def self.matching_orders(order)
   #   with_exclusive_scope do
@@ -89,23 +89,25 @@ class TradeOrder < ActiveRecord::Base
   #   end
   # end
 
-  scope :active_with_category, lambda { |cat|
+  def self.active_with_category(category)
     with_exclusive_scope do
-      where(:category => cat.to_s).
+      where(:category => category.to_s).
         active.
-        order("ppc #{(cat.to_s == 'buy') ? 'DESC' : 'ASC'}")
+        order("ppc #{(category.to_s == 'buy') ? 'DESC' : 'ASC'}")
     end
-  }
+  end
 
-  scope :active, lambda { where(:active => true) }
+  def self.active
+    where(:active => true)
+  end
 
-  scope :visible, lambda { |user|
+  def self.visible(user)
     if user
       where("(dark_pool = ? OR user_id = ?)", false, user.id)
     else
       where(:dark_pool => false)
     end
-  }
+  end
 
   def self.base_matching_order(order)
     with_exclusive_scope do
@@ -143,6 +145,16 @@ class TradeOrder < ActiveRecord::Base
     save! and execute!
   end
 
+  def self.build_with_params(params)
+    trade_order_type = params[:type]
+
+    if !TradeOrder::TYPES.include?(trade_order_type.to_sym)
+      raise "No match found for #{trade_order_type}"
+    end
+    
+    "#{trade_order_type}".camelize.constantize.new(params)
+  end
+  
   # This is used by the order book
   def self.get_orders(category, options = {})
     with_exclusive_scope do
@@ -162,6 +174,4 @@ class TradeOrder < ActiveRecord::Base
         all
     end
   end
-
-
 end

@@ -19,10 +19,12 @@ class MarketOrder < TradeOrder
           # We take the opposite order price (BigDecimal)
           p = mo.ppc
 
-          if p == 0
+          # We can't execute a market order against another market order
+          if p.nil?
             mo = mos.pop
             next
           end
+          
           # All array elements are BigDecimal, result is BigDecimal
           btc_amount = [
             sale.amount,                              # Amount of BTC sold
@@ -91,6 +93,4 @@ class MarketOrder < TradeOrder
       r
     end
   end
-
-
 end

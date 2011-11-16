@@ -1,7 +1,14 @@
 require 'test_helper'
 
 class TradeOrderTest < ActiveSupport::TestCase
-
+  test "should market order ppc should be null" do
+    market_order = Factory(:market_order,
+      :user => Factory(:user)
+    )
+    
+    assert_nil market_order.ppc
+  end
+  
   test "should correctly perform a simple trade order" do
     trader1 = Factory(:user)
     trader2 = Factory(:user)
@@ -635,5 +642,4 @@ class TradeOrderTest < ActiveSupport::TestCase
     t.execute!
     assert_equal BigDecimal("975.0"), t2.balance(:eur), "#{t2.balance(:eur)}"
   end
-
 end

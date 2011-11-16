@@ -19,7 +19,7 @@
         %td= l to.created_at
         %td= t to.category
         %td.amount= number_to_bitcoins to.amount, :precision => 4
-        - if to.type == "LimitOrder"
+        - if to.is_a?(LimitOrder)
           %td.amount= format_amount(to.ppc, to[:currency], 5)
           %td.amount= format_amount(to.ppc * to.amount, to[:currency], 4)
         - else
