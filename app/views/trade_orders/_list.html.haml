@@ -10,12 +10,12 @@
     - unless orders.blank?
       - orders.each do |to|
         %tr{ :class => cycle('even', 'odd') }
-          - if to.ppc > 0
+          - if to.ppc
             %td.amount= format_amount(to[:price], to[:currency], 4)
           - else
             %td= t(".market_order")
           %td.amount= number_to_bitcoins to[:amount], :precision => 3
-          - if to.ppc > 0
+          - if to.ppc
             %td.amount= format_amount(to[:ppc]*to[:amount], to[:currency], 3)
           - else
             %td= t(".market_order")

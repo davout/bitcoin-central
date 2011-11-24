@@ -110,10 +110,12 @@ class TradeOrder < ActiveRecord::Base
   end
 
   def inactivate_if_needed!
-    if category == "sell"
-      self.active = false if (user.balance(:btc) < amount)
-    else
-      self.active = (user.balance(currency) >= (amount * (ppc || 0)))
+    if active
+      if category == "sell"
+        self.active = (user.balance(:btc) >= amount)
+      else
+        self.active = (user.balance(currency) >= (amount * (ppc || 0)))
+      end
     end
 
     save!
@@ -175,7 +177,10 @@ class TradeOrder < ActiveRecord::Base
       
       if order.is_a?(LimitOrder)
         predicate = predicate.
-          where("ppc #{order.buying? ? '<=' : '>='} ? ", order.ppc)
+          where("(ppc #{order.buying? ? '<=' : '>='} ? OR ppc IS NULL)", order.ppc)
+      else
+        predicate = predicate.
+          where("ppc IS NOT NULL")
       end
       
       predicate
@@ -202,7 +207,7 @@ class TradeOrder < ActiveRecord::Base
           # We take the opposite order price (BigDecimal)
           p = mo.ppc
 
-          if p == 0
+          if p.nil?
             p = ppc
           end
 
