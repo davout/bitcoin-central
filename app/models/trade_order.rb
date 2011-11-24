@@ -174,19 +174,13 @@ class TradeOrder < ActiveRecord::Base
         with_category(order.buying? ? 'sell' : 'buy').
         where("user_id <> ?", order.user_id).
         order("ppc #{order.buying? ? 'ASC' : 'DESC'}")
-      
-      if order.is_a?(LimitOrder)
-        predicate = predicate.
-          where("(ppc #{order.buying? ? '<=' : '>='} ? OR ppc IS NULL)", order.ppc)
-      else
-        predicate = predicate.
-          where("ppc IS NOT NULL")
-      end
-      
+
+      predicate = order.sub_matching_orders(predicate)
+
       predicate
     end
   end
- 
+
   def matching_orders
     TradeOrder.matching_orders(self)
   end
