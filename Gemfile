@@ -41,6 +41,10 @@ gem 'iban-tools'
 # TODO : Add me
 # gem 'delayed_job'
 
+group :development do
+  gem 'ruby-debug'
+end
+
 group :test do
   gem 'mocha', :require => false
   gem 'factory_girl_rails'
