@@ -12,4 +12,10 @@ class AccountsControllerTest < ActionController::TestCase
     get :pecunix_deposit_form, :format => :js
     assert_response :success
   end
+  
+  test "should get balances in json" do
+    login_with(Factory(:user))
+    get :show, :format => :json
+    assert_response :success
+  end
 end

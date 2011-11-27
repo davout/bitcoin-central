@@ -1,4 +1,15 @@
 class AccountsController < ApplicationController
+  respond_to :html, :json
+  
+  def show
+    @balances = Currency.all.map(&:code).inject({}) do |acc, code|
+      acc[code] = current_user.balance(code)
+      acc
+    end
+    
+    respond_with @balances
+  end
+  
   def balance
     render :text => "%2.5f" % @current_user.balance(params[:currency])
   end
