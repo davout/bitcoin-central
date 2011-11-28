@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   # Changes the locale if *locale* (en|fr|...) is passed as GET parameter
   def set_locale
     # TODO : Try to guess locale with IP lookup and/or HTTP headers
-    locale = params[:locale] or session[:locale] or "en"
+    locale = request.subdomains.first or params[:locale] or session[:locale] or "en"
     locale = locale.to_sym if locale
 
     if locale and I18n.available_locales.include?(locale)
@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
       session[:locale] = locale
     end
   end
-  
+
   # This method is used to work around the fact that there is only
   # one allowed root node in a well formed XML document, we remove
   # the root node so we get to pretend that XML === JSON
