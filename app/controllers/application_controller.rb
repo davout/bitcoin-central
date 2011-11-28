@@ -17,14 +17,13 @@ class ApplicationController < ActionController::Base
 
   # Changes the locale if *locale* (en|fr|...) is passed as GET parameter
   def set_locale
-    # TODO : Try to guess locale with IP lookup and/or HTTP headers
-    locale = request.subdomains.first or params[:locale] or session[:locale] or "en"
-    locale = locale.to_sym if locale
+    locale = "en"
 
-    if locale and I18n.available_locales.include?(locale)
-      I18n.locale = locale
-      session[:locale] = locale
+    if I18n.available_locales.map(&:to_s).include?(request.subdomains.first)
+      locale = request.subdomains.first
     end
+
+    I18n.locale = locale.to_sym
   end
 
   # This method is used to work around the fact that there is only
