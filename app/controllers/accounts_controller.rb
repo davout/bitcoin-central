@@ -3,15 +3,26 @@ class AccountsController < ApplicationController
   
   def show
     @balances = Currency.all.map(&:code).inject({}) do |acc, code|
-      acc[code] = current_user.balance(code)
+      acc[code] = current_user.balance(code.downcase.to_sym)
       acc
     end
+
+    @balances["UNCONFIRMED_BTC"] = current_user.balance(:btc, :unconfirmed => true) - current_user.balance(:btc)
     
     respond_with @balances
   end
   
   def balance
-    render :text => "%2.5f" % @current_user.balance(params[:currency])
+    @balance = {
+      :balance => @current_user.balance(params[:currency]),
+      :currency => params[:currency].upcase
+    }
+    
+    if params[:currency] == 'btc'
+      @balance[:unconfirmed] = current_user.balance(:btc, :unconfirmed => true) - current_user.balance(:btc)
+    end
+    
+    respond_with @balance
   end
   
   def deposit

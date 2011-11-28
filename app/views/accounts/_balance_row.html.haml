@@ -1,0 +1,12 @@
+- if (balance > 0) or %w{btc eur}.include?(code)
+  %tr
+    %td= link_to image_tag("currencies/#{code}_logo.png", :alt => t("currencies.#{code}.name"), :title => t("currencies.#{code}.name")), t("currencies.#{code}.link"), :target => "_blank", :title => t("currencies.#{code}.name")
+    %td= code.upcase
+    %td.account-balance{ :title => exact_balance(balance, code) }
+      %div{ :class => color_for_balance(balance) }
+        #{sign_for_balance(balance)} #{number_to_currency(balance, :unit => "")}
+
+        - if code == "btc" and unconfirmed_btc > 0
+          %br
+          %span.unconfirmed{ :title => t(:balance_unconfirmed) }
+            + #{number_to_currency(unconfirmed_btc, :unit => "")}

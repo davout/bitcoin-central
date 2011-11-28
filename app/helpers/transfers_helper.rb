@@ -10,7 +10,7 @@ module TransfersHelper
   end
   
   def transfer_details(transfer)
-    link_to(image_tag("magnifier.png", :alt => t(".details"), :title => t(".details")), account_transfer_path(transfer))
+    link_to(image_tag("details.png", :alt => t(".details"), :title => t(".details")), account_transfer_path(transfer))
   end
   
   def transfer_state(state, options = {})   

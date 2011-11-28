@@ -115,23 +115,6 @@ fr:
 
   # views/trade_orders/book.html
   order_book_title: Choisissez une devise
-  currencies:
-    all: Toutes
-    btc: BTC
-    btc_legend: Bitcoin
-    lrusd: LRUSD
-    lreur: LREUR
-    usd: USD
-    cad: CAD
-    inr: INR
-    lr_legend: Liberty Reserve
-    eur: EUR
-    eur_legend: Euro
-    pgau: PGAU
-    pgau_legend: Or Pecunix
-    usd_legend: Dollar US
-    cad_legend: Dollar Canadien
-    inr_legend: Roupie Indienne  
   amount: Montant
   price: Prix
   no_buying_orders_found: "Aucun ordre d'achat n'a été trouvé"

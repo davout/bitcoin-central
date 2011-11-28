@@ -1,6 +1,6 @@
 module YubikeysHelper
   def yubikey_details(yubikey)
-    link_to(image_tag("magnifier.png", :alt => t(".details"), :title => t(".details")), user_yubikey_path(yubikey))
+    link_to(image_tag("details.png", :alt => t(".details"), :title => t(".details")), user_yubikey_path(yubikey))
   end
 
   def yubikey_delete(yubikey)

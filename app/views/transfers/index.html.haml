@@ -12,7 +12,7 @@
       %tr{ :class => cycle('even', 'odd') }
         %td= l transfer.created_at
         %td
-          = image_tag("#{transfer.currency}.png")
+          = currency_icon_for(transfer.currency)
           = transfer.currency
         %td.amount
           %span{ :class => color_for(transfer), :title => confirmation_tooltip_for(transfer) }

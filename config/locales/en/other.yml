@@ -114,24 +114,7 @@ en:
   sign_in_submit: Sign-in
 
   # views/trade_orders/book.html
-  order_book_title: Select a currency
-  currencies:
-    all: All
-    btc: BTC
-    btc_legend: Bitcoin
-    lrusd: LRUSD
-    lreur: LREUR
-    usd: USD
-    cad: CAD
-    inr: INR
-    lr_legend: Liberty Reserve
-    eur: EUR
-    eur_legend: Cash EUR
-    pgau: PGAU
-    pgau_legend: Pecunix Gold
-    usd_legend: US Dollar
-    cad_legend: Canadian Dollar
-    inr_legend: Indian Rupee    
+  order_book_title: Select a currency 
   amount: Amount
   price: Price
   no_buying_orders_found: No buying orders have been found.

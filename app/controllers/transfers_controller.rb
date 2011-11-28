@@ -1,6 +1,9 @@
 class TransfersController < ApplicationController
+  respond_to :html, :json
+  
   def index
     @transfers = current_user.account_operations.all.paginate(:page => params[:page], :per_page => 16)
+    respond_with @transfers
   end
 
   def new

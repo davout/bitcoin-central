@@ -1,24 +1,20 @@
 module AccountsHelper
-  def exact_balance(user, currency)
-    "#{"%.5f" % user.balance(currency)} #{currency.to_s.upcase}"
+  def exact_balance(balance, code)
+    "#{"%.5f" % balance} #{code.upcase}"
   end
 
-  def unconfirmed_btc_balance_part(user)
-    user.balance(:btc, :unconfirmed => true) - user.balance(:btc)
-  end
-
-  def color_for_balance(user, currency)
-    if user.balance(currency) > 0
+  def color_for_balance(balance)
+    if balance > 0
       "green"
-    elsif user.balance(currency) < 0
+    elsif balance < 0
       "red"
     end
   end
 
-  def sign_for_balance(user, currency)
-    if user.balance(currency) > 0
+  def sign_for_balance(balance)
+    if balance > 0
       "+"
-    elsif user.balance(currency) < 0
+    elsif balance < 0
       "-"
     end
   end

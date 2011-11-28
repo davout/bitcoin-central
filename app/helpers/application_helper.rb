@@ -55,7 +55,7 @@ module ApplicationHelper
   end
   
   def currency_icon_for(currency)
-    image_tag "#{currency}.png", 
+    image_tag "currencies/#{currency}_icon.png", 
       :alt => currency,
       :title => currency,
       :class => "currency-icon"

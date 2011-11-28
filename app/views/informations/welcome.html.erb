@@ -19,10 +19,11 @@
 <div class="question" style="text-align:justify">
   <h2><%= t(".download") %></h2>
   <ul id="downloads">
-    <li><%= link_to image_tag("os/windows.png") + "Windows (zip)", "bin/bitcoin-0.3.24-win32.zip" %></li>
-    <li><%= link_to image_tag("os/windows.png") + "Windows (exe)", " bin/bitcoin-0.3.24-win32-setup.exe" %></li>
-    <li><%= link_to image_tag("os/linux.png") + "Linux", "bin/bitcoin-0.3.24-linux.tar.gz" %></li>
-    <li><%= link_to image_tag("os/apple.png") + "Mac OS X", "bin/bitcoin-0.3.24-macosx.zip" %></li>
+    <li><%= link_to image_tag("os/windows.png") + "Windows (zip)", "bin/bitcoin-0.5.0-win32.zip" %></li>
+    <li><%= link_to image_tag("os/windows.png") + "Windows (exe)", " bin/bitcoin-0.5.0-win32-setup.exe" %></li>
+    <li><%= link_to image_tag("os/ubuntu_ppa.png") + "Ubuntu PPA", " https://launchpad.net/~bitcoin/+archive/bitcoin" %></li>
+    <li><%= link_to image_tag("os/linux.png") + "Linux", "bin/bitcoin-0.5.0-linux.tar.gz" %></li>
+    <li><%= link_to image_tag("os/apple.png") + "Mac OS X", "bin/bitcoin-0.5.0-macosx.dmg" %></li>
     <li><%= link_to image_tag("os/github.png") + t(".source"), "https://github.com/bitcoin/bitcoin", :target => "_blank" %></li>
 </div>
 
@@ -31,7 +32,11 @@
   options.axes.xaxis.renderer = $.jqplot.DateAxisRenderer;
 
   $.jqplot('price-chart',
-<%= @series.to_json.html_safe %>,
-  options
-)
+    <%= @series.to_json.html_safe %>,
+    options
+  )
 </script>
+
+
+  
+    

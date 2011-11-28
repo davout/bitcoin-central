@@ -27,7 +27,11 @@ BitcoinBank::Application.routes.draw do
   end
 
   resource :account, :only => [:show] do
-    get :balance
+    match '/balance/:currency',
+      :action => 'balance',
+      :as => 'balance',
+      :only => :get
+      
     get :deposit
     get :pecunix_deposit_form
     
