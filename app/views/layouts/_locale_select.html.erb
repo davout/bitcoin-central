@@ -5,7 +5,7 @@
         :title => I18n::Locales[locale],
         :alt => I18n::Locales[locale]
       ),
-      "http://#{locale}.#{request.domain}"
+      locale_switch_link(locale, request.url)
     )
   %>
   <% end %>

@@ -64,4 +64,13 @@ module ApplicationHelper
   def bbe_link(type, id)
     link_to(truncate(id, :length => 15, :omission => ""), "http://blockexplorer.com/#{type}/#{id}", :target => "_blank", :title => id)
   end
+
+  def locale_switch_link(locale, url)
+    scheme, address = url.split(":\/\/")
+    first_subdomain = address.match(/^[^\.]+/)[0]
+
+    address.gsub!(/^[^\.]+/, "") if I18n.available_locales.map(&:to_s).include? first_subdomain
+
+    "#{scheme}://#{locale}#{address}"
+  end
 end

@@ -23,4 +23,9 @@ class ApplicationHelperTest < ActionView::TestCase
     assert display_menu?(Factory.build(:user), {})
     assert display_menu?(nil, {})
   end
+
+  test "locale switch link should work as expected" do
+    assert_equal "https://fr.domain.tld/path.extension?query=string&x=y",
+      locale_switch_link("fr", "https://en.domain.tld/path.extension?query=string&x=y")
+  end
 end
