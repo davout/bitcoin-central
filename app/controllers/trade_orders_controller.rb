@@ -7,7 +7,7 @@ class TradeOrdersController < ApplicationController
   end
 
   def create
-    @trade_order = TradeOrder.new(params[:trade_order])
+    @trade_order = TradeOrder.build_with_params(params[:trade_order])
     @trade_order.user = current_user
 
     if @trade_order.save

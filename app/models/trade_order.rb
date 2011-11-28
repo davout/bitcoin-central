@@ -2,9 +2,11 @@ class TradeOrder < ActiveRecord::Base
   MIN_AMOUNT = 1.0
   MIN_DARK_POOL_AMOUNT = 400.0
 
+  TYPES = [:limit_order, :market_order]
+
   attr_accessor :skip_min_amount
 
-  attr_accessible :amount, :currency, :category, :ppc, :dark_pool
+  attr_accessible :amount, :currency, :category, :dark_pool
 
   default_scope order('created_at DESC')
 
@@ -38,7 +40,7 @@ class TradeOrder < ActiveRecord::Base
         errors[:amount] << (I18n.t "errors.greater_than_balance", :balance=>("%.4f" % user.balance(:btc)), :currency=>"BTC")
       end
 
-      unless currency.blank?
+      unless currency.blank? or self.is_a?(MarketOrder)
         if amount and ppc and ((user.balance(currency) / ppc) < amount ) and buying?
           errors[:amount] << (I18n.t "errors.greater_than_capacity", :capacity=>("%.4f" % (user.balance(currency) / ppc)), :ppc=>ppc, :currency=>currency)
         end
@@ -58,10 +60,6 @@ class TradeOrder < ActiveRecord::Base
     :presence => true,
     :inclusion => { :in => ["buy", "sell"] }
 
-  validates :ppc,
-    :minimal_order_ppc => true,
-    :numericality => true
-
   def buying?
     category == "buy"
   end
@@ -70,51 +68,54 @@ class TradeOrder < ActiveRecord::Base
     !buying?
   end
 
-  scope :with_currency, lambda { |currency|
+  def self.with_currency(currency)
     unless currency.to_s.upcase == 'ALL'
       where("currency = ?", currency.to_s.upcase)
     end
-  }
+  end
 
-  scope :with_category, lambda { |category|
+  def self.with_category(category)
     where("category = ?", category.to_s)
-  }
-
-  def self.matching_orders(order)
-    with_exclusive_scope do
-      active.
-        with_currency(order.currency).
-        with_category(order.buying? ? 'sell' : 'buy').
-        where("ppc #{order.buying? ? '<=' : '>='} ? ", order.ppc).
-        where("user_id <> ?", order.user_id).
-        order("ppc #{order.buying? ? 'ASC' : 'DESC'}")
-    end
   end
 
 
-  scope :active_with_category, lambda { |cat|
+  def self.active_with_category(category)
     with_exclusive_scope do
-      where(:category => cat.to_s).
+      where(:category => category.to_s).
         active.
-        order("ppc #{(cat.to_s == 'buy') ? 'DESC' : 'ASC'}")
+        order("ppc #{(category.to_s == 'buy') ? 'DESC' : 'ASC'}")
     end
-  }
+  end
 
-  scope :active, lambda { where(:active => true) }
+  def self.active
+    where(:active => true)
+  end
 
-  scope :visible, lambda { |user|
+  def self.visible(user)
     if user
       where("(dark_pool = ? OR user_id = ?)", false, user.id)
     else
       where(:dark_pool => false)
     end
-  }
+  end
+
+  def self.base_matching_order(order)
+    with_exclusive_scope do
+      active.
+        with_currency(order.currency).
+        with_category(order.buying? ? 'sell' : 'buy').
+        where("user_id <> ?", order.user_id).
+        order("ppc #{order.buying? ? 'ASC' : 'DESC'}")
+    end
+  end
 
   def inactivate_if_needed!
-    if category == "sell"
-      self.active = false if (user.balance(:btc) < amount)
-    else
-      self.active = false if (user.balance(currency) < (amount * ppc))
+    if active
+      if category == "sell"
+        self.active = (user.balance(:btc) >= amount)
+      else
+        self.active = (user.balance(currency) >= (amount * (ppc || 0)))
+      end
     end
 
     save!
@@ -136,6 +137,54 @@ class TradeOrder < ActiveRecord::Base
     save! and execute!
   end
 
+  def self.build_with_params(params)
+    trade_order_type = params[:type]
+
+    if !TradeOrder::TYPES.include?(trade_order_type.to_sym)
+      raise "No match found for #{trade_order_type}"
+    end
+    
+    "#{trade_order_type}".camelize.constantize.new(params)
+  end
+  
+  # This is used by the order book
+  def self.get_orders(category, options = {})
+    with_exclusive_scope do
+      TradeOrder.active_with_category(category).
+        select("ppc AS price").
+        select("ppc").
+        select("SUM(amount) AS amount").
+        select("MAX(created_at) AS created_at").
+        select("currency").
+        select("dark_pool").
+        active.
+        visible(options[:user]).
+        with_currency(options[:currency] || :all).
+        group("#{options[:separated] ? "id" : "ppc"}").
+        group("currency").
+        order("ppc #{category == :sell ? "ASC" : "DESC"}").
+        all
+    end
+  end
+    
+  def self.matching_orders(order)
+    with_exclusive_scope do
+      predicate = active.
+        with_currency(order.currency).
+        with_category(order.buying? ? 'sell' : 'buy').
+        where("user_id <> ?", order.user_id).
+        order("ppc #{order.buying? ? 'ASC' : 'DESC'}")
+
+      predicate = order.sub_matching_orders(predicate)
+
+      predicate
+    end
+  end
+
+  def matching_orders
+    TradeOrder.matching_orders(self)
+  end
+  
   def execute!
     executed_trades = []
 
@@ -151,7 +200,11 @@ class TradeOrder < ActiveRecord::Base
 
           # We take the opposite order price (BigDecimal)
           p = mo.ppc
-          
+
+          if p.nil?
+            p = ppc
+          end
+
           # All array elements are BigDecimal, result is BigDecimal
           btc_amount = [
             sale.amount,                              # Amount of BTC sold
@@ -218,26 +271,6 @@ class TradeOrder < ActiveRecord::Base
       r[:total_traded_currency] += t.traded_currency
       r[:ppc] = r[:total_traded_currency] / r[:total_traded_btc]
       r
-    end
-  end
-
-  # This is used by the order book
-  def self.get_orders(category, options = {})
-    with_exclusive_scope do
-      TradeOrder.active_with_category(category).
-        select("ppc AS price").
-        select("ppc").
-        select("SUM(amount) AS amount").
-        select("MAX(created_at) AS created_at").
-        select("currency").
-        select("dark_pool").
-        active.
-        visible(options[:user]).
-        with_currency(options[:currency] || :all).
-        group("#{options[:separated] ? "id" : "ppc"}").
-        group("currency").
-        order("ppc #{category == :sell ? "ASC" : "DESC"}").
-        all
     end
   end
 end

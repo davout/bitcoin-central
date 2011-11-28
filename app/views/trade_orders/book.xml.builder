@@ -3,7 +3,7 @@ xml.instruct!
 xml.bids do
   @purchases.each do |to|
     xml.bid :currency => to[:currency],
-      :price => to[:price].to_d,
+      :price => "QWRWER",
       :amount => to[:amount],
       :timestamp => to[:created_at].to_i
   end

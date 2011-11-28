@@ -16,7 +16,7 @@ gem 'recaptcha',
 gem 'devise'
 
 gem 'exception_notification',
-  :git => "http://github.com/rails/exception_notification.git",
+  :git => "git@github.com:rails/exception_notification.git",
   :require => 'exception_notifier'
 
 gem 'whenever'
@@ -38,15 +38,9 @@ gem 'rqrcode'
 
 gem 'iban-tools'
 
-# TODO : Add me
-# gem 'delayed_job'
-
-group :development do
-  gem 'ruby-debug'
-end
+gem 'delayed_job'
 
 group :test do
   gem 'mocha', :require => false
   gem 'factory_girl_rails'
-  gem 'turn'
 end

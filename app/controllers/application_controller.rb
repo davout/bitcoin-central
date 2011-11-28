@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
 
   # Redirects users to their account page after sign-in
   def after_sign_in_path_for(resource)
-    account_path
+    session[:user_return_to] or account_path
   end
 
   def get_announcements

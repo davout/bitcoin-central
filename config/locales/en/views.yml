@@ -64,13 +64,15 @@ en:
   trade_orders:
     index:
       create: Create an order
+      market_order: Market Order  
     book:
       bids: Bids
       asks: Asks
     list:
       price: Price
       amount: Amount
-      total: Total  
+      total: Total
+      market_order: Market Order  
       
   trades:
     index:

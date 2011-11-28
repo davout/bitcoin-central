@@ -3,11 +3,11 @@ require 'test_helper'
 class TradeOrdersControllerTest < ActionController::TestCase
   def setup
     @user = Factory(:user)
-    
+
     add_money(@user, 25.0, :lrusd)
     add_money(@user, 100.0, :btc)
-    
-    TradeOrder.create! do |t|
+
+    LimitOrder.create! do |t|
       t.amount = 1.0
       t.ppc = 1.0
       t.user = @user
@@ -15,7 +15,7 @@ class TradeOrdersControllerTest < ActionController::TestCase
       t.category = "buy"
     end
 
-    TradeOrder.create! do |t|
+    LimitOrder.create! do |t|
       t.amount = 1.0
       t.ppc = 1.0
       t.user = @user
@@ -56,12 +56,13 @@ class TradeOrdersControllerTest < ActionController::TestCase
 
   test "should create trade order" do
     login_with(@user)
-    
+
     post :create, :trade_order => {
       :category => "sell",
       :amount => "1",
       :ppc => "1",
-      :currency => "PGAU"
+      :currency => "PGAU",
+      :type => "limit_order"
     }
 
     assert_response :redirect

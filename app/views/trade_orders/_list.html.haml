@@ -10,9 +10,15 @@
     - unless orders.blank?
       - orders.each do |to|
         %tr{ :class => cycle('even', 'odd') }
-          %td.amount= format_amount(to[:price], to[:currency], 4)
+          - if to.ppc
+            %td.amount= format_amount(to[:price], to[:currency], 4)
+          - else
+            %td= t(".market_order")
           %td.amount= number_to_bitcoins to[:amount], :precision => 3
-          %td.amount= format_amount(to[:ppc]*to[:amount], to[:currency], 3)
+          - if to.ppc
+            %td.amount= format_amount(to[:ppc]*to[:amount], to[:currency], 3)
+          - else
+            %td= t(".market_order")
           %td.auto-sized= currency_icon_for(to.currency)
     - else
       = render :partial => "layouts/no_data"
