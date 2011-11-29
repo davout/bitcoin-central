@@ -17,8 +17,8 @@ class TradeOrdersController < ApplicationController
         notice = t(:order_saved)
       else
         notice = t(:order_filled,
-          :how => (t(@trade_order.destroyed?) ? :completely : :partially),
-          :action => (t(@trade_order.buying?) ? :bought : :sold),
+          :how => (t(@trade_order.destroyed?) ? t(:completely) : t(:partially)),
+          :action => (t(@trade_order.buying?) ? t(:bought) : t(:sold)),
           :traded_btc => ("%.4f" % result[:total_traded_btc]),
           :amount => ("%.4f" % result[:total_traded_currency]),
           :currency => result[:currency],
