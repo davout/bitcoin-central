@@ -69,7 +69,11 @@ module ApplicationHelper
     scheme, address = url.split(":\/\/")
     first_subdomain = address.match(/^[^\.]+/)[0]
 
-    address.gsub!(/^[^\.]+/, "") if I18n.available_locales.map(&:to_s).include? first_subdomain
+    if I18n.available_locales.map(&:to_s).include? first_subdomain
+      address.gsub!(/^[^\.]+/, "")
+    else
+      address = ".#{address}"
+    end
 
     "#{scheme}://#{locale}#{address}"
   end
