@@ -177,7 +177,10 @@ fr:
         other: Pages statiques
       bank_account:
         one: Compte bancaire
-        other: Comptes bancaires
+        other: Comptes bancaires        
+      ticket:
+        one: Ticket
+        other: Tickets
       currency:
         one: Devise
         other: Devises
