@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111122160759) do
+ActiveRecord::Schema.define(:version => 20111129123247) do
 
   create_table "account_operations", :force => true do |t|
     t.string   "type"
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(:version => 20111122160759) do
     t.text     "address"
     t.boolean  "notify_on_trade",        :default => true
     t.integer  "last_notified_trade_id", :default => 0,     :null => false
+    t.integer  "max_read_tx_id"
   end
 
   add_index "accounts", ["email"], :name => "index_users_on_email", :unique => true

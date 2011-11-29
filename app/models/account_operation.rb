@@ -182,4 +182,23 @@ class AccountOperation < ActiveRecord::Base
 
     [[fee, max_fee].min, min_fee].max
   end
+  
+  # Should the transaction be highlighted in some way ?
+  def unread
+    account && (id > account.max_read_tx_id)
+  end
+  
+  
+  # TODO : Unread does not appear!
+  def as_json(options={})    
+    super(options.merge(
+        :only => [
+          :id, :address, :email, :amount, :currency, :bt_tx_confirmations, :bt_tx_id, :comment, :created_at
+        ],
+        :methods => [
+          :unread
+        ]
+      )
+    )
+  end
 end
