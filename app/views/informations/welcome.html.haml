@@ -13,7 +13,7 @@ fjs.parentNode.insertBefore(js, fjs);
 </script>
 
 %div{ :id => "price-chart-container", :class => "chart-container" }
-  %h3= t :trading_data_title
+  %h3= t ".trading_data_title"
   %div{ :id => "price-chart", :class => "chart", :style => "margin:auto;margin-top:2em;width:400px;height:300px" }
   %br
   = form_tag root_path, :method => :get do
@@ -31,7 +31,7 @@ fjs.parentNode.insertBefore(js, fjs);
         
 %div{ :class => "fb-like", :"data-href" => "http://www.facebook.com/pages/Bitcoin-Central/153396928094765?skip_nax_wizard=true", :"data-send" => "true", :"data-width" => "450", :"data-show-faces" => "true" }
 
-%h1= t :welcome
+%h1= t ".welcome"
 %div{ :class => "question", :style => "text-align:justify" }
   = render :partial => "what_is_bitcoin"
 

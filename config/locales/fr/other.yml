@@ -96,8 +96,6 @@ fr:
   faq_title: Foire aux questions
 
   # views/informations/welcome.html
-  trading_data_title: Échanges de la semaine passée
-  welcome: Bienvenue sur bitcoin-central.net !
 
   # views/layouts/_footer.html
   footer_html: "Vous pouvez supporter ce projet en donnant à l'adresse : <span class=\"bitcoin-address\">%{adress}</span>"
