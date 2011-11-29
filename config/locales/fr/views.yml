@@ -228,6 +228,8 @@ fr:
     welcome:
       download: Télécharger Bitcoin 0.5.0
       source: Code source
+      trading_data_title: Échanges de la semaine passée
+      welcome: Bienvenue sur bitcoin-central.net !
     support:
       contact: Contactez-nous
       contact_description_html: "Vous pouvez nous contacter à l'adresse <a href=\"mailto:%{email}\">%{email}</a>"
