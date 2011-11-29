@@ -1,0 +1,55 @@
+<div id="fb-root"></div>
+<script>(function(d, s, id)
+{
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id))
+{
+return;
+}
+js = d.createElement(s);
+js.id = id;js.src = "//connect.facebook.net/fr_FR/all.js#xfbml=1";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+
+%div{ :id => "price-chart-container", :class => "chart-container" }
+  %h3= t :trading_data_title
+  %div{ :id => "price-chart", :class => "chart", :style => "margin:auto;margin-top:2em;width:400px;height:300px" }
+  %br
+  = form_tag root_path, :method => :get do
+    %select{ :name => "currency", :onchange => "$(this).parents('form').submit()", :style => "float:right" }
+
+      - Currency.all.map(&:code).reject{ |c| c == "BTC"}.sort.each do |c|
+        - if ((params[:currency].blank? && c == "EUR") || params[:currency] == c)
+          %option{ :selected => "selected".html_safe, :value => c }
+            = t("activerecord.attributes.currency.codes.#{c.downcase}")
+            = c.upcase
+        - else
+          %option{ :value => c }
+            = t("activerecord.attributes.currency.codes.#{c.downcase}")
+            = c.upcase
+        
+%div{ :class => "fb-like", :"data-href" => "http://www.facebook.com/pages/Bitcoin-Central/153396928094765?skip_nax_wizard=true", :"data-send" => "true", :"data-width" => "450", :"data-show-faces" => "true" }
+
+%h1= t :welcome
+%div{ :class => "question", :style => "text-align:justify" }
+  = render :partial => "what_is_bitcoin"
+
+%div{ :class => "question", :style => "text-align:justify" }
+  %h2= t(".download")
+  %ul{ :id => "downloads" }
+    %li= link_to image_tag("os/windows.png") + "Windows (zip)", "bin/bitcoin-0.5.0-win32.zip"
+    %li= link_to image_tag("os/windows.png") + "Windows (exe)", "bin/bitcoin-0.5.0-win32-setup.exe"
+    %li= link_to image_tag("os/ubuntu_ppa.png") + "Ubuntu PPA", "https://launchpad.net/~bitcoin/+archive/bitcoin"
+    %li= link_to image_tag("os/linux.png") + "Linux", "bin/bitcoin-0.5.0-linux.tar.gz"
+    %li= link_to image_tag("os/apple.png") + "Mac OS X", "bin/bitcoin-0.5.0-macosx.dmg"
+    %li= link_to image_tag("os/github.png") + t(".source"), "https://github.com/bitcoin/bitcoin", :target => "_blank"
+
+%script{ :type => "text/javascript" }
+  options =
+  = @options.to_json.html_safe;
+  options.axes.xaxis.renderer = $.jqplot.DateAxisRenderer;
+
+  $.jqplot('price-chart',
+  = @series.to_json.html_safe
+  , options)
