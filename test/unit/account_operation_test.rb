@@ -81,10 +81,9 @@ class AccountOperationTest < ActiveSupport::TestCase
     assert_equal BigDecimal("10.0"), user.balance(:lreur)
   end
   
-  
   # We want to make sure the JSON serialization does not include the model name as root
   test "serialization should not include root model name" do
-    assert_equal AccountOperation.new.to_json({}),
-      "{\"comment\":null,\"bt_tx_id\":null,\"address\":null,\"created_at\":null,\"unread\":null,\"amount\":0.0,\"bt_tx_confirmations\":0,\"currency\":null,\"email\":null}"
+    assert_equal JSON::parse(AccountOperation.new.to_json({})),
+      JSON::parse("{\"comment\":null,\"bt_tx_id\":null,\"address\":null,\"created_at\":null,\"unread\":null,\"amount\":0.0,\"bt_tx_confirmations\":0,\"currency\":null,\"email\":null}")
   end
 end
