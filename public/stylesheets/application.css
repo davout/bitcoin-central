@@ -669,6 +669,10 @@ input.amount {
   text-align: inherit;
 }
 
+div.fb-like {
+  float: right;
+}
+
 /* Charts */
 div.chart-container {
 

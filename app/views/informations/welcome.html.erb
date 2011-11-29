@@ -1,3 +1,13 @@
+<div id="fb-root"></div>
+    <script>(function(d, s, id) {
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id)) {return;}
+	js = d.createElement(s); js.id = id;
+	js.src = "//connect.facebook.net/fr_FR/all.js#xfbml=1";
+	fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+
 <div id="price-chart-container" class="chart-container">
   <h3><%= t :trading_data_title %></h3>
   <div id="price-chart" class="chart" style="margin:auto;margin-top:2em;width:400px;height:300px"></div>
@@ -10,6 +20,8 @@
     </select>
   <% end %>
 </div>
+
+<div class="fb-like" data-href="http://www.facebook.com/pages/Bitcoin-Central/153396928094765?skip_nax_wizard=true" data-send="true" data-width="450" data-show-faces="true"></div>
 
 <h1><%= t :welcome %></h1>
 <div class="question" style="text-align:justify">
