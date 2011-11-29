@@ -33,6 +33,6 @@ BitcoinBank::Application.configure do
   }
 
   # Used to broadcast invoices public URLs
-  config.base_url = "http://localhost:3030/"
+  config.base_url = "http://lvh.me:3000/"
 end
 

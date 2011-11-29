@@ -15,10 +15,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # Changes the locale if *locale* (en|fr|...) is passed as GET parameter
+  # Sets the locale according to the first subdomain or redirects to a localized
+  # version of the requested URL
   def set_locale
-    locale = "en"
-
+    locale = I18n.default_locale
+    
     if I18n.available_locales.map(&:to_s).include?(request.subdomains.first)
       locale = request.subdomains.first
     end
