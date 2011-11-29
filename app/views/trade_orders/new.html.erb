@@ -1,6 +1,6 @@
 <h1><%= t :create_order_title %></h1>
 
-<%= form_for @trade_order, :url => account_trade_orders_path do |f| %>
+<%= form_for @trade_order, :as => "trade_order", :url => account_trade_orders_path do |f| %>
   <%= errors_for @trade_order, :message => "error_creating_order" %>
 
   <div class="form-field">
