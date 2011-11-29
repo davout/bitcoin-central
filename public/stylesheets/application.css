@@ -669,7 +669,13 @@ input.amount {
   text-align: inherit;
 }
 
+/* Social network buttons */
+
 div.fb-like {
+  float: right;
+}
+
+div.social-buttons {
   float: right;
 }
 

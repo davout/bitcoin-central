@@ -28,8 +28,18 @@ fjs.parentNode.insertBefore(js, fjs);
           %option{ :value => c }
             = t("activerecord.attributes.currency.codes.#{c.downcase}")
             = c.upcase
-        
-%div{ :class => "fb-like", :"data-href" => "http://www.facebook.com/pages/Bitcoin-Central/153396928094765?skip_nax_wizard=true", :"data-send" => "true", :"data-width" => "450", :"data-show-faces" => "true" }
+   
+%div{ :class => "social-buttons" }
+     
+  %div{ :class => "fb-like", :"data-href" => "http://www.facebook.com/pages/Bitcoin-Central/153396928094765?skip_nax_wizard=true", :"data-send" => "true", :"data-width" => "450", :"data-show-faces" => "true" }
+
+  %br
+
+  %a{ :href => "https://twitter.com/Bitcoin_Central", :class => "twitter-follow-button"}
+    Follow @Bitcoin_Central
+
+
+%script{ :src => "//platform.twitter.com/widgets.js", :type => "text/javascript"}
 
 %h1= t ".welcome"
 %div{ :class => "question", :style => "text-align:justify" }
