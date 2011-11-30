@@ -100,10 +100,6 @@ en:
   # views/layouts/_footer.html
   footer_html: 'Feel free to support this project by donating a few BTC to <span class="bitcoin-address">%{adress}</span>'
 
-  # views/layouts/application.html
-  website_title: Bitcoin Central
-  website_keywords: bitcoin, bitcoin central, buy bitcoins, sell bitcoins
-
   # views/sessions/new.html
   account_label: Account ID
   account_description: E-mail address or account ID
