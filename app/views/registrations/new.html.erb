@@ -30,7 +30,7 @@
     <%= f.password_field :password_confirmation, :autocomplete => "off" %>
     <% unless resource.new_record? %>
       <div class="explanation">
-        <%= t :new_password_confirmation_explanation %>
+        <%= t(".new_password_confirmation_explanation") %>
       </div>
     <% end %>
   </div>
@@ -45,7 +45,7 @@
 
   <% if resource.new_record? %>
     <div class="recaptcha-field">
-      <label for="recaptcha_response_field">Are you human ?</label>
+      <%= f.label :recaptcha_response_field %>
       <div class="recaptcha-input">
         <%= recaptcha_tags :ssl => true %>
       </div>

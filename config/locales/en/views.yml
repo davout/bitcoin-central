@@ -64,7 +64,9 @@ en:
   trade_orders:
     index:
       create: Create an order
-      market_order: Market Order  
+      market_order: Market Order
+      sell: Sell
+      buy: Buy
     book:
       bids: Bids
       asks: Asks
@@ -260,4 +262,3 @@ en:
         other: You have %{count} pending support tickets.
       open_a_ticket: Open a new support ticket
       view_tickets: View all requests    
-   

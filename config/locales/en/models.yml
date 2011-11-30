@@ -53,6 +53,7 @@ en:
         id: ID
         email: E-mail address
         password: Password
+        recaptcha_response_field: Are you human?
         name: Account ID
         admin: Administrator
         authentication_token: Authentication token

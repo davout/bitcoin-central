@@ -17,7 +17,7 @@
     - @trade_orders.each do |to|
       %tr{ :class => [(to.active? ? "" : "inactive"), cycle('even', 'odd')] }
         %td= l to.created_at
-        %td= t to.category
+        %td= t(".#{to.category}")
         %td.amount= number_to_bitcoins to.amount, :precision => 4
         - if to.is_a?(LimitOrder)
           %td.amount= format_amount(to.ppc, to[:currency], 5)

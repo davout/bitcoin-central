@@ -65,6 +65,8 @@ fr:
     index:
       create: Passer un ordre
       market_order: Prix du marché
+      sell: Vente
+      buy: Achat
     book:
       bids: Achat
       asks: Vente

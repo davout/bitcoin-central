@@ -53,6 +53,8 @@ fr:
         id: ID
         email: Adresse e-mail
         password: Mot de passe
+        password_confirmation: Confirmation du mot de passe
+        recaptcha_response_field: Etes vous un humain?
         name: Compte
         admin: Administration
         authentication_token: Jeton d'authentification
