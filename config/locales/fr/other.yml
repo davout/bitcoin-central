@@ -129,22 +129,6 @@ fr:
   delete_order_confirm: Êtes-vous sûr(e) de vouloir supprimer cet ordre ?
   no_orders_found: "Aucun ordre n'a été trouvé"
 
-  # views/trade_orders/new.html
-  create_order_title: Nouvel ordre
-  currency_to_trade: Devise à échanger
-  buy: Acheter
-  sell: Vendre
-  sell_or_buy_description: Voulez-vous acheter ou vendre des Bitcoins ?
-  your_balance: Votre solde
-  your_balance_description: Votre solde dans la devise sélectionnée
-  amount_description: Montant en BTC à échanger
-  ppc_description: Prix pour 1 BTC
-  total_description: Total de votre ordre
-  dark_pool_description: "Ne pas afficher l'ordre publiquement"
-  error_creating_order:
-    one: "Une erreur empêche votre ordre d'être passé :"
-    other: "%{count} erreurs empêchent votre ordre d'être passé :"
-
   # views/trades/index.html
   trade_history_title: Historique
   no_trades_found: Aucune transaction trouvée

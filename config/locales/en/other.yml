@@ -129,23 +129,6 @@ en:
   delete_order_confirm: Are you sure you want to delete this trade order ?
   no_orders_found: No orders have been found.
 
-  # views/trade_orders/new.html
-  create_order_title: Create a trade order
-  currency_to_trade: Currency you want to trade
-  category: Category
-  buy: Buy
-  sell: Sell
-  sell_or_buy_description: Whether you want to buy or sell bitcoins
-  your_balance: Your balance
-  your_balance_description: Your available confirmed balance
-  amount_description: BTC amount you're trading
-  ppc_description: Price for 1 BTC
-  total_description: The total for your order
-  dark_pool_description: Should the order be hidden ?
-  error_creating_order:
-    one: "1 error prevented your trade order from being created :"
-    other: "%{count} errors prevented your trade order from being created :"
-
   # views/trades/index.html
   trade_history_title: Trade history
   no_trades_found: No trades were found  

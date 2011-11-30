@@ -73,7 +73,23 @@ fr:
       amount: Montant
       total: Total
       market_order: Prix du marché
-      
+    new:
+      title: Nouvel order d'échange
+      currency: Devise à échanger
+      category: Category
+      buy: Acheter
+      sell: Vendre
+      sell_or_buy_explanation: Voulez-vous acheter ou vendre des Bitcoins ?
+      your_balance: Votre solde
+      your_balance_explanation: Votre solde dans la devise sélectionnée
+      amount_explanation: Montant en BTC à échanger
+      ppc_explanation: Prix pour 1 BTC
+      total_explanation: Total de votre ordre
+      dark_pool_explanation: Ne pas afficher l'ordre publiquement
+      error:
+        one: "Une erreur empêche votre ordre d'être passé :"
+        other: "%{count} erreurs empêchent votre ordre d'être passé :"
+        
   trades:
     index:
       title: Historique

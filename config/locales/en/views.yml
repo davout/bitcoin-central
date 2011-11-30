@@ -73,7 +73,23 @@ en:
       amount: Amount
       total: Total
       market_order: Market Order  
-      
+    new:
+      title: Create a trade order
+      currency: Currency you want to trade
+      category: Category
+      buy: Buy
+      sell: Sell
+      sell_or_buy_explanation: Whether you want to buy or sell bitcoins
+      your_balance: Your balance
+      your_balance_explanation: Your available confirmed balance
+      amount_explanation: BTC amount you're trading
+      ppc_explanation: Price for 1 BTC
+      total_explanation: The total for your order
+      dark_pool_explanation: Should the order be hidden ?
+      error:
+        one: "1 error prevented your trade order from being created :"
+        other: "%{count} errors prevented your trade order from being created :"
+
   trades:
     index:
       title: Trade history
