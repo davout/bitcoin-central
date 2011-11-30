@@ -28,6 +28,7 @@ fr:
         dark_pool: Ordre masqué
         ppc: Prix
         category: Type
+        type: Matching
         currency: Devise
         total: Total
       transfer:

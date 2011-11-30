@@ -28,6 +28,7 @@ en:
         dark_pool: Dark pool
         ppc: Price
         category: Type
+        type: Matching
         currency: Currency
         total: Total
       transfer:

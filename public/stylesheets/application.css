@@ -568,6 +568,15 @@ table#history td.amount {
   display: none;
 }
 
+div.trade-orders-help {
+  margin: -1em 0 2em;
+}
+
+div.trade-orders-help img {
+  position: relative;
+  top: 6px;    
+}
+
 /* Trade orders history */
 table#trade-orders tr td {
   height: 2em;

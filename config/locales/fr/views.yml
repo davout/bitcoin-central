@@ -77,7 +77,8 @@ fr:
       market_order: Prix du marché
     new:
       title: Nouvel order d'échange
-      currency: Devise à échanger
+      currency_explanation: Devise à échanger
+      type_explanation: Les différentes méthodes de matching sont décrites dans l'aide
       category: Category
       buy: Acheter
       sell: Vendre
@@ -88,6 +89,7 @@ fr:
       ppc_explanation: Prix pour 1 BTC
       total_explanation: Total de votre ordre
       dark_pool_explanation: Ne pas afficher l'ordre publiquement
+      help: Visitez notre page d'aide si vous avez besoin d'assistance
       error:
         one: "Une erreur empêche votre ordre d'être passé :"
         other: "%{count} erreurs empêchent votre ordre d'être passé :"

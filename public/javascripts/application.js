@@ -1,9 +1,9 @@
 $(document).ready(function() {
     /* Trade order creation form */
-    $("body.trade_orders .trigger-total-update").bind("click keypress keyup blur", updateTotal);
+    $("body.trade_orders input.trigger-total-update").bind("click keypress keyup blur", updateTotal)
 
     if ($("body.trade_orders input#trade_order_amount").length) {
-        updateTradeOrderForm();
+        updateTradeOrderForm()
     }
 
     // Triggered by a currency or category selection on
@@ -30,22 +30,28 @@ $(document).ready(function() {
             window.location = logoutPath
         }
     })
+    
+    $("#trade_order_type").change(updateDisplayedFields)
+    
+    if ($("#trade_order_type")) {
+      updateDisplayedFields()
+    }
 });
 
 function updateTradeOrderForm() {
     currency = getSelectedCurrency();
-    category = $("input:radio.category-select:checked").val();
+    category = $("input:radio.category-select:checked").val()
     
     if (category) {
         if (category == "sell") {
-            setBalance("BTC");
+            setBalance("BTC")
         }
         else {
             if (currency) {
-                setBalance(currency);
+                setBalance(currency)
             }
             else {
-                $("#balance").val("");
+                $("#balance").val("")
             }
         }
     }
@@ -58,34 +64,33 @@ function getSelectedCurrency() {
 }
 
 function setBalance(currency) {
-    $.get("/account/balance", {
-        "currency" : currency
-    },
-    function(data) {
-        balance = $("#balance").val(data + " " + currency);
-    }
-    );
+    $.get("/account/balance/" + currency + ".json", {},
+      function(data) {
+        console.log(data)
+          $("#balance").val(data.balance + " " + data.currency)
+      }
+    )
 }
 
 function updateTotal() {
-    precision = 5;
-    currency = getSelectedCurrency();
-    ppc = parseFloat($("#trade_order_ppc").val());
-    amount = parseFloat($("#trade_order_amount").val());
-    total = roundTo(ppc * amount, precision);
+    precision = 5
+    currency = getSelectedCurrency()
+    ppc = parseFloat($("#trade_order_ppc").val())
+    amount = parseFloat($("#trade_order_amount").val())
+    total = roundTo(ppc * amount, precision)
 
     if (!isNaN(total)) {
-        total = (total.toFixed(precision).toString());
+        total = (total.toFixed(precision).toString())
         
         if (currency) {
-            total = total + " " + currency;
+            total = total + " " + currency
         }
     }
     else {
-        total = "";
+        total = ""
     }
 
-    $("#total").val(total);
+    $("#total").val(total)
 }
 
 function updateWithdrawForm(evt) {
@@ -94,5 +99,16 @@ function updateWithdrawForm(evt) {
 }
 
 function roundTo(value, precision) {
-    return((Math.round(value * Math.pow(10, precision))) / Math.pow(10, precision));
+    return((Math.round(value * Math.pow(10, precision))) / Math.pow(10, precision))
+}
+
+function updateDisplayedFields() {
+  if ($("#trade_order_type").val() == "limit_order") {
+    $("#trade_order_ppc").parent("div").show()
+    $("#total").parent("div").show()
+  }
+  else if ($("#trade_order_type").val() == "market_order") {
+    $("#trade_order_ppc").parent("div").hide()
+    $("#total").parent("div").hide()
+  }
 }

@@ -1,19 +1,11 @@
 %h1= t(".title")
 
-// TODO : Add help link
+%div.trade-orders-help
+  = image_tag "info.png"
+  = link_to(t(".help"), static_path(:trade_orders_help))
 
 = form_for @trade_order, :as => "trade_order", :url => account_trade_orders_path do |f|
   = errors_for @trade_order, :translated_message => t(".error", :count => @trade_order.errors.count)
-
-  .form-field
-    = f.label :currency
-    = f.select :currency, Currency.all.map { |c| ["#{t("activerecord.attributes.currency.codes.#{c.code.downcase}")} (#{c.code})", c.code] unless c.code == "BTC" }.compact, { :prompt => "--" }, { :class => "currency-select trigger-total-update" }
-    .explanation
-      = t(".currency")
-
-  .form-field
-    = f.label :type
-    = f.select :type, TradeOrder::TYPES.map { |t| [t.to_s.camelcase.chomp("Order"), t] }
 
   .form-field
     = f.label :category
@@ -22,38 +14,42 @@
       = f.label :category_buy, t(".buy")
       = f.radio_button :category, "sell", :class => "category-select trigger-total-update"
       = f.label :category_sell, t(".sell")
-    .explanation
-      = t(".sell_or_buy_explanation")
+    .explanation= t(".sell_or_buy_explanation")
 
   .form-field
-    = label_tag :balance, t(".your_balance")
-    = text_field_tag :balance, nil, :disabled => true, :class => "amount"
-    .explanation
-      = t(".your_balance_explanation")
+    = f.label :currency
+    = f.select :currency, Currency.all.map { |c| ["#{t("activerecord.attributes.currency.codes.#{c.code.downcase}")} (#{c.code})", c.code] unless c.code == "BTC" }.compact, { :prompt => "--" }, { :class => "currency-select trigger-total-update" }
+    .explanation= t(".currency_explanation")
+
+  .form-field
+    = f.label :type
+    = f.select :type, TradeOrder::TYPES.map { |t| [t.to_s.camelcase.chomp("Order"), t] }
+    .explanation= t(".type_explanation")
 
   .form-field
     = f.label :amount
     = f.text_field :amount, :value => amount_field_value(@trade_order.amount), :size => 8, :class => "trigger-total-update amount"
-    .explanation
-      = t(".amount_explanation")
+    .explanation= t(".amount_explanation")
     
   .form-field
     = f.label :ppc
     = f.text_field :ppc, :value => amount_field_value(@trade_order.ppc), :size => 8, :class => "trigger-total-update amount"
-    .explanation
-      = t(".ppc_explanation")
+    .explanation= t(".ppc_explanation")
 
   .form-field
     = f.label :total
     = text_field_tag :total, nil, :size => 8, :disabled => true, :class => "amount"
-    .explanation
-      = t(".total_explanation")
+    .explanation= t(".total_explanation")
+
+  .form-field
+    = label_tag :balance, t(".your_balance")
+    = text_field_tag :balance, nil, :disabled => true, :class => "amount"
+    .explanation= t(".your_balance_explanation")
 
   .form-field
     = f.label :dark_pool
     = f.check_box :dark_pool, :class => "checkbox"
-    .explanation
-      = t(".dark_pool_explanation")
+    .explanation= t(".dark_pool_explanation")
 
 
   .form-field

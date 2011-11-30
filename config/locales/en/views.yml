@@ -77,7 +77,8 @@ en:
       market_order: Market Order  
     new:
       title: Create a trade order
-      currency: Currency you want to trade
+      currency_explanation: Currency you want to trade
+      type_explanation: Different matching types are explained in our help page     
       category: Category
       buy: Buy
       sell: Sell
@@ -88,6 +89,7 @@ en:
       ppc_explanation: Price for 1 BTC
       total_explanation: The total for your order
       dark_pool_explanation: Should the order be hidden ?
+      help: Visit our help page if you need assistance trading Bitcoins
       error:
         one: "1 error prevented your trade order from being created :"
         other: "%{count} errors prevented your trade order from being created :"
