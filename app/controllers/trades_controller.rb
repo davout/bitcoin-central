@@ -5,7 +5,6 @@ class TradesController < ApplicationController
   def index
     @trades = Trade.
       involved(current_user).
-      all.
       paginate(:page => params[:page], :per_page => 16)
   end
 
