@@ -672,11 +672,20 @@ input.amount {
 /* Social network buttons */
 
 div.fb-like {
-  float: right;
+  width: 330px;
 }
 
-div.social-buttons {
+ul#social-buttons {
+  width: 350px;
   float: right;
+  padding-left: 4em;
+  margin-top: 2em;
+}
+
+
+ul#social-buttons > li {
+  margin-bottom: 1em;
+  list-style-image: none;
 }
 
 /* Charts */
@@ -849,6 +858,10 @@ td.bank, td.account-holder {
 }
 
 /* Downloads */
+ul#downloads {
+  float: left;
+}
+
 ul#downloads li {
     list-style-type: none;
     list-style-image: none;
