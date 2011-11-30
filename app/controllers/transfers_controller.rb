@@ -18,6 +18,7 @@ class TransfersController < ApplicationController
   
   def show
     @transfer = current_user.account_operations.find(params[:id])
+    respond_with @transfer
   end
   
   def create
@@ -40,9 +41,13 @@ class TransfersController < ApplicationController
       raise(ActiveRecord::Rollback) unless o.save
     end
 
-    unless @transfer.new_record?     
-      redirect_to account_transfers_path,
-        :notice => I18n.t("transfers.index.successful.#{@transfer.state}", :amount => @transfer.amount.abs, :currency => @transfer.currency)
+    unless @transfer.new_record?
+      respond_with @transfer do |format|
+        format.html do
+          redirect_to account_transfers_path,
+            :notice => I18n.t("transfers.index.successful.#{@transfer.state}", :amount => @transfer.amount.abs, :currency => @transfer.currency)
+        end
+      end
     else
       fetch_bank_accounts
       render :action => :new
