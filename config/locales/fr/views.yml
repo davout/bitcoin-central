@@ -79,7 +79,7 @@ fr:
       total: Total
       market_order: Prix du marché
     new:
-      title: Nouvel order d'échange
+      title: Nouvel ordre d'échange
       currency_explanation: Devise à échanger
       type_explanation: Les différentes méthodes de matching sont décrites dans l'aide
       category: Category
