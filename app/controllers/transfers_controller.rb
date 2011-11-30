@@ -42,11 +42,13 @@ class TransfersController < ApplicationController
     end
 
     unless @transfer.new_record?
-      respond_with @transfer do |format|
+      respond_with do |format|
         format.html do
           redirect_to account_transfers_path,
             :notice => I18n.t("transfers.index.successful.#{@transfer.state}", :amount => @transfer.amount.abs, :currency => @transfer.currency)
         end
+          
+        format.json { render :json => @transfer }
       end
     else
       fetch_bank_accounts
@@ -57,7 +59,7 @@ class TransfersController < ApplicationController
   
   protected
   
-    def fetch_bank_accounts
-      @bank_accounts = current_user.bank_accounts.map { |ba| [ba.iban, ba.id] }
-    end
+  def fetch_bank_accounts
+    @bank_accounts = current_user.bank_accounts.map { |ba| [ba.iban, ba.id] }
+  end
 end
