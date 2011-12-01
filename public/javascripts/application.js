@@ -66,8 +66,7 @@ function getSelectedCurrency() {
 function setBalance(currency) {
     $.get("/account/balance/" + currency + ".json", {},
       function(data) {
-        console.log(data)
-          $("#balance").val(data.balance + " " + data.currency)
+        $("#balance").val(data.balance + " " + data.currency)
       }
     )
 }
