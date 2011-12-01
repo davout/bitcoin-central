@@ -744,4 +744,19 @@ class TradeOrderTest < ActiveSupport::TestCase
     t.execute!
     assert_equal BigDecimal("999250.0"), trader2.balance(:lrusd), "Delta #{trader2.balance(:lrusd) - BigDecimal("999250.0")}"
   end
+  
+  
+  test "market order should have blank ppc since it won't honor it" do
+    mo = Factory.build(:market_order,
+      :category => "buy",
+      :amount => 1,
+      :currency => "EUR",
+      :user => Factory(:user)
+    )
+
+    assert mo.valid?
+  
+    mo.ppc = 1
+    assert !mo.valid?
+  end
 end
