@@ -30,11 +30,11 @@ class Trade < Operation
     :presence=> true
   
   validates :traded_btc,
-    :numericality => true,
+    :numericality => { :greater_than => 0 },
     :presence => true
 
   validates :traded_currency,
-    :numericality => true,
+    :numericality => { :greater_than => 0 },
     :presence => true
 
   validates :ppc,

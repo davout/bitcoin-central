@@ -19,6 +19,23 @@ class TransfersControllerTest < ActionController::TestCase
         }
       end
     end
+    
+    assert_redirected_to account_transfers_path
+  end
+  
+  test "should reply with json when creating through api" do
+    user = login_with(Factory(:user))
+    add_money(user, 1000.0, :btc)
+
+    Bitcoin::Util.stubs(:valid_bitcoin_address?).returns(true)
+    Bitcoin::Util.stubs(:my_bitcoin_address?).returns(false)    
+    Bitcoin::Client.instance.stubs(:send_to_address).returns("foo")
+    Bitcoin::Client.instance.stubs(:get_balance).returns(BigDecimal("1000"))
+
+    post :create, :transfer => { :currency => "BTC", :amount => "500", :address => "bar" },
+      :format => :json
+    
+    assert JSON.parse(response.body)["id"]   
   end
 
   test "should withdraw liberty reserve" do

@@ -174,7 +174,7 @@ fr:
       bad_length: a une longueur incorrecte
       bad_chars: comprend des caractères invalides
       insufficient_privileges: Privilèges insuffisants
-      
+      should_be_blank: ne peut pas être renseigné
     template: &errors_template
       header:
         one:   "Impossible d'enregistrer ce %{model} : 1 erreur"

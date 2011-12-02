@@ -798,9 +798,47 @@ class TradeOrderTest < ActiveSupport::TestCase
 
     add_money(t1, BigDecimal("1000.0"), :btc)
 
-    market.reload.execute!
-
     assert_equal BigDecimal("250.0"), t2.balance(:btc)
 
+  end
+  
+  test "market order should have blank ppc since it won't honor it" do
+    mo = Factory.build(:market_order,
+      :category => "buy",
+      :amount => 1,
+      :currency => "EUR",
+      :user => Factory(:user)
+    )
+
+    assert mo.valid?
+  
+    mo.ppc = 1
+    assert !mo.valid?
+  end
+    
+  test "market order should only execute when the user has money" do
+    u1 = Factory(:user)
+    u2 = Factory(:user)
+    
+    add_money(u2, 1000, :btc)
+    
+    Factory(:limit_order,
+      :category => "sell",
+      :user => u2,
+      :currency => "EUR",
+      :amount => 1000,
+      :ppc => 1
+    )
+    
+    assert_no_difference 'Trade.count' do
+      mo = Factory(:market_order,
+        :category => "buy",
+        :amount => 100,
+        :user => u1,
+        :currency => "EUR"
+      )
+      
+      mo.execute!
+    end
   end
 end

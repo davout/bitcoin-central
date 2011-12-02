@@ -1,5 +1,8 @@
 fr:
   layouts:
+    application:
+      title: "Bitcoin-Central : Achetez et vendez des Bitcoins"
+      description: Achetez, vendez et stockez vos Bitcoins de manière simple et sûre avec la meilleure plateforme Bitcoin open-source  
     user_informations:
       signed_in_as: Connecté sous
       address_tip: Une nouvelle adresse est générée à chaque paiement reçu, vos adresses précédentes restent valables
@@ -76,7 +79,7 @@ fr:
       total: Total
       market_order: Prix du marché
     new:
-      title: Nouvel order d'échange
+      title: Nouvel ordre d'échange
       currency_explanation: Devise à échanger
       type_explanation: Les différentes méthodes de matching sont décrites dans l'aide
       category: Category

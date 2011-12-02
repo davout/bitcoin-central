@@ -6,7 +6,7 @@ class TradeOrder < ActiveRecord::Base
 
   attr_accessor :skip_min_amount
 
-  attr_accessible :amount, :currency, :category, :dark_pool
+  attr_accessible :amount, :currency, :category, :dark_pool, :ppc
 
   default_scope order('created_at DESC')
 
@@ -163,6 +163,11 @@ class TradeOrder < ActiveRecord::Base
     TradeOrder.matching_orders(self)
   end
   
+  def user_has_balance?
+    balance = selling? ? user.balance(:btc) : user.balance(currency)
+    balance > 0
+  end
+  
   def execute!
     executed_trades = []
 
@@ -172,7 +177,7 @@ class TradeOrder < ActiveRecord::Base
         mos.reverse!
         mo = mos.pop
 
-        while !mo.blank? and active? and !destroyed?
+        while !mo.blank? and active? and !destroyed? and user_has_balance?
           is_purchase = category == "buy"
           purchase, sale = (is_purchase ? self : mo), (is_purchase ? mo : self)
 
@@ -194,37 +199,42 @@ class TradeOrder < ActiveRecord::Base
           traded_btc = btc_amount.round(5)
           traded_currency = (btc_amount * p).round(5)
 
-          # Update orders
-          mo.amount = mo.amount - traded_btc
-          self.amount = amount - traded_btc
+          # This is necessary to prevent market orders from keeping being executed
+          # when a user has no balance anymore, or when amounts are so small that one
+          # of the sides sells/buy 0.000001 for 0
+          if traded_btc > 0 and traded_currency > 0
+            # Update orders
+            mo.amount = mo.amount - traded_btc
+            self.amount = amount - traded_btc
 
-          mo.save!
-          save!
+            mo.save!
+            save!
 
-          # Record the trade
-          trade = Trade.create! do |t|
-            t.traded_btc = traded_btc
-            t.traded_currency = traded_currency
-            t.currency = currency
-            t.ppc = p
-            t.seller_id = sale.user_id
-            t.buyer_id = purchase.user_id
-            t.purchase_order_id = purchase.id
-            t.sale_order_id = sale.id
-          end
+            # Record the trade
+            trade = Trade.create! do |t|
+              t.traded_btc = traded_btc
+              t.traded_currency = traded_currency
+              t.currency = currency
+              t.ppc = p
+              t.seller_id = sale.user_id
+              t.buyer_id = purchase.user_id
+              t.purchase_order_id = purchase.id
+              t.sale_order_id = sale.id
+            end
 
-          executed_trades << trade
+            executed_trades << trade
 
-          # TODO : Split orders if an user has enough funds to partially honor an order ?
-          # Destroy or save them according to the remaining balance
-          [self, mo].each do |o|
-            if o.amount.zero?
-              o.destroy
-            else
-              o.save!
+            # TODO : Split orders if an user has enough funds to partially honor an order ?
+            # Destroy or save them according to the remaining balance
+            [self, mo].each do |o|
+              if o.amount.zero?
+                o.destroy
+              else
+                o.save!
+              end
             end
           end
-
+          
           mo = mos.pop
         end
       rescue
