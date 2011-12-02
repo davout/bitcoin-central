@@ -8,7 +8,7 @@ $(document).ready(function() {
 
     // Triggered by a currency or category selection on
     // the trade order creation form
-    $("body.trade_orders select.trigger-total-update").change(updateTradeOrderForm);
+    $("body.trade_orders select.trigger-total-update").change(updateTradeOrderForm)
     
     $("body.transfers-new #transfer_currency").change(updateWithdrawForm)
     
@@ -36,6 +36,8 @@ $(document).ready(function() {
     if ($("#trade_order_type")) {
       updateDisplayedFields()
     }
+
+    $("a#qrcode_icon").fancybox()
 });
 
 function updateTradeOrderForm() {

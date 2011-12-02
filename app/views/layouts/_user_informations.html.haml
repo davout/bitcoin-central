@@ -15,8 +15,8 @@
 
         %span#last-bitcoin-address.bitcoin-address
           = @current_user.bitcoin_address 
-          %a{ :id => "example2", :href => "/images/qrcodebig.png"}
-            %img{ :alt => "example2", :src => "images/qrcodetiny.png"}
+          %a{ :id => "qrcode_icon", :href => "/images/qrcodebig.png"}
+            %img{ :src => "images/qrcodetiny.png"}
 
     - else
       = link_to t(".sign_up"), new_registration_path(:user)
