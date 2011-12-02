@@ -136,9 +136,9 @@ div#user-information a, div#user-information .address-label {
   font-weight: bold;
 }
 
-div#user-information p.bitcoin-address a#refresh-button {
+div#user-information span.bitcoin-address img {
   position: relative;
-  top: 4px;
+  top: 3px;
 }
 
 /* Menu */
