@@ -744,4 +744,63 @@ class TradeOrderTest < ActiveSupport::TestCase
     t.execute!
     assert_equal BigDecimal("999250.0"), trader2.balance(:lrusd), "Delta #{trader2.balance(:lrusd) - BigDecimal("999250.0")}"
   end
+
+  test "a market order should remains active" do
+    t1 = Factory(:user)
+
+    add_money(t1, BigDecimal("1000.0"), :btc)
+
+    market = Factory(:market_order,
+      :category => "sell",
+      :amount   => 250,
+      :user     => t1,
+      :currency => "EUR"
+    )
+
+    limit = Factory(:limit_order,
+      :category => "sell",
+      :amount   => 250,
+      :ppc      => 0.1,
+      :user     => t1,
+      :currency => "EUR"
+    )
+
+    assert market.active?
+    assert limit.active?
+
+    add_money(t1, BigDecimal("-1000.0"), :btc)
+
+    assert !limit.reload.active?
+    assert market.reload.active?
+  end
+
+  test "a market order should be executed when trader gets money" do
+    t1 = Factory(:user)
+    t2 = Factory(:user)
+
+    add_money(t2, BigDecimal("1000.0"), :lrusd)
+
+    market = Factory(:market_order,
+      :category => "sell",
+      :amount   => 250,
+      :user     => t1,
+      :currency => "LRUSD"
+    )
+
+    limit = Factory(:limit_order,
+      :category => "buy",
+      :amount   => 250,
+      :ppc      => 0.1,
+      :user     => t2,
+      :currency => "LRUSD"
+    )
+
+
+    add_money(t1, BigDecimal("1000.0"), :btc)
+
+    market.reload.execute!
+
+    assert_equal BigDecimal("250.0"), t2.balance(:btc)
+
+  end
 end
