@@ -8,10 +8,10 @@ class TradeOrderTest < ActiveSupport::TestCase
       :currency => "EUR",
       :category => "buy"
     )
-   
+
     assert_nil market_order.ppc
   end
- 
+
   test "should correctly perform a simple trade order" do
     trader1 = Factory(:user)
     trader2 = Factory(:user)
@@ -195,7 +195,7 @@ class TradeOrderTest < ActiveSupport::TestCase
 
     assert_difference 'TradeOrder.count', -2 do
       assert_difference 'Trade.count', 2 do
-        assert_difference 'AccountOperation.count', 8 do
+        assert_difference 'AccountOperation.count', 12 do
           bid_at_8.execute!
         end
       end
@@ -308,7 +308,7 @@ class TradeOrderTest < ActiveSupport::TestCase
 
     assert_difference "TradeOrder.count", -1 do
       assert_difference "Trade.count" do
-        assert_difference "AccountOperation.count", 4 do
+        assert_difference "AccountOperation.count", 6 do
           t.execute!
         end
       end
@@ -384,7 +384,7 @@ class TradeOrderTest < ActiveSupport::TestCase
 
     assert_no_difference "TradeOrder.count" do
       assert_difference "Trade.count" do
-        assert_difference "AccountOperation.count", 4 do
+        assert_difference "AccountOperation.count", 6 do
           t2.execute!
         end
       end
@@ -545,7 +545,7 @@ class TradeOrderTest < ActiveSupport::TestCase
 
     add_money(trader1, 20, :lrusd)
 
-    assert_difference "AccountOperation.count", 4 do
+    assert_difference "AccountOperation.count", 6 do
       t.activate!
       assert t.active?
     end
@@ -614,7 +614,7 @@ class TradeOrderTest < ActiveSupport::TestCase
     )
 
     t.execute!
-   
+
     assert_equal BigDecimal("999250.0"), trader2.balance(:lrusd)
   end
 
@@ -641,14 +641,14 @@ class TradeOrderTest < ActiveSupport::TestCase
     )
 
     assert limit.matching_orders.include?(market)
-    
+
     limit.execute!
-    
+
     assert_equal BigDecimal("975.0"), t2.balance(:eur)
     assert_equal BigDecimal("250.0"), t2.balance(:btc)
   end
-  
-  
+
+
   test "a market order should execute against a limit order" do
     t1 = Factory(:user)
     t2 = Factory(:user)
@@ -672,13 +672,13 @@ class TradeOrderTest < ActiveSupport::TestCase
     )
 
     assert market.matching_orders.include?(limit)
-   
+
     market.execute!
-   
+
     assert_equal BigDecimal("975.0"), t2.balance(:eur)
     assert_equal BigDecimal("250.0"), t2.balance(:btc)
   end
- 
+
   test "execution should use ppc order only" do
     trader1 = Factory(:user)
     trader2 = Factory(:user)
@@ -744,7 +744,7 @@ class TradeOrderTest < ActiveSupport::TestCase
     t.execute!
     assert_equal BigDecimal("999250.0"), trader2.balance(:lrusd), "Delta #{trader2.balance(:lrusd) - BigDecimal("999250.0")}"
   end
-  
+
   test "market order should have blank ppc since it won't honor it" do
     mo = Factory.build(:market_order,
       :category => "buy",
@@ -754,17 +754,17 @@ class TradeOrderTest < ActiveSupport::TestCase
     )
 
     assert mo.valid?
-  
+
     mo.ppc = 1
     assert !mo.valid?
   end
-    
+
   test "market order should only execute when the user has money" do
     u1 = Factory(:user)
     u2 = Factory(:user)
-    
+
     add_money(u2, 1000, :btc)
-    
+
     Factory(:limit_order,
       :category => "sell",
       :user => u2,
@@ -772,7 +772,7 @@ class TradeOrderTest < ActiveSupport::TestCase
       :amount => 1000,
       :ppc => 1
     )
-    
+
     assert_no_difference 'Trade.count' do
       mo = Factory(:market_order,
         :category => "buy",
@@ -780,8 +780,37 @@ class TradeOrderTest < ActiveSupport::TestCase
         :user => u1,
         :currency => "EUR"
       )
-      
+
       mo.execute!
     end
+  end
+
+  test "a fee should be taken" do
+    t1 = Factory(:user,
+         :com => "0.1")
+    t2 = Factory(:user,
+         :com => "0.1")
+
+    add_money(t1, 1000, :btc)
+    add_money(t2, 1000, :eur)
+
+    Factory(:limit_order,
+      :user => t1,
+      :category => "sell",
+      :amount => 1000,
+      :ppc => 1,
+      :currency => "EUR"
+    )
+
+    t = Factory(:market_order,
+      :category => "buy",
+      :amount => 1000,
+      :currency => "EUR",
+      :user => t2
+    )
+
+    t.execute!
+    assert_equal t1.balance(:eur), BigDecimal("900")
+    assert_equal Account.storage_account_for(:BTC_fees).balance(:btc), 100
   end
 end

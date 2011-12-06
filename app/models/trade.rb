@@ -69,6 +69,13 @@ class Trade < Operation
   end
   
   def execute
+
+    globale_com = BigDecimal("0.1")
+
+    sell_com = sale_order.user.com.nil? ? globale_com : BigDecimal(sale_order.user.com)
+
+    buy_com = purchase_order.user.com.nil? ? globale_com : BigDecimal(purchase_order.user.com)
+
     account_operations << AccountOperation.new do |it|
       it.currency = currency
       it.amount = -traded_currency
@@ -77,7 +84,7 @@ class Trade < Operation
 
     account_operations << AccountOperation.new do |it|
       it.currency = currency
-      it.amount = traded_currency
+      it.amount = traded_currency * (1 - sell_com)
       it.account_id = sale_order.user_id
     end
 
@@ -90,8 +97,20 @@ class Trade < Operation
 
     account_operations << AccountOperation.new do |bt|
       bt.currency = "BTC"
-      bt.amount = traded_btc
+      bt.amount = traded_btc * (1 - buy_com)
       bt.account_id = purchase_order.user_id
+    end
+
+    account_operations << AccountOperation.new do |fee|
+      fee.currency = "BTC"
+      fee.amount = traded_btc * buy_com
+      fee.account = Account.storage_account_for("BTC_fees".to_sym)
+    end
+
+    account_operations << AccountOperation.new do |fee|
+      fee.currency = currency
+      fee.amount = traded_currency * sell_com
+      fee.account = Account.storage_account_for((currency + "_fees").to_sym)
     end
 
     save!
