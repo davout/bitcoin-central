@@ -17,29 +17,10 @@ class Admin::UsersController < Admin::AdminController
   end
   
   active_scaffold :user do |config|
-    config.actions.exclude :create, :update, :delete
+    config.actions.exclude :create, :delete
     
     config.columns = [
-      :id,
-      :name,
-      :email,
-      :require_ga_otp,
-      :require_yk_otp,
-      :time_zone,
-      :bitcoin_address,
-      :confirmation_sent_at,
-      :confirmed_at,
-      :current_sign_in_at,
-      :current_sign_in_ip,
-      :failed_attempts,
-      :last_sign_in_at,
-      :last_sign_in_ip,
-      :locked_at,
-      :remember_created_at,
-      :merchant,
-      :yubikeys,
-      :full_name,
-      :address
+      :com
     ]
     
     config.list.columns = [
