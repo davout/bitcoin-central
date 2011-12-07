@@ -39,3 +39,10 @@
         %div{ :style => "clear:both" }
 
     = render :partial => 'layouts/footer'
+
+%script{ :type => "text/javascript" }
+  $(document).ready(function(){$("a#qrcode_icon").fancybox({
+  'content' : ' \
+  = escape_javascript(render :partial => 'users/qrcode', :locals => { :qrcode => RQRCode::QRCode.new("trololol", :size => 6) }) + '\\'
+  '
+  })});

@@ -37,7 +37,6 @@ $(document).ready(function() {
       updateDisplayedFields()
     }
 
-    $("a#qrcode_icon").fancybox()
 });
 
 function updateTradeOrderForm() {
