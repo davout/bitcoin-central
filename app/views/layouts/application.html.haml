@@ -16,10 +16,9 @@
 
     = render :partial => 'layouts/google_analytics'
     = render :partial => 'layouts/open_graph'
+    = render :partial => 'layouts/icons'
+
     %link{ :href => locale_switch_link(I18n.locale, request.url), :rel => "canonical" }
-    %link{ :rel => "apple-touch-icon", :sizes => "114x114", :href => "apple-touch-icon-114x114-precomposed.png" }
-    %link{ :rel => "apple-touch-icon", :sizes => "72x72", :href => "apple-touch-icon-72x72-precomposed.png" }
-    %link{ :rel => "apple-touch-icon", :sizes => "57x57", :href => "apple-touch-icon-57x57-precomposed.png" }
 
     = yield :head
 
