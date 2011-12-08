@@ -32,7 +32,7 @@ class Account < ActiveRecord::Base
   def self.storage_account_for(currency)
     account_name = "storage_for_#{currency.to_s.downcase}"
     account = find_by_name(account_name)
-    
+
     if account
       account
     else

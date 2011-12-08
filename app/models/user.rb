@@ -68,6 +68,13 @@ class User < Account
     super or (generate_new_address && super)
   end
 
+  def qr_code
+    if @qrcode.nil?
+      @qrcode = RQRCode::QRCode.new(bitcoin_address, :size => 6)
+    end
+    @qrcode
+  end
+
   def confirm!
     super
     UserMailer.registration_confirmation(self).deliver
