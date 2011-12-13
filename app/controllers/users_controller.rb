@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class UsersController < ApplicationController  
   skip_before_filter :authenticate_user!,
     :only => [:new, :create]
 
@@ -53,6 +53,17 @@ class UsersController < ApplicationController
       redirect_to edit_user_path, :notice => t("users.password_change_form.password_updated")
     else
       render :edit_password
+    end
+  end
+  
+  def address
+    respond_to do |format|
+      format.png do        
+        send_data `echo #{current_user.bitcoin_address} | qrencode --level=H --size=6 --margin=0 -o -`,
+          :type => 'image/png',
+          :disposition => 'inline',
+          :filename => "#{current_user.bitcoin_address}.png"
+      end
     end
   end
 end
