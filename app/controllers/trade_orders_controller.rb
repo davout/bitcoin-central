@@ -32,6 +32,11 @@ class TradeOrdersController < ApplicationController
     end
   end
 
+  def reactive_trade_order
+    current_user.trade_orders.find(params[:trade_order_id]).reactive
+    redirect_to account_trade_orders_path
+  end
+
   def index
     @trade_orders = current_user.trade_orders.paginate(:page => params[:page], :per_page => 16)
   end

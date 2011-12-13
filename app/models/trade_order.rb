@@ -121,6 +121,25 @@ class TradeOrder < ActiveRecord::Base
     save!
   end
 
+  def activable?
+    res = false
+    if !active
+      if category == "sell" and user.balance(:btc) >= amount
+        res = true
+      else
+        if category == "buy"
+          res = (user.balance(currency) >= (amount * (ppc || 0)))
+        end
+      end
+    end
+    res
+  end
+
+  def reactive
+    self.active = activable?
+    save! and execute!
+  end
+
   def activate!
     raise "Order is already active" if active?
 

@@ -15,6 +15,12 @@ module TradeOrdersHelper
       :confirm => (t :delete_order_confirm)
   end
 
+  def active_link_for(trade_order)
+    button_to image_tag("delete.png"),
+      account_trade_order_reactive_trade_order_path(trade_order),
+      :method => :post
+  end
+
   def format_amount(amount, currency, precision = 4)
     "#{number_to_currency(amount, :unit => "", :precision => precision)} #{currency + ("&nbsp;" * (5 - currency.size))}".html_safe
   end
