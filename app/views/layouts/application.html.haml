@@ -9,7 +9,8 @@
     %meta{ :"http-equiv" => "content-type", :content => "text/html;charset=UTF-8" }
     %meta{ :"http-equiv" => "content-language", :content => I18n.locale }
 
-    = stylesheet_link_tag %w{reset application jqplot}, :cache => "all"
+    = stylesheet_link_tag %w{reset application jqplot jquery.fancybox}, :cache => "all"
+
     = javascript_include_tag :defaults, :cache => "all"
     = active_scaffold_includes
     = csrf_meta_tag
@@ -40,3 +41,12 @@
         %div{ :style => "clear:both" }
 
     = render :partial => 'layouts/footer'
+
+- if @current_user
+
+  %script{ :type => "text/javascript" }
+    $(document).ready(function(){$("a#qrcode_icon").fancybox({
+    'content' : ' \
+    = escape_javascript(render :partial => 'users/qrcode', :locals => { :qrcode => @current_user.qr_code }) + '\\'
+    '
+    })});
