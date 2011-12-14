@@ -121,8 +121,6 @@ fr:
   type: Type
   price: Prix
   dark_pool_order: Ordre privé
-  delete_order: Supprimer cet ordre
-  delete_order_confirm: Êtes-vous sûr(e) de vouloir supprimer cet ordre ?
   no_orders_found: "Aucun ordre n'a été trouvé"
 
   # views/trades/index.html

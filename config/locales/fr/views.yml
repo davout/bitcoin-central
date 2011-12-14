@@ -70,6 +70,10 @@ fr:
       market_order: Prix du marché
       sell: Vente
       buy: Achat
+      delete_order: Supprimer cet ordre
+      delete_order_confirm: Êtes-vous sûr(e) de vouloir supprimer cet ordre ?
+      activate_order: Activer l'ordre et l'exécuter
+      activate_order_confirm: Êtes-vous sûr(e) de vouloir activer cet ordre ? 
     book:
       bids: Achat
       asks: Vente

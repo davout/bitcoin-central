@@ -43,7 +43,7 @@ BitcoinBank::Application.routes.draw do
     resources :invoices
 
     resources :trade_orders, :only => [:index, :new, :create, :destroy] do
-      post :reactive_trade_order
+      post :activate
     end
   end
 

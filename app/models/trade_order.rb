@@ -121,8 +121,10 @@ class TradeOrder < ActiveRecord::Base
     save!
   end
 
+  # TODO : DRY up
   def activable?
     res = false
+
     if !active
       if category == "sell" and user.balance(:btc) >= amount
         res = true
@@ -132,14 +134,11 @@ class TradeOrder < ActiveRecord::Base
         end
       end
     end
+
     res
   end
 
-  def reactive
-    self.active = activable?
-    save! and execute!
-  end
-
+  # TODO : DRY up, doublon avec les validations ?
   def activate!
     raise "Order is already active" if active?
 

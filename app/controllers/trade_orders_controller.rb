@@ -32,8 +32,8 @@ class TradeOrdersController < ApplicationController
     end
   end
 
-  def reactive_trade_order
-    current_user.trade_orders.find(params[:trade_order_id]).reactive
+  def activate
+    current_user.trade_orders.find(params[:trade_order_id]).activate!
     redirect_to account_trade_orders_path
   end
 
