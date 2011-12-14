@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.9'
+gem 'rails', '3.1.3'
 
 gem 'rake'
 
@@ -23,7 +23,8 @@ gem 'whenever'
 
 gem 'capistrano'
 
-gem 'active_scaffold_vho'
+gem 'active_scaffold_vho',
+  :git => "git@github.com:vhochstein/active_scaffold.git"
 
 gem 'haml'
 
@@ -39,6 +40,8 @@ gem 'rqrcode'
 gem 'iban-tools'
 
 gem 'delayed_job'
+
+gem 'rack'
 
 group :test do
   gem 'mocha', :require => false
