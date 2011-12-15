@@ -6,7 +6,6 @@ BitcoinBank::Application.routes.draw do
     post :reset_ga_otp_secret
     put :update_password
     get :edit_password
-    get :address
 
     resources :yubikeys, :only => [:index, :create, :destroy]
     resources :bank_accounts, :only => [:index, :create, :destroy]
@@ -76,6 +75,8 @@ BitcoinBank::Application.routes.draw do
     
     match '/balances', :to => 'informations#balances', :as => :balances
   end
+  
+  match '/qrcode/:data.png' => 'qrcodes#show', :as => :qrcode
   
   match '/order_book' => 'trade_orders#book'
 

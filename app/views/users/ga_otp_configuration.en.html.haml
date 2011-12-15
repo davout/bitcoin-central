@@ -35,7 +35,7 @@
 
 %p Scan the QR code to automatically configure your mobile device.
 
-= render :partial => 'users/qrcode', :locals => { :qrcode => RQRCode::QRCode.new(current_user.ga_provisioning_uri, :size => 6) }
+= qrcode_image_tag current_user.ga_provisioning_uri
 
 %h3 Manual configuration
 

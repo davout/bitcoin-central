@@ -15,7 +15,7 @@
 
         %span#last-bitcoin-address.bitcoin-address
           = @current_user.bitcoin_address 
-          = link_to address_user_path(:format => :png), :id => "address-qrcode" do
+          = link_to qrcode_image_path(current_user.bitcoin_address), :class => "address-qrcode" do
             = image_tag "qrcode.png"
 
     - else

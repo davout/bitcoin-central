@@ -38,7 +38,7 @@ $(document).ready(function() {
     }
     
     // QR code fancybox next to address
-    $("a#address-qrcode").fancybox({
+    $("a.address-qrcode").fancybox({
       opacity: true,
       showCloseButton: true
     })

@@ -55,15 +55,4 @@ class UsersController < ApplicationController
       render :edit_password
     end
   end
-  
-  def address
-    respond_to do |format|
-      format.png do        
-        send_data `echo #{current_user.bitcoin_address} | qrencode --level=H --size=6 --margin=0 -o -`,
-          :type => 'image/png',
-          :disposition => 'inline',
-          :filename => "#{current_user.bitcoin_address}.png"
-      end
-    end
-  end
 end
