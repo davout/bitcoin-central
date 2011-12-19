@@ -30,28 +30,6 @@ class TradeOrder < ActiveRecord::Base
   validates :amount,
     :numericality => true
 
-  validate :amount do
-    if new_record?
-      if amount and (amount < MIN_AMOUNT) and !skip_min_amount
-        errors[:amount] << (I18n.t "errors.must_be_greater", :min=>MIN_AMOUNT)
-      end
-
-      if amount and (amount > user.balance(:btc)) and selling?
-        errors[:amount] << (I18n.t "errors.greater_than_balance", :balance=>("%.4f" % user.balance(:btc)), :currency=>"BTC")
-      end
-
-      unless currency.blank? or self.is_a?(MarketOrder)
-        if amount and ppc and ((user.balance(currency) / ppc) < amount ) and buying?
-          errors[:amount] << (I18n.t "errors.greater_than_capacity", :capacity=>("%.4f" % (user.balance(currency) / ppc)), :ppc=>ppc, :currency=>currency)
-        end
-      end
-
-      if dark_pool? and amount < MIN_DARK_POOL_AMOUNT
-        errors[:dark_pool] << (I18n.t "errors.minimum_dark_pool_order")
-      end
-    end
-  end
-
   validates :currency,
     :presence => true,
     :inclusion => { :in => Transfer::CURRENCIES }
@@ -110,7 +88,7 @@ class TradeOrder < ActiveRecord::Base
   end
 
   def inactivate_if_needed!
-    if active
+    if active and self.is_a?(LimitOrder)
       if category == "sell"
         self.active = (user.balance(:btc) >= amount)
       else
@@ -121,6 +99,24 @@ class TradeOrder < ActiveRecord::Base
     save!
   end
 
+  # TODO : DRY up
+  def activable?
+    res = false
+
+    if !active
+      if category == "sell" and user.balance(:btc) >= amount
+        res = true
+      else
+        if category == "buy"
+          res = (user.balance(currency) >= (amount * (ppc || 0)))
+        end
+      end
+    end
+
+    res
+  end
+
+  # TODO : DRY up, doublon avec les validations ?
   def activate!
     raise "Order is already active" if active?
 

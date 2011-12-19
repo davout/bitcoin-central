@@ -68,4 +68,37 @@ class TradeOrdersControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to account_trade_orders_path
   end
+
+  test "should activate trade order" do
+    trader = Factory(:user)
+    login_with(trader)
+
+    add_money(trader, 100.0, :btc)
+
+    post :create, :trade_order => {
+      :category => "sell",
+      :amount => "100",
+      :ppc => "1",
+      :currency => "PGAU",
+      :type => "limit_order"
+    }
+
+    t1 = trader.trade_orders.last
+
+    assert t1.active?
+
+    add_money(trader, -100.0, :btc)
+
+    assert !t1.reload.active
+
+    add_money(trader, 100.0, :btc)
+
+    assert t1.reload.activable?
+
+    post :activate, :trade_order_id => t1.id
+
+    assert_response :redirect
+
+    assert_redirected_to account_trade_orders_path
+  end
 end

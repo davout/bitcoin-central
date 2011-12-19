@@ -10,7 +10,7 @@ class AccountOperation < ActiveRecord::Base
 
   belongs_to :account
     
-  after_create :inactivate_orders,
+  after_create :refresh_orders,
     :refresh_account_address
   
   attr_accessible :amount, :currency
@@ -42,12 +42,20 @@ class AccountOperation < ActiveRecord::Base
     "#{I18n.t("activerecord.models.account_operation.one")} n°#{id}"
   end
   
-  def inactivate_orders
+  def refresh_orders
     if account.is_a?(User)
-      account.reload.trade_orders.each { |t| t.inactivate_if_needed! }
+      account.reload.trade_orders.each { |t|
+        if t.is_a?(LimitOrder)
+          t.inactivate_if_needed!
+        else
+          if t.is_a?(MarketOrder)
+            t.execute!
+          end
+        end
+      }
     end
   end
-  
+
   def confirmed?
     (bt_tx_confirmations >= MIN_BTC_CONFIRMATIONS) or bt_tx_id.nil? or (amount < 0)
   end

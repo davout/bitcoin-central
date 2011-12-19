@@ -1,0 +1,4 @@
+#footer
+  = t(:footer_html, :adress => BitcoinBank::Donations)
+  = link_to qrcode_image_path(BitcoinBank::Donations), :class => "address-qrcode" do
+    = image_tag "qrcode.png"

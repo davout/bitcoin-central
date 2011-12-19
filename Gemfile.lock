@@ -21,7 +21,7 @@ GEM
       rack-mount (~> 0.8.2)
       rack-test (~> 0.6.1)
       sprockets (~> 2.0.3)
-    active_scaffold (3.1.11)
+    active_scaffold (3.1.12)
       rails (~> 3.1.0)
     activemodel (3.1.3)
       activesupport (= 3.1.3)
@@ -40,7 +40,6 @@ GEM
     addressable (2.2.6)
     arel (2.2.1)
     bcrypt-ruby (3.0.1)
-    bcrypt-ruby (3.0.1-x86-mingw32)
     builder (3.0.0)
     capistrano (2.9.0)
       highline
@@ -49,11 +48,12 @@ GEM
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
     chronic (0.6.6)
-    daemons (1.1.4)
+    chunky_png (1.2.5)
+    daemons (1.1.5)
     delayed_job (2.1.4)
       activesupport (~> 3.0)
       daemons
-    devise (1.5.2)
+    devise (1.5.3)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
       warden (~> 1.1)
@@ -66,7 +66,7 @@ GEM
       factory_girl (~> 2.3.0)
       railties (>= 3.0.0)
     haml (3.1.4)
-    highline (1.6.8)
+    highline (1.6.9)
     hike (1.2.1)
     i18n (0.6.0)
     iban-tools (0.0.6)
@@ -81,7 +81,6 @@ GEM
       metaclass (~> 0.0.1)
     multi_json (1.0.4)
     mysql (2.8.1)
-    mysql (2.8.1-x86-mingw32)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
@@ -91,6 +90,8 @@ GEM
       net-ssh (>= 1.99.1)
     orm_adapter (0.0.5)
     polyglot (0.3.3)
+    qrencoder (1.4.0)
+      chunky_png (~> 1.1)
     rack (1.3.5)
     rack-cache (1.1)
       rack (>= 0.4)
@@ -116,11 +117,10 @@ GEM
       rdoc (~> 3.4)
       thor (~> 0.14.6)
     rake (0.9.2.2)
-    rdoc (3.11)
+    rdoc (3.12)
       json (~> 1.4)
     recaptcha (0.3.4)
     rotp (1.3.2)
-    rqrcode (0.4.2)
     sprockets (2.0.3)
       hike (~> 1.2)
       rack (~> 1.0)
@@ -144,7 +144,6 @@ GEM
 
 PLATFORMS
   ruby
-  x86-mingw32
 
 DEPENDENCIES
   active_scaffold
@@ -159,12 +158,12 @@ DEPENDENCIES
   json
   mocha
   mysql (= 2.8.1)
+  qrencoder
   rack
   rails (= 3.1.3)
   rake
   recaptcha
   rotp (~> 1.3.0)
-  rqrcode
   transitions
   uglifier
   whenever
