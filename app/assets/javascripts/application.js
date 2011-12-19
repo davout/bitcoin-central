@@ -1,4 +1,18 @@
-//= require_tree . 
+//= require controls.js
+//= require excanvas.js
+//= require jquery.js
+//= require jquery-ui.js
+//= require jqplot.js
+//= require jqplot.dateAxisRenderer.js
+//= require jqplot.highlighter.js
+//= require jquery.countdown.js
+//= require jquery.fancybox.js
+//= require rails.js
+//= require active_scaffold/default/active_scaffold.js
+//= require active_scaffold/default/date_picker_bridge.js
+//= require active_scaffold/default/jquery.editinplace.js
+//= require active_scaffold/default/tiny_mce_bridge.js
+ 
 
 $(document).ready(function() {
     /* Trade order creation form */
