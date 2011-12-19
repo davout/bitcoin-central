@@ -19,4 +19,6 @@ BitcoinBank::Application.configure do
   
   # Used to broadcast invoices public URLs
   config.base_url = "https://bitcoin-central.net/"
+  
+  config.assets.compress = true
 end
