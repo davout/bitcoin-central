@@ -77,4 +77,12 @@ module ApplicationHelper
 
     "#{scheme}://#{locale}#{address}"
   end
+  
+  def qrcode_image_tag(data)
+    image_tag(qrcode_image_path(data), :class => "qrcode", :alt => data, :title => data)
+  end
+  
+  def qrcode_image_path(data)
+    qrcode_path(:data => CGI.escape(data))
+  end
 end

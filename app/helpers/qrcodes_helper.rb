@@ -1,0 +1,2 @@
+module QrcodesHelper
+end
