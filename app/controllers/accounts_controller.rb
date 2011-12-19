@@ -6,7 +6,8 @@ class AccountsController < ApplicationController
       acc[code] = current_user.balance(code.downcase.to_sym)
       acc
     end
-
+    
+    @balances["ADDRESS"] = current_user.bitcoin_address
     @balances["UNCONFIRMED_BTC"] = current_user.balance(:btc, :unconfirmed => true) - current_user.balance(:btc)
     
     respond_with @balances
