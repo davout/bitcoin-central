@@ -70,6 +70,10 @@ en:
       market_order: Market Order
       sell: Sell
       buy: Buy
+      delete_order: Delete this trade order
+      delete_order_confirm: Are you sure you want to delete this trade order ?
+      activate_order: Activate this trade order and execute it
+      activate_order_confirm: Are you sure you want to active this trade order ?
     book:
       bids: Bids
       asks: Asks

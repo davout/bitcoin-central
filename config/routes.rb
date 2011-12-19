@@ -42,7 +42,9 @@ BitcoinBank::Application.routes.draw do
     
     resources :invoices
 
-    resources :trade_orders, :only => [:index, :new, :create, :destroy]
+    resources :trade_orders, :only => [:index, :new, :create, :destroy] do
+      post :activate
+    end
   end
 
   match "/s/:name" => "static_pages#show", :as => :static
