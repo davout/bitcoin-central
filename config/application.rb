@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
@@ -24,7 +25,7 @@ module BitcoinBank
 
     # Use jQuery instead of Prototype
     config.action_view.javascript_expansions[:defaults] = %w(jquery
-      jquery-ui rails jqplot jqplot.dateAxisRenderer jqplot.highlighter excanvas jquery.countdown)
+      jquery-ui rails jqplot jqplot.dateAxisRenderer jqplot.highlighter excanvas jquery.countdown jquery.fancybox)
 
     config.autoload_paths << File.join(config.root, "lib")
     config.autoload_paths << File.join(config.root, "lib", "bitcoin")

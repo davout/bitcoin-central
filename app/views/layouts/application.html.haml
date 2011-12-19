@@ -9,13 +9,16 @@
     %meta{ :"http-equiv" => "content-type", :content => "text/html;charset=UTF-8" }
     %meta{ :"http-equiv" => "content-language", :content => I18n.locale }
 
-    = stylesheet_link_tag %w{reset application jqplot}, :cache => "all"
+    = stylesheet_link_tag %w{reset application jqplot jquery.fancybox}, :cache => "all"
+
     = javascript_include_tag :defaults, :cache => "all"
     = active_scaffold_includes
     = csrf_meta_tag
 
     = render :partial => 'layouts/google_analytics'
     = render :partial => 'layouts/open_graph'
+    = render :partial => 'layouts/icons'
+
     %link{ :href => locale_switch_link(I18n.locale, request.url), :rel => "canonical" }
 
     = yield :head
@@ -23,7 +26,7 @@
   %body{ :class => [request[:controller], "#{request[:controller]}-#{request[:action]}"] }
     #content
 
-      %h1#main-title= link_to(content_tag(:span, t(:website_title)), root_path)
+      %h1#main-title= link_to(content_tag(:span, t(".title")), root_path)
 
       = render :partial => 'layouts/locale_select'
       = render :partial => 'layouts/user_informations'

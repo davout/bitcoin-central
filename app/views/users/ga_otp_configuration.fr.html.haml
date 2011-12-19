@@ -34,7 +34,7 @@
 
 %p Scannez le code QR afin de configurer automatiquement votre générateur de codes d'authentification.
 
-= render :partial => 'users/qrcode', :locals => { :qrcode => RQRCode::QRCode.new(current_user.ga_provisioning_uri, :size => 6) }
+= qrcode_image_tag current_user.ga_provisioning_uri
 
 %h3 Configuration manuelle
 
