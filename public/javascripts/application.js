@@ -36,8 +36,13 @@ $(document).ready(function() {
     if ($("#trade_order_type")) {
       updateDisplayedFields()
     }
-
-});
+    
+    // QR code fancybox next to address
+    $("a.address-qrcode").fancybox({
+      opacity: true,
+      showCloseButton: true
+    })
+})
 
 function updateTradeOrderForm() {
     currency = getSelectedCurrency();

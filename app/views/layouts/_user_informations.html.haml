@@ -1,8 +1,8 @@
 #user-information
   %p
-    - if @current_user
+    - if current_user
       %p.identification
-        = t ".signed_in_as"
+        = t(".signed_in_as")
         = link_to @current_user.name, edit_user_path
         = "-"
         = link_to t(".logout"), destroy_session_path(:user)
@@ -10,13 +10,13 @@
       
       %p{ :title => t(".address_tip") }
         %span.address-label
-          = t ".your_address"
+          = t(".your_address")
           = ":"
 
         %span#last-bitcoin-address.bitcoin-address
           = @current_user.bitcoin_address 
-          %a{ :id => "qrcode_icon", :href => "/images/qrcodebig.png"}
-            %img{ :src => "images/qrcodetiny.png"}
+          = link_to qrcode_image_path(current_user.bitcoin_address), :class => "address-qrcode" do
+            = image_tag "qrcode.png"
 
     - else
       = link_to t(".sign_up"), new_registration_path(:user)

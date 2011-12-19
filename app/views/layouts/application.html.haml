@@ -41,12 +41,3 @@
         %div{ :style => "clear:both" }
 
     = render :partial => 'layouts/footer'
-
-- if @current_user
-
-  %script{ :type => "text/javascript" }
-    $(document).ready(function(){$("a#qrcode_icon").fancybox({
-    'content' : ' \
-    = escape_javascript(render :partial => 'users/qrcode', :locals => { :qrcode => @current_user.qr_code }) + '\\'
-    '
-    })});
