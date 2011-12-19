@@ -1,5 +1,5 @@
 class Trade < Operation
-  DEFAULT_COMMISSION_RATE = BigDecimal("10.0")
+  DEFAULT_COMMISSION_RATE = BigDecimal("0")
 
   default_scope order("created_at DESC")
   

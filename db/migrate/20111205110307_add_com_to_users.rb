@@ -1,6 +1,9 @@
 class AddComToUsers < ActiveRecord::Migration
   def self.up
-    add_column :accounts, :commission_rate, :decimal
+    add_column :accounts, :commission_rate, :decimal,
+      :precision => 16,
+      :scale => 8,
+      :default => 0
   end
 
   def self.down

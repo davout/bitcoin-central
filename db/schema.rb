@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111129123247) do
+ActiveRecord::Schema.define(:version => 20111205110307) do
 
   create_table "account_operations", :force => true do |t|
     t.string   "type"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(:version => 20111129123247) do
   add_index "account_operations", ["lr_transaction_id"], :name => "index_transfers_on_lr_transaction_id", :unique => true
 
   create_table "accounts", :force => true do |t|
-    t.string   "name",                                      :null => false
+    t.string   "name",                                                                     :null => false
     t.string   "email"
     t.string   "password"
     t.datetime "created_at"
@@ -50,35 +50,36 @@ ActiveRecord::Schema.define(:version => 20111129123247) do
     t.string   "salt"
     t.string   "time_zone"
     t.string   "secret_token"
-    t.string   "encrypted_password",     :default => "",    :null => false
-    t.string   "password_salt",          :default => "",    :null => false
+    t.string   "encrypted_password",                                    :default => "",    :null => false
+    t.string   "password_salt",                                         :default => "",    :null => false
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "reset_password_token"
     t.string   "remember_token"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0
+    t.integer  "sign_in_count",                                         :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.integer  "failed_attempts",        :default => 0
+    t.integer  "failed_attempts",                                       :default => 0
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.string   "authentication_token"
-    t.boolean  "merchant",               :default => false
+    t.boolean  "merchant",                                              :default => false
     t.string   "ga_otp_secret"
-    t.boolean  "require_ga_otp",         :default => false
+    t.boolean  "require_ga_otp",                                        :default => false
     t.datetime "last_address_refresh"
-    t.boolean  "require_yk_otp",         :default => false
+    t.boolean  "require_yk_otp",                                        :default => false
     t.integer  "parent_id"
     t.string   "type"
     t.string   "full_name"
     t.text     "address"
-    t.boolean  "notify_on_trade",        :default => true
-    t.integer  "last_notified_trade_id", :default => 0,     :null => false
-    t.integer  "max_read_tx_id",         :default => 0,     :null => false
+    t.boolean  "notify_on_trade",                                       :default => true
+    t.integer  "last_notified_trade_id",                                :default => 0,     :null => false
+    t.integer  "max_read_tx_id",                                        :default => 0,     :null => false
+    t.decimal  "commission_rate",        :precision => 16, :scale => 8, :default => 0.0
   end
 
   add_index "accounts", ["email"], :name => "index_users_on_email", :unique => true

@@ -69,7 +69,8 @@ class Admin::UsersController < Admin::AdminController
       :failed_attempts,
       :last_sign_in_at,
       :last_sign_in_ip,
-      :locked_at
+      :locked_at,
+      :commission_rate
     ]
 
     config.columns[:merchant].inplace_edit = true
