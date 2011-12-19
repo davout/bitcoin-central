@@ -1,4 +1,6 @@
 class Trade < Operation
+  DEFAULT_COMMISSION_RATE = BigDecimal("10.0")
+
   default_scope order("created_at DESC")
   
   after_create :execute
@@ -70,11 +72,9 @@ class Trade < Operation
   
   def execute
 
-    globale_com = BigDecimal("0.1")
+    sell_com = sale_order.user.commission_rate || DEFAULT_COMMISSION_RATE
 
-    sell_com = sale_order.user.com.nil? ? globale_com : BigDecimal(sale_order.user.com)
-
-    buy_com = purchase_order.user.com.nil? ? globale_com : BigDecimal(purchase_order.user.com)
+    buy_com = purchase_order.user.commission_rate || DEFAULT_COMMISSION_RATE
 
     account_operations << AccountOperation.new do |it|
       it.currency = currency
@@ -84,7 +84,7 @@ class Trade < Operation
 
     account_operations << AccountOperation.new do |it|
       it.currency = currency
-      it.amount = traded_currency * (1 - sell_com)
+      it.amount = traded_currency * ((100.0 - sell_com) / 100.0)
       it.account_id = sale_order.user_id
     end
 
@@ -97,19 +97,19 @@ class Trade < Operation
 
     account_operations << AccountOperation.new do |bt|
       bt.currency = "BTC"
-      bt.amount = traded_btc * (1 - buy_com)
+      bt.amount = traded_btc * ((100.0 - buy_com) / 100.0)
       bt.account_id = purchase_order.user_id
     end
 
     account_operations << AccountOperation.new do |fee|
       fee.currency = "BTC"
-      fee.amount = traded_btc * buy_com
+      fee.amount = traded_btc * buy_com / 100.0
       fee.account = Account.storage_account_for("BTC_fees".to_sym)
     end
 
     account_operations << AccountOperation.new do |fee|
       fee.currency = currency
-      fee.amount = traded_currency * sell_com
+      fee.amount = traded_currency * sell_com / 100.0
       fee.account = Account.storage_account_for((currency + "_fees").to_sym)
     end
 

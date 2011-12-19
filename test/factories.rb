@@ -12,7 +12,7 @@ Factory.define :user do |user|
   user.confirmed_at           DateTime.now
   user.merchant               false
   user.sequence(:bitcoin_address)     { |n| "1FXWhKPChEcUnSEoFQ3DGzxKe44MDbat#{n}" }
-  user.com                    "0"
+  user.commission_rate        BigDecimal("0")
 end
 
 Factory.define :manager do |user|

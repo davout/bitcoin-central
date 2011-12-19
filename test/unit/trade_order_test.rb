@@ -787,9 +787,9 @@ class TradeOrderTest < ActiveSupport::TestCase
 
   test "a fee should be taken" do
     t1 = Factory(:user,
-         :com => "0.1")
+         :commission_rate => BigDecimal("10"))
     t2 = Factory(:user,
-         :com => "0.1")
+         :commission_rate => BigDecimal("10"))
 
     add_money(t1, 1000, :btc)
     add_money(t2, 1000, :eur)
