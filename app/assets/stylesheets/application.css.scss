@@ -1,3 +1,13 @@
+/*
+ *= require_self
+ *= require_tree .
+*/
+@import "reset.css";
+@import "active_scaffold/default/stylesheet.css";
+@import "active_scaffold/default/stylesheet-ie.css";
+@import "jqplot.css";
+@import "jquery.fancybox.css";
+
 /* Global styles */
 html {
   background: #EEEEEE;
@@ -59,7 +69,7 @@ ul {
 
 ul > li {
   list-style-position: outside;
-  list-style-image: url("/images/square.png");
+  list-style-image: url("square.png");
   margin-bottom: .7em;
 }
 
@@ -107,7 +117,7 @@ h1#main-title a span{
 }
 
 h1#main-title a {
-  background-image: url('/images/bitcoin.png');
+  background-image: url('bitcoin.png');
   background-repeat: no-repeat;
   display: block;
   width: 300px;
@@ -761,7 +771,7 @@ tr.odd {
 
  div.form-field input.yk-otp {
    width: 22em;
-   background: url("/images/yubico-icon.png");
+   background: url("yubico-icon.png");
    background-repeat: no-repeat;
    background-position: 6px center;
    padding-left: 28px;

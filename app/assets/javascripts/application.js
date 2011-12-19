@@ -1,3 +1,5 @@
+//= require_tree . 
+
 $(document).ready(function() {
     /* Trade order creation form */
     $("body.trade_orders input.trigger-total-update").bind("click keypress keyup blur", updateTotal)

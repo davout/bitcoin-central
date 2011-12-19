@@ -3,7 +3,10 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
-Bundler.require(:default, Rails.env) if defined?(Bundler)
+if defined?(Bundler)
+  Bundler.require(*Rails.groups(:assets => %w(development, test)))
+  Bundler.require(:default, Rails.env)
+end
 
 module BitcoinBank
   class Application < Rails::Application
@@ -23,13 +26,11 @@ module BitcoinBank
     config.filter_parameters += [:password]
     config.action_dispatch.session_store = :active_record_store
 
-    # Use jQuery instead of Prototype
-    config.action_view.javascript_expansions[:defaults] = %w(jquery
-      jquery-ui rails jqplot jqplot.dateAxisRenderer jqplot.highlighter excanvas jquery.countdown jquery.fancybox)
-
     config.autoload_paths << File.join(config.root, "lib")
     config.autoload_paths << File.join(config.root, "lib", "bitcoin")
     config.autoload_paths << File.join(config.root, "lib", "validators")
+
+    config.assets.enabled = true
     
     Haml::Template.options[:ugly] = true
   end

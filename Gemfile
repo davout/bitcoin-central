@@ -23,8 +23,7 @@ gem 'whenever'
 
 gem 'capistrano'
 
-gem 'active_scaffold_vho',
-  :git => "git@github.com:vhochstein/active_scaffold.git"
+gem 'active_scaffold'
 
 gem 'haml'
 
@@ -42,6 +41,8 @@ gem 'iban-tools'
 gem 'delayed_job'
 
 gem 'rack'
+
+gem 'uglifier'
 
 group :test do
   gem 'mocha', :require => false
