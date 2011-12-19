@@ -1,5 +1,0 @@
-%table.qrcode
-  - qrcode.modules.each_index do |x|
-    %tr
-      - qrcode.modules.each_index do |y|
-        %td{ :class => (qrcode.dark?(x,y) && "black") }
