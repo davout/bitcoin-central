@@ -10,5 +10,5 @@
     %th= t :balance  
 
   - @balances.keys.sort.each do |code|
-    - unless code == 'UNCONFIRMED_BTC'
+    - unless %w{UNCONFIRMED_BTC ADDRESS}.include?(code) 
       = render :partial => 'accounts/balance_row', :locals => { :code => code.downcase, :balance => @balances[code], :unconfirmed_btc => @balances['UNCONFIRMED_BTC'] }
