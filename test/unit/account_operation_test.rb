@@ -86,4 +86,15 @@ class AccountOperationTest < ActiveSupport::TestCase
     assert_equal JSON::parse(AccountOperation.new.to_json({})),
       JSON::parse("{\"comment\":null,\"bt_tx_id\":null,\"address\":null,\"created_at\":null,\"unread\":null,\"amount\":0.0,\"bt_tx_confirmations\":0,\"currency\":null,\"email\":null}")
   end
+  
+  # Under no circumstances should a user account have a negative balance
+  test "should not lead to negative balance" do
+    u = Factory(:user)
+   
+    add_money(u, 1000, :eur)
+   
+    assert_no_difference ("u.balance(:eur)") do
+      add_money(u, -1000, :eur)
+    end
+  end
 end
