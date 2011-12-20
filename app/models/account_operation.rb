@@ -16,7 +16,8 @@ class AccountOperation < ActiveRecord::Base
   attr_accessible :amount, :currency
    
   validates :amount,
-    :presence => true
+    :presence => true,
+    :user_balance => true
   
   validates :currency,
     :presence => true,
