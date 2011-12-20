@@ -89,7 +89,7 @@ class TradeOrdersControllerTest < ActionController::TestCase
 
     add_money(trader, -100.0, :btc)
 
-    assert !t1.reload.active
+    assert !t1.reload.active?
 
     add_money(trader, 100.0, :btc)
 

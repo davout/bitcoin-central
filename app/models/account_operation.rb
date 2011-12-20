@@ -46,11 +46,11 @@ class AccountOperation < ActiveRecord::Base
   
   def refresh_orders
     if account.is_a?(User)
-      account.reload.trade_orders.with_currency(currency).each { |t|
+      account.reload.trade_orders.each { |t|
         if t.is_a?(LimitOrder)
           t.inactivate_if_needed!
         else
-          if t.is_a?(MarketOrder) and amount > 0
+          if ((t.selling? and currency == "BTC") or (t.buying? and t.currency == currency)) and t.is_a?(MarketOrder) and amount > 0
             t.execute!
           end
         end
