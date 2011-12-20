@@ -33,8 +33,22 @@ class TradeOrdersController < ApplicationController
   end
 
   def activate
-    current_user.trade_orders.find(params[:trade_order_id]).activate!
-    redirect_to account_trade_orders_path
+    trade_order = current_user.trade_orders.find(params[:trade_order_id])
+    result = trade_order.activate!
+    if result[:trades].zero?
+      notice = t(:order_saved)
+    else
+      notice = t(:order_filled,
+        :how => (t(trade_order.destroyed?) ? t(:completely) : t(:partially)),
+        :action => (t(trade_order.buying?) ? t(:bought) : t(:sold)),
+        :traded_btc => ("%.4f" % result[:total_traded_btc]),
+        :amount => ("%.4f" % result[:total_traded_currency]),
+        :currency => result[:currency],
+        :ppc => ("%.5f" % result[:ppc]))
+    end
+
+    redirect_to account_trade_orders_path,
+      :notice => notice
   end
 
   def index
