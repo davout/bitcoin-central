@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require 'digest'
 
 class AccountOperation < ActiveRecord::Base
@@ -45,11 +46,11 @@ class AccountOperation < ActiveRecord::Base
   
   def refresh_orders
     if account.is_a?(User)
-      account.reload.trade_orders.each { |t|
+      account.reload.trade_orders.with_currency(currency).each { |t|
         if t.is_a?(LimitOrder)
           t.inactivate_if_needed!
         else
-          if t.is_a?(MarketOrder)
+          if t.is_a?(MarketOrder) and amount > 0
             t.execute!
           end
         end
