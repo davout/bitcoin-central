@@ -1,6 +1,6 @@
 %h1= t(".associate")
 
-= form_for [current_user, @yubikey] do |f|
+= form_for @yubikey, :url => user_yubikeys_path(@yubikey) do |f|
   = errors_for @yubikey, :message => "yubikeys.index.error"
 
   .form-field
