@@ -784,4 +784,40 @@ class TradeOrderTest < ActiveSupport::TestCase
       mo.execute!
     end
   end
+
+  test "a limit order should not work without money" do
+    t1 = Factory(:user)
+    t2 = Factory(:user)
+
+    add_money(t1, BigDecimal("1000.0"), :btc)
+    add_money(t2, BigDecimal("2000.0"), :eur)
+
+    Factory(:limit_order,
+      :category => "sell",
+      :amount   => 1000,
+      :ppc      => 1.0,
+      :user     => t1,
+      :currency => "EUR"
+    )
+
+    Factory(:limit_order,
+      :category => "sell",
+      :amount   => 1000,
+      :ppc      => 1.0,
+      :user     => t1,
+      :currency => "EUR"
+    )
+
+    t = Factory(:market_order,
+      :category => "buy",
+      :amount   => 2000,
+      :user     => t2,
+      :currency => "EUR"
+    )
+
+    t.execute!
+
+    assert_equal t1.balance(:btc), BigDecimal("0.0")
+
+  end
 end
