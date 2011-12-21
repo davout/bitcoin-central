@@ -75,15 +75,13 @@ class TradeOrdersControllerTest < ActionController::TestCase
 
     add_money(trader, 100.0, :btc)
 
-    post :create, :trade_order => {
-      :category => "sell",
-      :amount => "100",
-      :ppc => "1",
-      :currency => "PGAU",
-      :type => "limit_order"
-    }
-
-    t1 = trader.trade_orders.last
+    t1 = Factory(:limit_order,
+         :amount => 100.0,
+         :category => "sell",
+         :currency => "EUR",
+         :ppc      => 1.0,
+         :user     => trader
+         )
 
     assert t1.active?
 
