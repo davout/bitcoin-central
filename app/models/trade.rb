@@ -106,13 +106,13 @@ class Trade < Operation
     account_operations << AccountOperation.new do |fee|
       fee.currency = "BTC"
       fee.amount = btc_fee
-      fee.account = Account.storage_account_for("btc_fees".to_sym)
+      fee.account = Account.storage_account_for(:fees)
     end
 
     account_operations << AccountOperation.new do |fee|
       fee.currency = currency
       fee.amount = currency_fee
-      fee.account = Account.storage_account_for((currency.downcase + "_fees").to_sym)
+      fee.account = Account.storage_account_for(:fees)
     end
 
     save!

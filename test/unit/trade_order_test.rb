@@ -745,10 +745,10 @@ class TradeOrderTest < ActiveSupport::TestCase
     assert_equal BigDecimal("999250.0"), trader2.balance(:lrusd), "Delta #{trader2.balance(:lrusd) - BigDecimal("999250.0")}"
   end
 
-  test "a market order should remains active" do
+  test "a market order should remain active" do
     t1 = Factory(:user)
 
-    add_money(t1, BigDecimal("1000.0"), :btc)
+    add_money(t1, 1000.0, :btc)
 
     market = Factory(:market_order,
       :category => "sell",
@@ -768,7 +768,7 @@ class TradeOrderTest < ActiveSupport::TestCase
     assert market.active?
     assert limit.active?
 
-    add_money(t1, BigDecimal("-1000.0"), :btc)
+    add_money(t1, -1000.0, :btc)
 
     assert !limit.reload.active?
     assert market.reload.active?
@@ -882,7 +882,7 @@ class TradeOrderTest < ActiveSupport::TestCase
       :commission_rate => BigDecimal("0.1"))
     
     t2 = Factory(:user,
-      :commission_rate => BigDecimal("0.1"))
+      :commission_rate => BigDecimal("0.2"))
 
     add_money(t1, 1000, :btc)
     add_money(t2, 1000, :eur)
@@ -905,7 +905,8 @@ class TradeOrderTest < ActiveSupport::TestCase
     t.execute!
     
     assert_equal t1.balance(:eur), BigDecimal("900")
-    assert_equal Account.storage_account_for(:BTC_fees).balance(:btc), 100
+    assert_equal Account.storage_account_for(:fees).balance(:eur), 100
+    assert_equal Account.storage_account_for(:fees).balance(:btc), 200
   end
   
   test "should not be able to create a very small market order" do
