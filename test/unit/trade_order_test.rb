@@ -818,6 +818,5 @@ class TradeOrderTest < ActiveSupport::TestCase
     t.execute!
 
     assert_equal t1.balance(:btc), BigDecimal("0.0")
-
   end
 end

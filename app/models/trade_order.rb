@@ -158,6 +158,7 @@ class TradeOrder < ActiveRecord::Base
         select("currency").
         select("dark_pool").
         active.
+        where("`type` <> 'MarketOrder'").
         visible(options[:user]).
         with_currency(options[:currency] || :all).
         group("#{options[:separated] ? "id" : "ppc"}").
