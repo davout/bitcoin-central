@@ -879,9 +879,10 @@ class TradeOrderTest < ActiveSupport::TestCase
   
   test "a fee should be taken" do
     t1 = Factory(:user,
-      :commission_rate => BigDecimal("10"))
+      :commission_rate => BigDecimal("0.1"))
+    
     t2 = Factory(:user,
-      :commission_rate => BigDecimal("10"))
+      :commission_rate => BigDecimal("0.1"))
 
     add_money(t1, 1000, :btc)
     add_money(t2, 1000, :eur)
@@ -902,6 +903,7 @@ class TradeOrderTest < ActiveSupport::TestCase
     )
 
     t.execute!
+    
     assert_equal t1.balance(:eur), BigDecimal("900")
     assert_equal Account.storage_account_for(:BTC_fees).balance(:btc), 100
   end

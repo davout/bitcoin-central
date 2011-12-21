@@ -38,7 +38,7 @@ class TradeOrder < ActiveRecord::Base
     :presence => true,
     :inclusion => { :in => ["buy", "sell"] }
 
-    validate :amount do
+  validate :amount do
     if new_record?
       if amount and (amount < MIN_AMOUNT) and !skip_min_amount
         errors[:amount] << (I18n.t "errors.must_be_greater", :min=>MIN_AMOUNT)
