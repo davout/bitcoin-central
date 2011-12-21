@@ -114,15 +114,6 @@ en:
   no_buying_orders_found: No buying orders have been found.
   no_selling_orders_found: No selling orders have been found.
 
-  # views/trade_orders/index.html
-  trade_orders_title: Trade orders
-  created_at: Created at
-  type: Type
-  price: Price
-  total: Total
-  dark_pool_order: Dark pool order
-  no_orders_found: No orders have been found.
-
   # views/trades/index.html
   trade_history_title: Trade history
   no_trades_found: No trades were found  

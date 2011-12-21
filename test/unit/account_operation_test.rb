@@ -92,7 +92,7 @@ class AccountOperationTest < ActiveSupport::TestCase
     u = Factory(:user)
 
     assert_no_difference ("u.balance(:eur)") do
-      add_money(u, -1000, :eur)
+      add_money(u, -100, :eur)
     end
   end
 end

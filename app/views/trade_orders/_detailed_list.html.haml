@@ -1,0 +1,34 @@
+%table#trade-orders.default
+  %tr
+    %th= t("activerecord.attributes.trade_order.updated_at")
+    %th= t("activerecord.attributes.trade_order.category")
+    %th= t("activerecord.attributes.trade_order.type")
+    %th= t("activerecord.attributes.trade_order.amount")
+    %th= t("activerecord.attributes.trade_order.ppc")
+    %th= t("activerecord.attributes.trade_order.total")
+    %th.auto-sized
+    %th.auto-sized
+    %th.auto-sized
+    %th.auto-sized
+
+  - unless trade_orders.blank?
+    - trade_orders.each do |to|
+      %tr{ :class => cycle('even', 'odd', :name => 'trade_orders') }
+        %td= l(to.updated_at)
+        %td= t(".#{to.category}")
+        %td= t(".#{to.type.gsub(/Order/, "").downcase}")
+        %td.amount= number_to_bitcoins to.amount, :precision => 4
+        - if to.is_a?(LimitOrder)
+          %td.amount= format_amount(to.ppc, to[:currency], 5)
+          %td.amount= format_amount(to.ppc * to.amount, to[:currency], 4)
+        - else
+          %td= t(".market_order")
+          %td= t(".market_order")
+        %td.auto-sized= dark_pool_icon_for(to)
+        %td.auto-sized= currency_icon_for(to[:currency])
+        %td.auto-sized= activate_link_for(to) if to.activable?
+        %td.auto-sized= delete_link_for(to)
+
+    - reset_cycle 'trade_orders'
+  - else
+    = render :partial => "layouts/no_data"

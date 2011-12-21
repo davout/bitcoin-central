@@ -38,6 +38,18 @@ class TradeOrder < ActiveRecord::Base
     :presence => true,
     :inclusion => { :in => ["buy", "sell"] }
 
+  validate :amount do
+    if new_record?
+      if amount and (amount < MIN_AMOUNT) and !skip_min_amount
+        errors[:amount] << (I18n.t "errors.must_be_greater", :min=>MIN_AMOUNT)
+      end
+
+      if dark_pool? and amount < MIN_DARK_POOL_AMOUNT
+        errors[:dark_pool] << (I18n.t "errors.minimum_dark_pool_order")
+      end
+    end
+  end
+  
   def buying?
     category == "buy"
   end
@@ -67,6 +79,10 @@ class TradeOrder < ActiveRecord::Base
 
   def self.active
     where(:active => true)
+  end
+  
+  def self.inactive
+    where(:active => false)
   end
 
   def self.visible(user)
@@ -154,6 +170,7 @@ class TradeOrder < ActiveRecord::Base
         select("currency").
         select("dark_pool").
         active.
+        where("`type` <> 'MarketOrder'").
         visible(options[:user]).
         with_currency(options[:currency] || :all).
         group("#{options[:separated] ? "id" : "ppc"}").
