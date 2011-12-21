@@ -38,6 +38,18 @@ class TradeOrder < ActiveRecord::Base
     :presence => true,
     :inclusion => { :in => ["buy", "sell"] }
 
+    validate :amount do
+    if new_record?
+      if amount and (amount < MIN_AMOUNT) and !skip_min_amount
+        errors[:amount] << (I18n.t "errors.must_be_greater", :min=>MIN_AMOUNT)
+      end
+
+      if dark_pool? and amount < MIN_DARK_POOL_AMOUNT
+        errors[:dark_pool] << (I18n.t "errors.minimum_dark_pool_order")
+      end
+    end
+  end
+  
   def buying?
     category == "buy"
   end

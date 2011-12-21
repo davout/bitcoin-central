@@ -870,4 +870,17 @@ class TradeOrderTest < ActiveSupport::TestCase
     assert_equal t1.balance(:eur), BigDecimal("900")
     assert_equal Account.storage_account_for(:BTC_fees).balance(:btc), 100
   end
+  
+  test "should not be able to create a very small market order" do
+    u = Factory(:user)
+    
+    mo = Factory.build(:market_order,
+      :user => u,
+      :currency => 'EUR',
+      :category => 'buy',
+      :amount => 0.001
+    )
+   
+    assert !mo.valid?
+  end
 end
