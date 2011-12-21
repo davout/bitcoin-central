@@ -31,6 +31,8 @@ fr:
         type: Matching
         currency: Devise
         total: Total
+        created_at: Création
+        updated_at: Mise à jour
       transfer:
         id: ID
         created_at: Date

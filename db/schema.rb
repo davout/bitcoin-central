@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(:version => 20111205110307) do
     t.boolean  "notify_on_trade",                                       :default => true
     t.integer  "last_notified_trade_id",                                :default => 0,     :null => false
     t.integer  "max_read_tx_id",                                        :default => 0,     :null => false
-    t.decimal  "commission_rate",        :precision => 16, :scale => 8, :default => 0.0
+    t.decimal  "commission_rate",        :precision => 16, :scale => 8
   end
 
   add_index "accounts", ["email"], :name => "index_users_on_email", :unique => true

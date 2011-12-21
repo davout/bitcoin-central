@@ -115,14 +115,6 @@ fr:
   no_selling_orders_found: "Aucun ordre de vente n'a été trouvé"
   total: Total
 
-  # views/trade_orders/index.html
-  trade_orders_title: Vos ordres
-  created_at: Création
-  type: Type
-  price: Prix
-  dark_pool_order: Ordre privé
-  no_orders_found: "Aucun ordre n'a été trouvé"
-
   # views/trades/index.html
   trade_history_title: Historique
   no_trades_found: Aucune transaction trouvée

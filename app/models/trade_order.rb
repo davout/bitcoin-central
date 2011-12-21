@@ -68,6 +68,10 @@ class TradeOrder < ActiveRecord::Base
   def self.active
     where(:active => true)
   end
+  
+  def self.inactive
+    where(:active => false)
+  end
 
   def self.visible(user)
     if user

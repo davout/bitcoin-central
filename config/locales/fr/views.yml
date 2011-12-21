@@ -67,9 +67,14 @@ fr:
   trade_orders:
     index:
       create: Passer un ordre
-      market_order: Prix du marché
+      active_orders: "Ordres actifs (%{count})"
+      inactive_orders: "Ordres inactifs (%{count})"
+    detailed_list:
+      na: N/A
       sell: Vente
       buy: Achat
+      market: Marché
+      limit: Limite
       delete_order: Supprimer cet ordre
       delete_order_confirm: Êtes-vous sûr(e) de vouloir supprimer cet ordre ?
       activate_order: Activer l'ordre et l'exécuter

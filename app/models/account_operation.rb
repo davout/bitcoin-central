@@ -49,8 +49,8 @@ class AccountOperation < ActiveRecord::Base
         if t.is_a?(LimitOrder)
           t.inactivate_if_needed!
         else
-          if t.is_a?(MarketOrder)
-            t.execute!
+          if ((t.selling? and currency == "BTC") or (t.buying? and t.currency == currency)) and t.is_a?(MarketOrder) and amount > 0
+            t.execute!	
           end
         end
       }
