@@ -13,7 +13,7 @@
 
   %div
     %strong= "#{t("activerecord.attributes.ticket.state")} : "
-    = t("activerecord.attributes.ticket.states.#{ticket.state}")
+    = t("activerecord.extra.ticket.states.#{ticket.state}")
   .ticket-comment
     = t(".someone_wrote", :who => (ticket.user == current_user ? t(".you") : ticket.user.name), :when => distance_of_time_in_words_to_now(ticket.created_at.utc))
     %div= ticket.description

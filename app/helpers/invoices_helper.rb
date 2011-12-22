@@ -11,7 +11,7 @@ module InvoicesHelper
     content_tag :span, 
       :title => tooltip_for_state(state),
       :class => ["invoice-state", color_for_state(state)] do
-        "#{options[:icon] ? image_tag("#{state}.png", :class => "state-icon") : ""} #{t("activerecord.attributes.invoice.state_translations.#{state}")}".strip.html_safe
+        "#{options[:icon] ? image_tag("#{state}.png", :class => "state-icon") : ""} #{t("activerecord.extra.invoice.state_translations.#{state}")}".strip.html_safe
     end
   end
     
@@ -24,7 +24,7 @@ module InvoicesHelper
   end
   
   def tooltip_for_state(state)
-    t("activerecord.attributes.invoice.state_tooltips.#{state}")
+    t("activerecord.extra.invoice.state_tooltips.#{state}")
   end
 
   def auto_refresh_if_necessary(invoice)

@@ -13,14 +13,6 @@ en:
         merchant_memo: Comment
         authentication_token: Authentication token
         item_url: Related order URL
-        state_translations:
-          pending: Pending payment
-          processing: Processing payment
-          paid: Paid
-        state_tooltips:
-          pending: No payment has been received yet
-          processing: A payment has been detected and awaits confirmation from the Bitcoin network
-          paid: Payment has been confirmed
       liberty_reserve_transfer:
         lr_account_id: Liberty Reserve account ID
       trade_order:
@@ -99,9 +91,6 @@ en:
         price: Price
         total: Total
         created_at: Date
-        types:
-          buy: Buy
-          sell: Sell
       announcement:
         content: Message
         active: Active
@@ -122,30 +111,14 @@ en:
         account_holder: Full name and address
         created_at: Registered on
         state: Status
-        states:
-          unverified: Unverified
-          verified: Verified
       currency:
         code: Code
         created_at: Creation
         updated_at: Update
-        codes:
-          eur: Euro
-          usd: US Dollar
-          cad: Canadian Dollar
-          inr: Indian Rupee
-          lrusd: Liberty Reserve Dollar
-          lreur: Liberty Reserve Euro
-          pgau: Pecunix Gold
-          btc: Bitcoin
       ticket:
         id: ID
         title: Title
         state: Status
-        states:
-          pending: Pending
-          solved: Solved
-          closed: Closed
         description: Description
         created_at: Opened at
         updated_at: Updated at
@@ -187,3 +160,37 @@ en:
       currency:
         one: Currency
         other: Currencies
+        
+    extra:
+      invoice:
+        state_translations:
+          pending: Pending payment
+          processing: Processing payment
+          paid: Paid
+        state_tooltips:
+          pending: No payment has been received yet
+          processing: A payment has been detected and awaits confirmation from the Bitcoin network
+          paid: Payment has been confirmed        
+      trade:
+        types:
+          buy: Buy
+          sell: Sell        
+      bank_account:
+        states:
+          unverified: Unverified
+          verified: Verified        
+      currency:
+        codes:
+          eur: Euro
+          usd: US Dollar
+          cad: Canadian Dollar
+          inr: Indian Rupee
+          lrusd: Liberty Reserve Dollar
+          lreur: Liberty Reserve Euro
+          pgau: Pecunix Gold
+          btc: Bitcoin        
+      ticket:
+        states:
+          pending: Pending
+          solved: Solved
+          closed: Closed

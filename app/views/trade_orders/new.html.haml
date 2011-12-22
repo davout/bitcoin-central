@@ -18,7 +18,7 @@
 
   .form-field
     = f.label :currency
-    = f.select :currency, Currency.all.map { |c| ["#{t("activerecord.attributes.currency.codes.#{c.code.downcase}")} (#{c.code})", c.code] unless c.code == "BTC" }.compact, { :prompt => "--" }, { :class => "currency-select trigger-total-update" }
+    = f.select :currency, Currency.all.map { |c| ["#{t("activerecord.extra.currency.codes.#{c.code.downcase}")} (#{c.code})", c.code] unless c.code == "BTC" }.compact, { :prompt => "--" }, { :class => "currency-select trigger-total-update" }
     .explanation= t(".currency_explanation")
 
   .form-field

@@ -5,7 +5,7 @@
   <dd>
     <select id="record_currency_" name="record[currency]">
       <% current_user.allowed_currencies.map(&:to_s).each do |c| %>
-        <option value="<%= c.upcase %>"><%= c.upcase %> - <%= t("activerecord.attributes.currency.codes.#{c}") %></option>
+        <option value="<%= c.upcase %>"><%= c.upcase %> - <%= t("activerecord.extra.currency.codes.#{c}") %></option>
       <% end %>
     </select>
     <span class="description"></span>

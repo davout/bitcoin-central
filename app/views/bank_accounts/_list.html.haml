@@ -12,7 +12,7 @@
         %td= l(bank_account.created_at, :format => :short)
         %td.fixed= bank_account.bic
         %td.fixed= bank_account.iban
-        %td{ :class => bank_account.state }= t("activerecord.attributes.bank_account.states.#{bank_account.state}")
+        %td{ :class => bank_account.state }= t("activerecord.extra.bank_account.states.#{bank_account.state}")
         %td.auto-sized= bank_account_delete(bank_account)
   - else
     = render :partial => "layouts/no_data"

@@ -13,14 +13,6 @@ fr:
         merchant_memo: Commentaire
         authentication_token: Jeton d'authentification
         item_url: URL de la commande
-        state_translations:
-          pending: En attente de paiement
-          processing: Traitement en cours
-          paid: Payé
-        state_tooltips:
-          pending: Aucun paiement n'a encore été reçu
-          processing: Un paiement a été reçu, il est en attente de confirmation par le réseau Bitcoin
-          paid: Paiement a été confirmé
       liberty_reserve_transfer:
         lr_account_id: Compte Liberty Reserve
       trade_order:
@@ -101,9 +93,6 @@ fr:
         price: Taux
         total: Total
         created_at: Date
-        types:
-          buy: Achat
-          sell: Vente
       announcement:
         content: Message
         active: Activé
@@ -124,30 +113,14 @@ fr:
         account_holder: Nom et adresse
         created_at: Enregistré le
         state: État
-        states:
-          unverified: Non vérifié
-          verified: Vérifié
       currency:
         code: Code
         created_at: Création
         updated_at: Mise à jour
-        codes:
-          eur: Euro
-          usd: Dollar US
-          cad: Dollar Canadien
-          inr: Roupie Indienne
-          lrusd: Dollar Liberty Reserve
-          lreur: Euro Liberty Reserve
-          pgau: Or Pecunix
-          btc: Bitcoin
       ticket:
         id: Réf.
         title: Titre
         state: Statut
-        states:
-          pending: En cours
-          solved: Résolu
-          closed: Fermé
         description: Description
         created_at: Ouvert le
         updated_at: Mis à jour
@@ -189,3 +162,37 @@ fr:
       currency:
         one: Devise
         other: Devises
+            
+    extra:
+      invoice:
+        state_translations:
+          pending: En attente de paiement
+          processing: Traitement en cours
+          paid: Payé
+        state_tooltips:
+          pending: Aucun paiement n'a encore été reçu
+          processing: Un paiement a été reçu, il est en attente de confirmation par le réseau Bitcoin
+          paid: Paiement a été confirmé
+      trade:
+        types:
+          buy: Achat
+          sell: Vente
+      bank_account:
+        states:
+          unverified: Non vérifié
+          verified: Vérifié
+      currency:
+        codes:
+          eur: Euro
+          usd: Dollar US
+          cad: Dollar Canadien
+          inr: Roupie Indienne
+          lrusd: Dollar Liberty Reserve
+          lreur: Euro Liberty Reserve
+          pgau: Or Pecunix
+          btc: Bitcoin  
+      ticket:
+        states:
+          pending: En cours
+          solved: Résolu
+          closed: Fermé

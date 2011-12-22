@@ -43,7 +43,7 @@ module TradeOrdersHelper
     
     Currency.where("code NOT IN (#{exclusions.map{ |excluded| "'#{excluded}'" }.join(",")})").all.each do |currency|
       result << content_tag(:option, :value => currency.code, :selected => (c == currency.code)) do
-        "#{t("activerecord.attributes.currency.codes.#{currency.code.downcase}")} (#{currency.code})"
+        "#{t("activerecord.extra.currency.codes.#{currency.code.downcase}")} (#{currency.code})"
       end
     end
     

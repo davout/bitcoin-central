@@ -22,11 +22,11 @@ fjs.parentNode.insertBefore(js, fjs);
       - Currency.all.map(&:code).reject{ |c| c == "BTC"}.sort.each do |c|
         - if ((params[:currency].blank? && c == "EUR") || params[:currency] == c)
           %option{ :selected => "selected".html_safe, :value => c }
-            = t("activerecord.attributes.currency.codes.#{c.downcase}")
+            = t("activerecord.extra.currency.codes.#{c.downcase}")
             = c.upcase
         - else
           %option{ :value => c }
-            = t("activerecord.attributes.currency.codes.#{c.downcase}")
+            = t("activerecord.extra.currency.codes.#{c.downcase}")
             = c.upcase
 
 %script{ :src => "//platform.twitter.com/widgets.js", :type => "text/javascript"}
