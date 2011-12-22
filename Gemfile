@@ -4,7 +4,7 @@ gem 'rails', '3.1.3'
 
 gem 'rake'
 
-gem 'mysql', '2.8.1'
+gem 'mysql2'
 
 gem 'json'
 

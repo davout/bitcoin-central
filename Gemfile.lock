@@ -80,7 +80,7 @@ GEM
     mocha (0.10.0)
       metaclass (~> 0.0.1)
     multi_json (1.0.4)
-    mysql (2.8.1)
+    mysql2 (0.3.11)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
@@ -157,7 +157,7 @@ DEPENDENCIES
   iban-tools
   json
   mocha
-  mysql (= 2.8.1)
+  mysql2
   qrencoder
   rack
   rails (= 3.1.3)

@@ -8,7 +8,8 @@ class MonkeyPatchesTest < ActiveSupport::TestCase
       r = ActiveRecord::Base.
         connection.
         execute("SELECT @@GLOBAL.tx_isolation, @@tx_isolation").
-        fetch_row
+        to_a.
+        flatten
     end
 
     assert_equal "SERIALIZABLE", r[1], "MySQL Transactions should run in SERIALIZABLE isolation level"
