@@ -1,0 +1,947 @@
+/* Global styles */
+html {
+  background: #EEEEEE;
+}
+
+body {
+  text-align: left;
+  color: #333;
+  background: #EEEEEE;
+  padding-bottom: 1em;
+}
+
+a {
+  text-decoration: none;
+  color: #CE0701;
+}
+
+a:hover {
+  color: #6E0701;
+}
+
+h1, h2, h3 {
+  color: #6E0701;
+}
+
+h1 {
+  font-size: 160%;
+  font-weight: bold;
+  margin-bottom: .9em;
+  margin-top: 1.5em;
+}
+
+h2 {
+  font-size: 130%;
+  font-weight: bold;
+  margin-bottom: .5em;
+  margin-top: 1.5em;
+}
+
+h3 {
+  font-size: 110%;
+  font-weight: bold;
+  margin-bottom: .2em;
+}
+
+p {
+  margin-bottom: .4em;
+}
+
+strong {
+  font-weight: bold;
+}
+
+ul {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 2em;
+}
+
+ul > li {
+  list-style-position: outside;
+  list-style-image: url("/assets/square.png");
+  margin-bottom: .7em;
+}
+
+.hidden {
+  display: none;
+}
+
+.fixed {
+  font-family: Lucidatypewriter, monospace;
+}
+
+/* Footer */
+div#footer {
+  text-align: center;
+  font-size: 90%;
+  margin-bottom: 1em;
+}
+
+/* Main content frame */
+div#content {
+  margin: 0;
+  margin-bottom: 2em;
+  padding: 25px;
+  min-height: 50em;
+  margin-left: 100px;
+  margin-right: 100px;
+  background: white;
+}
+
+/* Right content frame */
+div#right-content {
+  clear: both;
+  width: 80%;
+  margin: auto;
+}
+
+/* Main logo */
+h1#main-title {
+  margin-bottom: 2em;
+  margin-top: inherit;
+}
+
+h1#main-title a span{
+  display: none;
+}
+
+h1#main-title a {
+  background-image: url('bitcoin.png');
+  background-repeat: no-repeat;
+  display: block;
+  width: 300px;
+  height: 60px;
+}
+
+/* Locale selection */
+div#locale-select {
+  position: absolute;
+  top: 25px;
+  /*top: 25px;*/
+  right: 125px;
+  text-align: right;
+}
+
+/* User information */
+div#user-information {
+  position: absolute;
+  top: 50px;
+  right: 125px;
+  text-align: right;
+}
+
+div#user-information a, div#user-information .address-label {
+  font-weight: bold;
+}
+
+/* QR Code icon */
+a.address-qrcode img {
+  position: relative;
+  top: 4px;
+}
+
+/* Menu */
+ul#menu {
+  display: block;
+  border-bottom: 1px solid #6E0701;
+  height: 2.5em;
+  margin-bottom: 2.5em;
+  padding-bottom: 1px;
+}
+
+ul#menu > li {
+  width: 9em;
+  float: left;
+  height: 2.5em;
+  list-style-type: none;
+  list-style-image: none;
+
+  /* HACK : We don't want anything to move when setting actual borders */
+  border-top: 1px solid white;
+  border-right: 1px solid white;
+  border-left: 1px solid white;
+}
+
+ul#menu > li:hover {
+  border: 1px solid #6E0701;
+  border-bottom: 1px solid white;
+}
+
+ul#menu > li > a, ul#menu > li > ul > li > a {
+  font-size: 115%;
+  font-weight: bold;
+  text-decoration: none;
+  height: 100%;
+  display: block;
+  width: 100%;
+  position: relative;
+  top: 2px;
+}
+
+ul#menu > li > ul > li > a {
+  font-size: 100%;
+}
+
+ul#menu > li > a span, ul#menu > li > ul > li > a span {
+  position: relative;
+  top: 7px;
+  left: 6px;
+}
+
+ul#menu > li > ul {
+  display: none;
+  border: 1px solid #6E0701;
+  border-top: none;
+  width: 150%;
+  margin: 0;
+  position: relative;
+  left: -1px;
+  top: 1px;
+  border-bottom: 1px solid #6E0701;
+  background: white;
+}
+
+ul#menu > li > ul > li {
+  width: 100%;
+  margin: 0;
+  height: 2.5em;
+  list-style-type: none;
+  list-style-image: none;
+}
+
+ul#menu > li > ul > li:hover {
+  background: #FFEEEE;
+}
+
+ul#menu > li:hover > ul {
+  display: block;
+  z-index: 10;
+}
+
+/* Forms */
+form fieldset {
+    margin-top: 2em;
+    margin-bottom: 1em;
+    border-top: 1px solid #6E0701;
+    padding-top: 1em;
+    padding-left: 1em;
+}
+
+form fieldset legend {
+  font-size: 130%;
+  font-weight: bold;
+  padding-left: .5em;
+  
+  padding-right: .5em;
+  color: #6E0701;
+}
+
+div.form-field {
+  display: block;
+  margin-bottom: .7em;
+  min-height: 2.2em;
+}
+
+div.form-field label, div.recaptcha-field label {
+  display: block;
+  width: 180px;
+  font-weight: bold;
+  font-size: 110%;
+  float:left;
+  height: 2em;
+  position: relative;
+  top: 5px;
+}
+
+div.form-field input, div.form-field select {
+  float: left;
+  width: 220px;
+  border: 1px solid gray;
+  height: 24px;
+  padding-left: 6px;
+}
+
+div.form-field select {
+    width: inherit;
+    min-width: 220px;
+}
+
+div.form-field input:focus, div.form-field select:focus {
+  -moz-box-shadow: 0px 0px 3px rgba(255,0,0,0.5);
+  -webkit-box-shadow: 0px 0px 4px rgba(255,238,238,0.5);
+  border: 1px solid #FEE;
+}
+
+div.recaptcha-field {
+  min-height: 150px;
+  clear: both;
+}
+
+div.recaptcha-field div.recaptcha-input {
+  float: left;
+}
+
+form input.submit {
+  border:1px solid rgba(0,0,0,0.4);
+  background: silver;
+  padding: .6em;
+  padding-left: 2em;
+  padding-right: 2em;
+  font-weight: bold;
+  width: inherit;
+  height: inherit;
+  font-size: 110%;
+  background: -webkit-gradient(linear,0% 0%,0% 100%,from(rgba(255,255,255,1)),to(rgba(185,185,185,1)));
+  background: -moz-linear-gradient(top,rgba(255,255,255,1),rgba(185,185,185,1));
+  text-shadow: 1px 1px 1px rgba(255,255,255,0.5);
+  -moz-border-radius: 200px;
+  border-radius: 200px;
+  -moz-box-shadow: 0px 0px 2px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 0px 0px 2px rgba(0,0,0,0.5);
+}
+
+
+div.form-field input.submit {
+  float:left;
+  margin-left: 180px;
+  width: inherit;
+}
+
+div.form-field input.submit:hover {
+  background: -webkit-gradient(linear,0% 0%,0% 100%,from(rgba(245,245,245,1)),to(rgba(175,175,175,1)));
+  background: -moz-linear-gradient(top,rgba(245,245,245,1),rgba(175,175,175,1));
+}
+
+div.form-field input.bitcoin-address {
+  width: 22em;
+}
+
+div.form-field div.radios {
+  float:left;
+}
+
+div.form-field div.radios label {
+  font-weight: normal;
+  margin-left: .7em;
+  width: 4em;
+}
+
+div.form-field div.checkboxes label {
+  font-weight: normal;
+  margin-left: .7em;
+  width: 10em;
+}
+
+div.form-field div.radios input, div.form-field input.checkbox, div.form-field div.checkboxes input {
+  width: inherit;
+}
+
+/* TODO : Consolidate checkbox styles */
+
+div.form-field div.checkboxes input {
+  position: relative;
+  top: 2px;
+}
+
+div.form-field div.checkboxes {
+  margin-left: 180px;
+}
+
+div.field_with_errors {
+  display: inline;
+  color: red;
+}
+
+div.form-field {
+  clear:both;
+}
+
+div.form-field div.explanation {
+  display: block;
+  color: #555;
+  font-size: 95%;
+  float: left;
+  clear: both;
+  margin-top: .4em;
+  margin-bottom: 1.2em;
+  margin-left: 180px;
+  /* width: 220px; */
+  width: 280px;
+  text-align: left;
+}
+
+div.form-field textarea {
+  padding: .3em;
+  padding-left: 6px;
+}
+
+/* Rails errors */
+div#errors ul {
+  list-style-type: square;
+}
+
+div#errors ul li {
+  list-style: square inside;
+}
+
+div#errors {
+  margin-bottom: 2em;
+}
+
+/* Frequently asked questions */
+div#faq {
+  max-width: 700px;
+  text-align: justify;
+}
+
+div#faq div.question {
+  margin-bottom: 3em;
+}
+
+/* Tables */
+table.default {
+  background: white;
+  width: 100%;
+}
+
+table.default tr {
+  border-bottom: 1px solid #ffe5e5;
+  border-top: 1px solid #ffe5e5;
+
+}
+
+table.default th {
+  font-weight: bold;
+}
+
+table.default td, table.default th {
+  min-width: 7em;
+  padding: .2em;
+  padding-left: 1em;
+  padding-right: 1em;
+  text-align: center;
+}
+
+table.default td.auto-sized, table.default th.auto-sized {
+  min-width: 0;
+  padding-left: .3em;
+  padding-right: .3em;
+}
+
+table.default tr:hover th, table.default tr th {
+  background: #FFEEEE;
+  font-size: 115%;
+  height: 2em;
+}
+
+table.default tr td.no-records {
+  background: #F7F5F5;
+  height: 2.5em;
+  border-bottom: 1px solid #F7F5F5;
+  font-size: 105%;
+  font-weight: bold;
+  font-style: italic;
+
+  /* Hide the bottom table border */
+  position: relative;
+  top:1px;
+}
+
+/* Invoices and details table */
+
+body.invoices-show div#content div#right-content {
+  width: 50%;
+  min-width: 50em;
+}
+
+table.details {
+  border-top: 1px solid #6E0701;
+  border-bottom: 1px solid #6E0701;
+  margin: auto;
+}
+
+table.details tr {
+  border: none;
+}
+
+table.details tr th {
+  text-align: right;
+  padding-right: 1.5em;
+  width: 15em;
+  border-right: 1px solid #6E0701;
+}
+
+table.details tr td, table.details tr td.amount {
+  text-align: left;
+  padding-left: 1.5em;
+}
+
+table.details img.currency-icon {
+    position: relative;
+    top: 3px;
+}
+
+div.payment-explanations {
+  text-align: center;
+}
+
+/* Invoices */
+span.invoice-state {
+  font-weight: bold;
+}
+
+img.state-icon {
+  position: relative;
+  top: 2px;
+}
+
+div.invoice-item-link {
+  text-align: center;
+  font-size: 120%;
+}
+
+/* Creation links */
+div.creation-link {
+  float: right;
+  position: relative;
+  top: 4px;
+}
+
+div.creation-link img {
+  position: relative;
+  top: 3px;
+}
+
+div.creation-link a {
+  font-weight: bold;
+}
+
+/* Fund transfers */
+a.transfer-funds {
+  font-size: 110%;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 1em;
+}
+
+a.transfer-funds:hover {
+  text-decoration: none;
+}
+
+div.transfer-wizard ul li {
+  margin: 1em;
+}
+
+/* Balances table */
+table#account-balances td {
+  height: 4em;
+}
+
+table#account-balances td img {
+  margin: 1em;
+}
+
+table#account-balances td.account-balance {
+  font-size: 120%;
+  font-weight: bold;
+}
+
+span.unconfirmed {
+  color: gray;
+}
+
+td.account-balance span.unconfirmed {
+  font-size: 90%;
+}
+
+/* Account history */
+table#history td.amount {
+  font-size: 120%;
+  font-weight: bold;
+  font-family: inherit;
+  text-align: center;
+}
+
+/* New trade order */
+.js-calculation {
+  margin-left: 1em;
+  display: none;
+}
+
+div.trade-orders-help {
+  margin: -1em 0 2em;
+}
+
+div.trade-orders-help img {
+  position: relative;
+  top: 6px;    
+}
+
+/* Trade orders history */
+table#trade-orders tr td {
+  height: 2em;
+}
+
+/* Flash */
+div.flash {
+  text-align: center;
+  font-weight: bold;
+  font-size: 110%;
+  margin-bottom: 2em;
+  margin-top: 2em;
+}
+
+div.flash div.notice {
+  color: green;
+}
+
+div.flash div.alert, div.flash div.error {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
+.orange {
+  color: orange;
+}
+
+.red {
+  color: red;
+}
+
+/* Bitcoin addresses */
+.bitcoin-address {
+  font-family: Lucidatypewriter, monospace;
+  font-weight: normal;
+}
+
+/* User info */
+a#refresh-button img {
+  position: relative;
+  top: 3px;
+}
+
+/* Price graph */
+img#price-graph {
+  display: block;
+  margin: 2em auto;
+}
+
+/* Trade order book */
+div#purchase-orders {
+  width: 45%;
+  float: left;
+}
+
+div#sale-orders {
+  width: 45%;
+  float: right;
+}
+/*
+div.order-book h2 {
+  margin-top: .5em;
+}
+
+div#order-book-filter, div#order-book-filter label {
+  z-index: 0;
+}
+
+div#order-book-filter label {
+  font-weight: bold;
+  margin-left: .7em;
+  width: 8em;
+  font-size: 105%;
+  position: relative;
+  top: -3px;
+}
+
+
+div#order-book-filter input.submit {
+  margin-left: inherit;
+  position: relative;
+  top:-7px;
+}
+*/
+table.default td.amount, .amount {
+  font-family: Lucidatypewriter, monospace;
+  text-align: right;
+}
+
+input.amount {
+  text-align: inherit;
+}
+
+/* Social network buttons */
+
+div.fb-like {
+  width: 330px;
+}
+
+ul#social-buttons {
+  width: 350px;
+  float: right;
+  padding-left: 4em;
+  margin-top: 2em;
+}
+
+
+ul#social-buttons > li {
+  margin-bottom: 1em;
+  list-style-image: none;
+}
+
+/* Charts */
+div.chart-container {
+
+}
+
+div#price-chart-container {
+  width: 400px;
+  float: right;
+  margin-right: 1em;
+  margin-left: 2em;
+}
+
+/* Devise */
+ul#devise-actions {
+  margin-left: 180px;
+  margin-top: 30px;
+}
+
+ul#devise-actions li {
+  list-style-image: none;
+}
+
+/* Pagination */
+.pagination {
+  text-align:center;
+  margin-top: 1.5em;
+}
+
+/* Row cycling */
+tr.odd {
+  background: #fffbfb;
+}
+
+ div.form-field input.ga-otp {
+   width: 6em;
+}
+
+ div.form-field input.yk-otp {
+   width: 22em;
+   background: url("yubico-icon.png");
+   background-repeat: no-repeat;
+   background-position: 6px center;
+   padding-left: 28px;
+}
+
+/* Announcements */
+div.announcements {
+  width: 80%;
+  min-height: 2em;
+  font-size: 110%;
+  margin: auto;
+  background: #FEE;
+/*  text-shadow: 0px 0px 1px rgba(255,238,238,0.5);*/
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -moz-box-shadow: 0px 0px 4px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 0px 0px 4px rgba(0,0,0,0.5);
+  padding: 1em;
+}
+
+div.announcements ul {
+  padding:0;
+  margin:0;
+  padding-left: 3em;
+}
+
+div.announcements ul li {
+  font-size: 115%;
+  list-style-image: none;
+  margin-top: .3em;
+  margin-bottom: .5em;
+  color: #6E0701;
+}
+
+/* Auto logout countdown */
+span#countdown {
+    display: none;
+}
+
+/* Bank account info */
+div#bank-info {
+    margin-top: 1.5em;
+    margin-left: 1em;
+    margin-right: 1em;
+    background: #DDD;
+    padding: .3em;
+    padding-left: 2em;
+    white-space: pre-wrap;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+}
+
+div#bank-info table tr th, div#bank-info table tr td {
+    padding: 3px;
+}
+
+div#bank-info table tr td {
+    font-family: monospace;
+}
+
+div#bank-info table tr th {
+    font-weight: bold;
+    min-width: 11em;
+    height: 1.5em;
+    vertical-align: top;
+}
+
+div#bank-info p#unavailable {
+    margin-bottom: 0;
+    font-style: italic;
+}
+
+.transfer-state {
+    font-weight: bold;
+}
+
+td.verified {
+  font-weight: bold;
+  color: green;
+}
+
+td.unverified {
+  font-weight: bold;
+  color: orange;
+}
+
+div.last-update {
+  text-align: right;
+  color: gray;
+  font-style: italic;
+  font-size: 90%;
+  margin-top: 3em;
+}
+
+td.bank-address, td.account-holder-address {
+    font-size: 90%;
+    font-style: italic;
+}
+
+td.bank, td.account-holder {
+    font-weight: bold;
+}
+
+/* Downloads */
+ul#downloads {
+  float: left;
+}
+
+ul#downloads li {
+    list-style-type: none;
+    list-style-image: none;
+    font-weight: bold;
+}
+
+ul#downloads li img {
+    margin-right: .7em;
+    position: relative;
+    top: 3px;
+}
+
+/* Support tickets */
+textarea#ticket_description {
+    width: 45em;
+    height: 10em;
+}
+
+div.ticket {
+    width: 75%;
+}
+
+div.ticket div.ticket-comment {
+    margin-top: 1em;
+    margin-left: 1em;
+    font-style: italic;
+}
+
+div.ticket div.ticket-comment div {
+    white-space: pre-wrap;
+    font-family: Lucidatypewriter, monospace;
+    font-style: normal;
+    padding: 1em;
+    margin-top: .5em;
+    background: #ddd;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -moz-box-shadow: 0px 0px 4px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0px 0px 4px rgba(0,0,0,0.5);
+}
+
+div.ticket textarea {
+    margin-left: 1em;
+    width: 90%;
+}
+
+div.ticket input.submit {
+    margin-left: 1em;
+}
+
+div.ticket-buttons {
+    width: 10em;
+    float:right;
+
+}
+
+div.ticket-buttons div.form-field {
+    display: inline;
+}
+
+div.ticket-buttons input.submit {
+    position: relative;
+    top: 1em;
+    float: right;
+}
+
+div.ticket-buttons input.close {
+    background: -webkit-gradient(linear,0% 0%,0% 100%,from(rgba(255,255,255,1)),to(rgba(132,189,104,1)));
+    background: -moz-linear-gradient(top,rgba(255,255,255,1),rgba(132,189,104,1));
+    color: #003300;
+    -moz-box-shadow: 0px 0px 2px rgba(0,126,26,0.5);
+    -webkit-box-shadow: 0px 0px 2px rgba(0,126,26,0.5);
+}
+
+div.ticket-buttons input.reopen {
+    background: -webkit-gradient(linear,0% 0%,0% 100%,from(rgba(255,255,255,1)),to(rgba(255,204,0,1)));
+    background: -moz-linear-gradient(top,rgba(255,255,255,1),rgba(132,204,0,1));
+    color: #000;
+    -moz-box-shadow: 0px 0px 2px rgba(255,204,0,0.5);
+    -webkit-box-shadow: 0px 0px 2px rgba(255,204,0,0.5);
+}
+
+div.ticket-buttons input.close:hover {
+    background: -webkit-gradient(linear,0% 0%,0% 100%,from(rgba(255,255,255,1)),to(rgba(95,174,19,1)));
+    background: -moz-linear-gradient(top,rgba(255,255,255,1),rgba(95,174,19,1));
+}
+
+div.ticket-buttons input.reopen:hover {
+    background: -webkit-gradient(linear,0% 0%,0% 100%,from(rgba(255,255,255,1)),to(rgba(255,153,0,1)));
+    background: -moz-linear-gradient(top,rgba(255,255,255,1),rgba(255,153,0,1));
+}
+
+/* Static page headers */
+a.anchor {
+    color: inherit;
+}
+
+/* QR Codes */
+img.qrcode {
+  margin: 1em;
+  -moz-box-shadow: 0px 0px 8px rgba(0,0,0,1);
+  -webkit-box-shadow: 0px 0px 8px rgba(0,0,0,1);
+}
