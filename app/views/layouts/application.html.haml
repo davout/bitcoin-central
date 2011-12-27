@@ -15,10 +15,12 @@
 
     = csrf_meta_tag
 
+    %link{ :rel => "icon", :type => "image/png", :href => "/assets/favicon32.png" }
+
+    = render :partial => 'layouts/apple-touch'
     = render :partial => 'layouts/google_analytics'
     = render :partial => 'layouts/open_graph'
-    = render :partial => 'layouts/icons'
-
+ 
     %link{ :href => locale_switch_link(I18n.locale, request.url), :rel => "canonical" }
 
     = yield :head
