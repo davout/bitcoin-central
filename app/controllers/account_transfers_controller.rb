@@ -7,32 +7,36 @@ class AccountTransfersController < ApplicationController
   def create
     @transfer = AccountTransfer.new(params[:transfer])
 
-    Operation.transaction do
-      o = Operation.create!
+    if !@transfer.amount_is_valid(current_user)
+      redirect_to new_account_account_transfer_path
+    else
+      Operation.transaction do
+        o = Operation.create!
 
-      ao = AccountOperation.new do |it|
-        it.currency = @transfer.currency
-        it.amount = @transfer.amount
-        it.dest_email = @transfer.dest_email
-        it.account = Account.storage_account_for(@transfer.currency)
+        ao = AccountOperation.new do |it|
+          it.currency = @transfer.currency
+          it.amount = @transfer.amount
+          it.dest_email = @transfer.dest_email
+          it.account = Account.storage_account_for(@transfer.currency)
+        end
+
+        o.account_operations << ao
+
+        ao = AccountOperation.new do |it|
+          it.currency = @transfer.currency
+          it.amount = - @transfer.amount
+          it.dest_email = @transfer.dest_email
+          it.account_id = current_user.id
+          it.type = "AccountTransfer"
+          it.active = true
+        end
+
+        o.account_operations << ao
+
+        o.save!
       end
-
-      o.account_operations << ao
-
-      ao = AccountOperation.new do |it|
-        it.currency = @transfer.currency
-        it.amount = - @transfer.amount
-        it.dest_email = @transfer.dest_email
-        it.account_id = current_user.id
-        it.type = "AccountTransfer"
-        it.active = true
-      end
-
-      o.account_operations << ao
-
-      o.save!
+      redirect_to account_account_transfers_path
     end
-    redirect_to account_account_transfers_path
   end
 
   def show
