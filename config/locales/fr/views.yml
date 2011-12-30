@@ -17,6 +17,8 @@ fr:
         history: Historique
         withdraw: Retirer des fonds
         deposit: Déposer des fonds
+        send: Envoyer de l'argent
+        transfers: Transferts
       trading:
         main: Achat/Vente
         your_orders: Ordres d'échange
@@ -64,6 +66,14 @@ fr:
         afin de vous indiquer l'avancement du processus.
       return_to_item: Revenir sur le site du vendeur
 
+  account_transfers:
+    index:
+      cancel_transfer: Annuler le transfert
+      cancel_transfer_confirm: Êtes-vous sûr(e) de vouloir annuler ce transfert ?
+      valid_transfer: Valider le transfert
+      valid_transfer_confirmation: Êtes-vous sûr(e) de vouloir valider ce transfert ?
+      transfer_validated: Le transfert a bien été validé.
+      transfer_cancelled: Le transfert est annulé.
   trade_orders:
     index:
       create: Passer un ordre

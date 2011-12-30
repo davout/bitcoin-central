@@ -14,7 +14,7 @@ class AccountOperation < ActiveRecord::Base
   after_create :refresh_orders,
     :refresh_account_address
   
-  attr_accessible :amount, :currency
+  attr_accessible :amount, :currency, :dest_email, :active
    
   validates :amount,
     :presence => true,

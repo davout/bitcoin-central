@@ -1,0 +1,34 @@
+%h2= t(".sent")
+%table.default
+  %tr
+    %th= t(".destination")
+    %th= t(".amount")
+    %th= t(".currency")
+    %th.auto-sized
+
+  - unless @transfers_sent.blank?
+
+    - @transfers_sent.each do |transfer|
+      %tr
+        %td= transfer.dest_email
+        %td= -transfer.amount
+        %td= transfer.currency
+        - if transfer.active
+          %td.auto-sized= delete_link_transfer(transfer)
+
+%h2= t(".received")
+%table.default
+  %tr
+    %th= t(".from")
+    %th= t(".amount")
+    %th= t(".currency")
+    %th.auto-sized
+
+  - unless @transfers_received.blank?
+    - @transfers_received.each do |transfer|
+      %tr
+        %td= Account.find(transfer.account_id).email
+        %td= -transfer.amount
+        %td= transfer.currency
+        - if transfer.active
+          %td.auto-sized= valid_link_transfer(transfer)

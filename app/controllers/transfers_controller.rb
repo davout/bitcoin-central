@@ -24,7 +24,7 @@ class TransfersController < ApplicationController
   def create
     @transfer = Transfer.from_params(params[:transfer])
     @transfer.account = current_user
-    
+
     if @transfer.is_a?(WireTransfer) && @transfer.bank_account
       @transfer.bank_account.user_id = current_user.id
     end

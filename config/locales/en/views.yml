@@ -17,6 +17,8 @@ en:
         history: History
         withdraw: Withdraw
         deposit: Deposit
+        send: Send money
+        transfers: Transfers
       trading:
         main: Trading
         your_orders: Trade orders
@@ -64,6 +66,14 @@ en:
         show you its progress.
       return_to_item: Return to merchant website
 
+  account_transfers:
+    index:
+      cancel_transfer: Cancel this transfer
+      cancel_transfer_confirm: Are you sure you want to cancel this transfer?
+      valid_transfer: Valid this transfer
+      valid_transfer_confirm: Are you sure you want to valid this transfer?
+      transfer_validated: Transfer is validated
+      transfer_cancelled: Transfer is deleted
   trade_orders:
     index:
       create: Create an order

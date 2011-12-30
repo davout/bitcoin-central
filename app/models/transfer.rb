@@ -68,7 +68,6 @@ class Transfer < AccountOperation
   
   def self.class_for_transfer(currency)
     currency = currency.to_s.downcase.to_sym
-
     if currency == :eur
       WireTransfer
     elsif [:lrusd, :lreur].include?(currency)

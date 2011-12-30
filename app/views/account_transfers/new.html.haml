@@ -1,0 +1,15 @@
+= form_for @transfer, :url => { :action => "create" }, :as => :transfer do |f|
+  .form-field
+    = f.label :currency
+    = f.select :currency, [["Bitcoins", "BTC"], ["EUR", "EUR"], ["Liberty Reserve USD", "LRUSD"], ["Liberty Reserve EUR", "LREUR"]]
+
+  .form-field
+    = f.label :amount
+    = f.text_field :amount
+
+  .form-field
+    = f.label :dest_email
+    = f.text_field :dest_email
+
+  .form-field
+    = f.submit :value => t(:submit), :class => "submit"

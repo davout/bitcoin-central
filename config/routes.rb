@@ -34,9 +34,12 @@ BitcoinBank::Application.routes.draw do
       
     get :deposit
     get :pecunix_deposit_form
+
+    resources :account_transfers, :only => [:show, :new, :create, :index, :destroy]
     
     resources :transfers, :only => [:index, :new, :create, :show] 
     
+
     resources :trades, 
       :only => [:index]
     
