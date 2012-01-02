@@ -1,4 +1,4 @@
-class AccountTransfer < Transfer
+class EmailTransfer < Transfer
 
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -23,8 +23,8 @@ class AccountTransfer < Transfer
         it.amount = - self.amount
         it.dest_email = self.dest_email
         it.account_id = self.account_id
-        it.type = "AccountTransfer"
         it.active = true
+        it.type = "EmailTransfer"
       end
 
       o.account_operations << ao
@@ -39,7 +39,7 @@ class AccountTransfer < Transfer
   end
 
   def amount_is_valid(trader)
-    amount < 0 or trader.balance(self.currency) < amount
+    amount > 0 and trader.balance(self.currency) >= amount
   end
 
   def cancel

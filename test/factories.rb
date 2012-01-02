@@ -98,6 +98,12 @@ Factory.define :bitcoin_transfer do |transfer|
   transfer.bt_tx_id             nil
 end
 
+Factory.define :email_transfer do |transfer|
+  transfer.currency             "BTC"
+  transfer.amount               BigDecimal("10")
+  transfer.dest_email           "test@test.fr"
+end
+
 Factory.define(:bank_account) do |bank_account|
   bank_account.association    :user
   bank_account.bic            "SOGEFRPP"
