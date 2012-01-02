@@ -59,7 +59,6 @@ Factory.define :transfer do |transfer|
   transfer.association      :operation
   transfer.currency         "EUR"
   transfer.bt_tx_id         nil
-  transfer.destination      "Account"
 end
 
 Factory.define :market_order do |market_order|
@@ -88,7 +87,6 @@ Factory.define(:wire_transfer) do |wire_transfer|
   wire_transfer.association           :bank_account
   wire_transfer.amount                -100.0
   wire_transfer.currency              "EUR"
-  wire_transfer.destination      "Account"
 end
 
 Factory.define :bitcoin_transfer do |transfer|
@@ -98,7 +96,6 @@ Factory.define :bitcoin_transfer do |transfer|
   transfer.sequence(:address)   { |n| "1FXWhKPChEcUnSEoFQ3DGzxKe44MDbat#{n}" }  
   transfer.currency             "BTC"
   transfer.bt_tx_id             nil
-  transfer.destination      "Account"
 end
 
 Factory.define(:bank_account) do |bank_account|
