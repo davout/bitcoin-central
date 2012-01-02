@@ -6,35 +6,12 @@ class AccountTransfersController < ApplicationController
 
   def create
     @transfer = AccountTransfer.new(params[:transfer])
+    @transfer.account_id = current_user.id
 
     if !@transfer.amount_is_valid(current_user)
       redirect_to new_account_account_transfer_path
     else
-      Operation.transaction do
-        o = Operation.create!
-
-        ao = AccountOperation.new do |it|
-          it.currency = @transfer.currency
-          it.amount = @transfer.amount
-          it.dest_email = @transfer.dest_email
-          it.account = Account.storage_account_for(@transfer.currency)
-        end
-
-        o.account_operations << ao
-
-        ao = AccountOperation.new do |it|
-          it.currency = @transfer.currency
-          it.amount = - @transfer.amount
-          it.dest_email = @transfer.dest_email
-          it.account_id = current_user.id
-          it.type = "AccountTransfer"
-          it.active = true
-        end
-
-        o.account_operations << ao
-
-        o.save!
-      end
+      @transfer.build
       redirect_to account_account_transfers_path
     end
   end
@@ -46,30 +23,7 @@ class AccountTransfersController < ApplicationController
     end
 
     if @transfer
-
-      Operation.transaction do
-        o = Operation.create!
-
-        ao = AccountOperation.new do |it|
-          it.currency = @transfer.currency
-          it.amount = - @transfer.amount
-          it.account_id = current_user.id
-        end
-
-        o.account_operations << ao
-
-        ao = AccountOperation.new do |it|
-          it.currency = @transfer.currency
-          it.amount = @transfer.amount
-          it.account = Account.storage_account_for(@transfer.currency)
-        end
-
-        o.account_operations << ao
-
-        o.save!
-
-      end
-      @transfer.unactive
+      @transfer.validate
       redirect_to account_account_transfers_path,
         :notice => t(".transfer_validated")
     end
@@ -87,6 +41,7 @@ class AccountTransfersController < ApplicationController
     if transfer.account_id == current_user.id
       transfer.cancel
     end
+
     redirect_to account_account_transfers_path,
       :notice => t(".transfer_cancelled")
   end
