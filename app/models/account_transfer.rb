@@ -39,11 +39,7 @@ class AccountTransfer < Transfer
   end
 
   def amount_is_valid(trader)
-    if amount < 0 or trader.balance(self.currency) < amount
-      false
-    else
-      true
-    end
+    amount < 0 or trader.balance(self.currency) < amount
   end
 
   def cancel
