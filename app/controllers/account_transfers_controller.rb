@@ -85,29 +85,7 @@ class AccountTransfersController < ApplicationController
     transfer = AccountTransfer.find(params[:id])
 
     if transfer.account_id == current_user.id
-      transfer.type = "AccountOperation"
-      transfer.save!
-      Operation.transaction do
-        o = Operation.create!
-
-        ao = AccountOperation.new do |it|
-          it.currency = transfer.currency
-          it.amount = - transfer.amount
-          it.account_id = current_user.id
-        end
-
-        o.account_operations << ao
-
-        ao = AccountOperation.new do |it|
-          it.currency = transfer.currency
-          it.amount = transfer.amount
-          it.account = Account.storage_account_for(transfer.currency)
-        end
-
-        o.account_operations << ao
-
-        o.save!
-      end
+      transfer.cancel
     end
     redirect_to account_account_transfers_path,
       :notice => t(".transfer_cancelled")

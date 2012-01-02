@@ -17,6 +17,9 @@ every 30.minutes do
   rake "bitcoin:backup_wallet"
 end
 
+every 1.hours do
+  rake "transfers:delete_old_transfers"
+
 every 1.day, :at => '5:30 am' do
   rake "bitcoin:backup_db"
 end
