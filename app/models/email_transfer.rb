@@ -43,6 +43,10 @@ class EmailTransfer < Transfer
   end
 
   def cancel
+    if !active
+      #FIXME ERROR!!
+      return
+    end
     self.type = "AccountOperation"
     self.save!
     Operation.transaction do
