@@ -25,7 +25,7 @@ class EmailTransfersController < ApplicationController
     if @transfer
       @transfer.validate
       redirect_to account_email_transfers_path,
-        :notice => t(".transfer_validated")
+        :notice => t(".email_transfers.index.transfer_validated")
     end
   end
 
@@ -43,6 +43,6 @@ class EmailTransfersController < ApplicationController
     end
 
     redirect_to account_email_transfers_path,
-      :notice => t(".transfer_cancelled")
+      :notice => t(".email_transfers.index.transfer_cancelled")
   end
 end
