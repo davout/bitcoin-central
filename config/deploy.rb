@@ -1,5 +1,4 @@
 require 'bundler/capistrano'
-load 'deploy/assets'
 
 set :default_env, 'production'
 set :rails_env, ENV['rails_env'] || ENV['RAILS_ENV'] || default_env
@@ -54,8 +53,9 @@ task :remove_config_ru do
   run "rm -f #{release_path}/config.ru"
 end
 
-after "deploy:update_code", :copy_production_configurations
-after :copy_production_configurations, :remove_config_ru
+before "deploy:assets:precompile", :copy_production_configurations
+
+after "deploy:update_code", :remove_config_ru
 after :remove_config_ru, "deploy:update_crontab"
 after "deploy:update_crontab", :symlink_bitcoin_bin_dir
-after :symlink_bitcoin_bin_dir, "deploy:assets:precompile"
+
