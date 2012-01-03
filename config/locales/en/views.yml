@@ -1,8 +1,10 @@
 en:
   layouts:
-    application:
+    desktop:
       title: "Bitcoin-Central : Trade Bitcoins easily and safely"
       description: Buy, sell and store Bitcoins easily and safely on the best open-source platform
+    iphone:
+      title: Bitcoin-Central
     user_informations:
       signed_in_as: Signed-in as
       address_tip: A new address is generated each time you receive a payment, your previous addresses will still work though

@@ -2,8 +2,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   helper :all
+  
+  layout :pick_layout
 
   before_filter :authenticate_user!,
+    :redirect_iphone,
     :move_xml_params,
     :set_locale,
     :set_time_zone,
@@ -45,5 +48,26 @@ class ApplicationController < ActionController::Base
     if params[:action] == 'welcome' || (params[:controller] == "accounts" && params[:action] == "show")
       @announcements = Announcement.active.all
     end
+  end
+  
+  # Picks the correct layout for a given user agent
+  def pick_layout
+      if iphone?
+      "iphone"
+    else
+      "desktop"
+    end
+  end
+  
+  # Redirects iPhones to the sign-in page
+  # (ugly hack, should be in config/routes.rb, but a bug in Devise prevents constraint-scoped root paths)
+  def redirect_iphone
+    if iphone? and params[:controller] == 'informations' and params[:action] == 'welcome'
+      redirect_to new_user_session_path
+    end
+  end
+  
+  def iphone?
+    request.env['HTTP_USER_AGENT'] =~ /iPhone/
   end
 end

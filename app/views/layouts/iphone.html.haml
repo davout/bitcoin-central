@@ -9,9 +9,9 @@
     %meta{ :"http-equiv" => "content-type", :content => "text/html;charset=UTF-8" }
     %meta{ :"http-equiv" => "content-language", :content => I18n.locale }
 
-    = stylesheet_link_tag "application"
+    = stylesheet_link_tag "iphone"
 
-    = javascript_include_tag "application"
+    = javascript_include_tag "iphone"
 
     = csrf_meta_tag
 
@@ -27,19 +27,12 @@
 
   %body{ :class => [request[:controller], "#{request[:controller]}-#{request[:action]}"] }
     #content
-
       %h1#main-title= link_to(content_tag(:span, t(".title")), root_path)
 
       = render :partial => 'layouts/locale_select'
       = render :partial => 'layouts/user_informations'
       = render :partial => 'layouts/navigation'
-      = render :partial => 'layouts/announcements'
       = render :partial => 'layouts/flash', :object => flash
 
       #right-content
         = yield
-
-        / This is used to force the container to stretch
-        %div{ :style => "clear:both" }
-
-    = render :partial => 'layouts/footer'
