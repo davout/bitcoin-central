@@ -14,11 +14,13 @@ GIT
 
 GIT
   remote: https://github.com/patshaughnessy/paperclip.git
-  revision: 942a2b43383fd04c0434ca4b27379a114cb28a50
+  revision: c295bc4e78b84044296f3a03157c097b50161bc5
   specs:
-    paperclip (2.3.6)
-      activerecord
-      activesupport
+    paperclip (2.4.5)
+      activerecord (>= 2.3.0)
+      activesupport (>= 2.3.2)
+      cocaine (>= 0.0.2)
+      mime-types
 
 GEM
   remote: http://rubygems.org/
@@ -70,6 +72,7 @@ GEM
       net-ssh-gateway (>= 1.1.0)
     chronic (0.6.6)
     chunky_png (1.2.5)
+    cocaine (0.2.1)
     coffee-rails (3.1.1)
       coffee-script (>= 2.2.0)
       railties (~> 3.1.0)
@@ -79,10 +82,8 @@ GEM
     coffee-script-source (1.2.0)
     configatron (2.9.0)
       yamler (>= 0.1.0)
-    daemons (1.1.5)
-    delayed_job (2.1.4)
+    delayed_job (3.0.0)
       activesupport (~> 3.0)
-      daemons
     devise (1.5.3)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
@@ -103,7 +104,7 @@ GEM
     jquery-rails (1.0.19)
       railties (~> 3.0)
       thor (~> 0.14)
-    json (1.6.3)
+    json (1.6.4)
     libv8 (3.3.10.4)
     mail (2.3.0)
       i18n (>= 0.4.0)
@@ -126,7 +127,7 @@ GEM
     polyglot (0.3.3)
     qrencoder (1.4.0)
       chunky_png (~> 1.1)
-    rack (1.3.5)
+    rack (1.3.6)
     rack-cache (1.1)
       rack (>= 0.4)
     rack-mount (0.8.3)
@@ -174,7 +175,7 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.31)
-    uglifier (1.2.0)
+    uglifier (1.2.1)
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
     warden (1.1.0)
