@@ -31,6 +31,7 @@ module BitcoinBank
     config.autoload_paths << File.join(config.root, "lib", "validators")
 
     config.assets.enabled = true
+    config.assets.version = '1.0'
     
     Haml::Template.options[:ugly] = true
   end
