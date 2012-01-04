@@ -197,7 +197,6 @@ class AccountOperation < ActiveRecord::Base
     account && (id > account.max_read_tx_id)
   end
   
-  # TODO : Unread does not appear!
   def as_json(options={})    
     super(options.merge(
         :only => [
