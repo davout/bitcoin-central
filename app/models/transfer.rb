@@ -17,7 +17,7 @@ class Transfer < AccountOperation
     :inclusion => { :in => ["LRUSD", "LREUR", "EUR", "BTC"] }
 
   def type_name
-    type.gsub(/Transfer/, "").underscore.gsub(/\_/, " ").titleize
+    type.gsub(/Transfer$/, "").underscore.gsub(/\_/, " ").titleize
   end
 
   state_machine do
