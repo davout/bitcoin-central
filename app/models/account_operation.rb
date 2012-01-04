@@ -197,6 +197,11 @@ class AccountOperation < ActiveRecord::Base
     account && (id > account.max_read_tx_id)
   end
   
+  # Extra confirmations this account operation requires to be considered confirmed
+  def required_confirmations
+    (MIN_BTC_CONFIRMATIONS - bt_tx_confirmations) unless confirmed?
+  end
+  
   def as_json(options={})    
     super(options.merge(
         :only => [
@@ -204,7 +209,8 @@ class AccountOperation < ActiveRecord::Base
         ],
         :methods => [
           :unread,
-          :confirmed?
+          :confirmed?,
+          :required_confirmations
         ]
       )
     )
