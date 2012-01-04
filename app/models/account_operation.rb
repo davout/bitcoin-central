@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 require 'digest'
 
 class AccountOperation < ActiveRecord::Base
@@ -59,7 +58,7 @@ class AccountOperation < ActiveRecord::Base
   end
 
   def confirmed?
-    (bt_tx_confirmations >= MIN_BTC_CONFIRMATIONS) or bt_tx_id.nil? or (amount < 0)
+    bt_tx_id.nil? or (amount < 0) or (bt_tx_confirmations >= MIN_BTC_CONFIRMATIONS)
   end
 
   def refresh_account_address
@@ -198,15 +197,20 @@ class AccountOperation < ActiveRecord::Base
     account && (id > account.max_read_tx_id)
   end
   
+  # Extra confirmations this account operation requires to be considered confirmed
+  def required_confirmations
+    (MIN_BTC_CONFIRMATIONS - bt_tx_confirmations) unless confirmed?
+  end
   
-  # TODO : Unread does not appear!
   def as_json(options={})    
     super(options.merge(
         :only => [
           :id, :address, :email, :amount, :currency, :bt_tx_confirmations, :bt_tx_id, :comment, :created_at
         ],
         :methods => [
-          :unread
+          :unread,
+          :confirmed?,
+          :required_confirmations
         ]
       )
     )
