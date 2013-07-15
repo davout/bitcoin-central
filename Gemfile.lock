@@ -71,7 +71,7 @@ GEM
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
     chronic (0.6.6)
-    chunky_png (1.2.5)
+    chunky_png (1.2.8)
     cocaine (0.2.1)
     coffee-rails (3.1.1)
       coffee-script (>= 2.2.0)
@@ -125,7 +125,7 @@ GEM
       net-ssh (>= 1.99.1)
     orm_adapter (0.0.5)
     polyglot (0.3.3)
-    qrencoder (1.4.0)
+    qrencoder (1.4.1)
       chunky_png (~> 1.1)
     rack (1.3.6)
     rack-cache (1.1)
@@ -208,7 +208,7 @@ DEPENDENCIES
   mocha
   mysql2
   paperclip!
-  qrencoder
+  qrencoder (~> 1.4.1)
   rails (= 3.1.3)
   rake
   recaptcha

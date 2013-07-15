@@ -29,8 +29,7 @@ gem 'will_paginate', '~> 3.0.pre2'
 gem 'rotp', '~> 1.3.0'
 
 # QR Code generation
-#gem 'qrencoder'
-gem "qrencoder", "~> 1.4.1"
+gem 'qrencoder'
 
 # IBAN format validations
 gem 'iban-tools'
