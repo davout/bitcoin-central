@@ -14,7 +14,7 @@ en:
   no_data: No data has been found
 
   # controllers/informations_controller.rb
-  chart_date_format: %m/%d
+  chart_date_format: "%m/%d"
 
   # controllers/sessions_controller.rb
   sign_in_success: You logged-in successfully to your account.
@@ -50,7 +50,7 @@ en:
   # helpers/transfers_helper.rb
   confirmations_left:
     one: 1 confirmation left
-    other: %{count} confirmations left
+    other: "%{count} confirmations left"
 
   # mailers/backup_mailer.rb
   support_from: Bitcoin Central support <%{support_email}>
@@ -108,7 +108,7 @@ en:
   sign_in_submit: Sign-in
 
   # views/trade_orders/book.html
-  order_book_title: Select a currency 
+  order_book_title: Select a currency
   amount: Amount
   price: Price
   no_buying_orders_found: No buying orders have been found.
@@ -116,7 +116,7 @@ en:
 
   # views/trades/index.html
   trade_history_title: Trade history
-  no_trades_found: No trades were found  
+  no_trades_found: No trades were found
 
   # views/transfers/index.html
   account_history_title: Account history

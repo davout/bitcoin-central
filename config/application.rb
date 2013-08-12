@@ -10,17 +10,13 @@ end
 
 module BitcoinBank
   class Application < Rails::Application
-    I18n.const_set :Locales, {
-      :en => "English",
-      :fr => "Français"
-    }
+    # I18n.const_set :Locales, {
+    #   :en => "English"
+    # }
 
-    config.i18n.default_locale = :en
-
-    config.i18n.available_locales = I18n::Locales.keys
-
-    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml')]
-
+    config.time_zone = 'Beijing'
+    config.i18n.default_locale = 'en'
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*.{rb,yml}').to_s]
 
     config.encoding = "utf-8"
     config.filter_parameters += [:password]
@@ -32,7 +28,7 @@ module BitcoinBank
 
     config.assets.enabled = true
     config.assets.version = '1.0'
-    
+
     Haml::Template.options[:ugly] = true
   end
 end

@@ -1,7 +1,5 @@
 BitcoinBank::Application.routes.draw do
 
-  devise_for :users
-
   resources :invoices, :only => [:index, :new, :create, :show, :destroy]
 
   resource :user, :only => [:edit, :update] do
