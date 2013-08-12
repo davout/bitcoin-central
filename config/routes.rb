@@ -1,4 +1,7 @@
 BitcoinBank::Application.routes.draw do
+
+  devise_for :users
+
   resources :invoices, :only => [:index, :new, :create, :show, :destroy]
 
   resource :user, :only => [:edit, :update] do
@@ -31,15 +34,15 @@ BitcoinBank::Application.routes.draw do
       :action => 'balance',
       :as => 'balance',
       :only => :get
-      
+
     get :deposit
     get :pecunix_deposit_form
-    
-    resources :transfers, :only => [:index, :new, :create, :show] 
-    
-    resources :trades, 
+
+    resources :transfers, :only => [:index, :new, :create, :show]
+
+    resources :trades,
       :only => [:index]
-    
+
     resources :invoices
 
     resources :trade_orders, :only => [:index, :new, :create, :destroy] do
@@ -48,7 +51,7 @@ BitcoinBank::Application.routes.draw do
   end
 
   match "/s/:name" => "static_pages#show", :as => :static
-  
+
   match '/third_party_callbacks/:action',
     :controller => :third_party_callbacks
 
@@ -57,29 +60,29 @@ BitcoinBank::Application.routes.draw do
 
     resources :pending_transfers do
       as_routes
-      
+
       member do
         post :process_tx
       end
     end
-    
+
     resources :users do
       as_routes
-      
+
       member do
         get :balances
       end
-      
+
       resources :account_operations do
         as_routes
       end
     end
-    
+
     match '/balances', :to => 'informations#balances', :as => :balances
   end
-  
+
   match '/qrcode/:data.png' => 'qrcodes#show', :as => :qrcode
-  
+
   match '/order_book' => 'trade_orders#book'
 
   match '/trades' => 'trades#all_trades'
