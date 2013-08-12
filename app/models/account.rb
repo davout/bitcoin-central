@@ -1,15 +1,9 @@
 class Account < ActiveRecord::Base
   has_many :account_operations
 
-  has_many :used_currencies,
-    :dependent => :destroy
-  
-  belongs_to :parent,
-    :class_name => 'Account'
+  has_many :used_currencies,  :dependent => :destroy
 
-  validates :name,
-    :presence => true,
-    :uniqueness => true
+  belongs_to :parent, :class_name => 'Account'
 
   # BigDecimal returned here
   def balance(currency, options = {} )
@@ -37,7 +31,7 @@ class Account < ActiveRecord::Base
       account
     else
       Account.create! do |a|
-        a.name = account_name
+        a.account = account_name
       end
     end
   end
