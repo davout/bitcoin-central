@@ -62,6 +62,11 @@ ActiveRecord::Schema.define(:version => 20111205110307) do
     t.string   "authentication_token"
     t.datetime "created_at",                                                               :null => false
     t.datetime "updated_at",                                                               :null => false
+    t.string   "last_address"
+    t.string   "salt"
+    t.string   "time_zone"
+    t.boolean  "admin",                                                 :default => false
+    t.string   "secret_token"
     t.boolean  "merchant",                                              :default => false
     t.string   "ga_otp_secret"
     t.boolean  "require_ga_otp",                                        :default => false

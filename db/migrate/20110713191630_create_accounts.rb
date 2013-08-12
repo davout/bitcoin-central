@@ -1,5 +1,6 @@
 class CreateAccounts < ActiveRecord::Migration
   def self.up
+    rename_table :users, :accounts
     add_column :accounts, :parent_id, :integer
     add_column :accounts, :type, :string
     add_column :accounts, :account, :string
