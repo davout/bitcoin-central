@@ -3,6 +3,8 @@ class RegistrationsController < Devise::RegistrationsController
     build_resource
 
     resource.email = params[:user][:email]
+    resource.password = params[:user][:password]
+    resource.password_confirmation = params[:user][:password_confirmation]
 
     verify_recaptcha and resource.captcha_checked!
 
