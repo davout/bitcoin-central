@@ -81,8 +81,11 @@ class User < Account
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
-    account = conditions.delete(:account)
-    where(conditions).where(["account = :value OR email = :value", { :value => account }]).first
+    if login = conditions.delete(:email)
+      where(conditions).where(["lower(email) = :value", { :value => login.downcase }]).first
+    else
+      where(conditions).first
+    end
   end
 
   def generate_name

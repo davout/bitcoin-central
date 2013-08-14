@@ -2,8 +2,8 @@ development:
   adapter: mysql2
   encoding: utf8
   database: bitcoin-bank_development
-  username: rails
-  password: rails
+  username: root
+  password:
 
 test:
   adapter: mysql2

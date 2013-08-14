@@ -110,49 +110,46 @@ en:
   #   index:
   #     title: "Trade history"
 
-  # accounts:
-  #   show:
-  #     add_funds: "Deposit funds"
-  #   deposit:
-  #     not_available: "SEPA wire deposits are currently unavailable"
-  #     deposit_bitcoins_title: "Deposit Bitcoins"
-  #     deposit_bitcoins_body_html: """
-  #       <p>Simply transfer funds to your address and they'll show up in your account after a couple of minutes. Your address is located in the upper right corner of the screen.
-  #       You will be able to use these funds after the transaction is confirmed (approximately %{estimation} minutes).</p>
-  #       """
-  #     deposit_eur_title: Deposit with bank wire
-  #     deposit_eur_body_html:
-  #     """
-  #       <p>
-  #         Funding your EUR account with a SEPA wire is free.
-  #         <ul>
-  #           <li>You <strong>must</strong> include your account ID in the <strong>\"Comments\"</strong> field</li>
-  #           <li>You can wire most currencies, it will get converted to EUR before funding your account</li>
-  #           <li>Fees may apply for non-SEPA transfers, contact us for more details</li>
-  #         </ul>
-  #       </p>
-  #       """
-  #     bic: BIC
-  #     account_holder: Account holder
-  #     iban: IBAN
-  #     bank: Bank
-  #     comment: Comment
-  #     account_holder_address: Account holder address
-  #     deposit_lr_title: Deposit Liberty Reserve
-  #     deposit_pgau_title: Deposit Pecunix gold
-  #     deposit_pgau_body_html: """
-  #       <p>
-  #         Use this form to specify the amount of gold grams to deposit, upon submission
-  #         you'll be taken to the Pecunix interface to confirm the transfer. Once the transfer
-  #         is completed, the gold will appear in your balance.
-  #       </p>
-  #       """
-  #     pgau_amount: "Amount (PGAU)"
-  #     deposit_pgau: "Deposit Pecunix"
-  #     other_options: "Other options"
-  #     add_bank_account: "Add a bank account"
-  #   lr_sci_form:
-  #     click_for_lr_html: '<a href="#lr" onclick="%{action}">Click here</a> to pay with your Liberty Reserve account (LREUR and LRUSD).'
+  accounts:
+    show:
+      add_funds: "Deposit funds"
+    deposit:
+      not_available: "SEPA wire deposits are currently unavailable"
+      deposit_bitcoins_title: "Deposit Bitcoins"
+      deposit_bitcoins_body_html:
+        <p>Simply transfer funds to your address and they'll show up in your account after a couple of minutes. Your address is located in the upper right corner of the screen.
+        You will be able to use these funds after the transaction is confirmed (approximately %{estimation} minutes).</p>
+
+      deposit_eur_title: Deposit with bank wire
+      deposit_eur_body_html:
+        <p>
+          Funding your EUR account with a SEPA wire is free.
+          <ul>
+            <li>You <strong>must</strong> include your account ID in the <strong>\"Comments\"</strong> field</li>
+            <li>You can wire most currencies, it will get converted to EUR before funding your account</li>
+            <li>Fees may apply for non-SEPA transfers, contact us for more details</li>
+          </ul>
+        </p>
+      bic: BIC
+      account_holder: Account holder
+      iban: IBAN
+      bank: Bank
+      comment: Comment
+      account_holder_address: Account holder address
+      deposit_lr_title: Deposit Liberty Reserve
+      deposit_pgau_title: Deposit Pecunix gold
+      deposit_pgau_body_html:
+        <p>
+          Use this form to specify the amount of gold grams to deposit, upon submission
+          you'll be taken to the Pecunix interface to confirm the transfer. Once the transfer
+          is completed, the gold will appear in your balance.
+        </p>
+      pgau_amount: "Amount (PGAU)"
+      deposit_pgau: "Deposit Pecunix"
+      other_options: "Other options"
+      add_bank_account: "Add a bank account"
+    lr_sci_form:
+      click_for_lr_html: '<a href="#lr" onclick="%{action}">Click here</a> to pay with your Liberty Reserve account (LREUR and LRUSD).'
 
   # users:
   #   form:

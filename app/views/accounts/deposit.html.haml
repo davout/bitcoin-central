@@ -9,14 +9,14 @@
     %table
       %tr
         %th= t(".comment")
-        %td= current_user.name
+        %td= current_user.account
       %tr
         %th= t(".account_holder")
         %td.account-holder= @account_holder
       %tr
         %th
         %td.account-holder-address= @account_holder_address
-      
+
       %tr
         %td{ :colspan => 2 } &nbsp;
 
@@ -59,5 +59,5 @@
 
   .form-field
     = submit_tag t(".deposit_pgau"), :class => "submit"
-  
+
 #pecunix-sci-form-container.hidden
