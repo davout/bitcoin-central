@@ -5,7 +5,7 @@ class RegistrationsController < Devise::RegistrationsController
     resource.email = params[:user][:email]
     resource.password = params[:user][:password]
     resource.password_confirmation = params[:user][:password_confirmation]
-
+    resource.confirmed_at = DateTime.now
 
     if resource.save
       redirect_to root_path,
