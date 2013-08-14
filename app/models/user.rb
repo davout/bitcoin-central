@@ -61,18 +61,6 @@ class User < Account
     :uniqueness => true,
     :presence => true
 
-  validate :captcha do
-    if captcha.nil? and new_record?
-      unless skip_captcha
-        errors[:captcha] << I18n.t("errors.answer_incorrect")
-      end
-    end
-  end
-
-  def captcha_checked!
-    self.captcha = true
-  end
-
   def bitcoin_address
     super or (generate_new_address && super)
   end

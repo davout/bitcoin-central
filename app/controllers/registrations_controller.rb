@@ -6,7 +6,6 @@ class RegistrationsController < Devise::RegistrationsController
     resource.password = params[:user][:password]
     resource.password_confirmation = params[:user][:password_confirmation]
 
-    verify_recaptcha and resource.captcha_checked!
 
     if resource.save
       redirect_to root_path,
