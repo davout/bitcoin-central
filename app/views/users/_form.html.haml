@@ -3,8 +3,8 @@
 
   - unless @user.new_record?
     .form-field
-      = f.label :name
-      = f.text_field :name, :disabled => true
+      = f.label :account
+      = f.text_field :account, :disabled => true
 
   .form-field
     = f.label :email
@@ -48,7 +48,7 @@
       .form-field
         = f.label :notify_on_trade
         = f.check_box :notify_on_trade, :class => "checkbox"
-        .explanation= t(".notify_on_trade_explanation")        
+        .explanation= t(".notify_on_trade_explanation")
 
     %fieldset
       %legend= t(".api_tools")

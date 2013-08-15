@@ -7,7 +7,7 @@
 
   <input type="hidden" name="lr_store" value="<%= BitcoinBank::LibertyReserve['store'] %>" />
   <input type="hidden" name="lr_merchant_ref" value="<%= @current_user.id %>" />
-  <input type="hidden" name="lr_comments" value="Transfer funds to account <%= @current_user.name %>" />
+  <input type="hidden" name="lr_comments" value="Transfer funds to account <%= @current_user.account %>" />
 
   <input type="hidden" name="lr_success_url" value="<%= BitcoinBank::LibertyReserve['success_url'] %>" />
   <input type="hidden" name="lr_success_url_method" value="GET" />

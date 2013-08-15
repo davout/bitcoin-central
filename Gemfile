@@ -1,6 +1,7 @@
-source 'http://rubygems.org'
+#source 'http://rubygems.org'
+source 'http://ruby.taobao.org'
 
-gem 'rails', '3.1.3'
+gem 'rails', '3.2.13'
 gem 'rake'
 gem 'mysql2'
 gem 'addressable'
@@ -23,10 +24,10 @@ gem 'exception_notification',
 gem 'transitions',
   :require => ["transitions", "active_record/transitions"]
 
-gem 'will_paginate', '~> 3.0.pre2'
+gem 'will_paginate'
 
 # OTP toolbox
-gem 'rotp', '~> 1.3.0'
+gem 'rotp'
 
 # QR Code generation
 gem 'qrencoder'
@@ -41,7 +42,7 @@ gem 'blueprint-rails'
 gem 'bourbon'
 
 # File attachment with database storage support
-gem 'paperclip', 
+gem 'paperclip',
   :git => 'https://github.com/patshaughnessy/paperclip.git'
 
 # Apple push notifications
