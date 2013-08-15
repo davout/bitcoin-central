@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(:version => 20111205110307) do
     t.string   "account"
     t.string   "full_name"
     t.text     "address"
+    t.string   "name"
     t.boolean  "notify_on_trade",                                       :default => true
     t.integer  "last_notified_trade_id",                                :default => 0,     :null => false
     t.integer  "max_read_tx_id",                                        :default => 0,     :null => false

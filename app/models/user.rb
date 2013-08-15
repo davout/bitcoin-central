@@ -81,6 +81,8 @@ class User < Account
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
+    name = conditions.delete(:name)
+    where(conditions).where(["name = :value OR email = :value", { :value => name }]).first
     if login = conditions.delete(:email)
       where(conditions).where(["lower(email) = :value", { :value => login.downcase }]).first
     else
@@ -89,6 +91,6 @@ class User < Account
   end
 
   def generate_name
-    self.account = "BC-U#{"%06d" % (rand * 10 ** 6).to_i}"
+    self.name = "BC-U#{"%06d" % (rand * 10 ** 6).to_i}"
   end
 end

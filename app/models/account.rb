@@ -31,7 +31,7 @@ class Account < ActiveRecord::Base
       account
     else
       Account.create! do |a|
-        a.account = account_name
+        a.name    = account_name
       end
     end
   end
