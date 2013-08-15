@@ -1,6 +1,14 @@
 class User < Account
   # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable, :lockable and :timeoutable
+  # :token_authenticatable, :confirmable,
+  # # :lockable, :timeoutable and :omniauthable
+  # devise :database_authenticatable, :registerable,
+  #        :recoverable, :rememberable, :trackable, :validatable
+
+  # # Setup accessible (or protected) attributes for your model
+  # attr_accessible :email, :password, :password_confirmation, :remember_me
+  # # Include default devise modules. Others available are:
+  # # :token_authenticatable, :confirmable, :lockable and :timeoutable
   devise :database_authenticatable,
     :ga_otp_authenticatable,
     :yk_otp_authenticatable,
@@ -10,11 +18,12 @@ class User < Account
     :trackable,
     :validatable,
     :lockable,
-    :timeoutable
+    :timeoutable,
+    :rememberable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :password, :password_confirmation, :remember_me, :time_zone, 
-    :merchant, :require_ga_otp, :require_yk_otp, :full_name, :address
+  attr_accessible :password, :password_confirmation, :remember_me, :time_zone,
+    :merchant, :require_ga_otp, :require_yk_otp, :full_name, :address, :remember_me
 
   attr_accessor :captcha,
     :skip_captcha,
@@ -52,18 +61,6 @@ class User < Account
     :uniqueness => true,
     :presence => true
 
-  validate :captcha do
-    if captcha.nil? and new_record?
-      unless skip_captcha
-        errors[:captcha] << I18n.t("errors.answer_incorrect")
-      end
-    end
-  end
-
-  def captcha_checked!
-    self.captcha = true
-  end
-
   def bitcoin_address
     super or (generate_new_address && super)
   end
@@ -84,11 +81,14 @@ class User < Account
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
-    name = conditions.delete(:name)
-    where(conditions).where(["name = :value OR email = :value", { :value => name }]).first
+    if login = conditions.delete(:email)
+      where(conditions).where(["lower(email) = :value", { :value => login.downcase }]).first
+    else
+      where(conditions).first
+    end
   end
 
   def generate_name
-    self.name = "BC-U#{"%06d" % (rand * 10 ** 6).to_i}"
+    self.account = "BC-U#{"%06d" % (rand * 10 ** 6).to_i}"
   end
 end

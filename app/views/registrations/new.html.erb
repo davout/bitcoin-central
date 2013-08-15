@@ -43,15 +43,6 @@
     </div>
   </div>
 
-  <% if resource.new_record? %>
-    <div class="recaptcha-field">
-      <%= f.label :recaptcha_response_field %>
-      <div class="recaptcha-input">
-        <%= recaptcha_tags :ssl => true %>
-      </div>
-    </div>
-  <% end %>
-
   <div class="form-field">
     <%= f.submit :class => 'submit' %>
   </div>

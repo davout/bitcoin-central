@@ -2,125 +2,125 @@ en:
   layouts:
     application:
       title: "Bitcoin-Central : Trade Bitcoins easily and safely"
-      description: Buy, sell and store Bitcoins easily and safely on the best open-source platform
+      description: "Buy, sell and store Bitcoins easily and safely on the best open-source platform"
     user_informations:
-      signed_in_as: Signed-in as
-      address_tip: A new address is generated each time you receive a payment, your previous addresses will still work though
-      your_address: Your address
-      logout: Logout
-      sign_up: Sign-up
-      sign_in: Sign-in
+      signed_in_as: "Signed-in as"
+      address_tip: "A new address is generated each time you receive a payment, your previous addresses will still work though"
+      your_address: "Your address"
+      logout: "Logout"
+      sign_up: "Sign-up"
+      sign_in: "Sign-in"
     navigation:
       account:
-        main: Account
-        balance: Balance
-        history: History
-        withdraw: Withdraw
-        deposit: Deposit
+        main: "Account"
+        balance: "Balance"
+        history: "History"
+        withdraw: "Withdraw"
+        deposit: "Deposit"
       trading:
-        main: Trading
-        your_orders: Trade orders
-        order_book: Order book
-        trade_history: Trade history
+        main: "Trading"
+        your_orders: "Trade orders"
+        order_book: "Order book"
+        trade_history: "Trade history"
       admin:
-        main: Admin
-        transfers: Transfers
-        users: Users
-        information: Informations
-        pending_transfers: Pending transfers
+        main: "Admin"
+        transfers: "Transfers"
+        users: "Users"
+        information: "Informations"
+        pending_transfers: "Pending transfers"
       help:
-        main: Help
-        faq: FAQ
-        economy: Economy
-        support: Support
-        fees: Our Fees
-        api_docs: API
-        terms_of_service: Terms of Service
+        main: "Help"
+        faq: "FAQ"
+        economy: "Economy"
+        support: "Support"
+        fees: "Our Fees"
+        api_docs: "API"
+        terms_of_service: "Terms of Service"
       ecommerce:
-        main: E-commerce
+        main: "E-commerce"
 
   invoices:
     new:
-      create_invoice: Create an invoice
-      error: Error posting invoice
-      amount_explanation: The amount to be paid for this invoice
-      payment_explanation: The address at which the funds should be sent
-      callback_url_explanation: The URL that should be POST'ed to upon payment
-      submit: Post invoice
-      created: Invoice successfully posted
-      item_url_explanation: Related order URL on the merchant website
+      create_invoice: "Create an invoice"
+      error: "Error posting invoice"
+      amount_explanation: "The amount to be paid for this invoice"
+      payment_explanation: "The address at which the funds should be sent"
+      callback_url_explanation: "The URL that should be POST'ed to upon payment"
+      submit: "Post invoice"
+      created: "Invoice successfully posted"
+      item_url_explanation: "Related order URL on the merchant website"
     index:
-      details: Show invoice details
-      create: Create invoice
-      deleted: Invoice deleted successfully
-      confirm: Are you sure you want to delete this invoice ?
-      delete: Delete this invoice
+      details: "Show invoice details"
+      create: "Create invoice"
+      deleted: "Invoice deleted successfully"
+      confirm: "Are you sure you want to delete this invoice ?"
+      delete: "Delete this invoice"
     show:
-      details: Invoice details
-      payee: Payee
+      details: "Invoice details"
+      payee: "Payee"
       payment-explanations: >
         To pay this invoice, simply transfer the requested amount to
         the payment address, the page will automatically refresh to
         show you its progress.
       return_to_item: Return to merchant website
-
   trade_orders:
     index:
-      create: Create an order
+      create: "Create an order"
       active_orders: "Active orders (%{count})"
       inactive_orders: "Inactive orders (%{count})"
     detailed_list:
-      na: N/A
-      sell: Ask
-      buy: Bid
-      market: Market
-      limit: Limit
-      delete_order: Delete this trade order
-      delete_order_confirm: Are you sure you want to delete this trade order ?      
-      activate_order: Activate this trade order and execute it
-      activate_order_confirm: Are you sure you want to activate this trade order ?      
+      na: "N/A"
+      sell: "Ask"
+      buy: "Bid"
+      market: "Market"
+      limit: "Limit"
+      delete_order: "Delete this trade order"
+      delete_order_confirm: "Are you sure you want to delete this trade order ?"
+      activate_order: "Activate this trade order and execute it"
+      activate_order_confirm: "Are you sure you want to activate this trade order ?"
     book:
-      bids: Bids
-      asks: Asks
+      bids: "Bids"
+      asks: "Asks"
     list:
-      price: Price
-      amount: Amount
-      total: Total
-      market_order: Market Order  
+      price: "Price"
+      amount: "Amount"
+      total: "Total"
+      market_order: "Market Order"
     new:
-      title: Create a trade order
-      currency_explanation: Currency you want to trade
-      type_explanation: Different matching types are explained in our help page     
-      category: Category
-      buy: Buy
-      sell: Sell
-      sell_or_buy_explanation: Whether you want to buy or sell bitcoins
-      your_balance: Your balance
-      your_balance_explanation: Your available confirmed balance
-      amount_explanation: BTC amount you're trading
-      ppc_explanation: Price for 1 BTC
-      total_explanation: The total for your order
-      dark_pool_explanation: Should the order be hidden ?
-      help: Visit our help page if you need assistance trading Bitcoins
+      title: "Create a trade order"
+      currency_explanation: "Currency you want to trade"
+      type_explanation: "Different matching types are explained in our help page"
+      category: "Category"
+      buy: "Buy"
+      sell: "Sell"
+      sell_or_buy_explanation: "Whether you want to buy or sell bitcoins"
+      your_balance: "Your balance"
+      your_balance_explanation: "Your available confirmed balance"
+      amount_explanation: "BTC amount you're trading"
+      ppc_explanation: "Price for 1 BTC"
+      total_explanation: "The total for your order"
+      dark_pool_explanation: "Should the order be hidden ?"
+      help: "Visit our help page if you need assistance trading Bitcoins"
       error:
         one: "1 error prevented your trade order from being created :"
         other: "%{count} errors prevented your trade order from being created :"
 
   trades:
     index:
-      title: Trade history
+      title: "Trade history"
 
   accounts:
     show:
-      add_funds: Deposit funds
+      add_funds: "Deposit funds"
     deposit:
-      not_available: SEPA wire deposits are currently unavailable
-      deposit_bitcoins_title: Deposit Bitcoins
+      not_available: "SEPA wire deposits are currently unavailable"
+      deposit_bitcoins_title: "Deposit Bitcoins"
       deposit_bitcoins_body_html:
         <p>Simply transfer funds to your address and they'll show up in your account after a couple of minutes. Your address is located in the upper right corner of the screen.
         You will be able to use these funds after the transaction is confirmed (approximately %{estimation} minutes).</p>
+
       deposit_eur_title: Deposit with bank wire
-      deposit_eur_body_html: "
+      deposit_eur_body_html:
         <p>
           Funding your EUR account with a SEPA wire is free.
           <ul>
@@ -129,7 +129,6 @@ en:
             <li>Fees may apply for non-SEPA transfers, contact us for more details</li>
           </ul>
         </p>
-        "
       bic: BIC
       account_holder: Account holder
       iban: IBAN
@@ -144,37 +143,37 @@ en:
           you'll be taken to the Pecunix interface to confirm the transfer. Once the transfer
           is completed, the gold will appear in your balance.
         </p>
-      pgau_amount: Amount (PGAU)
-      deposit_pgau: Deposit Pecunix
-      other_options: Other options
-      add_bank_account: Add a bank account
+      pgau_amount: "Amount (PGAU)"
+      deposit_pgau: "Deposit Pecunix"
+      other_options: "Other options"
+      add_bank_account: "Add a bank account"
     lr_sci_form:
-      click_for_lr_html: <a href="#lr" onclick="%{action}">Click here</a> to pay with your Liberty Reserve account (LREUR and LRUSD).
-      
+      click_for_lr_html: '<a href="#lr" onclick="%{action}">Click here</a> to pay with your Liberty Reserve account (LREUR and LRUSD).'
+
   users:
     form:
-      submit: Submit
-      merchant_explanation: Activate merchant tools
-      ga_otp_explanation: Require Google Auth. OTP
-      ga_otp_config: Help and setup instructions
-      additional_authentication_requirements: Additional authentication requirements
-      api_tools: API & Tools
-      yk_otp_config: Associate keys to your account
-      time_zone_explanation: Used to display localized dates and times
-      manage_bank_accounts: Manage your bank accounts
+      submit: "Submit"
+      merchant_explanation: "Activate merchant tools"
+      ga_otp_explanation: "Require Google Auth. OTP"
+      ga_otp_config: "Help and setup instructions"
+      additional_authentication_requirements: "Additional authentication requirements"
+      api_tools: "API & Tools"
+      yk_otp_config: "Associate keys to your account"
+      time_zone_explanation: "Used to display localized dates and times"
+      manage_bank_accounts: "Manage your bank accounts"
       registered_bank_accounts:
-        zero: You haven't registered any bank account yet.
-        one: You have registered a bank account
-        other: You have registered %{count} bank accounts
-      notifications: E-mail notifications
-      notify_on_trade_explanation: Receive a notification when one of your trade orders gets matched
+        zero: "You haven't registered any bank account yet."
+        one: "You have registered a bank account"
+        other: "You have registered %{count} bank accounts"
+      notifications: "E-mail notifications"
+      notify_on_trade_explanation: "Receive a notification when one of your trade orders gets matched"
     ga_otp_configuration:
-      reset: The Google Authenticator shared-secret has been correctly reset, you should update your mobile device settings
+      reset: "The Google Authenticator shared-secret has been correctly reset, you should update your mobile device settings"
     password_change_form:
-      change_password: Change your password
-      submit: Submit
-      password_updated: Your password has been updated successfully
-      
+      change_password: "Change your password"
+      submit: "Submit"
+      password_updated: "Your password has been updated successfully"
+
 
   yubikeys:
     index:
@@ -183,7 +182,7 @@ en:
       confirm: Are you sure ?
       associate: Associate a new Yubikey
       otp_explanation: Simply generate an OTP here to associate your key
-      created: Yubikey associated, you'll need it for your next sign-in
+      created: "Yubikey associated, you'll need it for your next sign-in"
       destroyed: Yubikey removed
       error: This key could not be associated to your account
 
@@ -198,7 +197,7 @@ en:
     unlocks:
       new:
         resend: Send unlock instructions
-        
+
   transfers:
     index:
       details: Transaction details
@@ -208,10 +207,10 @@ en:
     show:
       state:
         processed: Processed
-        pending: Pending        
+        pending: Pending
     new:
       title: Withdraw funds
-      body_html: "
+      body_html: >
         <p>You can currently withdraw using the following methods :
           <ul>
             <li>Bitcoins,</li>
@@ -220,7 +219,7 @@ en:
             <li>Pecunix manual transfer</li>
           </ul>
         </p>
-        "
+
       error: "Some errors prevent your funds from being withdrawn :"
       max_amount: Maximum amount
       submit: Transfer
@@ -254,11 +253,11 @@ en:
       no_tickets_found: You have no support requests to display
     ticket:
       add_comment: Add a comment
-      someone_wrote: %{who} wrote, %{when} ago
+      someone_wrote: "%{who} wrote, %{when} ago"
       you: You
       reopen : Re-open ticket
       close: Close ticket
-    
+
   informations:
     welcome:
       download: Download Bitcoin 0.5.0
@@ -275,4 +274,4 @@ en:
         one: You have a pending support ticket.
         other: You have %{count} pending support tickets.
       open_a_ticket: Open a new support ticket
-      view_tickets: View all requests    
+      view_tickets: View all requests
