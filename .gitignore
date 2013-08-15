@@ -11,3 +11,5 @@ public/**/active_scaffold
 public/blank.html
 .idea/
 /.sass-cache/
+
+config/database.yml

@@ -3,7 +3,7 @@ class InformationsController < ApplicationController
 
   def welcome
     currency = (params[:currency] || "eur").downcase.to_sym
-    
+
     @min_y = [0.3 * (Trade.last_week.with_currency(currency).minimum(:ppc) or 0) - (Trade.with_currency(currency).maximum(:ppc) or 0), 0].max
     @max_y = 1.3 * (Trade.last_week.with_currency(currency).maximum(:ppc) or 0)
 
@@ -17,7 +17,7 @@ class InformationsController < ApplicationController
       :label => currency.to_s.upcase,
       :color => color_for_currency(currency)
     }
-    
+
     @options[:axes][:yaxis][:min] = @min_y
     @options[:axes][:yaxis][:max] = @max_y
 
@@ -68,20 +68,20 @@ class InformationsController < ApplicationController
       @tickets = current_user.tickets
     end
   end
-  
-  
+
+
   protected
 
   def color_for_currency(currency)
     colors = {
       :lrusd => "#068300",
-      :lreur => "#0E00C1",       
+      :lreur => "#0E00C1",
       :eur => "#AFAAF3",
       :cad => "#6db7e1",
       :inr => "#c40f75",
-      :pgau => "#b58f24" 
+      :pgau => "#b58f24"
     }
-    
+
     colors[currency]
   end
 end

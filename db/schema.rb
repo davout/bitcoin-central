@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -17,8 +18,8 @@ ActiveRecord::Schema.define(:version => 20111205110307) do
     t.integer  "account_id"
     t.string   "address"
     t.decimal  "amount",                :precision => 16, :scale => 8, :default => 0.0
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                                            :null => false
+    t.datetime "updated_at",                                                            :null => false
     t.string   "currency"
     t.string   "lr_transaction_id"
     t.decimal  "lr_transferred_amount", :precision => 16, :scale => 8, :default => 0.0
@@ -41,32 +42,31 @@ ActiveRecord::Schema.define(:version => 20111205110307) do
   add_index "account_operations", ["lr_transaction_id"], :name => "index_transfers_on_lr_transaction_id", :unique => true
 
   create_table "accounts", :force => true do |t|
-    t.string   "name",                                                                     :null => false
-    t.string   "email"
-    t.string   "password"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "bitcoin_address"
-    t.string   "salt"
-    t.string   "time_zone"
-    t.string   "secret_token"
+    t.string   "email",                                                 :default => "",    :null => false
     t.string   "encrypted_password",                                    :default => "",    :null => false
-    t.string   "password_salt",                                         :default => "",    :null => false
-    t.string   "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
     t.string   "reset_password_token"
-    t.string   "remember_token"
+    t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.integer  "sign_in_count",                                         :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
     t.integer  "failed_attempts",                                       :default => 0
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.string   "authentication_token"
+    t.datetime "created_at",                                                               :null => false
+    t.datetime "updated_at",                                                               :null => false
+    t.string   "last_address"
+    t.string   "salt"
+    t.string   "time_zone"
+    t.boolean  "admin",                                                 :default => false
+    t.string   "secret_token"
     t.boolean  "merchant",                                              :default => false
     t.string   "ga_otp_secret"
     t.boolean  "require_ga_otp",                                        :default => false
@@ -74,22 +74,28 @@ ActiveRecord::Schema.define(:version => 20111205110307) do
     t.boolean  "require_yk_otp",                                        :default => false
     t.integer  "parent_id"
     t.string   "type"
+    t.string   "account"
     t.string   "full_name"
     t.text     "address"
+    t.string   "name"
     t.boolean  "notify_on_trade",                                       :default => true
     t.integer  "last_notified_trade_id",                                :default => 0,     :null => false
     t.integer  "max_read_tx_id",                                        :default => 0,     :null => false
     t.decimal  "commission_rate",        :precision => 16, :scale => 8
   end
 
+  add_index "accounts", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
+  add_index "accounts", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "accounts", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "accounts", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "accounts", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
 
   create_table "announcements", :force => true do |t|
     t.string   "title"
     t.text     "content"
     t.boolean  "active"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "bank_accounts", :force => true do |t|
@@ -98,22 +104,22 @@ ActiveRecord::Schema.define(:version => 20111205110307) do
     t.string   "iban",           :null => false
     t.text     "account_holder"
     t.string   "state"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "comments", :force => true do |t|
     t.integer  "user_id"
     t.integer  "ticket_id"
     t.text     "contents"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "currencies", :force => true do |t|
     t.string   "code",       :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "invoices", :force => true do |t|
@@ -123,8 +129,8 @@ ActiveRecord::Schema.define(:version => 20111205110307) do
     t.string   "payment_address",                                                      :null => false
     t.string   "callback_url",                                                         :null => false
     t.datetime "paid_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                                           :null => false
+    t.datetime "updated_at",                                                           :null => false
     t.string   "reference",                                                            :null => false
     t.string   "merchant_reference"
     t.string   "merchant_memo"
@@ -143,8 +149,8 @@ ActiveRecord::Schema.define(:version => 20111205110307) do
     t.decimal  "traded_currency",   :precision => 16, :scale => 8, :default => 0.0
     t.decimal  "ppc",               :precision => 16, :scale => 8, :default => 0.0
     t.string   "currency"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                                        :null => false
+    t.datetime "updated_at",                                                        :null => false
     t.integer  "seller_id"
     t.integer  "buyer_id"
     t.string   "type"
@@ -153,8 +159,8 @@ ActiveRecord::Schema.define(:version => 20111205110307) do
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
     t.text     "data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
@@ -165,8 +171,8 @@ ActiveRecord::Schema.define(:version => 20111205110307) do
     t.string   "title"
     t.string   "locale"
     t.text     "contents"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "tickets", :force => true do |t|
@@ -174,8 +180,8 @@ ActiveRecord::Schema.define(:version => 20111205110307) do
     t.text     "description"
     t.integer  "user_id"
     t.string   "state"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "trade_orders", :force => true do |t|
@@ -184,8 +190,8 @@ ActiveRecord::Schema.define(:version => 20111205110307) do
     t.decimal  "ppc",                       :precision => 16, :scale => 8
     t.string   "currency",                                                                    :null => false
     t.string   "category",                                                                    :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                                                  :null => false
+    t.datetime "updated_at",                                                                  :null => false
     t.boolean  "active",                                                   :default => true
     t.boolean  "dark_pool",                                                :default => false, :null => false
     t.boolean  "dark_pool_exclusive_match",                                :default => false, :null => false
@@ -199,16 +205,16 @@ ActiveRecord::Schema.define(:version => 20111205110307) do
     t.decimal  "daily_limit",   :precision => 16, :scale => 8, :default => 0.0
     t.decimal  "monthly_limit", :precision => 16, :scale => 8, :default => 0.0
     t.boolean  "management",                                   :default => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                                      :null => false
+    t.datetime "updated_at",                                                      :null => false
   end
 
   create_table "yubikeys", :force => true do |t|
     t.integer  "user_id",                      :null => false
     t.string   "key_id",                       :null => false
     t.boolean  "active",     :default => true
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
 end

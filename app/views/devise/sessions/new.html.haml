@@ -2,9 +2,8 @@
 
 = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
   .form-field
-    = f.label :name
-    = f.text_field :name
-    .explanation= t(:account_description)
+    = f.label :email
+    = f.text_field :email
 
   .form-field
     = f.label :password
@@ -12,16 +11,6 @@
     .explanation= link_to t(".password_explanation"), new_password_path(resource_name)
 
   .form-field
-    = f.label :ga_otp
-    = f.text_field :ga_otp, :class => "ga-otp"
-    .explanation= t(".ga_otp_explanation")
+    = f.submit "sign_in", :class => "submit"
 
-  .form-field
-    = f.label :yk_otp
-    = f.text_field :yk_otp, :class => "yk-otp"
-    .explanation= t(".yk_otp_explanation")
-  
-  .form-field
-    = f.submit t(".sign_in"), :class => "submit"
-  
 = render :partial => "devise/shared/links"

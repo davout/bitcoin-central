@@ -9,5 +9,5 @@ test:
   adapter: mysql2
   encoding: utf8
   database: bitcoin-bank_test
-  username: rails
-  password: rails
+  username: root
+  password:
