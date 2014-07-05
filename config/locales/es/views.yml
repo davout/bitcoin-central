@@ -1,0 +1,28 @@
+es:
+  invoices:
+    new:
+      create_invoice: Crear una factura
+      error: Error de creación de factura
+      amount_explanation: Cantidad para pagar
+      payment_explanation: Dirección de recepción de los fondos
+      callback_url_explanation: URL de notificación a la que se debe hacer el POST
+      submit: Crear factura
+      created: Factura creada correctamente
+      item_url_explanation: URL de la petición en el sitio del vendedor
+    index:
+      details: Ver detalles de la factura
+      create: Crear una factura
+    show:
+      details: Detalles de la factura
+      payee: Beneficiario
+      payment-explanations: >
+        Para pagar, simplemente transfiere la cantidad indicada
+        a la dirección de pago, la página se actualizará automaticamente
+         para mostrarle cómo va en el proceso.
+      return_to_item: Regresar al sitio del vendedor
+
+
+  users:
+    form:
+      submit: Guardar
+      merchant_explanation: Activar su tienda "online"

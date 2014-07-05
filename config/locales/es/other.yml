@@ -1,0 +1,303 @@
+es:
+  password_forgotten: ¿Contraseña olvidada?
+  didnt_receive_confirmation: "¿Correo de confirmación no recibido?"
+  didnt_receive_unlock_instructions: "¿Correo de desbloqueo no recibido?"
+  resend_confirmation: Volver a mandar el correo de confirmación
+  submit: Validar
+
+  # Generic
+  no_data: Ningún dato
+
+  # controllers/informations_controller.rb
+  chart_date_format: %d.%m.
+
+  # controllers/sessions_controller.rb
+  sign_in_success: Conexión establecida
+  sign_in_failure: Conexión fallida, por favor verifique sus datos
+  sign_out_success: Desconexión realizada
+
+  # controllers/third_party_callbacks_controller.rb
+  lr_transfer_success: "Transfirió correctamente %{amount} %{currency} a su cuenta (Comisión LR: %{fee} %{currency})"
+  lr_transfer_failure: Su transferencia de %{amount} %{currency} falló
+  px_transfer_canceled: Su transferencia Pecunix fue cancelada
+  px_transfer_success: Transfirió correctamente %{amount} PGAU a su cuenta (Comisión Pecunix %{fee} PGAU).
+
+  # controllers/trade_orders_controller.rb
+  order_saved: Su orden fue registrado, no se pudo realizar porque no hay órdenes compatibles.
+  order_filled: Su orden fue %{how} ejecutada, %{action} %{traded_btc} BTC por %{amount} %{currency} a un precio de %{ppc} %{currency}/BTC
+  bought: compró
+  sold: vendió
+  partially: parcialmente
+  completely: totalmente
+  order_deleted: Su orden fue suprimida
+  change_password: Cambio de contraseña
+
+  # controllers/transfers_controller.rb
+  successful_transfer: Transfirió correctamente %{amount} %{currency}
+
+  # controllers/user_controller.rb
+  account_created: Su cuenta fue correctamente creada
+  account_updated: Su cuenta fue correctamente actualizada
+
+  # helpers/trade_orders_helper.rb
+  order_dark_pool_some: Algunas órdenes no son publicamente visibles
+  order_dark_pool: Esta orden no es publicamente visible
+
+  # helpers/transfers_helper.rb
+  confirmations_left:
+    one: Esperando una confirmación más
+    other: Esperando %{count} confirmaciones
+
+  # mailers/backup_mailer.rb
+  support_from: Soporte de Bitcoin Central <%{support_email}>
+  wallet_backup_subject: Respaldo de wallet.dat %{date}
+
+  # mailers/user_mailer.rb
+  sign_up_confirmation: "Confirmación de registración"
+
+  # models/*.rb + lib/validators/*.rb
+  errors:
+    not_yourself: no puede ser usted
+
+    blank: no se puede quedar vació
+
+    must_be_greater: debe ser mayor que %{min} BTC
+    greater_than_balance: es mayor que su saldo (%{balance} %{currency})
+    greater_than_capacity: es mayor que sus posibilidades (%{capacity} BTC a %{ppc} BTC/%{currency})
+    minimum_dark_pool_order: "Esta orden es demasiado pequeña como para ser privada"
+
+    invalid: es inválida
+    no_match: no corresponde
+    answer_incorrect: es incorrecta
+
+    not_your_address: no puede ser su dirección de usted
+    min_amount: no puede ser menor que %{minimum} %{currency}
+    ppc_minimum: El precio debe ser mayor que 0.0001 %{currency}
+
+  # views/accounts/show.html
+  account_balance_title: Saldos
+  currency: Divisa
+  balance: Saldos
+  balance_unconfirmed: Esta transferencia está en espera de confirmación por la red Bitcoin
+
+  # views/backup_mailer/wallet_backup.text
+  encrypted_wallet: Copia cifrada del archivo wallet.dat %{date}
+
+  # views/informations/economy.html
+  economy_title: Economía
+  how_many_generated: "¿Cuántos Bitcoins hay en circulación?"
+  generated_coins_html: "Actualmente, hay <strong>%{count}</strong> Bitcoins en circulación."
+
+  # views/informations/faq.html
+  faq_title: Preguntas frecuentes
+
+  # views/informations/welcome.html
+  trading_data_title: Transacciones de la última semana
+  welcome: ¡Bienvenido/a a bitcoin-central.net!
+
+  # views/layouts/_footer.html
+  footer_html: "Puede apoyar este proyecto con donaciones a la dirección siguiente: <span class=\"bitcoin-address\">%{adress}</span>"
+
+  # views/layouts/_navigation.html
+  navigation:
+    account:
+      main: Cuenta
+      balance: Saldos
+      history: Historial
+      transfer_money: Transferencia de fondos
+      deposit_money: Depósito de fondos
+    trading:
+      main: Compra/Venta
+      new_order: Nueva orden
+      your_orders: Sus órdenes
+      order_book: Ofertas actuales
+      trade_history: Historial
+    admin:
+      main: Administración
+      transfers: Transferencias
+      users: Usuarios
+      information: Información
+    help:
+      main: Ayuda
+      faq: Preguntas frecuentes
+      economy: Economía
+      support: Contacto
+    ecommerce:
+      main: E-commerce
+
+  # views/layouts/_user_informations.html
+  generate_new_address_legend: Generar una nueva dirección
+  your_last_address: Su dirección
+  logout: Desconectarse
+  signed_in_as: Conectado/a como
+  sign_up: Crear cuenta
+  sign_in: Conexión
+
+  # views/layouts/application.html
+  website_title: Bitcoin Central
+  website_keywords: bitcoin, bitcoin central, compra de bitcoins, venta de bitcoins
+
+  # views/sessions/new.html
+  account_label: Número de cuenta
+  account_description: Dirección de correo o núm. de cuenta
+  password_label: Contraseña
+  password_description: ¿Contraseña olvidada?
+  sign_in_submit: Conexión
+
+  # views/trade_orders/book.html
+  order_book_title: Elija una divisa
+  currencies:
+    all: Todo
+    btc: BTC
+    btc_legend: Bitcoin
+    lrusd: LRUSD
+    lreur: LREUR
+    lr_legend: Liberty Reserve
+    eur: EUR
+    eur_legend: Euro
+    pgau: PGAU
+    pgau_legend: Oro Pecunix
+  buying: Compra
+  selling: Venta
+  amount: Cantidad
+  price: Precio
+  no_buying_orders_found: "No hay ninguna orden de compra"
+  no_selling_orders_found: "No hay ninguna orden de venta"
+  total: Total
+
+  # views/trade_orders/index.html
+  trade_orders_title: Sus órdenes
+  created_at: Creación
+  type: Tipo
+  price: Precio
+  dark_pool_order: Orden privada
+  delete_order: Suprimir esta orden
+  delete_order_confirm: Por favor confirme que quiere borrar esta orden.
+  no_orders_found: "No hay ninguna orden"
+
+  # views/trade_orders/new.html
+  create_order_title: Nueva orden
+  currency_to_trade: Divisa para cambiar
+  buy: Comprar
+  sell: Vender
+  sell_or_buy_description: ¿Quiere comprar Bitcoins o venderlos?
+  your_balance: Su saldo
+  your_balance_description: Su saldo en la divisa seleccionada
+  amount_description: Cantidad de BTC para cambiar
+  ppc_description: Precio por 1 BTC
+  total_description: Total de su orden
+  dark_pool_description: "No mostrar publicamente esta orden"
+  error_creating_order:
+    one: "Un error impide que su orden se pueda registrar:"
+    other: "%{count} errores impiden que su orden se pueda registrar:"
+
+  # views/trades/index.html
+  trade_history_title: Historial
+  no_trades_found: Ninguna transacción
+
+  # views/transfers/_lr_sci_form.html
+  click_for_lr_html: <a href="#" onclick="%{action}">Detalle de la transferencia en la interfaz Liberty Reserve</a>
+
+  # views/transfers/deposit.html
+  support_email: support@bitcoin-central.net
+  deposit_bitcoins_title: Depositar unos Bitcoins
+  deposit_bitcoins_body_html:
+    <p>Envíe los fondos a su dirección de Bitcoin como aparece arriba de la pantalla. La transferencia aparecerá después de unos minutos.</p>
+    <p>Nótese que los fondos transferidos sólo se podrán usar después de que la red Bitcoin confirme la transferencia (aprox. %{estimation} minutos).</p>
+  deposit_eur_title: Depositar fondos en Euros
+  deposit_eur_body_html:
+    <p>Por favor, mande un correo a la dirección de soporte&colon; <a href="mailto:%{support_email}">%{support_email}</a>.</p>
+  deposit_lr_title: Depósito de Liberty Reserve
+  deposit_pgau_title: "Depósito de oro Pecunix"
+  deposit_pgau_body_html:
+    <p>
+    Indique la cantidad de oro para transferir, le redirigirán a la interfaz de Pecunix para confirmar la transferencia.
+    El oro se le acreditará a su cuenta en cuanto se confirme la transferencia.
+    </p>
+  amount_pgau: Cantidad (PGAU)
+  deposit_pgau: Continuar
+
+  # views/transfers/index.html
+  account_history_title: Historial
+  currency: Divisa
+
+  # views/transfers/new.html
+  transfer_funds_title: Transferencia de fondos
+  transfer_funds_body_html: "
+    <p>Puede transferir fondos a:
+      <ul>
+        <li>una dirección <strong>bitcoin</strong> (sólamente BTC),</li>
+        <li>una dirección de <strong>correo</strong> (cualquier divisa),</li>
+        <li>un número de cuenta <strong>Bitcoin Central</strong> (cualquier divisa), o</li>
+        <li>una cuenta <strong>Liberty Reserve</strong> (LREUR y LRUSD)</li>
+      </ul>
+    </p>
+    "
+  how_does_it_work_title: ¿Cómo funciona?
+  how_does_it_work_body_html:
+    <p>
+      Las transferencias en bitcoins se pueden hacer hacia una cuenta Bitcoin Central o una dirección de correo.
+      La transferencia se queda dentro de Bitcoin Central en el caso de un envío a una dirección bitcoin que pertenezca
+      a un usuario del sitio. En el caso contrario, se hará a través de la red Bitcoin.
+    </p>
+    <p>
+      Las transferencias entre cuentas de Bitcoin Central son totalmente gratuitos.
+    </p>
+    <p>
+      Les transferts vers une adresse e-mail déclenchent l&#146;envoi d&#146;un message si son propriétaire
+      ne possède pas de compte Bitcoin Central, dans ce cas, le message l&#146;informe que les fonds sont
+      disponibles sur Bitcoin Central. Si les fonds ne sont pas récupérés par leur destinataire ils sont
+      re-crédités sur le compte de l&#146;expéditeur après un certain temps. <strong>Cette fonctionnalité n&#146;est pas encore disponible.</strong>
+      Las transferencias hacia una dirección de correo provocan el envío de un mensaje si su propietario
+      no tiene cuenta en Bitcoin Central. El mensaje indica que los fondos se pueden retirar en Bitcoin
+      Central. Si el destinatario no recupera los fondos, después de un determinado tiempo se le vuelven
+      a acreditar al remitente. <strong>Esta funcionalidad todavía no está disponible.</strong>
+    </p>
+  error_transferring_funds:
+    one: "Un error impidió la transferencia:"
+    other: "%{count} errores impidieron la transferencia:"
+  payee: Destinatario
+  payee_id_eur: Número de cuenta Bitcoin Central o dirección de correo
+  payee_id_lrusd: Número de cuenta Bitcoin Central, Liberty Reserve o dirección de correo
+  payee_id_lreur: Número de cuenta Bitcoin Central, Liberty Reserve o dirección de correo
+  payee_id_btc: Número de cuenta Bitcoin Central, dirección de bitcoin o de correo
+  payee_id_none: Identificación del destinatario
+  confirmed_balance: Su saldo disponible
+  transfer_amount: Cantidad
+  transfer_button: Transferir
+
+  # views/user_mailer/registration_confirmation.html
+  # views/user_mailer/registration_confirmation.text
+  thanks_for_registering: "Gracias por crear su cuenta en Bitcoin Central."
+  your_account_id_is: "Su número de cuenta: %{account_id}"
+
+  # views/users/_form.html
+  error_updating_account:
+    one: "Un error impidió que sus informaciones se guardaran:"
+    other: "%{count} errores impidieron que sus informaciones se guardaran:"
+  email: Correo electrónico
+  new_password_explanation: Rellene este campo para cambiar su contraseña
+  new_password_confirmation: Confirmación
+  new_password_confirmation_explanation: Confirmación de la nueva contraseña
+  current_password_explanation: Necesaria para proteger su cuenta
+  time_zone: Zona horaria
+  time_zone_explanation: Necesaria para mostrar las fechas correctamente
+
+  # views/users/edit.html
+  account_details_title: Detalles sobre su cuenta
+
+  # views/users/index.html
+  listing_users_title: Lista de usuarios
+  account: Cuenta
+  password: Contraseña
+  user_show: Mostrar
+  user_edit: Editar
+  user_destroy: Suprimir
+  user_destroy_confirm: Confirme la supresión.
+  user_new: Nuevo usuario
+
+  # views/users/new.html
+  sign_up_for_account_title: Crear una cuenta
+
+  # Admin
+  insufficient_privileges: Sus privilegios como usuario no le permiten visitar esta página

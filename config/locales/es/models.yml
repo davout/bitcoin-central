@@ -1,0 +1,90 @@
+es:
+  activerecord:
+    attributes:
+      invoice:
+        reference: Referencia
+        user: Emisor
+        payment_address: Dirección de pago
+        amount: Cantidad
+        callback_url: URL de notificación
+        state: Estado
+        paid_at: Pagado el
+        merchant_reference: Ref. del beneficiario
+        merchant_memo: Comentario
+        authentication_token: Ficha de autentificación
+        item_url: URL de la petición
+        state_translations:
+          pending: Esperando el pago
+          processing: Proceso en curso
+          paid: Pagado
+        state_tooltips:
+          pending: Todavía no llega ningún pago
+          processing: Llegó un pago, se está esperando confirmación de parte de la red Bitcoin
+          paid: El pago fue confirmado
+      liberty_reserve_transfer:
+        lr_account_id: Cuenta Liberty Reserve
+      trade_order:
+        amount: Cantidad
+        dark_pool: Orden escondida
+        ppc: Precio
+        category: Tipo
+        currency: Divisa
+        total: Total
+      transfer:
+        user: Usuario
+        amount: Cantidad
+        address: Dirección
+        currency: Divisa
+        bt_tx_confirmations: Confirmaciones Bitcoin
+        bt_tx_from: Dirección Bitcoin de origen
+        email: Dirección de correo electrónico
+        lr_merchant_fee: Comisión Liberty Reserve
+        lr_transferred_amount: Importe de Liberty Reserve transferido
+        px_fee: Comisión Pecunix
+        px_payer: Remitente Pecunix
+      user:
+        email: Dirección de e-mail
+        password: Contraseña
+        account: Número de cuenta
+        admin: Administración
+        authentication_token: Ficha de autentificación
+        confirmation_sent_at: Envío de correo de confirmación
+        confirmation_token: Ficha de confirmación
+        confirmed_at: Confirmación
+        current_sign_in_at: Conexión activa
+        current_sign_in_ip: IP de conexión activa
+        encrypted_password: Contrseña encriptada
+        failed_attempts: Fallos de autentificación
+        last_address: Última dirección de Bitcoin
+        last_sign_in_at: Última conexión
+        last_sign_in_ip: IP de la última conexión
+        locked_at: Bloqueado el
+        password_salt: Sal de la contraseña
+        remember_created_at: Recuerdo
+        remeber_token: Ficha de recuerdo
+        reset_password_token: Ficha de cambio de contraseña
+        salt: Sal
+        secret_token: Ficha secreta
+        time_zone: Zona horaria
+        unlock_token: Ficha de desbloqueo
+        purchase_trades: Transacciones de compra
+        sale_trades: Transacciones de venta
+        trade_orders: Ordenes
+        transfers: Transacciones
+        current_password: Contraseña actual
+        new_password: Nueva contraseña
+        merchant: API de E-negocio
+
+    models:
+      invoice:
+        one: Factura
+        other: Facturas
+      user:
+        one: Usuario
+        other: Usuarios
+      trade_order:
+        one: Órden
+        other: Órdenes
+      transfer:
+        one: Transacción
+        other: Transacciones
